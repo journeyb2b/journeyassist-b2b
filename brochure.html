@@ -3,298 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kerala Winter FIT Brochure | Journey Assist</title>
+  <title>B2B Tour Brochure | Journey Assist</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
     @media print {
       .no-print { display: none !important; }
-      body { background: white !important; padding: 0 !important; }
-      .print-shadow-none { box-shadow: none !important; border: none !important; }
+      body { background: white !important; }
     }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen p-3 sm:p-6">
+<body class="bg-slate-100 min-h-screen text-slate-900 pb-12">
 
-  <!-- MAIN LIGHT BROCHURE CARD -->
-  <div class="max-w-5xl mx-auto bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xl print-shadow-none space-y-6">
-    
-    <!-- TOP HEADER BANNER -->
-    <div class="bg-gradient-to-r from-sky-900 via-blue-900 to-indigo-950 p-6 sm:p-8 text-white relative">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-        <div class="space-y-2">
-          <div class="flex items-center gap-2">
-            <span class="px-3 py-1 bg-blue-500/30 text-blue-200 border border-blue-400/30 text-[10px] font-black rounded-lg uppercase tracking-wider">
-              Journey Assist B2B Wholesale Desk
-            </span>
-          </div>
-          <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Kerala Winter FIT — Early Bird Offer</h1>
-          <p class="text-xs sm:text-sm font-semibold text-blue-100 flex flex-wrap items-center gap-3">
-            <span><i class="fa-solid fa-location-dot text-amber-400 mr-1"></i> Kerala</span>
-            <span>•</span>
-            <span><i class="fa-solid fa-clock text-sky-300 mr-1"></i> 3N/4D to 7N/8D</span>
-            <span>•</span>
-            <span><i class="fa-solid fa-calendar-days text-emerald-300 mr-1"></i> Booking window: Until 31 October 2026</span>
-          </p>
-        </div>
-
-        <!-- ACTION BUTTONS -->
-        <div class="flex items-center gap-2 w-full sm:w-auto no-print">
-          <a href="https://wa.me/?text=Check%20out%20Kerala%20Winter%20FIT%20Brochure" target="_blank" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-2 cursor-pointer">
-            <i class="fa-brands fa-whatsapp"></i> Share WhatsApp
-          </a>
-          <button onclick="window.print()" class="px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs rounded-xl border border-slate-300 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm">
-            <i class="fa-solid fa-print text-blue-600"></i> Print / PDF
-          </button>
-        </div>
+  <!-- PRINT / ACTION BAR -->
+  <div class="no-print bg-slate-900 text-white py-3 px-4 sticky top-0 z-50 shadow-md">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="text-xs font-bold text-slate-300 hover:text-white flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+      </a>
+      <div class="flex items-center gap-3">
+        <button onclick="window.print()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-extrabold transition flex items-center gap-2">
+          <i class="fa-solid fa-print"></i> Print / Save PDF
+        </button>
       </div>
     </div>
-
-    <!-- BROCHURE CONTENT BODY -->
-    <div class="p-4 sm:p-8 space-y-8">
-
-      <!-- COMPLETE SUPPLIER RATE GRID -->
-      <div class="space-y-6">
-        <div class="flex items-center gap-2 border-b-2 border-slate-200 pb-2">
-          <i class="fa-solid fa-table text-blue-600 text-base"></i>
-          <h2 class="text-base font-black text-slate-900 uppercase tracking-wider">Complete Supplier Rate Grid</h2>
-        </div>
-
-        <!-- 3N/4D PACKAGE SLAB -->
-        <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm">
-          <div class="bg-sky-900 px-4 py-2.5 flex justify-between items-center text-white">
-            <span class="text-xs font-black uppercase tracking-wider">3N/4D Package</span>
-            <span class="text-[11px] font-bold text-amber-300">2 Nights Munnar + 1 Night Kochi</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
-                  <th class="p-2.5 border-r border-slate-200">Hotel Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Category</th>
-                  <th class="p-2.5 border-r border-slate-200">Meal Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Single (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Twin (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Triple (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Child (6-11 yrs) (₹)</th>
-                  <th class="p-2.5">Extra Bed (₹)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">13,450</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">11,450</td><td class="p-2.5 border-r border-slate-200">10,450</td><td class="p-2.5 border-r border-slate-200">6,750</td><td class="p-2.5">5,450</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">15,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">13,950</td><td class="p-2.5 border-r border-slate-200">12,950</td><td class="p-2.5 border-r border-slate-200">7,950</td><td class="p-2.5">6,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Premium</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">17,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">25,950</td><td class="p-2.5 border-r border-slate-200">14,950</td><td class="p-2.5 border-r border-slate-200">9,450</td><td class="p-2.5">7,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Kochi</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">16,450</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">14,450</td><td class="p-2.5 border-r border-slate-200">13,450</td><td class="p-2.5 border-r border-slate-200">8,450</td><td class="p-2.5">6,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Kochi</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">17,950</td><td class="p-2.5 border-r border-slate-200">16,950</td><td class="p-2.5 border-r border-slate-200">10,950</td><td class="p-2.5">8,950</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 4N/5D PACKAGE SLAB -->
-        <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm">
-          <div class="bg-sky-900 px-4 py-2.5 flex justify-between items-center text-white">
-            <span class="text-xs font-black uppercase tracking-wider">4N/5D Package</span>
-            <span class="text-[11px] font-bold text-amber-300">2 Nights Munnar + 2 Nights Alleppey</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
-                  <th class="p-2.5 border-r border-slate-200">Hotel Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Category</th>
-                  <th class="p-2.5 border-r border-slate-200">Meal Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Single (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Twin (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Triple (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Child (6-11 yrs) (₹)</th>
-                  <th class="p-2.5">Extra Bed (₹)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">16,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">14,950</td><td class="p-2.5 border-r border-slate-200">13,950</td><td class="p-2.5 border-r border-slate-200">8,950</td><td class="p-2.5">7,450</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">17,950</td><td class="p-2.5 border-r border-slate-200">16,950</td><td class="p-2.5 border-r border-slate-200">10,950</td><td class="p-2.5">9,450</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Premium</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">22,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">20,950</td><td class="p-2.5 border-r border-slate-200">18,950</td><td class="p-2.5 border-r border-slate-200">12,950</td><td class="p-2.5">11,450</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Alleppey</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">20,450</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">17,950</td><td class="p-2.5 border-r border-slate-200">15,950</td><td class="p-2.5 border-r border-slate-200">10,450</td><td class="p-2.5">8,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Alleppey</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">24,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">21,950</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200">13,950</td><td class="p-2.5">11,950</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 5N/6D PACKAGE SLAB -->
-        <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm">
-          <div class="bg-sky-900 px-4 py-2.5 flex justify-between items-center text-white">
-            <span class="text-xs font-black uppercase tracking-wider">5N/6D Package</span>
-            <span class="text-[11px] font-bold text-amber-300">2 Nights Munnar + 1 Night Thekkady + 2 Nights Alleppey</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
-                  <th class="p-2.5 border-r border-slate-200">Hotel Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Category</th>
-                  <th class="p-2.5 border-r border-slate-200">Meal Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Single (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Twin (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Triple (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Child (6-11 yrs) (₹)</th>
-                  <th class="p-2.5">Extra Bed (₹)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">17,950</td><td class="p-2.5 border-r border-slate-200">15,950</td><td class="p-2.5 border-r border-slate-200">10,450</td><td class="p-2.5">8,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">24,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">21,950</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200">13,950</td><td class="p-2.5">11,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Premium</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">28,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">25,950</td><td class="p-2.5 border-r border-slate-200">22,950</td><td class="p-2.5 border-r border-slate-200">16,950</td><td class="p-2.5">14,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Thekkady</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">22,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">19,950</td><td class="p-2.5 border-r border-slate-200">17,950</td><td class="p-2.5 border-r border-slate-200">11,950</td><td class="p-2.5">10,450</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Alleppey</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">25,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">22,950</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200">13,950</td><td class="p-2.5">11,950</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 6N/7D PACKAGE SLAB 1 -->
-        <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm">
-          <div class="bg-sky-900 px-4 py-2.5 flex justify-between items-center text-white">
-            <span class="text-xs font-black uppercase tracking-wider">6N/7D Package</span>
-            <span class="text-[11px] font-bold text-amber-300">2 Nights Munnar + 1 Night Thekkady + 2 Nights Kovalam</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
-                  <th class="p-2.5 border-r border-slate-200">Hotel Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Category</th>
-                  <th class="p-2.5 border-r border-slate-200">Meal Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Single (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Twin (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Triple (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Child (6-11 yrs) (₹)</th>
-                  <th class="p-2.5">Extra Bed (₹)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">24,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">21,950</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200">13,950</td><td class="p-2.5">11,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">29,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">26,950</td><td class="p-2.5 border-r border-slate-200">23,950</td><td class="p-2.5 border-r border-slate-200">17,950</td><td class="p-2.5">14,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Thekkady</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">27,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">24,950</td><td class="p-2.5 border-r border-slate-200">21,950</td><td class="p-2.5 border-r border-slate-200">15,950</td><td class="p-2.5">12,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Kovalam</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">29,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">26,950</td><td class="p-2.5 border-r border-slate-200">23,950</td><td class="p-2.5 border-r border-slate-200">17,950</td><td class="p-2.5">14,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Kovalam</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">34,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">31,950</td><td class="p-2.5 border-r border-slate-200">28,950</td><td class="p-2.5 border-r border-slate-200">21,950</td><td class="p-2.5">17,950</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 6N/7D PACKAGE SLAB 2 -->
-        <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm">
-          <div class="bg-sky-900 px-4 py-2.5 flex justify-between items-center text-white">
-            <span class="text-xs font-black uppercase tracking-wider">6N/7D Package</span>
-            <span class="text-[11px] font-bold text-amber-300">2 Nights Munnar + 1 Night Thekkady + 2 Nights Alleppey + 1 Night Trivandrum</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
-                  <th class="p-2.5 border-r border-slate-200">Hotel Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Category</th>
-                  <th class="p-2.5 border-r border-slate-200">Meal Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Single (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Twin (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Triple (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Child (6-11 yrs) (₹)</th>
-                  <th class="p-2.5">Extra Bed (₹)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">24,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">21,950</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5 border-r border-slate-200">13,950</td><td class="p-2.5">12,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">33,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">26,950</td><td class="p-2.5 border-r border-slate-200">29,950</td><td class="p-2.5 border-r border-slate-200">17,950</td><td class="p-2.5">16,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Thekkady</td><td class="p-2.5 border-r border-slate-200">Premium</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">30,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">24,950</td><td class="p-2.5 border-r border-slate-200">24,950</td><td class="p-2.5 border-r border-slate-200">12,950</td><td class="p-2.5">12,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Kovalam</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">32,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">26,950</td><td class="p-2.5 border-r border-slate-200">23,950</td><td class="p-2.5 border-r border-slate-200">17,950</td><td class="p-2.5">14,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Kovalam</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">38,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">34,950</td><td class="p-2.5 border-r border-slate-200">28,950</td><td class="p-2.5 border-r border-slate-200">21,950</td><td class="p-2.5">17,950</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 7N/8D PACKAGE SLAB -->
-        <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm">
-          <div class="bg-sky-900 px-4 py-2.5 flex justify-between items-center text-white">
-            <span class="text-xs font-black uppercase tracking-wider">7N/8D Package</span>
-            <span class="text-[11px] font-bold text-amber-300">2 Nights Munnar + 1 Night Thekkady + 2 Nights Alleppey + 2 Nights Kovalam</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 border-b border-slate-300 font-bold">
-                  <th class="p-2.5 border-r border-slate-200">Hotel Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Category</th>
-                  <th class="p-2.5 border-r border-slate-200">Meal Plan</th>
-                  <th class="p-2.5 border-r border-slate-200">Single (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Twin (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Triple (₹)</th>
-                  <th class="p-2.5 border-r border-slate-200">Child (6-11 yrs) (₹)</th>
-                  <th class="p-2.5">Extra Bed (₹)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">27,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">24,950</td><td class="p-2.5 border-r border-slate-200">21,950</td><td class="p-2.5 border-r border-slate-200">15,950</td><td class="p-2.5">12,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Munnar</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">33,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">29,950</td><td class="p-2.5 border-r border-slate-200">26,950</td><td class="p-2.5 border-r border-slate-200">19,950</td><td class="p-2.5">16,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Thekkady</td><td class="p-2.5 border-r border-slate-200">Premium</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">30,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">27,950</td><td class="p-2.5 border-r border-slate-200">21,950</td><td class="p-2.5 border-r border-slate-200">15,950</td><td class="p-2.5">14,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Alleppey</td><td class="p-2.5 border-r border-slate-200">Standard</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">32,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">28,950</td><td class="p-2.5 border-r border-slate-200">25,950</td><td class="p-2.5 border-r border-slate-200">18,950</td><td class="p-2.5">15,950</td></tr>
-                <tr class="hover:bg-slate-50"><td class="p-2.5 border-r border-slate-200 font-bold">Kovalam</td><td class="p-2.5 border-r border-slate-200">Deluxe</td><td class="p-2.5 border-r border-slate-200 text-blue-600 font-bold">CP</td><td class="p-2.5 border-r border-slate-200">38,950</td><td class="p-2.5 border-r border-slate-200 font-black text-emerald-700">34,950</td><td class="p-2.5 border-r border-slate-200">31,950</td><td class="p-2.5 border-r border-slate-200">24,950</td><td class="p-2.5">20,950</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- INCLUSIONS, EXCLUSIONS & CHILD POLICY -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t-2 border-slate-200">
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-          <p class="text-xs font-black text-emerald-700 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-check"></i> Inclusions
-          </p>
-          <ul class="text-[11px] font-semibold text-slate-600 space-y-1">
-            <li>• Accommodation as per itinerary</li>
-            <li>• Daily breakfast (as per meal plan)</li>
-            <li>• Transfers & sightseeing as per itinerary</li>
-          </ul>
-        </div>
-
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-          <p class="text-xs font-black text-rose-700 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-xmark"></i> Exclusions
-          </p>
-          <ul class="text-[11px] font-semibold text-slate-600 space-y-1">
-            <li>• Air / Train fares</li>
-            <li>• Lunch & Dinner (unless mentioned)</li>
-            <li>• Personal expenses, tips, entry fees</li>
-          </ul>
-        </div>
-
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-          <p class="text-xs font-black text-blue-700 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-users"></i> Child & Extra Bed Policy
-          </p>
-          <ul class="text-[11px] font-semibold text-slate-600 space-y-1">
-            <li>• Child rates applicable for 6–11 years</li>
-            <li>• Extra bed charges as per hotel policy</li>
-            <li>• Infant rates on request</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- FOOTER -->
-    <div class="bg-slate-900 text-white p-4 px-6 flex flex-col sm:flex-row justify-between items-center text-xs font-semibold gap-2">
-      <div>Journey Assist — B2B Travel Wholesale Desk</div>
-      <div>+91 99193 82999 | support@journeyassist.in</div>
-    </div>
-
   </div>
 
+  <!-- MAIN BROCHURE CARD -->
+  <main class="max-w-4xl mx-auto mt-6 bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden" id="brochureContainer">
+    <div class="p-12 text-center text-slate-400 font-bold text-sm">
+      <i class="fa-solid fa-spinner fa-spin text-2xl text-blue-600 mb-3"></i><br>
+      Loading dynamic brochure details...
+    </div>
+  </main>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
+
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pkgId = urlParams.get('id');
+
+      if (!pkgId) {
+        document.getElementById('brochureContainer').innerHTML = `
+          <div class="p-12 text-center text-rose-500 font-bold text-sm">
+            No package ID provided in the link. Please select a package from dashboard.
+          </div>
+        `;
+        return;
+      }
+
+      fetchPackageData(pkgId);
+    };
+
+    async function fetchPackageData(id) {
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=getPackage&id=${encodeURIComponent(id)}`);
+        const data = await response.json();
+
+        if (data.success && data.package) {
+          renderBrochure(data.package);
+        } else {
+          document.getElementById('brochureContainer').innerHTML = `
+            <div class="p-12 text-center text-rose-500 font-bold text-sm">
+              Package details not found for ID: ${id}
+            </div>
+          `;
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById('brochureContainer').innerHTML = `
+          <div class="p-12 text-center text-rose-500 font-bold text-sm">
+            Error loading brochure data. Please check your network connection.
+          </div>
+        `;
+      }
+    }
+
+    function renderBrochure(p) {
+      let rateGridHtml = '';
+      try {
+        const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
+        if (Array.isArray(grid) && grid.length > 0) {
+          rateGridHtml = `
+            <div class="overflow-x-auto mt-4">
+              <table class="w-full text-left text-xs border-collapse border border-slate-200">
+                <thead>
+                  <tr class="bg-blue-900 text-white font-extrabold uppercase">
+                    <th class="p-3 border border-slate-300">Category / Option</th>
+                    <th class="p-3 border border-slate-300">B2B Net Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${grid.map(g => `
+                    <tr class="hover:bg-slate-50">
+                      <td class="p-3 border border-slate-200 font-bold text-slate-800">${g.category || g.hotel || 'Standard Option'}</td>
+                      <td class="p-3 border border-slate-200 font-black text-blue-700">${g.price || g.rate || p.b2bPrice || '-'}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `;
+        } else {
+          rateGridHtml = `<p class="text-xs font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200 mt-2">${p.b2bPrice || 'Rates available on request'}</p>`;
+        }
+      } catch (e) {
+        rateGridHtml = `<p class="text-xs font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200 mt-2">${p.b2bPrice || 'Rates available on request'}</p>`;
+      }
+
+      // Itinerary lines formatting
+      const itineraryFormatted = p.itinerary ? p.itinerary.replace(/\n/g, '<br>') : 'Custom day-wise itinerary will be provided upon booking.';
+
+      document.getElementById('brochureContainer').innerHTML = `
+        <!-- BROCHURE HEADER -->
+        <div class="bg-slate-900 text-white p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b-4 border-amber-400">
+          <div>
+            <span class="px-3 py-1 rounded-full bg-blue-600/30 border border-blue-400/40 text-amber-300 text-[10px] font-black uppercase tracking-wider">${p.destination || 'Destination Tour'} (${p.region || 'Domestic'})</span>
+            <h1 class="text-2xl sm:text-4xl font-black mt-2 tracking-tight">${p.title || 'Holiday Package'}</h1>
+            <p class="text-xs font-bold text-slate-300 mt-1"><i class="fa-regular fa-clock text-amber-400 mr-1"></i> Duration: ${p.duration || 'Flexible'}</p>
+          </div>
+          <div class="text-left sm:text-right bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+            <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Starting Net Rate</p>
+            <p class="text-2xl sm:text-3xl font-black text-amber-400">${p.b2bPrice || 'On Request'}</p>
+            <p class="text-[9px] text-slate-400 uppercase font-extrabold mt-0.5">B2B Agent Price</p>
+          </div>
+        </div>
+
+        <div class="p-8 sm:p-10 space-y-8">
+          
+          <!-- VALIDITY & INCLUSIONS -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-1">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-calendar-check text-blue-600 mr-1.5"></i> Travel Validity</p>
+              <p class="text-sm font-black text-slate-800">${p.travelDates || 'Valid for current season'}</p>
+            </div>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-1">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-check text-emerald-600 mr-1.5"></i> Key Inclusions</p>
+              <p class="text-sm font-extrabold text-slate-800">${p.inclusions || 'Hotel accommodation, Transfers, Sightseeing, Daily Breakfast'}</p>
+            </div>
+          </div>
+
+          <!-- RATE GRID -->
+          <div>
+            <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-table-cells text-blue-600"></i> Rate Options & Categories
+            </h3>
+            ${rateGridHtml}
+          </div>
+
+          <!-- DAY WISE ITINERARY -->
+          <div>
+            <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-route text-blue-600"></i> Tour Itinerary Details
+            </h3>
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs font-medium text-slate-700 leading-relaxed">
+              ${itineraryFormatted}
+            </div>
+          </div>
+
+          <!-- FOOTER / HELPLINE -->
+          <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs font-bold text-slate-500 gap-4">
+            <p><i class="fa-solid fa-building text-blue-600 mr-1"></i> Journey Assist B2B Operations</p>
+            <p><i class="fa-solid fa-phone text-blue-600 mr-1"></i> Helpline: +91 9919382999</p>
+          </div>
+
+        </div>
+      `;
+    }
+  </script>
 </body>
 </html>
