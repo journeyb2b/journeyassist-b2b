@@ -464,13 +464,14 @@
             </div>
             <div class="text-left md:text-right border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
               <p class="text-xl font-black text-slate-900">${p.b2bPrice || 'On Request'}</p>
-              <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Per Couple / Package</p>
+              <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Per Person</p>
             </div>
           </div>
         `;
       });
       container.innerHTML = html;
     }
+          
 
     function openPackageDetails(index) {
       const p = allPackages[index];
