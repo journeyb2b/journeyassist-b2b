@@ -132,60 +132,93 @@
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <div>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Mrs. Jyoti Sonkar</h2>
-          <p class="text-slate-500 text-xs font-semibold mt-1">Here's what's happening with your bookings today[cite: 5]</p>
+          <p class="text-slate-500 text-xs font-semibold mt-1">Here's what's happening with your bookings today</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
           <a href="#quickPackagesSection" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-bolt text-amber-300"></i> Book Quick Package[cite: 5]
+            <i class="fa-solid fa-bolt text-amber-300"></i> Book Quick Package
           </a>
           <button onclick="openCustomQuoteModal()" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2 cursor-pointer">
-            <i class="fa-solid fa-plus"></i> Create Custom Package[cite: 5]
+            <i class="fa-solid fa-plus"></i> Create Custom Package
           </button>
         </div>
       </div>
 
-      <!-- PORTAL ACTIVE STATUS CARD (MATCHING SCREENSHOT 39) -->
+      <!-- PORTAL ACTIVE STATUS CARD -->
       <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
         <div class="flex items-center justify-between">
           <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Portal Active Status</h3>
           <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase rounded-full">Active</span>
         </div>
         <div class="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-2xl">
-          <div class="bg-blue-700 text-white text-center py-2 rounded-xl text-[11px] font-bold">MONTH 1[cite: 3]</div>
-          <div class="bg-white text-slate-600 text-center py-2 rounded-xl text-[11px] font-bold">MONTH 2[cite: 3]</div>
-          <div class="bg-white text-slate-600 text-center py-2 rounded-xl text-[11px] font-bold">MONTH 3[cite: 3]</div>
+          <div class="bg-blue-700 text-white text-center py-2 rounded-xl text-[11px] font-bold">MONTH 1</div>
+          <div class="bg-white text-slate-600 text-center py-2 rounded-xl text-[11px] font-bold">MONTH 2</div>
+          <div class="bg-white text-slate-600 text-center py-2 rounded-xl text-[11px] font-bold">MONTH 3</div>
         </div>
-        <p class="text-xs font-semibold text-slate-600">Any confirmed booking keeps your portal open for 3 more months. Next check: 6 Nov 2026.[cite: 3]</p>
+        <p class="text-xs font-semibold text-slate-600">Any confirmed booking keeps your portal open for 3 more months. Next check: 6 Nov 2026.</p>
       </div>
 
-      <!-- ================= QUICK PACKAGES SECTION (MATCHING SCREENSHOTS 40 & 41) ================= -->
+      <!-- 4 STAT CARDS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-cyan-800 uppercase tracking-wider">Accounts</p><p class="text-2xl font-black text-slate-900 mt-2">₹0</p></div>
+          <div class="w-14 h-14 bg-cyan-500 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-wallet"></i></div>
+        </div>
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-blue-800 uppercase tracking-wider">Upcoming Trips</p><p class="text-2xl font-black text-slate-900 mt-2">0</p></div>
+          <div class="w-14 h-14 bg-blue-700 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-suitcase-rolling"></i></div>
+        </div>
+        <div class="bg-teal-500/10 border border-teal-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-teal-800 uppercase tracking-wider">Conversion Rate</p><p class="text-2xl font-black text-slate-900 mt-2">-</p></div>
+          <div class="w-14 h-14 bg-teal-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-chart-line"></i></div>
+        </div>
+        <div class="bg-indigo-500/10 border border-indigo-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-indigo-800 uppercase tracking-wider">Subscription</p><p class="text-lg font-black text-slate-900 mt-2">31/10/2026</p></div>
+          <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-id-card"></i></div>
+        </div>
+      </div>
+
+      <!-- NEEDS YOUR ATTENTION -->
+      <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Needs Your Attention
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Pending Query - 0</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Bookings & Queries - 0</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Invoices & Payments - 0</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Upcoming Query - 0</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Completed Query - 0</div>
+        </div>
+      </div>
+
+      <!-- ================= QUICK PACKAGES SECTION ================= -->
       <div id="quickPackagesSection" class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
         
         <!-- HEADER STATS -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-slate-100 text-center sm:text-left">
           <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
             <p class="text-2xl font-black text-slate-900" id="totalPackagesCount">0</p>
-            <p class="text-[10px] font-extrabold uppercase text-slate-500 tracking-wider">Packages Listed[cite: 4]</p>
+            <p class="text-[10px] font-extrabold uppercase text-slate-500 tracking-wider">Packages Listed</p>
           </div>
           <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
             <p class="text-2xl font-black text-emerald-800" id="openPackagesCount">0</p>
-            <p class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Open For Booking[cite: 4]</p>
+            <p class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Open For Booking</p>
           </div>
           <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
             <p class="text-2xl font-black text-amber-800" id="closingPackagesCount">0</p>
-            <p class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Closing This Month[cite: 4]</p>
+            <p class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Closing This Month</p>
           </div>
         </div>
 
-        <!-- SEARCH & TABS FILTER BAR (DOMESTIC / INTERNATIONAL / ALL) -->
+        <!-- SEARCH & TABS FILTER BAR -->
         <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
           <div class="relative w-full lg:w-1/2">
             <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
             <input type="text" id="packageSearchInput" onkeyup="filterPackages()" placeholder='Search a package — "kerala", "kashmir", "maldives"...' class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
           </div>
 
-          <!-- All / Domestic / International Tab Buttons -->
           <div class="flex bg-slate-100 p-1.5 rounded-2xl w-full lg:w-auto justify-center">
             <button id="tabFilterAll" onclick="setRegionFilter('all')" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-700 text-white shadow-sm transition">All</button>
             <button id="tabFilterDomestic" onclick="setRegionFilter('domestic')" class="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition">Domestic</button>
@@ -383,7 +416,6 @@
       document.getElementById('authContainer').classList.remove('hidden');
     }
 
-    // Fetch Packages from Google Sheets doGet API
     async function fetchPackages() {
       try {
         const response = await fetch(SCRIPT_URL);
@@ -397,7 +429,6 @@
           document.getElementById('packagesContainer').innerHTML = `<p class="text-center text-rose-500 text-xs font-bold py-8">No packages found in Google Sheet.</p>`;
         }
       } catch (err) {
-        // Fallback demo packages if sheet is empty yet
         allPackages = [
           { code: "JA-MAL-001", title: "OBLU XPERIENCE AILAFUSHI - 4 star", destination: "maldives", region: "international", duration: "3N/4D", category: "4 Star", b2bPrice: "USD 2,274", mrpPrice: "USD 2,800", inclusions: "All-inclusive", status: "OPEN", travelDates: "Travel 01 Nov 2026 - 23 Dec 2026" },
           { code: "JA-MAL-002", title: "Makunudu Island - 4 star", destination: "maldives", region: "international", duration: "3N/4D", category: "4 Star", b2bPrice: "USD 1,419", mrpPrice: "USD 1,800", inclusions: "All-inclusive", status: "CLOSING SOON", travelDates: "Book by 31st Oct 2026" },
@@ -625,7 +656,7 @@
       } catch (err) {
         alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200";
         alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> Connection error!`;
-        alertBox.classList.add('hidden');
+        alertBox.classList.remove('hidden');
       } finally {
         btn.disabled = false;
         btn.innerHTML = `<i class="fa-solid fa-paper-plane text-amber-300 mr-2"></i> Submit Query`;
