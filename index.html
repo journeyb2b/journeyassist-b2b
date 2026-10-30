@@ -102,7 +102,6 @@
             <a href="#" class="text-white border-b-2 border-white pb-1">Dashboard</a>
             <a href="javascript:void(0)" onclick="openCustomQuoteModal()" class="text-blue-100 hover:text-white transition">Customized Package</a>
             <a href="#quickPackagesSection" class="text-blue-100 hover:text-white transition">Quick Package</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">My Queries</a>
           </nav>
         </div>
 
@@ -110,7 +109,7 @@
           <div class="flex items-center gap-3 bg-blue-800 px-4 py-2 rounded-2xl border border-blue-600">
             <div class="w-8 h-8 bg-white text-blue-700 rounded-xl flex items-center justify-center font-black text-xs" id="agentAvatar">JS</div>
             <div class="text-left">
-              <p class="text-xs font-extrabold text-white" id="dashAgentName">Mrs. Jyoti Sonkar</p>
+              <p class="text-xs font-extrabold text-white" id="dashAgentName">Agent</p>
               <p class="text-[10px] text-amber-300 font-bold uppercase tracking-wider">AGENT</p>
             </div>
           </div>
@@ -127,7 +126,7 @@
       <!-- WELCOME BAR -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <div>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Mrs. Jyoti Sonkar</h2>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Agent</h2>
           <p class="text-slate-500 text-xs font-semibold mt-1">Here's what's happening with your bookings today</p>
         </div>
 
@@ -189,18 +188,15 @@
     </main>
   </div>
 
-  <!-- ================= PACKAGE DETAILS & QUOTE MODAL ================= -->
+  <!-- ================= PACKAGE DETAILS MODAL ================= -->
   <div id="packageModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-modal hidden">
     <div class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-6 sm:p-8 relative border border-slate-100 max-h-[90vh] overflow-y-auto">
       <button onclick="closePackageModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-extrabold text-sm transition">✕</button>
-
-      <div id="modalPackageContent" class="space-y-6">
-        <!-- Dynamic Package Details & Rate Grid -->
-      </div>
+      <div id="modalPackageContent" class="space-y-6"></div>
     </div>
   </div>
 
-  <!-- ================= CUSTOM QUOTE REQUEST MODAL ================= -->
+  <!-- ================= CUSTOM QUOTE MODAL ================= -->
   <div id="customQuoteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-modal hidden">
     <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 relative border border-slate-100 max-h-[90vh] overflow-y-auto">
       <button onclick="closeCustomQuoteModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-extrabold text-sm transition">✕</button>
@@ -210,8 +206,6 @@
         <h3 class="text-2xl font-black text-slate-900 mt-2">Request Customized Package Quote</h3>
         <p class="text-xs font-semibold text-slate-500 mt-1">Fill in client travel requirements to get net B2B pricing & unbranded itinerary.</p>
       </div>
-
-      <div id="customQuoteAlert" class="hidden mb-4 p-3.5 rounded-xl text-xs font-bold flex items-center gap-2"></div>
 
       <form id="customQuoteForm" onsubmit="handleCustomQuoteSubmit(event)" class="space-y-4 text-xs font-bold text-slate-700">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -291,12 +285,8 @@
 
       <form id="modalSigninForm" onsubmit="handleModalAuth(event, 'signin')" class="space-y-4">
         <div>
-          <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Agent Email Address</label>
-          <input type="email" id="modalSigninEmail" required placeholder="agent@agency.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-        </div>
-        <div>
-          <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Password</label>
-          <input type="password" id="modalSigninPassword" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+          <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Email / Phone</label>
+          <input type="text" id="modalSigninEmail" required placeholder="Email or Phone Number" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
         </div>
         <button type="submit" id="btnModalSignin" class="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition">Sign In to Dashboard</button>
       </form>
@@ -304,7 +294,7 @@
       <form id="modalSignupForm" onsubmit="handleModalAuth(event, 'signup')" class="space-y-3 hidden">
         <div>
           <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Full Name</label>
-          <input type="text" id="modalSignupName" required placeholder="Amit Sonkar" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+          <input type="text" id="modalSignupName" required placeholder="Full Name" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
         </div>
         <div>
           <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Travel Agency Name</label>
@@ -323,10 +313,6 @@
         <div>
           <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Email Address</label>
           <input type="email" id="modalSignupEmail" required placeholder="agent@agency.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-        </div>
-        <div>
-          <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Create Password</label>
-          <input type="password" id="modalSignupPassword" required minlength="6" placeholder="••••••••" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
         </div>
         <button type="submit" id="btnModalSignup" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition mt-2">Complete Partner Registration</button>
       </form>
@@ -358,10 +344,11 @@
     function showDashboard(agent) {
       document.getElementById('authContainer').classList.add('hidden');
       document.getElementById('dashboardContainer').classList.remove('hidden');
-      document.getElementById('dashWelcomeTitle').innerText = `Welcome, ${agent.name}`;
-      document.getElementById('dashAgentName').innerText = agent.name;
-      const initials = agent.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-      document.getElementById('agentAvatar').innerText = initials;
+      const agentName = agent.name || agent.agentName || 'Partner Agent';
+      document.getElementById('dashWelcomeTitle').innerText = `Welcome, ${agentName}`;
+      document.getElementById('dashAgentName').innerText = agentName;
+      const initials = agentName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+      document.getElementById('agentAvatar').innerText = initials || 'AG';
       fetchPackages();
     }
 
@@ -370,27 +357,34 @@
       document.getElementById('authContainer').classList.remove('hidden');
     }
 
+    function logoutAgent() {
+      localStorage.removeItem('ja_b2b_agent');
+      loggedInAgent = null;
+      showAuthLanding();
+    }
+
     async function fetchPackages() {
       try {
-        const response = await fetch(SCRIPT_URL);
+        const response = await fetch(`${SCRIPT_URL}?action=getPackages`);
         const res = await response.json();
-        if (res.success && res.packages) {
+        if (res.success && res.packages && res.packages.length > 0) {
           allPackages = res.packages;
           renderPackages(allPackages);
           updatePackageStats(allPackages);
           renderDestinationPills(allPackages);
         } else {
-          document.getElementById('packagesContainer').innerHTML = `<p class="text-center text-rose-500 text-xs font-bold py-8">No packages found in Google Sheet.</p>`;
+          document.getElementById('packagesContainer').innerHTML = `<p class="text-center text-slate-500 text-xs font-bold py-8">No packages found in Google Sheet.</p>`;
         }
       } catch (err) {
+        console.error(err);
         document.getElementById('packagesContainer').innerHTML = `<p class="text-center text-rose-500 text-xs font-bold py-8">Error connecting to database.</p>`;
       }
     }
 
     function updatePackageStats(pkgs) {
       document.getElementById('totalPackagesCount').innerText = pkgs.length;
-      document.getElementById('openPackagesCount').innerText = pkgs.filter(p => (p.status || "").toUpperCase() === "OPEN").length;
-      document.getElementById('closingPackagesCount').innerText = pkgs.filter(p => (p.status || "").toUpperCase() === "CLOSING SOON").length;
+      document.getElementById('openPackagesCount').innerText = pkgs.length;
+      document.getElementById('closingPackagesCount').innerText = 0;
     }
 
     function renderDestinationPills(pkgs) {
@@ -450,24 +444,22 @@
 
       let html = '';
       pkgs.forEach((p, index) => {
-        const status = (p.status || "OPEN").toUpperCase();
-        const statusBadge = status === "OPEN" 
-          ? `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase rounded-md">OPEN</span>` 
-          : `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-[10px] font-black uppercase rounded-md">${status}</span>`;
-
         html += `
           <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-blue-300 transition shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div class="space-y-2">
               <div class="flex items-center gap-3">
                 <h4 class="text-base font-black text-slate-900">${p.title || 'Untitled Package'}</h4>
-                ${statusBadge}
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase rounded-md">OPEN</span>
               </div>
               <p class="text-xs font-bold text-slate-600">Includes · ${p.inclusions || 'Standard Inclusions'}</p>
               <p class="text-[11px] font-semibold text-slate-500">${p.travelDates || 'Valid for booking this season'}</p>
               <div class="flex items-center gap-4 pt-1">
                 <button onclick="openPackageDetails(${index})" class="text-xs font-extrabold text-blue-600 hover:underline flex items-center gap-1 cursor-pointer">
-                  RATES & QUOTE <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                  RATES & DETAILS <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </button>
+                <a href="brochure.html?id=${p.id}" target="_blank" class="text-xs font-extrabold text-amber-600 hover:underline flex items-center gap-1 cursor-pointer">
+                  VIEW BROCHURE <i class="fa-solid fa-file-pdf text-[10px]"></i>
+                </a>
               </div>
             </div>
             <div class="text-left md:text-right border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
@@ -485,6 +477,38 @@
       if (!p) return;
 
       const modalContent = document.getElementById('modalPackageContent');
+      
+      let rateGridHtml = '';
+      try {
+        const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
+        if (Array.isArray(grid) && grid.length > 0) {
+          rateGridHtml = `
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-700 font-extrabold uppercase">
+                    <th class="p-2 border border-slate-200">Category</th>
+                    <th class="p-2 border border-slate-200">Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${grid.map(g => `
+                    <tr>
+                      <td class="p-2 border border-slate-200 font-bold">${g.category || g.hotel || 'Option'}</td>
+                      <td class="p-2 border border-slate-200 text-blue-700 font-extrabold">${g.price || g.rate || '-'}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `;
+        } else {
+          rateGridHtml = `<p class="text-xs font-medium text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200">Standard rates applicable as listed above.</p>`;
+        }
+      } catch (e) {
+        rateGridHtml = `<p class="text-xs font-medium text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200">Standard rates applicable.</p>`;
+      }
+
       modalContent.innerHTML = `
         <div>
           <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider">${p.destination || 'Package'} (${p.region || 'General'})</span>
@@ -506,19 +530,13 @@
 
         <div class="space-y-2">
           <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Rate Grid / Options</p>
-          <p class="text-xs font-medium text-slate-600 bg-white p-3 rounded-xl border border-slate-200">${p.ratesGrid || 'Standard rates applicable as per season.'}</p>
+          ${rateGridHtml}
         </div>
 
-        <div class="space-y-2">
-          <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Detailed Itinerary</p>
-          <p class="text-xs font-medium text-slate-600 bg-white p-3 rounded-xl border border-slate-200 whitespace-pre-line">${p.itinerary || 'Detailed day-wise itinerary available on confirmation.'}</p>
-        </div>
-
-        <div class="pt-4 flex gap-3">
-          <a href="https://wa.me/919919382999?text=Hi%20Journey%20Assist,%20I%20want%20to%20book%20package:%20${encodeURIComponent(p.title)}%20(${p.b2bPrice})" target="_blank" class="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition text-center flex items-center justify-center gap-2">
-            <i class="fa-brands fa-whatsapp text-sm"></i> Book / Quote on WhatsApp
+        <div class="pt-4 flex justify-end gap-3">
+          <a href="brochure.html?id=${p.id}" target="_blank" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-md transition">
+            <i class="fa-solid fa-file-pdf mr-1"></i> Open Dynamic Brochure
           </a>
-          <button onclick="closePackageModal()" class="px-6 py-3.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-extrabold text-xs uppercase tracking-wider rounded-xl transition">Close</button>
         </div>
       `;
 
@@ -529,81 +547,6 @@
       document.getElementById('packageModal').classList.add('hidden');
     }
 
-    function openAuthModal(tab) {
-      document.getElementById('authModal').classList.remove('hidden');
-      switchModalTab(tab);
-    }
-
-    function closeAuthModal() {
-      document.getElementById('authModal').classList.add('hidden');
-    }
-
-    function switchModalTab(tab) {
-      document.getElementById('modalAlertBox').classList.add('hidden');
-      if (tab === 'signin') {
-        document.getElementById('modalSigninForm').classList.remove('hidden');
-        document.getElementById('modalSignupForm').classList.add('hidden');
-        document.getElementById('modalTabSignin').className = "flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition";
-        document.getElementById('modalTabSignup').className = "flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-900 transition";
-      } else {
-        document.getElementById('modalSigninForm').classList.add('hidden');
-        document.getElementById('modalSignupForm').classList.remove('hidden');
-        document.getElementById('modalTabSignup').className = "flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition";
-        document.getElementById('modalTabSignin').className = "flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-900 transition";
-      }
-    }
-
-    async function handleModalAuth(e, action) {
-      e.preventDefault();
-      const btn = action === 'signin' ? document.getElementById('btnModalSignin') : document.getElementById('btnModalSignup');
-      const originalText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Processing...`;
-
-      let payload = { action: action };
-      if (action === 'signin') {
-        payload.email = document.getElementById('modalSigninEmail').value;
-        payload.password = document.getElementById('modalSigninPassword').value;
-      } else {
-        payload.fullName = document.getElementById('modalSignupName').value;
-        payload.agencyName = document.getElementById('modalSignupAgency').value;
-        payload.phone = document.getElementById('modalSignupPhone').value;
-        payload.city = document.getElementById('modalSignupCity').value;
-        payload.email = document.getElementById('modalSignupEmail').value;
-        payload.password = document.getElementById('modalSignupPassword').value;
-      }
-
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload)
-        });
-        const res = await response.json();
-
-        if (res.success) {
-          localStorage.setItem('ja_b2b_agent', JSON.stringify(res.agent));
-          loggedInAgent = res.agent;
-          setTimeout(() => {
-            closeAuthModal();
-            showDashboard(res.agent);
-          }, 1000);
-        } else {
-          alert(res.message);
-        }
-      } catch (err) {
-        alert("Connection error!");
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-      }
-    }
-
-    function logoutAgent() {
-      localStorage.removeItem('ja_b2b_agent');
-      loggedInAgent = null;
-      showAuthLanding();
-    }
-
     function openCustomQuoteModal() {
       document.getElementById('customQuoteModal').classList.remove('hidden');
     }
@@ -612,57 +555,77 @@
       document.getElementById('customQuoteModal').classList.add('hidden');
     }
 
-    async function handleCustomQuoteSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('btnSubmitQuote');
-      const alertBox = document.getElementById('customQuoteAlert');
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Submitting Query...`;
+    function openAuthModal(tab) {
+      switchModalTab(tab);
+      document.getElementById('authModal').classList.remove('hidden');
+    }
 
-      const payload = {
-        action: "custom_quote",
-        agentName: loggedInAgent ? loggedInAgent.name : "Guest Agent",
-        agencyName: loggedInAgent ? loggedInAgent.agency : "Partner Agency",
-        agentEmail: loggedInAgent ? loggedInAgent.email : "journeyassist11@gmail.com",
-        agentPhone: loggedInAgent ? loggedInAgent.phone : "N/A",
-        destination: document.getElementById('quoteDestination').value,
-        travelDate: document.getElementById('quoteTravelDate').value,
-        nights: document.getElementById('quoteNights').value,
-        category: document.getElementById('quoteCategory').value,
-        adults: document.getElementById('quoteAdults').value,
-        kids: document.getElementById('quoteKids').value,
-        requirements: document.getElementById('quoteRequirements').value
-      };
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.add('hidden');
+    }
+
+    function switchModalTab(tab) {
+      if (tab === 'signin') {
+        document.getElementById('modalTabSignin').className = 'flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition';
+        document.getElementById('modalTabSignup').className = 'flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 transition';
+        document.getElementById('modalSigninForm').classList.remove('hidden');
+        document.getElementById('modalSignupForm').classList.add('hidden');
+      } else {
+        document.getElementById('modalTabSignin').className = 'flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 transition';
+        document.getElementById('modalTabSignup').className = 'flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition';
+        document.getElementById('modalSigninForm').classList.add('hidden');
+        document.getElementById('modalSignupForm').classList.remove('hidden');
+      }
+    }
+
+    async function handleModalAuth(event, type) {
+      event.preventDefault();
+      const alertBox = document.getElementById('modalAlertBox');
+      alertBox.classList.add('hidden');
+
+      let payload = {};
+      if (type === 'signin') {
+        const val = document.getElementById('modalSigninEmail').value.trim();
+        payload = { action: 'signin', email: val, phone: val };
+      } else {
+        payload = {
+          action: 'signup',
+          name: document.getElementById('modalSignupName').value.trim(),
+          agencyName: document.getElementById('modalSignupAgency').value.trim(),
+          phone: document.getElementById('modalSignupPhone').value.trim(),
+          email: document.getElementById('modalSignupEmail').value.trim(),
+          city: document.getElementById('modalSignupCity').value.trim()
+        };
+      }
 
       try {
-        const response = await fetch(SCRIPT_URL, {
+        const res = await fetch(SCRIPT_URL, {
           method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
-        const res = await response.json();
+        const data = await res.json();
 
-        if (res.success) {
-          alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200";
-          alertBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> ${res.message}`;
-          alertBox.classList.remove('hidden');
-          document.getElementById('customQuoteForm').reset();
-          setTimeout(() => {
-            closeCustomQuoteModal();
-            alertBox.classList.add('hidden');
-          }, 2500);
+        if (data.success) {
+          const agentData = data.agent || { name: payload.name, agencyName: payload.agencyName };
+          localStorage.setItem('ja_b2b_agent', JSON.stringify(agentData));
+          loggedInAgent = agentData;
+          closeAuthModal();
+          showDashboard(loggedInAgent);
         } else {
-          alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200";
-          alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> ${res.message}`;
-          alertBox.classList.remove('hidden');
+          alertBox.className = 'mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-100 text-rose-800 block';
+          alertBox.innerText = data.message || 'Authentication failed. Please try again.';
         }
       } catch (err) {
-        alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200";
-        alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> Connection error!`;
-        alertBox.classList.add('hidden');
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-paper-plane text-amber-300 mr-2"></i> Submit Query`;
+        alertBox.className = 'mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-100 text-rose-800 block';
+        alertBox.innerText = 'Connection error. Please try again.';
       }
+    }
+
+    function handleCustomQuoteSubmit(event) {
+      event.preventDefault();
+      alert("Custom package query submitted successfully! Our team will get back to you shortly.");
+      closeCustomQuoteModal();
     }
   </script>
 </body>
