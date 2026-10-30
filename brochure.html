@@ -93,16 +93,28 @@
             <div class="overflow-x-auto mt-4">
               <table class="w-full text-left text-xs border-collapse border border-slate-200">
                 <thead>
-                  <tr class="bg-blue-900 text-white font-extrabold uppercase">
-                    <th class="p-3 border border-slate-300">Category / Option</th>
-                    <th class="p-3 border border-slate-300">B2B Net Rate</th>
+                  <tr class="bg-blue-900 text-white font-extrabold uppercase text-[10px]">
+                    <th class="p-2.5 border border-slate-300">Hotel Plan[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Category[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Meal[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Single (₹)[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Twin (₹)[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Triple (₹)[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Child (6-11)[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Extra Bed[cite: 1]</th>
                   </tr>
                 </thead>
                 <tbody>
                   ${grid.map(g => `
-                    <tr class="hover:bg-slate-50">
-                      <td class="p-3 border border-slate-200 font-bold text-slate-800">${g.category || g.hotel || 'Standard Option'}</td>
-                      <td class="p-3 border border-slate-200 font-black text-blue-700">${g.price || g.rate || p.b2bPrice || '-'}</td>
+                    <tr class="hover:bg-slate-50 font-medium">
+                      <td class="p-2.5 border border-slate-200 font-bold text-slate-800">${g.hotelPlan || '-'}</td>
+                      <td class="p-2.5 border border-slate-200 text-slate-700">${g.category || 'Standard'}</td>
+                      <td class="p-2.5 border border-slate-200 text-slate-600">${g.mealPlan || 'CP'}</td>
+                      <td class="p-2.5 border border-slate-200 font-bold text-slate-900">${g.single || '-'}</td>
+                      <td class="p-2.5 border border-slate-200 font-black text-blue-700">${g.twin || '-'}</td>
+                      <td class="p-2.5 border border-slate-200 font-bold text-slate-900">${g.triple || '-'}</td>
+                      <td class="p-2.5 border border-slate-200 text-slate-700">${g.child || '-'}</td>
+                      <td class="p-2.5 border border-slate-200 text-slate-700">${g.extraBed || '-'}</td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -128,35 +140,48 @@
             <p class="text-xs font-bold text-slate-300 mt-1"><i class="fa-regular fa-clock text-amber-400 mr-1"></i> Duration: ${p.duration || 'Flexible'}</p>
           </div>
           <div class="text-left sm:text-right bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
-            <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Starting Net Rate</p>
+            <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Starting Net Rate[cite: 1]</p>
             <p class="text-2xl sm:text-3xl font-black text-amber-400">${p.b2bPrice || 'On Request'}</p>
-            <p class="text-[9px] text-slate-400 uppercase font-extrabold mt-0.5">B2B Agent Price</p>
+            <p class="text-[9px] text-slate-400 uppercase font-extrabold mt-0.5">B2B Agent Price[cite: 1]</p>
           </div>
         </div>
 
         <div class="p-8 sm:p-10 space-y-8">
           
-          <!-- VALIDITY & INCLUSIONS -->
+          <!-- VALIDITY & INCLUSIONS / EXCLUSIONS -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-1">
-              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-calendar-check text-blue-600 mr-1.5"></i> Travel Validity</p>
-              <p class="text-sm font-black text-slate-800">${p.travelDates || 'Valid for current season'}</p>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-check text-emerald-600 mr-1.5"></i> Inclusions[cite: 1]</p>
+              <p class="text-xs font-bold text-slate-800">${p.inclusions || 'Accommodation, Daily breakfast, Transfers & sightseeing per itinerary[cite: 1]'}</p>
             </div>
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-1">
-              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-check text-emerald-600 mr-1.5"></i> Key Inclusions</p>
-              <p class="text-sm font-extrabold text-slate-800">${p.inclusions || 'Hotel accommodation, Transfers, Sightseeing, Daily Breakfast'}</p>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-xmark text-rose-600 mr-1.5"></i> Exclusions[cite: 1]</p>
+              <p class="text-xs font-bold text-slate-800">${p.exclusions || 'Air / Train fares, Lunch & Dinner, Personal expenses[cite: 1]'}</p>
             </div>
           </div>
 
-          <!-- RATE GRID -->
+          <!-- ITINERARY LINK / PDF DOWNLOAD BUTTON -->
+          ${p.itineraryLink ? `
+            <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl flex items-center justify-between">
+              <div>
+                <p class="text-xs font-black text-blue-900">Official Downloadable Itinerary PDF</p>
+                <p class="text-[11px] text-blue-700 font-medium">Access detailed unbranded document for clients.</p>
+              </div>
+              <a href="${p.itineraryLink}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition">
+                <i class="fa-solid fa-download mr-1"></i> Download PDF
+              </a>
+            </div>
+          ` : ''}
+
+          <!-- COMPLETE SUPPLIER RATE GRID -->
           <div>
             <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
-              <i class="fa-solid fa-table-cells text-blue-600"></i> Rate Options & Categories
+              <i class="fa-solid fa-table-cells text-blue-600"></i> Complete Supplier Rate Grid[cite: 1]
             </h3>
             ${rateGridHtml}
           </div>
 
-          <!-- DAY WISE ITINERARY -->
+          <!-- TOUR ITINERARY DETAILS -->
           <div>
             <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
               <i class="fa-solid fa-route text-blue-600"></i> Tour Itinerary Details
@@ -166,10 +191,16 @@
             </div>
           </div>
 
+          <!-- TERMS & CONDITIONS / CHILD POLICY -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-1">
+            <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider"><i class="fa-solid fa-circle-info text-blue-600 mr-1.5"></i> Terms & Conditions / Child Policy[cite: 1]</p>
+            <p class="text-xs font-medium text-slate-600">${p.terms || 'Child rates applicable for 6-11 years. Extra bed charges as per hotel policy[cite: 1].'}</p>
+          </div>
+
           <!-- FOOTER / HELPLINE -->
           <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs font-bold text-slate-500 gap-4">
-            <p><i class="fa-solid fa-building text-blue-600 mr-1"></i> Journey Assist B2B Operations</p>
-            <p><i class="fa-solid fa-phone text-blue-600 mr-1"></i> Helpline: +91 9919382999</p>
+            <p><i class="fa-solid fa-building text-blue-600 mr-1"></i> Journey Assist B2B Operations[cite: 1]</p>
+            <p><i class="fa-solid fa-phone text-blue-600 mr-1"></i> Helpline: +91 9919382999[cite: 1]</p>
           </div>
 
         </div>
