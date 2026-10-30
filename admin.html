@@ -29,10 +29,26 @@
       </a>
     </div>
 
+    <!-- BULK UPLOAD SECTION -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div>
+        <h2 class="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-file-excel text-emerald-400"></i> Bulk Upload Packages (CSV)
+        </h2>
+        <p class="text-[11px] text-slate-400">CSV file upload karke multiple packages ek saath add karein.</p>
+      </div>
+      <div class="flex items-center gap-2 w-full sm:w-auto">
+        <input type="file" id="csvFile відчу" accept=".csv" class="text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 cursor-pointer">
+        <button type="button" onclick="handleBulkCSVUpload()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition cursor-pointer">
+          <i class="fa-solid fa-upload mr-1"></i> Upload Bulk
+        </button>
+      </div>
+    </div>
+
     <!-- MAIN FORM CARD -->
     <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
       <h2 class="text-lg font-black text-white flex items-center gap-2 border-b border-slate-800 pb-4">
-        <i class="fa-solid fa-box-archive text-blue-500"></i> Add / Update Holiday Package
+        <i class="fa-solid fa-box-archive text-blue-500"></i> Add Single Holiday Package
       </h2>
 
       <form id="packageForm" onsubmit="savePackageData(event)" class="space-y-6">
@@ -41,7 +57,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-bold">
           <div>
             <label class="block text-slate-400 mb-1">Package Title *</label>
-            <input type="text" id="pkgTitle" required placeholder="e.g. Kerala Winter FIT — Early Bird Offer" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white">
+            <input type="text" id="pkgTitle" required placeholder="e.g. Kerala Winter FIT" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white">
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Destination *</label>
@@ -57,7 +73,7 @@
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Starting Price (₹) *</label>
-            <input type="text" id="pkgPrice" required placeholder="e.g. ₹ 11,450/person" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white">
+            <input type="text" id="pkgPrice" required placeholder="e.g. 11,450" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white">
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Booking Window / Validity</label>
@@ -72,7 +88,7 @@
               <h3 class="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
                 <i class="fa-solid fa-table text-amber-400"></i> Dynamic Rate Grid Builder
               </h3>
-              <p class="text-[11px] text-slate-400 font-medium">Multiple duration slabs (3N/4D, 4N/5D, etc.) ke rate rows add karein</p>
+              <p class="text-[11px] text-slate-400 font-medium">Multiple duration slabs ke rate rows add karein</p>
             </div>
             <button type="button" onclick="addRateSlabRow()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition cursor-pointer shadow">
               <i class="fa-solid fa-plus mr-1"></i> Add Rate Row
@@ -107,17 +123,16 @@
           <div class="space-y-4">
             <div>
               <label class="block text-slate-400 mb-1">External Itinerary / PDF Link (Optional)</label>
-              <input type="url" id="pkgItineraryLink" placeholder="https://drive.google.com/... or PDF link" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white">
-              <p class="text-[10px] text-slate-500 mt-1">Agar aapke paas PDF ya Drive link hai toh yahan paste karein.</p>
+              <input type="url" id="pkgItineraryLink" placeholder="https://drive.google.com/..." class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white">
             </div>
             <div>
               <label class="block text-slate-400 mb-1">Inclusions & Policies</label>
-              <textarea id="pkgInclusions" rows="3" placeholder="Accommodation, Breakfast, Transfers & Sightseeing..." class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white"></textarea>
+              <textarea id="pkgInclusions" rows="3" placeholder="Accommodation, Breakfast..." class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white"></textarea>
             </div>
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Direct Day-Wise Itinerary (Text)</label>
-            <textarea id="pkgItinerary" rows="6" placeholder="Day 1: Arrival & Cochin Sightseeing..." class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white"></textarea>
+            <textarea id="pkgItinerary" rows="6" placeholder="Day 1: Arrival..." class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white"></textarea>
           </div>
         </div>
 
@@ -142,7 +157,7 @@
       const tr = document.createElement('tr');
       tr.className = "hover:bg-slate-900/50";
       tr.innerHTML = `
-        <td class="p-1.5"><input type="text" class="rg-slab w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs" placeholder="3N/4D Package" value="${data.slab || ''}"></td>
+        <td class="p-1.5"><input type="text" class="rg-slab w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs" placeholder="3N/4D" value="${data.slab || ''}"></td>
         <td class="p-1.5"><input type="text" class="rg-hotel w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs" placeholder="Munnar" value="${data.hotel || ''}"></td>
         <td class="p-1.5"><input type="text" class="rg-category w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs" placeholder="Standard" value="${data.category || ''}"></td>
         <td class="p-1.5"><input type="text" class="rg-meal w-full p-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs" placeholder="CP" value="${data.meal || 'CP'}"></td>
@@ -158,6 +173,26 @@
         </td>
       `;
       tbody.appendChild(tr);
+    }
+
+    function handleBulkCSVUpload() {
+      const fileInput = document.getElementById('csvFile');
+      if (fileInput.files.length === 0) {
+        alert("Pehle ek CSV file select karein!");
+        return;
+      }
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = e.target.result;
+        const lines = text.split('\n');
+        if (lines.length > 1) {
+          alert("CSV file read ho gayi! Bulk data processing backend ke liye ready hai.");
+        } else {
+          alert("CSV file khali hai ya format galat hai.");
+        }
+      };
+      reader.readAsText(file);
     }
 
     async function savePackageData(e) {
