@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journey Assist | Super Admin Dashboard</title>
+  <title>Journey Assist | Full Admin Control Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
           <p class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Super Control Panel</p>
         </div>
       </div>
-      <button onclick="refreshData()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2 cursor-pointer">
+      <button onclick="refreshData()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2">
         <i class="fa-solid fa-rotate text-blue-400"></i> Refresh Data
       </button>
     </div>
@@ -32,10 +32,10 @@
     
     <!-- TABS -->
     <div class="flex border-b border-slate-800 gap-4">
-      <button id="btnTabPackages" onclick="switchAdminTab('packages')" class="pb-3 px-4 font-bold text-sm border-b-2 border-blue-500 text-blue-400 flex items-center gap-2 cursor-pointer">
+      <button id="btnTabPackages" onclick="switchAdminTab('packages')" class="pb-3 px-4 font-bold text-sm border-b-2 border-blue-500 text-blue-400 flex items-center gap-2">
         <i class="fa-solid fa-box-archive"></i> Manage Packages (<span id="pkgCount">0</span>)
       </button>
-      <button id="btnTabAgents" onclick="switchAdminTab('agents')" class="pb-3 px-4 font-bold text-sm text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2 cursor-pointer">
+      <button id="btnTabAgents" onclick="switchAdminTab('agents')" class="pb-3 px-4 font-bold text-sm text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2">
         <i class="fa-solid fa-users"></i> Registered Agents (<span id="agentCount">0</span>)
       </button>
     </div>
@@ -44,99 +44,64 @@
     <div id="sectionPackages" class="space-y-6">
 
       <!-- PACKAGE FORM (CREATE / EDIT) -->
-      <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800 shadow-xl space-y-6">
+      <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800 shadow-xl space-y-4">
         <div class="flex justify-between items-center border-b border-slate-800 pb-3">
           <h2 class="text-lg font-black text-white flex items-center gap-2" id="pkgFormTitle">
-            <i class="fa-solid fa-plus-circle text-blue-400"></i> Add New Package & Rate Grid
+            <i class="fa-solid fa-plus-circle text-blue-400"></i> Add New Package
           </h2>
-          <button id="btnCancelPkgEdit" onclick="resetPackageForm()" class="hidden px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg cursor-pointer">
+          <button id="btnCancelPkgEdit" onclick="resetPackageForm()" class="hidden px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg">
             Cancel Edit
           </button>
         </div>
 
-        <form id="addPackageForm" onsubmit="handleSavePackage(event)" class="space-y-6 text-xs font-bold">
+        <form id="addPackageForm" onsubmit="handleSavePackage(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-bold">
           <input type="hidden" id="pkgRowIndex" value="">
-          
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label class="block text-slate-400 mb-1">Package Title *</label>
-              <input type="text" id="pkgTitle" required placeholder="e.g. Kerala Winter FIT — Early Bird Offer" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1">Destination *</label>
-              <input type="text" id="pkgDestination" required placeholder="e.g. kerala" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1">Region *</label>
-              <select id="pkgRegion" required class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
-                <option value="domestic">Domestic</option>
-                <option value="international">International</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1">Duration</label>
-              <input type="text" id="pkgDuration" placeholder="3N/4D to 7N/8D" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1">Starting Price Tag *</label>
-              <input type="text" id="pkgB2BPrice" required placeholder="Starting ₹13,450/person" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1">Booking Window / Validity</label>
-              <input type="text" id="pkgTravelDates" placeholder="Booking window: Until 31 October 2026" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
-            </div>
-            <div class="md:col-span-3">
-              <label class="block text-slate-400 mb-1">Inclusions</label>
-              <input type="text" id="pkgInclusions" placeholder="Accommodation as per itinerary, Daily breakfast, Transfers & sightseeing" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
-            </div>
-          </div>
-
-          <!-- INTERACTIVE RATE GRID BUILDER SECTION -->
-          <div class="space-y-4 border-t border-slate-800 pt-6">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div>
-                <h3 class="text-sm font-black text-white flex items-center gap-2">
-                  <i class="fa-solid fa-table text-amber-400"></i> Supplier Rate Grid Table Builder
-                </h3>
-                <p class="text-[11px] font-medium text-slate-400">Add hotel plans, categories, meal plans, and pricing for each slab (e.g. 3N/4D Package)</p>
-              </div>
-              <button type="button" onclick="addRateRow()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs rounded-xl transition flex items-center gap-2 cursor-pointer shadow-md">
-                <i class="fa-solid fa-plus"></i> Add Rate Row
-              </button>
-            </div>
-
-            <div class="overflow-x-auto border border-slate-800 rounded-2xl bg-slate-900">
-              <table class="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr class="bg-slate-950 text-slate-400 border-b border-slate-800">
-                    <th class="p-3">Slab Title (e.g. 3N/4D Package)</th>
-                    <th class="p-3">Hotel Plan / Location</th>
-                    <th class="p-3">Category</th>
-                    <th class="p-3">Meal</th>
-                    <th class="p-3">Single (₹)</th>
-                    <th class="p-3">Twin (₹)</th>
-                    <th class="p-3">Triple (₹)</th>
-                    <th class="p-3">Child (₹)</th>
-                    <th class="p-3">Extra Bed (₹)</th>
-                    <th class="p-3 text-center">Action</th>
-                  </tr>
-                </thead>
-                <tbody id="rateGridTableBody" class="divide-y divide-slate-800 text-white">
-                  <!-- Dynamic rows will be inserted here -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- DETAILED ITINERARY -->
-          <div class="space-y-2 border-t border-slate-800 pt-6">
-            <label class="block text-slate-400 mb-1">Detailed Day-Wise Itinerary</label>
-            <textarea id="pkgItinerary" rows="4" placeholder="Day 1: Arrival & Transfer&#10;Day 2: Sightseeing..." class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white"></textarea>
-          </div>
-
           <div>
+            <label class="block text-slate-400 mb-1">Package Title *</label>
+            <input type="text" id="pkgTitle" required placeholder="e.g. OBLU XPERIENCE AILAFUSHI" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Destination *</label>
+            <input type="text" id="pkgDestination" required placeholder="e.g. maldives / kerala" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Region *</label>
+            <select id="pkgRegion" required class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+              <option value="international">International</option>
+              <option value="domestic">Domestic</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Duration</label>
+            <input type="text" id="pkgDuration" placeholder="3N/4D" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Category</label>
+            <input type="text" id="pkgCategory" placeholder="4 Star" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">B2B Price *</label>
+            <input type="text" id="pkgB2BPrice" required placeholder="USD 2,274 / Rs. 15,000" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div class="md:col-span-3">
+            <label class="block text-slate-400 mb-1">Inclusions</label>
+            <input type="text" id="pkgInclusions" placeholder="All-inclusive / Transfers / Breakfast" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div class="md:col-span-3">
+            <label class="block text-slate-400 mb-1">Travel Dates / Validity</label>
+            <input type="text" id="pkgTravelDates" placeholder="Travel 01 Nov 2026 - 23 Dec 2026" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div class="md:col-span-3">
+            <label class="block text-slate-400 mb-1">Rate Grid / Pricing Options (Optional)</label>
+            <textarea id="pkgRatesGrid" rows="2" placeholder="Ocean View: USD 2274 | Water Villa: USD 2650" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white"></textarea>
+          </div>
+          <div class="md:col-span-3">
+            <label class="block text-slate-400 mb-1">Detailed Itinerary (Optional)</label>
+            <textarea id="pkgItinerary" rows="2" placeholder="Day 1: Arrival & Speedboat..." class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white"></textarea>
+          </div>
+          <div class="md:col-span-3">
             <button type="submit" id="btnSavePkg" class="px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-extrabold rounded-xl transition shadow-lg flex items-center gap-2 cursor-pointer">
-              <i class="fa-solid fa-save"></i> <span id="btnSavePkgText">Save Package & Rate Grid</span>
+              <i class="fa-solid fa-save"></i> <span id="btnSavePkgText">Save Package</span>
             </button>
           </div>
         </form>
@@ -154,12 +119,60 @@
 
     <!-- ================= AGENTS SECTION ================= -->
     <div id="sectionAgents" class="space-y-6 hidden">
+
+      <!-- CREATE / EDIT AGENT FORM -->
+      <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800 shadow-xl space-y-4">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+          <h2 class="text-lg font-black text-white flex items-center gap-2" id="agentFormTitle">
+            <i class="fa-solid fa-user-plus text-emerald-400"></i> Add New Agent
+          </h2>
+          <button id="btnCancelAgentEdit" onclick="resetAgentForm()" class="hidden px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg">
+            Cancel Edit
+          </button>
+        </div>
+
+        <form id="addAgentForm" onsubmit="handleSaveAgent(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-bold">
+          <input type="hidden" id="agentRowIndex" value="">
+          <div>
+            <label class="block text-slate-400 mb-1">Full Name *</label>
+            <input type="text" id="agentName" required placeholder="Amit Sonkar" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Agency Name *</label>
+            <input type="text" id="agentAgency" required placeholder="Journey Assist Travels" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Mobile No. *</label>
+            <input type="tel" id="agentPhone" required placeholder="9919382999" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">City *</label>
+            <input type="text" id="agentCity" required placeholder="Lucknow" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Email Address *</label>
+            <input type="email" id="agentEmail" required placeholder="agent@agency.com" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Password</label>
+            <input type="text" id="agentPassword" placeholder="123456" class="w-full p-3 bg-slate-900 border border-slate-800 rounded-xl text-white">
+          </div>
+          <div class="md:col-span-3">
+            <button type="submit" id="btnSaveAgent" class="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl transition shadow-lg flex items-center gap-2 cursor-pointer">
+              <i class="fa-solid fa-save"></i> <span id="btnSaveAgentText">Save Agent</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- AGENTS LIST TABLE -->
       <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800 shadow-xl space-y-4">
         <h2 class="text-lg font-black text-white">Registered Agents Control List</h2>
         <div id="adminAgentsList" class="space-y-3">
           <p class="text-slate-500 text-xs font-bold py-4">Loading registered agents...</p>
         </div>
       </div>
+
     </div>
 
   </main>
@@ -169,68 +182,29 @@
     let cachePackages = [];
     let cacheAgents = [];
 
-    window.onload = function() { 
-      refreshData(); 
-      addRateRow(); // Add default empty row on load
+    window.onload = function() {
+      refreshData();
     };
 
     function switchAdminTab(tab) {
       if (tab === 'packages') {
         document.getElementById('sectionPackages').classList.remove('hidden');
         document.getElementById('sectionAgents').classList.add('hidden');
-        document.getElementById('btnTabPackages').className = "pb-3 px-4 font-bold text-sm border-b-2 border-blue-500 text-blue-400 flex items-center gap-2 cursor-pointer";
-        document.getElementById('btnTabAgents').className = "pb-3 px-4 font-bold text-sm text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2 cursor-pointer";
+        document.getElementById('btnTabPackages').className = "pb-3 px-4 font-bold text-sm border-b-2 border-blue-500 text-blue-400 flex items-center gap-2";
+        document.getElementById('btnTabAgents').className = "pb-3 px-4 font-bold text-sm text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2";
       } else {
         document.getElementById('sectionPackages').classList.add('hidden');
         document.getElementById('sectionAgents').classList.remove('hidden');
-        document.getElementById('btnTabAgents').className = "pb-3 px-4 font-bold text-sm border-b-2 border-blue-500 text-blue-400 flex items-center gap-2 cursor-pointer";
-        document.getElementById('btnTabPackages').className = "pb-3 px-4 font-bold text-sm text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2 cursor-pointer";
+        document.getElementById('btnTabAgents').className = "pb-3 px-4 font-bold text-sm border-b-2 border-blue-500 text-blue-400 flex items-center gap-2";
+        document.getElementById('btnTabPackages').className = "pb-3 px-4 font-bold text-sm text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2";
       }
-    }
-
-    // RATE GRID TABLE BUILDER FUNCTIONS
-    function addRateRow(data = {}) {
-      const tbody = document.getElementById('rateGridTableBody');
-      const tr = document.createElement('tr');
-      tr.className = "border-b border-slate-800/60 rate-row";
-      tr.innerHTML = `
-        <td class="p-2"><input type="text" class="r-slab w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="3N/4D Package" value="${data.slab || ''}"></td>
-        <td class="p-2"><input type="text" class="r-hotel w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="Munnar" value="${data.hotel || ''}"></td>
-        <td class="p-2"><input type="text" class="r-cat w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="Standard" value="${data.category || ''}"></td>
-        <td class="p-2"><input type="text" class="r-meal w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="CP" value="${data.meal || 'CP'}"></td>
-        <td class="p-2"><input type="text" class="r-single w-24 p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="13,450" value="${data.single || ''}"></td>
-        <td class="p-2"><input type="text" class="r-twin w-24 p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="11,450" value="${data.twin || ''}"></td>
-        <td class="p-2"><input type="text" class="r-triple w-24 p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="10,450" value="${data.triple || ''}"></td>
-        <td class="p-2"><input type="text" class="r-child w-24 p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="6,750" value="${data.child || ''}"></td>
-        <td class="p-2"><input type="text" class="r-extra w-24 p-2 bg-slate-950 border border-slate-800 rounded-lg text-white" placeholder="5,450" value="${data.extra || ''}"></td>
-        <td class="p-2 text-center"><button type="button" onclick="this.closest('tr').remove()" class="px-2 py-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white rounded-lg transition cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button></td>
-      `;
-      tbody.appendChild(tr);
-    }
-
-    function collectRateGridData() {
-      const rows = document.querySelectorAll('.rate-row');
-      let gridArray = [];
-      rows.forEach(r => {
-        gridArray.push({
-          slab: r.querySelector('.r-slab').value,
-          hotel: r.querySelector('.r-hotel').value,
-          category: r.querySelector('.r-cat').value,
-          meal: r.querySelector('.r-meal').value,
-          single: r.querySelector('.r-single').value,
-          twin: r.querySelector('.r-twin').value,
-          triple: r.querySelector('.r-triple').value,
-          child: r.querySelector('.r-child').value,
-          extra: r.querySelector('.r-extra').value
-        });
-      });
-      return JSON.stringify(gridArray);
     }
 
     async function refreshData() {
       try {
         const response = await fetch(SCRIPT_URL + "?admin=true");
         const res = await response.json();
+        
         if (res.packages) {
           cachePackages = res.packages;
           document.getElementById('pkgCount').innerText = res.packages.length;
@@ -241,15 +215,19 @@
           document.getElementById('agentCount').innerText = res.agents.length;
           renderAdminAgents(res.agents);
         }
-      } catch (err) { console.error("Fetch error:", err); }
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
     }
 
+    // ================= PACKAGES RENDERING & ACTIONS =================
     function renderAdminPackages(packages) {
       const list = document.getElementById('adminPackagesList');
       if (packages.length === 0) {
         list.innerHTML = `<p class="text-slate-500 text-xs font-bold py-4">No packages added yet.</p>`;
         return;
       }
+
       let html = '';
       packages.forEach((p, idx) => {
         const isPaused = p.status_active === "Paused";
@@ -264,16 +242,17 @@
                 <p class="font-extrabold text-white text-sm">${p.title}</p>
                 ${badge}
               </div>
-              <p class="text-xs font-semibold text-slate-400">${p.destination} (${p.region}) · ${p.b2bPrice} · ${p.duration}</p>
+              <p class="text-xs font-semibold text-slate-400">${p.destination} (${p.region}) · B2B: ${p.b2bPrice} · ${p.duration}</p>
             </div>
+
             <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-              <button onclick="editPackage(${idx})" class="px-3 py-1.5 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white text-xs font-bold rounded-xl border border-blue-500/30 transition flex items-center gap-1 cursor-pointer">
+              <button onclick="editPackage(${idx})" class="px-3 py-1.5 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white text-xs font-bold rounded-xl border border-blue-500/30 transition flex items-center gap-1">
                 <i class="fa-solid fa-pen-to-square"></i> Edit
               </button>
-              <button onclick="togglePackageStatus(${p.rowIndex}, '${isPaused ? 'Active' : 'Paused'})" class="px-3 py-1.5 ${isPaused ? 'bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400' : 'bg-amber-600/20 hover:bg-amber-600 text-amber-400'} hover:text-white text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1 cursor-pointer">
+              <button onclick="togglePackageStatus(${p.rowIndex}, '${isPaused ? 'Active' : 'Paused'}')" class="px-3 py-1.5 ${isPaused ? 'bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400' : 'bg-amber-600/20 hover:bg-amber-600 text-amber-400'} hover:text-white text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1">
                 <i class="fa-solid ${isPaused ? 'fa-play' : 'fa-pause'}"></i> ${isPaused ? 'Resume' : 'Pause'}
               </button>
-              <button onclick="deletePackage(${p.rowIndex})" class="px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white text-xs font-bold rounded-xl border border-rose-500/30 transition flex items-center gap-1 cursor-pointer">
+              <button onclick="deletePackage(${p.rowIndex})" class="px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white text-xs font-bold rounded-xl border border-rose-500/30 transition flex items-center gap-1">
                 <i class="fa-solid fa-trash"></i> Delete
               </button>
             </div>
@@ -286,32 +265,21 @@
     function editPackage(idx) {
       const p = cachePackages[idx];
       if (!p) return;
+
       document.getElementById('pkgRowIndex').value = p.rowIndex;
       document.getElementById('pkgTitle').value = p.title;
       document.getElementById('pkgDestination').value = p.destination;
       document.getElementById('pkgRegion').value = p.region;
       document.getElementById('pkgDuration').value = p.duration;
+      document.getElementById('pkgCategory').value = p.category;
       document.getElementById('pkgB2BPrice').value = p.b2bPrice;
       document.getElementById('pkgInclusions').value = p.inclusions;
       document.getElementById('pkgTravelDates').value = p.travelDates;
+      document.getElementById('pkgRatesGrid').value = p.ratesGrid;
       document.getElementById('pkgItinerary').value = p.itinerary;
 
-      // Populate Rate Grid Table Builder
-      const tbody = document.getElementById('rateGridTableBody');
-      tbody.innerHTML = '';
-      try {
-        const gridArr = JSON.parse(p.ratesGrid || '[]');
-        if (gridArr.length > 0) {
-          gridArr.forEach(row => addRateRow(row));
-        } else {
-          addRateRow();
-        }
-      } catch(e) {
-        addRateRow();
-      }
-
       document.getElementById('pkgFormTitle').innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-400"></i> Edit Package (${p.code})`;
-      document.getElementById('btnSavePkgText').innerText = "Update Package & Rate Grid";
+      document.getElementById('btnSavePkgText').innerText = "Update Package";
       document.getElementById('btnCancelPkgEdit').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -319,10 +287,8 @@
     function resetPackageForm() {
       document.getElementById('addPackageForm').reset();
       document.getElementById('pkgRowIndex').value = "";
-      document.getElementById('rateGridTableBody').innerHTML = '';
-      addRateRow();
-      document.getElementById('pkgFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle text-blue-400"></i> Add New Package & Rate Grid`;
-      document.getElementById('btnSavePkgText').innerText = "Save Package & Rate Grid";
+      document.getElementById('pkgFormTitle').innerHTML = `<i class="fa-solid fa-plus-circle text-blue-400"></i> Add New Package`;
+      document.getElementById('btnSavePkgText').innerText = "Save Package";
       document.getElementById('btnCancelPkgEdit').classList.add('hidden');
     }
 
@@ -338,11 +304,11 @@
         destination: document.getElementById('pkgDestination').value.toLowerCase(),
         region: document.getElementById('pkgRegion').value.toLowerCase(),
         duration: document.getElementById('pkgDuration').value,
-        category: "Standard / Deluxe",
+        category: document.getElementById('pkgCategory').value,
         b2bPrice: document.getElementById('pkgB2BPrice').value,
         inclusions: document.getElementById('pkgInclusions').value,
         travelDates: document.getElementById('pkgTravelDates').value,
-        ratesGrid: collectRateGridData(),
+        ratesGrid: document.getElementById('pkgRatesGrid').value,
         itinerary: document.getElementById('pkgItinerary').value
       };
 
@@ -350,7 +316,7 @@
         const response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
         const res = await response.json();
         if (res.success) {
-          alert("Package and Rate Grid saved successfully!");
+          alert("Package saved successfully!");
           resetPackageForm();
           refreshData();
         } else alert("Error: " + res.message);
@@ -382,25 +348,123 @@
       } catch (err) { alert("Error deleting package!"); }
     }
 
+    // ================= AGENTS RENDERING & ACTIONS =================
     function renderAdminAgents(agents) {
       const list = document.getElementById('adminAgentsList');
       if (agents.length === 0) {
         list.innerHTML = `<p class="text-slate-500 text-xs font-bold py-4">No agents registered yet.</p>`;
         return;
       }
+
       let html = '';
-      agents.forEach((a) => {
+      agents.forEach((a, idx) => {
+        const isPaused = a.status === "Paused";
+        const badge = isPaused 
+          ? `<span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px] font-black rounded-lg uppercase">Paused</span>` 
+          : `<span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black rounded-lg uppercase">Active</span>`;
+
         html += `
-          <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-            <div>
-              <p class="font-extrabold text-white text-sm">${a.fullName} (${a.agencyName})</p>
+          <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <p class="font-extrabold text-white text-sm">${a.fullName} (${a.agencyName})</p>
+                ${badge}
+              </div>
               <p class="text-xs font-semibold text-slate-400">${a.email} · Phone: ${a.phone} · City: ${a.city}</p>
             </div>
-            <span class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[10px] font-black rounded-lg uppercase">Active Agent</span>
+
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+              <button onclick="editAgent(${idx})" class="px-3 py-1.5 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white text-xs font-bold rounded-xl border border-blue-500/30 transition flex items-center gap-1">
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+              </button>
+              <button onclick="toggleAgentStatus(${a.rowIndex}, '${isPaused ? 'Active' : 'Paused'}')" class="px-3 py-1.5 ${isPaused ? 'bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400' : 'bg-amber-600/20 hover:bg-amber-600 text-amber-400'} hover:text-white text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-1">
+                <i class="fa-solid ${isPaused ? 'fa-user-check' : 'fa-user-slash'}"></i> ${isPaused ? 'Resume' : 'Pause'}
+              </button>
+              <button onclick="deleteAgent(${a.rowIndex})" class="px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white text-xs font-bold rounded-xl border border-rose-500/30 transition flex items-center gap-1">
+                <i class="fa-solid fa-trash"></i> Delete
+              </button>
+            </div>
           </div>
         `;
       });
       list.innerHTML = html;
+    }
+
+    function editAgent(idx) {
+      const a = cacheAgents[idx];
+      if (!a) return;
+
+      document.getElementById('agentRowIndex').value = a.rowIndex;
+      document.getElementById('agentName').value = a.fullName;
+      document.getElementById('agentAgency').value = a.agencyName;
+      document.getElementById('agentPhone').value = a.phone;
+      document.getElementById('agentCity').value = a.city;
+      document.getElementById('agentEmail').value = a.email;
+
+      document.getElementById('agentFormTitle').innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-400"></i> Edit Agent Details`;
+      document.getElementById('btnSaveAgentText').innerText = "Update Agent";
+      document.getElementById('btnCancelAgentEdit').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetAgentForm() {
+      document.getElementById('addAgentForm').reset();
+      document.getElementById('agentRowIndex').value = "";
+      document.getElementById('agentFormTitle').innerHTML = `<i class="fa-solid fa-user-plus text-emerald-400"></i> Add New Agent`;
+      document.getElementById('btnSaveAgentText').innerText = "Save Agent";
+      document.getElementById('btnCancelAgentEdit').classList.add('hidden');
+    }
+
+    async function handleSaveAgent(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSaveAgent');
+      btn.disabled = true;
+
+      const payload = {
+        action: "save_agent",
+        rowIndex: document.getElementById('agentRowIndex').value,
+        fullName: document.getElementById('agentName').value,
+        agencyName: document.getElementById('agentAgency').value,
+        phone: document.getElementById('agentPhone').value,
+        city: document.getElementById('agentCity').value,
+        email: document.getElementById('agentEmail').value,
+        password: document.getElementById('agentPassword').value
+      };
+
+      try {
+        const response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+        const res = await response.json();
+        if (res.success) {
+          alert("Agent details saved successfully!");
+          resetAgentForm();
+          refreshData();
+        } else alert("Error: " + res.message);
+      } catch (err) { alert("Connection error!"); } 
+      finally { btn.disabled = false; }
+    }
+
+    async function toggleAgentStatus(rowIndex, newStatus) {
+      if (!confirm(`Are you sure you want to ${newStatus === 'Paused' ? 'pause' : 'activate'} this agent's account?`)) return;
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({ action: "toggle_agent_status", rowIndex: rowIndex, status: newStatus })
+        });
+        const res = await response.json();
+        if (res.success) refreshData();
+      } catch (err) { alert("Error updating agent status!"); }
+    }
+
+    async function deleteAgent(rowIndex) {
+      if (!confirm("Are you sure you want to delete this agent?")) return;
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({ action: "delete_agent", rowIndex: rowIndex })
+        });
+        const res = await response.json();
+        if (res.success) refreshData();
+      } catch (err) { alert("Error deleting agent!"); }
     }
   </script>
 </body>
