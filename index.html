@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journey Assist | B2B Partner Portal</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Inter Font Stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- AUTHENTICATION PAGE CONTAINER -->
+  <div id="authContainer" class="min-h-screen w-full grid grid-cols-1 lg:grid-cols-12 bg-white">
+    
+    <!-- LEFT PANEL: BRANDING & HERO BANNER (5 COLUMNS) -->
+    <div class="lg:col-span-5 relative bg-slate-900 text-white flex flex-col justify-between p-8 sm:p-12 lg:p-16 overflow-hidden min-h-[420px] lg:min-h-screen">
+      <!-- Background Image with Overlay -->
+      <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80" alt="Kerala B2B Travel" class="absolute inset-0 w-full h-full object-cover opacity-25">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-950/95 via-slate-900/90 to-slate-950/95"></div>
+
+      <!-- Brand Logo Header -->
+      <div class="relative z-10 flex items-center gap-3.5">
+        <div class="w-11 h-11 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold shadow-lg shadow-blue-600/30">
+          <i class="fa-solid fa-plane-departure text-xl text-amber-300"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl font-black tracking-tight text-white">Journey Assist</h1>
+          <p class="text-[10px] uppercase font-extrabold tracking-widest text-blue-400">B2B Partner Network</p>
+        </div>
+      </div>
+
+      <!-- Hero Heading & Value Props -->
+      <div class="relative z-10 my-auto py-8">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-bold mb-6 backdrop-blur-md">
+          <i class="fa-solid fa-shield-halved text-amber-400"></i> Agent Exclusive Access
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
+          Grow Your Business With Direct B2B Rates.
+        </h2>
+        <p class="mt-4 text-slate-300 text-sm leading-relaxed font-medium max-w-md">
+          Instant access to 150+ verified holiday packages across Kerala and domestic destinations with unbranded itineraries for your retail clients.
+        </p>
+
+        <!-- Feature Points -->
+        <div class="mt-8 space-y-3.5">
+          <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-200 font-semibold">
+            <i class="fa-solid fa-circle-check text-blue-400 text-base"></i>
+            <span>Zero Annual Fees & Free Registration</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-200 font-semibold">
+            <i class="fa-solid fa-circle-check text-blue-400 text-base"></i>
+            <span>Net B2B Rates with Flexible Commission Markup</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-200 font-semibold">
+            <i class="fa-solid fa-circle-check text-blue-400 text-base"></i>
+            <span>24/7 Ground Operations Support for On-Tour Guests</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Info -->
+      <div class="relative z-10 pt-6 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between font-medium">
+        <span>© Journey Assist Travels</span>
+        <span>partners.journeyassist.in</span>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: CLEAN FORM CONTAINER (7 COLUMNS) -->
+    <div class="lg:col-span-7 bg-white flex flex-col justify-center p-6 sm:p-12 lg:p-20">
+      <div class="max-w-md w-full mx-auto">
+        
+        <!-- Form Header & Toggle -->
+        <div class="mb-8">
+          <h3 id="formHeading" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Agent Sign In</h3>
+          <p id="formSubheading" class="text-slate-500 text-xs sm:text-sm mt-1.5 font-medium">Enter your agent credentials to access B2B rates.</p>
+
+          <!-- Tab Bar -->
+          <div class="flex bg-slate-100 p-1.5 rounded-2xl mt-6 border border-slate-200/80">
+            <button type="button" id="tabSignin" onclick="switchTab('signin')" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-white text-blue-700 shadow-sm">
+              <i class="fa-solid fa-right-to-bracket mr-1.5"></i> Sign In
+            </button>
+            <button type="button" id="tabSignup" onclick="switchTab('signup')" class="flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 text-slate-500 hover:text-slate-900">
+              <i class="fa-solid fa-user-plus mr-1.5"></i> Register / New Agent
+            </button>
+          </div>
+        </div>
+
+        <!-- Alert Notification -->
+        <div id="alertBox" class="hidden mb-6 p-4 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-3 transition-all"></div>
+
+        <!-- 1. SIGN IN FORM -->
+        <form id="signinForm" onsubmit="handleAuth(event, 'signin')" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Agent Email Address</label>
+            <div class="relative">
+              <i class="fa-regular fa-envelope absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+              <input type="email" id="signinEmail" required placeholder="agent@agency.com" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Password</label>
+            <div class="relative">
+              <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+              <input type="password" id="signinPassword" required placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+            </div>
+          </div>
+          <button type="submit" id="btnSignin" class="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-blue-700/25 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer mt-2">
+            <span>Sign In to Portal</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </form>
+
+        <!-- 2. SIGN UP FORM -->
+        <form id="signupForm" onsubmit="handleAuth(event, 'signup')" class="space-y-4 hidden">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Full Name</label>
+            <input type="text" id="signupName" required placeholder="Amit Sonkar" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Travel Agency Name</label>
+            <input type="text" id="signupAgency" required placeholder="Journey Assist Travels" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mobile No.</label>
+              <input type="tel" id="signupPhone" required placeholder="9876543210" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">City</label>
+              <input type="text" id="signupCity" required placeholder="Lucknow" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Email Address</label>
+            <input type="email" id="signupEmail" required placeholder="agent@agency.com" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Create Password</label>
+            <input type="password" id="signupPassword" required minlength="6" placeholder="••••••••" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all">
+          </div>
+          <button type="submit" id="btnSignup" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer mt-2">
+            <span>Complete Agent Registration</span>
+            <i class="fa-solid fa-check text-xs text-amber-400"></i>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENT DASHBOARD WELCOME CARD (LOCKED UNTIL LOGIN) -->
+  <div id="dashboardContainer" class="min-h-screen w-full bg-slate-50 flex items-center justify-center p-6 hidden">
+    <div class="max-w-2xl w-full bg-white rounded-3xl shadow-xl p-8 border border-slate-200 text-slate-800">
+      <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center font-bold text-xl border border-blue-100">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <h3 id="dashAgency" class="text-xl font-black text-slate-900">Welcome Partner</h3>
+            <p id="dashAgentId" class="text-xs font-bold text-blue-700">ID: JA-AGT-0000</p>
+          </div>
+        </div>
+        <button type="button" onclick="logout()" class="px-4 py-2 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 border border-slate-200 text-slate-600 text-xs font-bold rounded-xl transition-all flex items-center gap-2">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+
+      <div class="py-6 space-y-4">
+        <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 text-emerald-800 text-xs sm:text-sm leading-relaxed font-semibold">
+          <i class="fa-solid fa-circle-check text-emerald-600 text-xl flex-shrink-0"></i>
+          <span>आपका B2B एजेंट अकाउंट सक्रिय है! आप एक्सक्लूसिव पैकेजेस और नेट रेट्स देखने के लिए तैयार हैं।</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80">
+            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Agent Name</p>
+            <p id="dashName" class="font-bold text-slate-800 text-sm mt-0.5">-</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80">
+            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">City</p>
+            <p id="dashCity" class="font-bold text-slate-800 text-sm mt-0.5">-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ✅ आपका Google Apps Script Web App URL
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
+
+    window.onload = function() {
+      const savedAgent = localStorage.getItem('ja_b2b_agent');
+      if (savedAgent) {
+        showDashboard(JSON.parse(savedAgent));
+      }
+    };
+
+    function switchTab(tab) {
+      const alertBox = document.getElementById('alertBox');
+      alertBox.classList.add('hidden');
+      
+      const heading = document.getElementById('formHeading');
+      const subheading = document.getElementById('formSubheading');
+
+      if (tab === 'signin') {
+        document.getElementById('signinForm').classList.remove('hidden');
+        document.getElementById('signupForm').classList.add('hidden');
+        document.getElementById('tabSignin').className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-white text-blue-700 shadow-sm";
+        document.getElementById('tabSignup').className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 text-slate-500 hover:text-slate-900";
+        heading.innerText = "Agent Sign In";
+        subheading.innerText = "Enter your agent credentials to access B2B rates.";
+      } else {
+        document.getElementById('signinForm').classList.add('hidden');
+        document.getElementById('signupForm').classList.remove('hidden');
+        document.getElementById('tabSignup').className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-white text-blue-700 shadow-sm";
+        document.getElementById('tabSignin').className = "flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 text-slate-500 hover:text-slate-900";
+        heading.innerText = "New Agent Registration";
+        subheading.innerText = "Register for free to get instant B2B partner access.";
+      }
+    }
+
+    function showAlert(msg, isSuccess) {
+      const alertBox = document.getElementById('alertBox');
+      alertBox.className = `mb-6 p-4 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-3 ${isSuccess ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-rose-50 text-rose-800 border border-rose-200'}`;
+      alertBox.innerHTML = `<i class="fa-solid ${isSuccess ? 'fa-circle-check text-emerald-600' : 'fa-triangle-exclamation text-rose-600'} text-base flex-shrink-0"></i> <span>${msg}</span>`;
+      alertBox.classList.remove('hidden');
+    }
+
+    async function handleAuth(e, action) {
+      e.preventDefault();
+      const btn = action === 'signin' ? document.getElementById('btnSignin') : document.getElementById('btnSignup');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
+
+      let payload = { action: action };
+
+      if (action === 'signin') {
+        payload.email = document.getElementById('signinEmail').value;
+        payload.password = document.getElementById('signinPassword').value;
+      } else {
+        payload.fullName = document.getElementById('signupName').value;
+        payload.agencyName = document.getElementById('signupAgency').value;
+        payload.phone = document.getElementById('signupPhone').value;
+        payload.city = document.getElementById('signupCity').value;
+        payload.email = document.getElementById('signupEmail').value;
+        payload.password = document.getElementById('signupPassword').value;
+      }
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        const res = await response.json();
+
+        if (res.success) {
+          showAlert(res.message, true);
+          localStorage.setItem('ja_b2b_agent', JSON.stringify(res.agent));
+          setTimeout(() => showDashboard(res.agent), 1000);
+        } else {
+          showAlert(res.message, false);
+        }
+      } catch (err) {
+        showAlert("कनेक्शन एरर! कृपया दोबारा कोशिश करें।", false);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    }
+
+    function showDashboard(agent) {
+      document.getElementById('authContainer').classList.add('hidden');
+      document.getElementById('dashboardContainer').classList.remove('hidden');
+      document.getElementById('dashAgency').innerText = agent.agency;
+      document.getElementById('dashAgentId').innerText = `ID: ${agent.agentId}`;
+      document.getElementById('dashName').innerText = agent.name;
+      document.getElementById('dashCity').innerText = agent.city || "India";
+    }
+
+    function logout() {
+      localStorage.removeItem('ja_b2b_agent');
+      document.getElementById('dashboardContainer').classList.add('hidden');
+      document.getElementById('authContainer').classList.remove('hidden');
+      document.getElementById('signinForm').reset();
+      document.getElementById('signupForm').reset();
+      switchTab('signin');
+    }
+  </script>
+</body>
+</html>
