@@ -11,7 +11,6 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
-  <!-- HEADER -->
   <header class="bg-slate-950 border-b border-slate-800 py-4 px-6 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
@@ -23,13 +22,12 @@
           <p class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">B2B Travel Wholesale Desk</p>
         </div>
       </div>
-      <a href="admin.html" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2">
+      <a href="admin.html" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2 cursor-pointer">
         <i class="fa-solid fa-user-shield text-blue-400"></i> Admin Panel
       </a>
     </div>
   </header>
 
-  <!-- MAIN PORTAL CONTENT -->
   <main class="max-w-7xl mx-auto p-6 space-y-6">
     <div class="flex justify-between items-center">
       <h2 class="text-xl font-black text-white">Live Holiday Packages & Rate Grids</h2>
@@ -38,7 +36,6 @@
       </button>
     </div>
 
-    <!-- PACKAGES GRID -->
     <div id="portalPackagesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <p class="text-slate-500 text-xs font-bold py-4">Loading professional packages...</p>
     </div>
@@ -46,7 +43,7 @@
 
   <!-- BROCHURE STYLE PACKAGE DETAILS MODAL -->
   <div id="packageModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-slate-950 border border-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl relative">
+    <div class="bg-slate-950 border border-slate-800 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl relative">
       <button onclick="closePackageModal()" class="absolute top-6 right-6 w-10 h-10 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-full flex items-center justify-center transition border border-slate-800 cursor-pointer">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
@@ -96,11 +93,11 @@
 
             <div class="bg-slate-900 p-3.5 rounded-2xl border border-slate-800/80 flex justify-between items-center">
               <div>
-                <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">B2B Wholesale Price</p>
+                <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Starting Price</p>
                 <p class="text-sm font-black text-emerald-400">${p.b2bPrice}</p>
               </div>
               <button onclick="openBrochureModal(${idx})" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs rounded-xl transition shadow-lg flex items-center gap-2 cursor-pointer">
-                <i class="fa-solid fa-file-invoice-dollar"></i> View Rates & Itinerary
+                <i class="fa-solid fa-file-invoice-dollar"></i> View Rate Grid
               </button>
             </div>
           </div>
@@ -122,23 +119,23 @@
               <p class="text-xs font-semibold text-slate-300 mt-1"><i class="fa-solid fa-calendar-days text-amber-400 mr-1.5"></i> ${p.travelDates || 'Valid for booking'}</p>
             </div>
             <div class="flex gap-2 w-full sm:w-auto">
-              <a href="https://wa.me/?text=Check%20out%20this%20exclusive%20package:%20${encodeURIComponent(p.title)}%20-%20B2B%20Price:%20${encodeURIComponent(p.b2bPrice)}" target="_blank" class="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+              <a href="https://wa.me/?text=Check%20out%20this%20exclusive%20package:%20${encodeURIComponent(p.title)}%20-%20Price:%20${encodeURIComponent(p.b2bPrice)}" target="_blank" class="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-xl transition flex items-center justify-center gap-2 shadow-lg cursor-pointer">
                 <i class="fa-brands fa-whatsapp text-sm"></i> Send to Client
               </a>
             </div>
           </div>
         </div>
 
-        <div class="space-y-3">
+        <div class="space-y-4">
           <h3 class="text-sm font-black text-white flex items-center gap-2 uppercase tracking-wider">
             <i class="fa-solid fa-table text-amber-400"></i> Complete Supplier Rate Grid
           </h3>
-          <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 text-xs font-medium text-slate-200 whitespace-pre-line leading-relaxed font-mono">
-            ${p.ratesGrid && p.ratesGrid.trim() !== '' ? p.ratesGrid : 'Standard rate grid applicable. Contact support for customized group quotes.'}
+          <div id="brochureTableContainer" class="space-y-6">
+            <!-- Dynamic Tables Here -->
           </div>
         </div>
 
-        <div class="space-y-3">
+        <div class="space-y-3 pt-4 border-t border-slate-800">
           <h3 class="text-sm font-black text-white flex items-center gap-2 uppercase tracking-wider">
             <i class="fa-solid fa-route text-blue-400"></i> Day-Wise Itinerary & Highlights
           </h3>
@@ -164,6 +161,67 @@
       `;
 
       document.getElementById('modalContentBody').innerHTML = html;
+
+      // Render Structured Tables Grouped by Slab
+      const container = document.getElementById('brochureTableContainer');
+      try {
+        const gridArr = JSON.parse(p.ratesGrid || '[]');
+        if (gridArr.length > 0) {
+          // Group by slab
+          let grouped = {};
+          gridArr.forEach(item => {
+            let slabKey = item.slab || 'Package Rates';
+            if (!grouped[slabKey]) grouped[slabKey] = [];
+            grouped[slabKey].push(item);
+          });
+
+          let tableHtml = '';
+          for (let slab in grouped) {
+            tableHtml += `
+              <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-900">
+                <div class="bg-blue-900/60 px-4 py-2.5 border-b border-slate-800 flex justify-between items-center">
+                  <span class="text-xs font-black text-white uppercase tracking-wider">${slab}</span>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr class="bg-slate-950 text-slate-400 border-b border-slate-800 text-[11px]">
+                        <th class="p-3">Hotel Plan</th>
+                        <th class="p-3">Category</th>
+                        <th class="p-3">Meal</th>
+                        <th class="p-3">Single (₹)</th>
+                        <th class="p-3">Twin (₹)</th>
+                        <th class="p-3">Triple (₹)</th>
+                        <th class="p-3">Child (6-11)</th>
+                        <th class="p-3">Extra Bed</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/80 text-slate-200">
+            `;
+            grouped[slab].forEach(row => {
+              tableHtml += `
+                <tr class="hover:bg-slate-800/40">
+                  <td class="p-3 font-bold text-white">${row.hotel || '-'}</td>
+                  <td class="p-3">${row.category || '-'}</td>
+                  <td class="p-3 font-semibold text-amber-400">${row.meal || 'CP'}</td>
+                  <td class="p-3">${row.single ? '₹ ' + row.single : '-'}</td>
+                  <td class="p-3 font-black text-emerald-400">${row.twin ? '₹ ' + row.twin : '-'}</td>
+                  <td class="p-3">${row.triple ? '₹ ' + row.triple : '-'}</td>
+                  <td class="p-3">${row.child ? '₹ ' + row.child : '-'}</td>
+                  <td class="p-3">${row.extra ? '₹ ' + row.extra : '-'}</td>
+                </tr>
+              `;
+            });
+            tableHtml += `</tbody></table></div></div>`;
+          }
+          container.innerHTML = tableHtml;
+        } else {
+          container.innerHTML = `<p class="text-xs text-slate-400 bg-slate-900 p-4 rounded-xl border border-slate-800">No structured rate grid provided.</p>`;
+        }
+      } catch (err) {
+        container.innerHTML = `<p class="text-xs text-slate-400 bg-slate-900 p-4 rounded-xl border border-slate-800">${p.ratesGrid || 'No rates available.'}</p>`;
+      }
+
       document.getElementById('packageModal').classList.remove('hidden');
     }
 
