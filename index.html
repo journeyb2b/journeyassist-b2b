@@ -23,6 +23,9 @@
           <p class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">B2B Travel Wholesale Desk</p>
         </div>
       </div>
+      <a href="admin.html" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2">
+        <i class="fa-solid fa-user-shield text-blue-400"></i> Admin Panel
+      </a>
     </div>
   </header>
 
@@ -30,7 +33,7 @@
   <main class="max-w-7xl mx-auto p-6 space-y-6">
     <div class="flex justify-between items-center">
       <h2 class="text-xl font-black text-white">Live Holiday Packages & Rate Grids</h2>
-      <button onclick="loadPortalPackages()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2">
+      <button onclick="loadPortalPackages()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl border border-slate-700 transition flex items-center gap-2 cursor-pointer">
         <i class="fa-solid fa-rotate text-blue-400"></i> Refresh Packages
       </button>
     </div>
@@ -44,12 +47,12 @@
   <!-- BROCHURE STYLE PACKAGE DETAILS MODAL -->
   <div id="packageModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-slate-950 border border-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl relative">
-      <button onclick="closePackageModal()" class="absolute top-6 right-6 w-10 h-10 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-full flex items-center justify-center transition border border-slate-800">
+      <button onclick="closePackageModal()" class="absolute top-6 right-6 w-10 h-10 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-full flex items-center justify-center transition border border-slate-800 cursor-pointer">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
 
       <div id="modalContentBody" class="space-y-6">
-        <!-- Dynamic Brochure Content will inject here -->
+        <!-- Dynamic Brochure Content -->
       </div>
     </div>
   </div>
@@ -58,9 +61,7 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
     let allPackages = [];
 
-    window.onload = function() {
-      loadPortalPackages();
-    };
+    window.onload = function() { loadPortalPackages(); };
 
     async function loadPortalPackages() {
       try {
@@ -70,9 +71,7 @@
           allPackages = res.packages;
           renderPortalPackages(res.packages);
         }
-      } catch (err) {
-        console.error("Error loading packages:", err);
-      }
+      } catch (err) { console.error("Error loading packages:", err); }
     }
 
     function renderPortalPackages(packages) {
@@ -115,7 +114,6 @@
       if (!p) return;
 
       let html = `
-        <!-- BROCHURE TOP BANNER -->
         <div class="bg-gradient-to-r from-blue-900/40 to-slate-900 p-6 rounded-2xl border border-blue-500/20 space-y-4">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
@@ -123,8 +121,6 @@
               <h2 class="text-2xl font-black text-white mt-2">${p.title}</h2>
               <p class="text-xs font-semibold text-slate-300 mt-1"><i class="fa-solid fa-calendar-days text-amber-400 mr-1.5"></i> ${p.travelDates || 'Valid for booking'}</p>
             </div>
-            
-            <!-- INSTANT WHATSAPP ACTIONS -->
             <div class="flex gap-2 w-full sm:w-auto">
               <a href="https://wa.me/?text=Check%20out%20this%20exclusive%20package:%20${encodeURIComponent(p.title)}%20-%20B2B%20Price:%20${encodeURIComponent(p.b2bPrice)}" target="_blank" class="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
                 <i class="fa-brands fa-whatsapp text-sm"></i> Send to Client
@@ -133,17 +129,15 @@
           </div>
         </div>
 
-        <!-- COMPLETE SUPPLIER RATE GRID SECTION -->
         <div class="space-y-3">
           <h3 class="text-sm font-black text-white flex items-center gap-2 uppercase tracking-wider">
             <i class="fa-solid fa-table text-amber-400"></i> Complete Supplier Rate Grid
           </h3>
-          <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 text-xs font-medium text-slate-200 whitespace-pre-line leading-relaxed">
+          <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 text-xs font-medium text-slate-200 whitespace-pre-line leading-relaxed font-mono">
             ${p.ratesGrid && p.ratesGrid.trim() !== '' ? p.ratesGrid : 'Standard rate grid applicable. Contact support for customized group quotes.'}
           </div>
         </div>
 
-        <!-- DETAILED ITINERARY SECTION -->
         <div class="space-y-3">
           <h3 class="text-sm font-black text-white flex items-center gap-2 uppercase tracking-wider">
             <i class="fa-solid fa-route text-blue-400"></i> Day-Wise Itinerary & Highlights
@@ -153,7 +147,6 @@
           </div>
         </div>
 
-        <!-- INCLUSIONS & EXCLUSIONS -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-2">
             <p class="text-xs font-black text-emerald-400 uppercase tracking-wider flex items-center gap-2">
