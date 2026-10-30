@@ -1,493 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journey Assist | B2B Agent Dashboard</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .glass-modal { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px); }
-  </style>
-</head>
-<body class="bg-slate-100 min-h-screen text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
-
-  <!-- PUBLIC LANDING / AUTH CONTAINER -->
-  <div id="authContainer" class="min-h-screen flex flex-col justify-between">
-    <div>
-      <!-- TOP NAV -->
-      <header class="bg-blue-600 text-white shadow-md sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-white text-blue-700 rounded-2xl flex items-center justify-center font-extrabold text-xl shadow-md">
-              <i class="fa-solid fa-plane-departure text-amber-500"></i>
-            </div>
-            <div>
-              <h1 class="text-2xl font-black tracking-tight text-white">Journey Assist</h1>
-              <p class="text-[10px] uppercase font-extrabold tracking-widest text-blue-200">B2B Partner Portal</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            <button onclick="openAuthModal('signin')" class="px-5 py-2.5 text-xs font-bold text-white hover:bg-blue-700 border border-blue-400 rounded-xl transition">Agent Sign In</button>
-            <button onclick="openAuthModal('signup')" class="px-5 py-2.5 bg-white text-blue-700 hover:bg-blue-50 rounded-xl text-xs font-bold shadow-md transition">Register Partner</button>
-          </div>
-        </div>
-      </header>
-
-      <!-- HERO & PACKAGES PREVIEW -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <span class="px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4 inline-block">India's Trusted B2B Travel Marketplace</span>
-        <h2 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">Unlock Best Net B2B Rates For Travel Agents</h2>
-        <p class="mt-4 text-slate-600 text-sm sm:text-base font-medium max-w-2xl mx-auto">Access 150+ verified holiday packages, instant unbranded quotes, and direct DMC pricing.</p>
-        <div class="mt-8">
-          <button onclick="openAuthModal('signup')" class="px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-sm uppercase rounded-2xl shadow-xl transition">Become An Agent Now</button>
-        </div>
-      </section>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 text-slate-400 py-8 text-xs text-center border-t border-slate-800">
-      <p>Registered Address: 29 Shalimar Garden Sector 8 Indira Nagar Lucknow 226016 | Helpline: +91 9919382999</p>
-      <p class="mt-2 text-slate-500">© 2026 Journey Assist Travels. All rights reserved. Made in India 🇮🇳</p>
-    </footer>
-  </div>
-
-  <!-- AGENT DASHBOARD CONTAINER (EXACT SCREENSHOT LAYOUT) -->
-  <div id="dashboardContainer" class="min-h-screen bg-slate-100 hidden">
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var action = data.action;
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
     
-    <!-- DASHBOARD TOP NAV (SCREENSHOT 33) -->
-    <header class="bg-blue-600 text-white shadow-md sticky top-0 z-40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        <!-- Brand & Nav Links -->
-        <div class="flex items-center gap-8">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-white text-blue-700 rounded-xl flex items-center justify-center font-bold text-lg">
-              <i class="fa-solid fa-plane-departure text-amber-500"></i>
-            </div>
-            <span class="text-lg font-black tracking-tight">Journey Assist</span>
-          </div>
-
-          <nav class="hidden lg:flex items-center gap-6 text-xs font-extrabold uppercase tracking-wider">
-            <a href="#" class="text-white border-b-2 border-white pb-1">Dashboard</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">Customized Package</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">Quick Package</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">My Queries</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">Hotel Booking</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">Contact Us</a>
-          </nav>
-        </div>
-
-        <!-- Right Profile & Notifications -->
-        <div class="flex items-center gap-4">
-          <button class="relative p-2 text-blue-100 hover:text-white">
-            <i class="fa-regular fa-bell text-lg"></i>
-            <span class="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">1</span>
-          </button>
-          
-          <div class="flex items-center gap-3 bg-blue-700 px-4 py-2 rounded-2xl border border-blue-500/50">
-            <div class="w-8 h-8 bg-white text-blue-700 rounded-xl flex items-center justify-center font-black text-xs" id="agentAvatar">JS</div>
-            <div class="text-left">
-              <p class="text-xs font-extrabold text-white" id="dashAgentName">Mrs. Jyoti Sonkar</p>
-              <p class="text-[10px] text-amber-300 font-bold uppercase tracking-wider">AGENT</p>
-            </div>
-          </div>
-
-          <button onclick="logoutAgent()" title="Logout" class="p-2.5 bg-blue-700 hover:bg-rose-600 text-white rounded-xl transition text-xs">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </button>
-        </div>
-
-      </div>
-    </header>
-
-    <!-- MAIN DASHBOARD CONTENT -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    // -------------------------------------------------------------
+    // 1. ACTION: CUSTOM PACKAGE QUOTE REQUEST
+    // -------------------------------------------------------------
+    if (action === "custom_quote") {
+      var sheet = ss.getSheetByName("Custom_Queries") || ss.insertSheet("Custom_Queries");
       
-      <!-- WELCOME & ACTION BUTTONS BAR (SCREENSHOT 33) -->
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Mrs. Jyoti Sonkar</h2>
-          <p class="text-slate-500 text-xs font-semibold mt-1">Here's what's happening with your bookings today</p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-plus"></i> Book Quick Package
-          </button>
-          <button class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-plus"></i> Create Custom Package
-          </button>
-          <button class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-plus"></i> Hotel Booking
-          </button>
-          <button class="px-5 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-calendar-days text-amber-400"></i> Schedule Demo
-          </button>
-        </div>
-      </div>
-
-      <!-- 4 TOP STAT CARDS (SCREENSHOT 33) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Accounts Card -->
-        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-cyan-800 uppercase tracking-wider">Accounts</p>
-            <p class="text-2xl font-black text-slate-900 mt-2">₹0</p>
-          </div>
-          <div class="w-14 h-14 bg-cyan-500 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-wallet"></i>
-          </div>
-        </div>
-
-        <!-- Upcoming Trips Card -->
-        <div class="bg-blue-500/10 border border-blue-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-blue-800 uppercase tracking-wider">Upcoming Trips</p>
-            <p class="text-2xl font-black text-slate-900 mt-2">0</p>
-          </div>
-          <div class="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-suitcase-rolling"></i>
-          </div>
-        </div>
-
-        <!-- Conversion Rate Card -->
-        <div class="bg-teal-500/10 border border-teal-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-teal-800 uppercase tracking-wider">Conversion Rate</p>
-            <p class="text-2xl font-black text-slate-900 mt-2">-</p>
-          </div>
-          <div class="w-14 h-14 bg-teal-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-chart-line"></i>
-          </div>
-        </div>
-
-        <!-- Subscription Card -->
-        <div class="bg-indigo-500/10 border border-indigo-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-indigo-800 uppercase tracking-wider">Subscription</p>
-            <p class="text-lg font-black text-slate-900 mt-2">31/10/2026</p>
-          </div>
-          <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-id-card"></i>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- NEEDS YOUR ATTENTION SECTION (SCREENSHOT 33) -->
-      <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Needs Your Attention
-        </h3>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Pending Query - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Bookings & Queries - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Invoices & Payments - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Upcoming Query - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Completed Query - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-        </div>
-      </div>
-
-      <!-- LOWER GRIDS (SCREENSHOT 34) -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Total Turnover -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-              <h4 class="text-xs font-extrabold text-blue-700 uppercase tracking-wider">Total Turnover</h4>
-              <i class="fa-solid fa-indian-rupee-sign text-blue-700"></i>
-            </div>
-            <div class="py-12 text-center">
-              <p class="text-3xl font-black text-slate-300">-</p>
-              <p class="text-xs font-semibold text-slate-500 mt-2">No revenue data</p>
-            </div>
-          </div>
-          <div class="flex justify-between text-[10px] text-slate-400 font-bold pt-4 border-t border-slate-100">
-            <span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span>
-          </div>
-        </div>
-
-        <!-- Package Pipeline -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-              <h4 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider">Package Pipeline</h4>
-              <button class="text-xs font-bold text-blue-600 hover:underline">View</button>
-            </div>
-            <div class="py-16 text-center">
-              <p class="text-xs font-semibold text-slate-500">No packages this period</p>
-            </div>
-          </div>
-          <div class="pt-4 border-t border-slate-100 text-[10px] text-slate-400 font-semibold text-center">
-            Active Booking Pipeline
-          </div>
-        </div>
-
-        <!-- Query Conversion -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-            <h4 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider">Query Conversion</h4>
-            <span class="text-xs font-bold text-emerald-600">0% overall conversion</span>
-          </div>
-
-          <div class="space-y-3 text-xs font-bold text-slate-700">
-            <div>
-              <div class="flex justify-between mb-1"><span>Query Raised</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-blue-600 h-full w-0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Quote Sent</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-amber-500 h-full w-0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Confirmed</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-indigo-600 h-full w-0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Completed</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-0"></div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- BOTTOM ACCOUNTS & BALANCES (SCREENSHOT 34) -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider mb-4">Accounts & Balances</h4>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
-              <span class="text-xs font-bold text-slate-700 flex items-center gap-2"><i class="fa-solid fa-wallet text-blue-600"></i> Wallet</span>
-              <span class="text-xs font-black text-slate-900">₹0</span>
-            </div>
-            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
-              <span class="text-xs font-bold text-slate-700 flex items-center gap-2"><i class="fa-solid fa-file-invoice text-blue-600"></i> Credit Notes</span>
-              <span class="text-xs font-black text-slate-900">₹0</span>
-            </div>
-            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
-              <span class="text-xs font-bold text-slate-700 flex items-center gap-2"><i class="fa-solid fa-star text-amber-500"></i> Travel Points</span>
-              <span class="text-xs font-black text-slate-900">₹0</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider mb-4">Package Overview</h4>
-          <p class="text-xs text-slate-500 font-semibold mb-4">Handy, Custom & Hotel bookings this period</p>
-          <div class="flex items-center gap-6 text-xs font-bold text-slate-600 pt-6 border-t border-slate-100">
-            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-600"></span> Handy Packages</span>
-            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Custom Packages</span>
-            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-500"></span> Hotel Booking</span>
-          </div>
-        </div>
-
-      </div>
-
-    </main>
-  </div>
-
-  <!-- AUTH MODAL POPUP -->
-  <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-modal hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 sm:p-8 relative border border-slate-100">
-      <button onclick="closeAuthModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-extrabold text-sm transition">✕</button>
-
-      <div class="text-center mb-6">
-        <div class="w-14 h-14 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl font-bold border border-blue-100 shadow-sm">
-          <i class="fa-solid fa-plane-departure text-amber-500"></i>
-        </div>
-        <h3 class="text-2xl font-black text-slate-900">Welcome to Your Next Journey</h3>
-        <p class="text-xs font-semibold text-slate-500 mt-1">Ready to explore B2B agent dashboard?</p>
-      </div>
-
-      <div class="flex bg-slate-100 p-1.5 rounded-2xl mb-6">
-        <button id="modalTabSignin" onclick="switchModalTab('signin')" class="flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition">Sign In</button>
-        <button id="modalTabSignup" onclick="switchModalTab('signup')" class="flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 transition">Register Partner</button>
-      </div>
-
-      <div id="modalAlertBox" class="hidden mb-4 p-3.5 rounded-xl text-xs font-bold flex items-center gap-2"></div>
-
-      <!-- SIGN IN FORM -->
-      <form id="modalSigninForm" onsubmit="handleModalAuth(event, 'signin')" class="space-y-4">
-        <div>
-          <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Agent Email Address</label>
-          <input type="email" id="modalSigninEmail" required placeholder="agent@agency.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
-        </div>
-        <div>
-          <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Password</label>
-          <input type="password" id="modalSigninPassword" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
-        </div>
-        <button type="submit" id="btnModalSignin" class="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition">Sign In to Dashboard</button>
-      </form>
-
-      <!-- SIGN UP FORM -->
-      <form id="modalSignupForm" onsubmit="handleModalAuth(event, 'signup')" class="space-y-3 hidden">
-        <div>
-          <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Full Name</label>
-          <input type="text" id="modalSignupName" required placeholder="Amit Sonkar" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-        </div>
-        <div>
-          <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Travel Agency Name</label>
-          <input type="text" id="modalSignupAgency" required placeholder="Journey Assist Travels" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Mobile No.</label>
-            <input type="tel" id="modalSignupPhone" required placeholder="9919382999" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-          </div>
-          <div>
-            <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">City</label>
-            <input type="text" id="modalSignupCity" required placeholder="Lucknow" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-          </div>
-        </div>
-        <div>
-          <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Email Address</label>
-          <input type="email" id="modalSignupEmail" required placeholder="agent@agency.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-        </div>
-        <div>
-          <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Create Password</label>
-          <input type="password" id="modalSignupPassword" required minlength="6" placeholder="••••••••" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
-        </div>
-        <button type="submit" id="btnModalSignup" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition mt-2">Complete Partner Registration</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
-
-    window.onload = function() {
-      const saved = localStorage.getItem('ja_b2b_agent');
-      if (saved) {
-        showDashboard(JSON.parse(saved));
-      } else {
-        showAuthLanding();
+      // Auto-create Headers if sheet is empty
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow([
+          "Timestamp", "Agent Name", "Agency Name", "Agent Email", "Agent Phone", 
+          "Destination", "Travel Date", "Nights", "Adults", "Kids", "Category", "Requirements"
+        ]);
       }
-    };
-
-    function showDashboard(agent) {
-      document.getElementById('authContainer').classList.add('hidden');
-      document.getElementById('dashboardContainer').classList.remove('hidden');
-      document.getElementById('dashWelcomeTitle').innerText = `Welcome, ${agent.name}`;
-      document.getElementById('dashAgentName').innerText = agent.name;
       
-      // Initials for avatar
-      const initials = agent.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-      document.getElementById('agentAvatar').innerText = initials;
+      var timestamp = new Date();
+      sheet.appendRow([
+        timestamp,
+        data.agentName,
+        data.agencyName,
+        data.agentEmail,
+        data.agentPhone,
+        data.destination,
+        data.travelDate,
+        data.nights,
+        data.adults,
+        data.kids,
+        data.category,
+        data.requirements
+      ]);
+      
+      // Email Notification to journeyassist11@gmail.com
+      var myEmail = "journeyassist11@gmail.com";
+      var emailSubject = "🚨 New Custom Quote Request from " + data.agencyName;
+      var emailBody = "Hi Journey Assist Team,\n\n" +
+                      "A new custom package query has been submitted by a B2B agent:\n\n" +
+                      "--------------------------------------------------\n" +
+                      "Agent Name: " + data.agentName + "\n" +
+                      "Agency Name: " + data.agencyName + "\n" +
+                      "Email: " + data.agentEmail + "\n" +
+                      "Phone: " + data.agentPhone + "\n" +
+                      "--------------------------------------------------\n" +
+                      "Destination: " + data.destination + "\n" +
+                      "Travel Date: " + data.travelDate + "\n" +
+                      "Duration: " + data.nights + "\n" +
+                      "Pax Details: " + data.adults + " Adults, " + data.kids + " Kids\n" +
+                      "Hotel Category: " + data.category + "\n" +
+                      "Special Requirements: " + data.requirements + "\n" +
+                      "--------------------------------------------------\n\n" +
+                      "Please process this query on priority.";
+                      
+      MailApp.sendEmail(myEmail, emailSubject, emailBody);
+      
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        message: "Your custom quote request has been submitted successfully! Email alert sent to team."
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    function showAuthLanding() {
-      document.getElementById('dashboardContainer').classList.add('hidden');
-      document.getElementById('authContainer').classList.remove('hidden');
-    }
-
-    function openAuthModal(tab) {
-      document.getElementById('authModal').classList.remove('hidden');
-      switchModalTab(tab);
-    }
-
-    function closeAuthModal() {
-      document.getElementById('authModal').classList.add('hidden');
-    }
-
-    function switchModalTab(tab) {
-      document.getElementById('modalAlertBox').classList.add('hidden');
-      if (tab === 'signin') {
-        document.getElementById('modalSigninForm').classList.remove('hidden');
-        document.getElementById('modalSignupForm').classList.add('hidden');
-        document.getElementById('modalTabSignin').className = "flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition";
-        document.getElementById('modalTabSignup').className = "flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-900 transition";
-      } else {
-        document.getElementById('modalSigninForm').classList.add('hidden');
-        document.getElementById('modalSignupForm').classList.remove('hidden');
-        document.getElementById('modalTabSignup').className = "flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition";
-        document.getElementById('modalTabSignin').className = "flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-900 transition";
+    // -------------------------------------------------------------
+    // 2. ACTION: AGENT SIGN UP / REGISTRATION
+    // -------------------------------------------------------------
+    if (action === "signup") {
+      var agentSheet = ss.getSheetByName("Agents") || ss.insertSheet("Agents");
+      
+      if (agentSheet.getLastRow() === 0) {
+        agentSheet.appendRow(["Timestamp", "Agent ID", "Full Name", "Agency Name", "Mobile", "City", "Email", "Password"]);
       }
-    }
-
-    function showModalAlert(msg, isSuccess) {
-      const box = document.getElementById('modalAlertBox');
-      box.className = `mb-4 p-3.5 rounded-xl text-xs font-bold flex items-center gap-2 ${isSuccess ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-rose-50 text-rose-800 border border-rose-200'}`;
-      box.innerHTML = `<i class="fa-solid ${isSuccess ? 'fa-circle-check text-emerald-600' : 'fa-triangle-exclamation text-rose-600'}"></i> <span>${msg}</span>`;
-      box.classList.remove('hidden');
-    }
-
-    async function handleModalAuth(e, action) {
-      e.preventDefault();
-      const btn = action === 'signin' ? document.getElementById('btnModalSignin') : document.getElementById('btnModalSignup');
-      const originalText = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Processing...`;
-
-      let payload = { action: action };
-      if (action === 'signin') {
-        payload.email = document.getElementById('modalSigninEmail').value;
-        payload.password = document.getElementById('modalSigninPassword').value;
-      } else {
-        payload.fullName = document.getElementById('modalSignupName').value;
-        payload.agencyName = document.getElementById('modalSignupAgency').value;
-        payload.phone = document.getElementById('modalSignupPhone').value;
-        payload.city = document.getElementById('modalSignupCity').value;
-        payload.email = document.getElementById('modalSignupEmail').value;
-        payload.password = document.getElementById('modalSignupPassword').value;
-      }
-
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload)
-        });
-        const res = await response.json();
-
-        if (res.success) {
-          showModalAlert(res.message, true);
-          localStorage.setItem('ja_b2b_agent', JSON.stringify(res.agent));
-          setTimeout(() => {
-            closeAuthModal();
-            showDashboard(res.agent);
-          }, 1000);
-        } else {
-          showModalAlert(res.message, false);
+      
+      // Check if email already exists
+      var agentData = agentSheet.getDataRange().getValues();
+      for (var i = 1; i < agentData.length; i++) {
+        if (agentData[i][6] === data.email) {
+          return ContentService.createTextOutput(JSON.stringify({
+            success: false,
+            message: "Email address is already registered. Please sign in."
+          })).setMimeType(ContentService.MimeType.JSON);
         }
-      } catch (err) {
-        showModalAlert("Connection error! Please check network.", false);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
       }
+      
+      var agentId = "JA-AGT-" + Math.floor(1000 + Math.random() * 9000);
+      var regTimestamp = new Date();
+      
+      agentSheet.appendRow([
+        regTimestamp,
+        agentId,
+        data.fullName,
+        data.agencyName,
+        data.phone,
+        data.city,
+        data.email,
+        data.password
+      ]);
+      
+      // Registration Notification Email to journeyassist11@gmail.com
+      var alertEmail = "journeyassist11@gmail.com";
+      var regSubject = "🎉 New Agent Registered: " + data.agencyName;
+      var regBody = "New Agent Details:\n\n" +
+                    "Agent ID: " + agentId + "\n" +
+                    "Name: " + data.fullName + "\n" +
+                    "Agency: " + data.agencyName + "\n" +
+                    "Mobile: " + data.phone + "\n" +
+                    "City: " + data.city + "\n" +
+                    "Email: " + data.email;
+                    
+      MailApp.sendEmail(alertEmail, regSubject, regBody);
+
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        message: "Registration successful! Welcome to Journey Assist B2B Partner Network.",
+        agent: {
+          agentId: agentId,
+          name: data.fullName,
+          agency: data.agencyName,
+          email: data.email,
+          phone: data.phone,
+          city: data.city
+        }
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    function logoutAgent() {
-      localStorage.removeItem('ja_b2b_agent');
-      showAuthLanding();
+    // -------------------------------------------------------------
+    // 3. ACTION: AGENT SIGN IN
+    // -------------------------------------------------------------
+    if (action === "signin") {
+      var agentSheet = ss.getSheetByName("Agents");
+      if (!agentSheet) {
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          message: "No registered agents found. Please register first."
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+      
+      var agentData = agentSheet.getDataRange().getValues();
+      for (var i = 1; i < agentData.length; i++) {
+        if (agentData[i][6] === data.email && agentData[i][7] === data.password) {
+          return ContentService.createTextOutput(JSON.stringify({
+            success: true,
+            message: "Sign in successful!",
+            agent: {
+              agentId: agentData[i][1],
+              name: agentData[i][2],
+              agency: agentData[i][3],
+              phone: agentData[i][4],
+              city: agentData[i][5],
+              email: agentData[i][6]
+            }
+          })).setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+      
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        message: "Invalid email or password. Please try again."
+      })).setMimeType(ContentService.MimeType.JSON);
     }
-  </script>
-</body>
-</html>
+
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// GET API Function to fetch packages
+function doGet(e) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var packageSheet = ss.getSheetByName("Packages");
+    
+    if (!packageSheet) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        packages: []
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    var data = packageSheet.getDataRange().getValues();
+    var packages = [];
+    
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][11] === "Active") { // Column L is status
+        packages.push({
+          code: data[i][0],
+          title: data[i][1],
+          destination: data[i][2],
+          duration: data[i][3],
+          nightBreakup: data[i][4],
+          category: data[i][5],
+          b2bPrice: data[i][6],
+          mrpPrice: data[i][7],
+          inclusions: data[i][8],
+          imageUrl: data[i][9],
+          pdfLink: data[i][10]
+        });
+      }
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      packages: packages
+    })).setMimeType(ContentService.MimeType.JSON);
+    
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      error: err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
