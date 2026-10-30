@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journey Assist | B2B Agent Dashboard</title>
+  <title>Journey Assist | India's Leading B2B Travel Partner Portal</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -15,58 +15,89 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     .glass-modal { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px); }
+    .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%); }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    .wa-float { animation: pulse-ring 2s infinite; }
   </style>
 </head>
 <body class="bg-slate-100 min-h-screen text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
 
-  <!-- PUBLIC LANDING / AUTH CONTAINER -->
+  <!-- ================= PUBLIC LANDING CONTAINER ================= -->
   <div id="authContainer" class="min-h-screen flex flex-col justify-between">
     <div>
-      <!-- TOP NAV -->
-      <header class="bg-blue-600 text-white shadow-md sticky top-0 z-40">
+      <!-- TOP ANNOUNCEMENT BAR -->
+      <div class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+          <div class="flex items-center gap-4 text-[11px] font-medium">
+            <a href="tel:+919919382999" class="hover:text-amber-400 transition font-bold text-amber-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-phone text-blue-400"></i> B2B Helpline: +91 9919382999
+            </a>
+            <span class="hidden sm:inline"><i class="fa-regular fa-clock text-amber-400 mr-1.5"></i> Operations: 10:00 AM - 7:00 PM (Mon-Sat)</span>
+          </div>
+          <div class="flex items-center gap-4 text-[11px] font-semibold">
+            <span class="text-amber-400"><i class="fa-solid fa-bolt mr-1"></i> Direct Net Rates</span>
+            <span class="text-emerald-400"><i class="fa-solid fa-shield-halved mr-1"></i> Verified B2B DMC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN NAVIGATION HEADER -->
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-white text-blue-700 rounded-2xl flex items-center justify-center font-extrabold text-xl shadow-md">
-              <i class="fa-solid fa-plane-departure text-amber-500"></i>
+          <a href="#" class="flex items-center gap-3.5">
+            <div class="w-11 h-11 bg-blue-700 text-white rounded-2xl flex items-center justify-center font-extrabold text-xl shadow-lg shadow-blue-700/30">
+              <i class="fa-solid fa-plane-departure text-amber-300"></i>
             </div>
             <div>
-              <h1 class="text-2xl font-black tracking-tight text-white">Journey Assist</h1>
-              <p class="text-[10px] uppercase font-extrabold tracking-widest text-blue-200">B2B Partner Portal</p>
+              <h1 class="text-2xl font-black tracking-tight text-slate-900">Journey Assist</h1>
+              <p class="text-[10px] uppercase font-black tracking-widest text-blue-600">B2B Partner Portal</p>
             </div>
-          </div>
+          </a>
+
           <div class="flex items-center gap-3">
-            <button onclick="openAuthModal('signin')" class="px-5 py-2.5 text-xs font-bold text-white hover:bg-blue-700 border border-blue-400 rounded-xl transition">Agent Sign In</button>
-            <button onclick="openAuthModal('signup')" class="px-5 py-2.5 bg-white text-blue-700 hover:bg-blue-50 rounded-xl text-xs font-bold shadow-md transition">Register Partner</button>
+            <button onclick="openAuthModal('signin')" class="px-5 py-2.5 text-xs font-bold text-slate-700 hover:text-blue-700 border border-slate-300 rounded-xl hover:border-blue-600 transition">Agent Sign In</button>
+            <button onclick="openAuthModal('signup')" class="px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-700/25 transition flex items-center gap-2">
+              <i class="fa-solid fa-user-plus text-amber-300"></i>
+              <span>Become An Agent</span>
+            </button>
           </div>
         </div>
       </header>
 
-      <!-- HERO & PACKAGES PREVIEW -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <span class="px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-4 inline-block">India's Trusted B2B Travel Marketplace</span>
-        <h2 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">Unlock Best Net B2B Rates For Travel Agents</h2>
-        <p class="mt-4 text-slate-600 text-sm sm:text-base font-medium max-w-2xl mx-auto">Access 150+ verified holiday packages, instant unbranded quotes, and direct DMC pricing.</p>
-        <div class="mt-8">
-          <button onclick="openAuthModal('signup')" class="px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-sm uppercase rounded-2xl shadow-xl transition">Become An Agent Now</button>
+      <!-- HERO SECTION -->
+      <section class="hero-gradient text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-center">
+        <div class="max-w-4xl mx-auto relative z-10">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-bold mb-6">
+            <i class="fa-solid fa-award text-amber-400"></i> India's Trusted B2B Travel Marketplace
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">Unlock Best Price & Exclusive B2B Rates</h2>
+          <p class="mt-4 text-slate-300 text-sm sm:text-base font-medium max-w-2xl mx-auto">Access 150+ verified holiday packages, instant unbranded quotes, and direct DMC pricing.</p>
+          <div class="mt-8">
+            <button onclick="openAuthModal('signup')" class="px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl transition cursor-pointer">Become An Agent Now</button>
+          </div>
         </div>
       </section>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 text-slate-400 py-8 text-xs text-center border-t border-slate-800">
-      <p>Registered Address: 29 Shalimar Garden Sector 8 Indira Nagar Lucknow 226016 | Helpline: +91 9919382999</p>
-      <p class="mt-2 text-slate-500">© 2026 Journey Assist Travels. All rights reserved. Made in India 🇮🇳</p>
+    <!-- CORPORATE FOOTER -->
+    <footer class="bg-slate-950 text-slate-300 pt-12 pb-8 border-t border-slate-800 text-xs">
+      <div class="max-w-7xl mx-auto px-4 text-center space-y-2 text-slate-400 font-medium">
+        <p class="font-extrabold text-white">Registered Office Address: 29 Shalimar Garden Sector 8 Indira Nagar Lucknow 226016 | Helpline: +91 9919382999</p>
+        <p>© 2026 Journey Assist. All rights reserved. Designed for Retail Travel Agents. Made in India 🇮🇳</p>
+      </div>
     </footer>
   </div>
 
-  <!-- AGENT DASHBOARD CONTAINER (EXACT SCREENSHOT LAYOUT) -->
+  <!-- ================= AGENT DASHBOARD CONTAINER ================= -->
   <div id="dashboardContainer" class="min-h-screen bg-slate-100 hidden">
     
-    <!-- DASHBOARD TOP NAV (SCREENSHOT 33) -->
-    <header class="bg-blue-600 text-white shadow-md sticky top-0 z-40">
+    <!-- DASHBOARD TOP NAV -->
+    <header class="bg-blue-700 text-white shadow-md sticky top-0 z-40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        <!-- Brand & Nav Links -->
         <div class="flex items-center gap-8">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 bg-white text-blue-700 rounded-xl flex items-center justify-center font-bold text-lg">
@@ -77,244 +108,154 @@
 
           <nav class="hidden lg:flex items-center gap-6 text-xs font-extrabold uppercase tracking-wider">
             <a href="#" class="text-white border-b-2 border-white pb-1">Dashboard</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">Customized Package</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">Quick Package</a>
+            <a href="javascript:void(0)" onclick="openCustomQuoteModal()" class="text-blue-100 hover:text-white transition">Customized Package</a>
+            <a href="#packages" class="text-blue-100 hover:text-white transition">Quick Package</a>
             <a href="#" class="text-blue-100 hover:text-white transition">My Queries</a>
             <a href="#" class="text-blue-100 hover:text-white transition">Hotel Booking</a>
-            <a href="#" class="text-blue-100 hover:text-white transition">Contact Us</a>
           </nav>
         </div>
 
-        <!-- Right Profile & Notifications -->
         <div class="flex items-center gap-4">
-          <button class="relative p-2 text-blue-100 hover:text-white">
-            <i class="fa-regular fa-bell text-lg"></i>
-            <span class="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">1</span>
-          </button>
-          
-          <div class="flex items-center gap-3 bg-blue-700 px-4 py-2 rounded-2xl border border-blue-500/50">
+          <div class="flex items-center gap-3 bg-blue-800 px-4 py-2 rounded-2xl border border-blue-600">
             <div class="w-8 h-8 bg-white text-blue-700 rounded-xl flex items-center justify-center font-black text-xs" id="agentAvatar">JS</div>
             <div class="text-left">
               <p class="text-xs font-extrabold text-white" id="dashAgentName">Mrs. Jyoti Sonkar</p>
               <p class="text-[10px] text-amber-300 font-bold uppercase tracking-wider">AGENT</p>
             </div>
           </div>
-
-          <button onclick="logoutAgent()" title="Logout" class="p-2.5 bg-blue-700 hover:bg-rose-600 text-white rounded-xl transition text-xs">
+          <button onclick="logoutAgent()" title="Logout" class="p-2.5 bg-blue-800 hover:bg-rose-600 text-white rounded-xl transition text-xs">
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
         </div>
-
       </div>
     </header>
 
-    <!-- MAIN DASHBOARD CONTENT -->
+    <!-- DASHBOARD CONTENT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
-      <!-- WELCOME & ACTION BUTTONS BAR (SCREENSHOT 33) -->
+      <!-- WELCOME BAR[cite: 5] -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <div>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Mrs. Jyoti Sonkar</h2>
-          <p class="text-slate-500 text-xs font-semibold mt-1">Here's what's happening with your bookings today</p>
+          <p class="text-slate-500 text-xs font-semibold mt-1">Here's what's happening with your bookings today[cite: 5]</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-          <button class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-plus"></i> Book Quick Package
+          <button onclick="openCustomQuoteModal()" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-plus"></i> Create Custom Package[cite: 5]
           </button>
-          <button class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-plus"></i> Create Custom Package
-          </button>
-          <button class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-plus"></i> Hotel Booking
-          </button>
-          <button class="px-5 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-calendar-days text-amber-400"></i> Schedule Demo
+          <button onclick="openCustomQuoteModal()" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-plus"></i> Hotel Booking[cite: 5]
           </button>
         </div>
       </div>
 
-      <!-- 4 TOP STAT CARDS (SCREENSHOT 33) -->
+      <!-- 4 STAT CARDS[cite: 5] -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Accounts Card -->
-        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-cyan-800 uppercase tracking-wider">Accounts</p>
-            <p class="text-2xl font-black text-slate-900 mt-2">₹0</p>
-          </div>
-          <div class="w-14 h-14 bg-cyan-500 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-wallet"></i>
-          </div>
+        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-cyan-800 uppercase tracking-wider">Accounts[cite: 5]</p><p class="text-2xl font-black text-slate-900 mt-2">₹0</p></div>
+          <div class="w-14 h-14 bg-cyan-500 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-wallet"></i></div>
         </div>
-
-        <!-- Upcoming Trips Card -->
-        <div class="bg-blue-500/10 border border-blue-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-blue-800 uppercase tracking-wider">Upcoming Trips</p>
-            <p class="text-2xl font-black text-slate-900 mt-2">0</p>
-          </div>
-          <div class="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-suitcase-rolling"></i>
-          </div>
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-blue-800 uppercase tracking-wider">Upcoming Trips[cite: 5]</p><p class="text-2xl font-black text-slate-900 mt-2">0</p></div>
+          <div class="w-14 h-14 bg-blue-700 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-suitcase-rolling"></i></div>
         </div>
-
-        <!-- Conversion Rate Card -->
-        <div class="bg-teal-500/10 border border-teal-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-teal-800 uppercase tracking-wider">Conversion Rate</p>
-            <p class="text-2xl font-black text-slate-900 mt-2">-</p>
-          </div>
-          <div class="w-14 h-14 bg-teal-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-chart-line"></i>
-          </div>
+        <div class="bg-teal-500/10 border border-teal-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-teal-800 uppercase tracking-wider">Conversion Rate[cite: 5]</p><p class="text-2xl font-black text-slate-900 mt-2">-</p></div>
+          <div class="w-14 h-14 bg-teal-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-chart-line"></i></div>
         </div>
-
-        <!-- Subscription Card -->
-        <div class="bg-indigo-500/10 border border-indigo-500/20 rounded-3xl p-6 flex items-center justify-between relative overflow-hidden">
-          <div>
-            <p class="text-xs font-extrabold text-indigo-800 uppercase tracking-wider">Subscription</p>
-            <p class="text-lg font-black text-slate-900 mt-2">31/10/2026</p>
-          </div>
-          <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md">
-            <i class="fa-solid fa-id-card"></i>
-          </div>
+        <div class="bg-indigo-500/10 border border-indigo-500/20 rounded-3xl p-6 flex items-center justify-between">
+          <div><p class="text-xs font-extrabold text-indigo-800 uppercase tracking-wider">Subscription[cite: 5]</p><p class="text-lg font-black text-slate-900 mt-2">31/10/2026</p></div>
+          <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-id-card"></i></div>
         </div>
-
       </div>
 
-      <!-- NEEDS YOUR ATTENTION SECTION (SCREENSHOT 33) -->
+      <!-- NEEDS YOUR ATTENTION[cite: 5] -->
       <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Needs Your Attention
+          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Needs Your Attention[cite: 5]
         </h3>
-        
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Pending Query - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Bookings & Queries - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Invoices & Payments - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Upcoming Query - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between cursor-pointer hover:bg-slate-100 transition">
-            <span class="text-xs font-bold text-slate-700">Completed Query - 0</span>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
-          </div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Pending Query - 0[cite: 5]</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Bookings & Queries - 0[cite: 5]</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Invoices & Payments - 0[cite: 5]</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Upcoming Query - 0[cite: 5]</div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Completed Query - 0[cite: 5]</div>
         </div>
       </div>
-
-      <!-- LOWER GRIDS (SCREENSHOT 34) -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Total Turnover -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-              <h4 class="text-xs font-extrabold text-blue-700 uppercase tracking-wider">Total Turnover</h4>
-              <i class="fa-solid fa-indian-rupee-sign text-blue-700"></i>
-            </div>
-            <div class="py-12 text-center">
-              <p class="text-3xl font-black text-slate-300">-</p>
-              <p class="text-xs font-semibold text-slate-500 mt-2">No revenue data</p>
-            </div>
-          </div>
-          <div class="flex justify-between text-[10px] text-slate-400 font-bold pt-4 border-t border-slate-100">
-            <span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span>
-          </div>
-        </div>
-
-        <!-- Package Pipeline -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-              <h4 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider">Package Pipeline</h4>
-              <button class="text-xs font-bold text-blue-600 hover:underline">View</button>
-            </div>
-            <div class="py-16 text-center">
-              <p class="text-xs font-semibold text-slate-500">No packages this period</p>
-            </div>
-          </div>
-          <div class="pt-4 border-t border-slate-100 text-[10px] text-slate-400 font-semibold text-center">
-            Active Booking Pipeline
-          </div>
-        </div>
-
-        <!-- Query Conversion -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-            <h4 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider">Query Conversion</h4>
-            <span class="text-xs font-bold text-emerald-600">0% overall conversion</span>
-          </div>
-
-          <div class="space-y-3 text-xs font-bold text-slate-700">
-            <div>
-              <div class="flex justify-between mb-1"><span>Query Raised</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-blue-600 h-full w-0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Quote Sent</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-amber-500 h-full w-0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Confirmed</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-indigo-600 h-full w-0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1"><span>Completed</span><span>0</span></div>
-              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-0"></div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- BOTTOM ACCOUNTS & BALANCES (SCREENSHOT 34) -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider mb-4">Accounts & Balances</h4>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
-              <span class="text-xs font-bold text-slate-700 flex items-center gap-2"><i class="fa-solid fa-wallet text-blue-600"></i> Wallet</span>
-              <span class="text-xs font-black text-slate-900">₹0</span>
-            </div>
-            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
-              <span class="text-xs font-bold text-slate-700 flex items-center gap-2"><i class="fa-solid fa-file-invoice text-blue-600"></i> Credit Notes</span>
-              <span class="text-xs font-black text-slate-900">₹0</span>
-            </div>
-            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
-              <span class="text-xs font-bold text-slate-700 flex items-center gap-2"><i class="fa-solid fa-star text-amber-500"></i> Travel Points</span>
-              <span class="text-xs font-black text-slate-900">₹0</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-          <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider mb-4">Package Overview</h4>
-          <p class="text-xs text-slate-500 font-semibold mb-4">Handy, Custom & Hotel bookings this period</p>
-          <div class="flex items-center gap-6 text-xs font-bold text-slate-600 pt-6 border-t border-slate-100">
-            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-600"></span> Handy Packages</span>
-            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Custom Packages</span>
-            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-500"></span> Hotel Booking</span>
-          </div>
-        </div>
-
-      </div>
-
     </main>
   </div>
 
-  <!-- AUTH MODAL POPUP -->
+  <!-- ================= CUSTOM QUOTE REQUEST MODAL ================= -->
+  <div id="customQuoteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-modal hidden">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 relative border border-slate-100 max-h-[90vh] overflow-y-auto">
+      <button onclick="closeCustomQuoteModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-extrabold text-sm transition">✕</button>
+
+      <div class="mb-6">
+        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider">B2B Agent Inquiry</span>
+        <h3 class="text-2xl font-black text-slate-900 mt-2">Request Customized Package Quote</h3>
+        <p class="text-xs font-semibold text-slate-500 mt-1">Fill in client travel requirements to get net B2B pricing & unbranded itinerary.</p>
+      </div>
+
+      <div id="customQuoteAlert" class="hidden mb-4 p-3.5 rounded-xl text-xs font-bold flex items-center gap-2"></div>
+
+      <form id="customQuoteForm" onsubmit="handleCustomQuoteSubmit(event)" class="space-y-4 text-xs font-bold text-slate-700">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block uppercase tracking-wider mb-1">Destination *</label>
+            <input type="text" id="quoteDestination" required placeholder="e.g. Kerala / Kashmir / Munnar" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+          </div>
+          <div>
+            <label class="block uppercase tracking-wider mb-1">Tentative Travel Date *</label>
+            <input type="date" id="quoteTravelDate" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block uppercase tracking-wider mb-1">No. of Nights *</label>
+            <select id="quoteNights" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+              <option value="2 Nights / 3 Days">2 Nights / 3 Days</option>
+              <option value="3 Nights / 4 Days" selected>3 Nights / 4 Days</option>
+              <option value="4 Nights / 5 Days">4 Nights / 5 Days</option>
+              <option value="5 Nights / 6 Days">5 Nights / 6 Days</option>
+            </select>
+          </div>
+          <div>
+            <label class="block uppercase tracking-wider mb-1">Hotel Category *</label>
+            <select id="quoteCategory" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+              <option value="3 Star Standard">3 Star Standard</option>
+              <option value="4 Star Deluxe">4 Star Deluxe</option>
+              <option value="5 Star Luxury">5 Star Luxury</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block uppercase tracking-wider mb-1">Adults (12+ Yrs) *</label>
+            <input type="number" id="quoteAdults" min="1" value="2" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+          </div>
+          <div>
+            <label class="block uppercase tracking-wider mb-1">Kids (Below 12 Yrs)</label>
+            <input type="number" id="quoteKids" min="0" value="0" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+          </div>
+        </div>
+
+        <div>
+          <label class="block uppercase tracking-wider mb-1">Special Requirements / Notes</label>
+          <textarea id="quoteRequirements" rows="3" placeholder="Cab requirement (Sedan/Ertiga/Innova), Houseboat preferences etc." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none"></textarea>
+        </div>
+
+        <button type="submit" id="btnSubmitQuote" class="w-full py-4 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer mt-2">
+          <i class="fa-solid fa-paper-plane text-amber-300"></i>
+          <span>Submit Request To journeyassist11@gmail.com</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= AUTH MODAL POPUP ================= -->
   <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-modal hidden">
     <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 sm:p-8 relative border border-slate-100">
       <button onclick="closeAuthModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-extrabold text-sm transition">✕</button>
@@ -338,11 +279,11 @@
       <form id="modalSigninForm" onsubmit="handleModalAuth(event, 'signin')" class="space-y-4">
         <div>
           <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Agent Email Address</label>
-          <input type="email" id="modalSigninEmail" required placeholder="agent@agency.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+          <input type="email" id="modalSigninEmail" required placeholder="agent@agency.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
         </div>
         <div>
           <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Password</label>
-          <input type="password" id="modalSigninPassword" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+          <input type="password" id="modalSigninPassword" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
         </div>
         <button type="submit" id="btnModalSignin" class="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition">Sign In to Dashboard</button>
       </form>
@@ -360,11 +301,11 @@
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Mobile No.</label>
-            <input type="tel" id="modalSignupPhone" required placeholder="9919382999" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+            <input type="tel" id="modalSignupPhone" required placeholder="9919382999" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
           </div>
           <div>
             <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">City</label>
-            <input type="text" id="modalSignupCity" required placeholder="Lucknow" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+            <input type="text" id="modalSignupCity" required placeholder="Lucknow" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
           </div>
         </div>
         <div>
@@ -380,13 +321,21 @@
     </div>
   </div>
 
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/919919382999?text=Hi%20Journey%20Assist,%20I%20want%20to%20register%20as%20a%20B2B%20Travel%20Agent." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-2xl wa-float transition">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
+    let loggedInAgent = null;
 
     window.onload = function() {
       const saved = localStorage.getItem('ja_b2b_agent');
       if (saved) {
-        showDashboard(JSON.parse(saved));
+        loggedInAgent = JSON.parse(saved);
+        showDashboard(loggedInAgent);
       } else {
         showAuthLanding();
       }
@@ -397,8 +346,6 @@
       document.getElementById('dashboardContainer').classList.remove('hidden');
       document.getElementById('dashWelcomeTitle').innerText = `Welcome, ${agent.name}`;
       document.getElementById('dashAgentName').innerText = agent.name;
-      
-      // Initials for avatar
       const initials = agent.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
       document.getElementById('agentAvatar').innerText = initials;
     }
@@ -469,6 +416,7 @@
         if (res.success) {
           showModalAlert(res.message, true);
           localStorage.setItem('ja_b2b_agent', JSON.stringify(res.agent));
+          loggedInAgent = res.agent;
           setTimeout(() => {
             closeAuthModal();
             showDashboard(res.agent);
@@ -486,7 +434,70 @@
 
     function logoutAgent() {
       localStorage.removeItem('ja_b2b_agent');
+      loggedInAgent = null;
       showAuthLanding();
+    }
+
+    // Custom Quote Modal Functions
+    function openCustomQuoteModal() {
+      document.getElementById('customQuoteModal').classList.remove('hidden');
+    }
+
+    function closeCustomQuoteModal() {
+      document.getElementById('customQuoteModal').classList.add('hidden');
+    }
+
+    async function handleCustomQuoteSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitQuote');
+      const alertBox = document.getElementById('customQuoteAlert');
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Sending to journeyassist11@gmail.com...`;
+
+      const payload = {
+        action: "custom_quote",
+        agentName: loggedInAgent ? loggedInAgent.name : "Guest Agent",
+        agencyName: loggedInAgent ? loggedInAgent.agency : "Partner Agency",
+        agentEmail: loggedInAgent ? loggedInAgent.email : "journeyassist11@gmail.com",
+        agentPhone: loggedInAgent ? loggedInAgent.phone : "N/A",
+        destination: document.getElementById('quoteDestination').value,
+        travelDate: document.getElementById('quoteTravelDate').value,
+        nights: document.getElementById('quoteNights').value,
+        category: document.getElementById('quoteCategory').value,
+        adults: document.getElementById('quoteAdults').value,
+        kids: document.getElementById('quoteKids').value,
+        requirements: document.getElementById('quoteRequirements').value
+      };
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        const res = await response.json();
+
+        if (res.success) {
+          alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200";
+          alertBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> ${res.message}`;
+          alertBox.classList.remove('hidden');
+          document.getElementById('customQuoteForm').reset();
+          setTimeout(() => {
+            closeCustomQuoteModal();
+            alertBox.classList.add('hidden');
+          }, 2500);
+        } else {
+          alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200";
+          alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> ${res.message}`;
+          alertBox.classList.remove('hidden');
+        }
+      } catch (err) {
+        alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200";
+        alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> Connection error! Please try again.`;
+        alertBox.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-paper-plane text-amber-300 mr-2"></i> Submit Request To journeyassist11@gmail.com`;
+      }
     }
   </script>
 </body>
