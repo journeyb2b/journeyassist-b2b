@@ -94,14 +94,14 @@
               <table class="w-full text-left text-xs border-collapse border border-slate-200">
                 <thead>
                   <tr class="bg-blue-900 text-white font-extrabold uppercase text-[10px]">
-                    <th class="p-2.5 border border-slate-300">Hotel Plan[cite: 1]</th>
-                    <th class="p-2.5 border border-slate-300">Category[cite: 1]</th>
-                    <th class="p-2.5 border border-slate-300">Meal[cite: 1]</th>
-                    <th class="p-2.5 border border-slate-300">Single (₹)[cite: 1]</th>
-                    <th class="p-2.5 border border-slate-300">Twin (₹)[cite: 1]</th>
-                    <th class="p-2.5 border border-slate-300">Triple (₹)[cite: 1]</th>
-                    <th class="p-2.5 border border-slate-300">Child (6-11)[cite: 1]</th>
-                    <th class="p-2.5 border border-slate-300">Extra Bed[cite: 1]</th>
+                    <th class="p-2.5 border border-slate-300">Hotel Plan</th>
+                    <th class="p-2.5 border border-slate-300">Category</th>
+                    <th class="p-2.5 border border-slate-300">Meal</th>
+                    <th class="p-2.5 border border-slate-300">Single (₹)</th>
+                    <th class="p-2.5 border border-slate-300">Twin (₹)</th>
+                    <th class="p-2.5 border border-slate-300">Triple (₹)</th>
+                    <th class="p-2.5 border border-slate-300">Child (6-11)</th>
+                    <th class="p-2.5 border border-slate-300">Extra Bed</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,9 +140,9 @@
             <p class="text-xs font-bold text-slate-300 mt-1"><i class="fa-regular fa-clock text-amber-400 mr-1"></i> Duration: ${p.duration || 'Flexible'}</p>
           </div>
           <div class="text-left sm:text-right bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
-            <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Starting Net Rate[cite: 1]</p>
+            <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Starting Net Rate</p>
             <p class="text-2xl sm:text-3xl font-black text-amber-400">${p.b2bPrice || 'On Request'}</p>
-            <p class="text-[9px] text-slate-400 uppercase font-extrabold mt-0.5">B2B Agent Price[cite: 1]</p>
+            <p class="text-[9px] text-slate-400 uppercase font-extrabold mt-0.5">B2B Agent Price</p>
           </div>
         </div>
 
@@ -151,12 +151,12 @@
           <!-- VALIDITY & INCLUSIONS / EXCLUSIONS -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
-              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-check text-emerald-600 mr-1.5"></i> Inclusions[cite: 1]</p>
-              <p class="text-xs font-bold text-slate-800">${p.inclusions || 'Accommodation, Daily breakfast, Transfers & sightseeing per itinerary[cite: 1]'}</p>
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-check text-emerald-600 mr-1.5"></i> Inclusions</p>
+              <p class="text-xs font-bold text-slate-800">${p.inclusions || 'Accommodation, Daily breakfast, Transfers & sightseeing per itinerary'}</p>
             </div>
             <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
-              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-xmark text-rose-600 mr-1.5"></i> Exclusions[cite: 1]</p>
-              <p class="text-xs font-bold text-slate-800">${p.exclusions || 'Air / Train fares, Lunch & Dinner, Personal expenses[cite: 1]'}</p>
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-xmark text-rose-600 mr-1.5"></i> Exclusions</p>
+              <p class="text-xs font-bold text-slate-800">${p.exclusions || 'Air / Train fares, Lunch & Dinner, Personal expenses'}</p>
             </div>
           </div>
 
@@ -176,7 +176,7 @@
           <!-- COMPLETE SUPPLIER RATE GRID -->
           <div>
             <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
-              <i class="fa-solid fa-table-cells text-blue-600"></i> Complete Supplier Rate Grid[cite: 1]
+              <i class="fa-solid fa-table-cells text-blue-600"></i> Complete Supplier Rate Grid
             </h3>
             ${rateGridHtml}
           </div>
@@ -193,14 +193,14 @@
 
           <!-- TERMS & CONDITIONS / CHILD POLICY -->
           <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-1">
-            <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider"><i class="fa-solid fa-circle-info text-blue-600 mr-1.5"></i> Terms & Conditions / Child Policy[cite: 1]</p>
-            <p class="text-xs font-medium text-slate-600">${p.terms || 'Child rates applicable for 6-11 years. Extra bed charges as per hotel policy[cite: 1].'}</p>
+            <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider"><i class="fa-solid fa-circle-info text-blue-600 mr-1.5"></i> Terms & Conditions / Child Policy</p>
+            <p class="text-xs font-medium text-slate-600">${p.terms || 'Child rates applicable for 6-11 years. Extra bed charges as per hotel policy.'}</p>
           </div>
 
           <!-- FOOTER / HELPLINE -->
           <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs font-bold text-slate-500 gap-4">
-            <p><i class="fa-solid fa-building text-blue-600 mr-1"></i> Journey Assist B2B Operations[cite: 1]</p>
-            <p><i class="fa-solid fa-phone text-blue-600 mr-1"></i> Helpline: +91 9919382999[cite: 1]</p>
+            <p><i class="fa-solid fa-building text-blue-600 mr-1"></i> Journey Assist B2B Operations</p>
+            <p><i class="fa-solid fa-phone text-blue-600 mr-1"></i> Helpline: +91 9919382999</p>
           </div>
 
         </div>
