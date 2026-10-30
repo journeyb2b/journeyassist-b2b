@@ -30,15 +30,15 @@
 
   <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
 
-    <!-- ADD / EDIT PACKAGE FORM -->
+    <!-- ADD / EDIT PACKAGE FORM WITH RATE GRID -->
     <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-6">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package</h2>
-          <p class="text-xs font-medium text-slate-400">Fill in the details to publish or modify package on the portal.</p>
+          <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Rate Grid</h2>
+          <p class="text-xs font-medium text-slate-400">Manage package details, pricing tiers, and dynamic rate grids.</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition">
-          <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
+          <i class="fa-solid fa-plus mr-1"></i> Add New Mode
         </button>
       </div>
 
@@ -48,7 +48,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Package Title *</label>
-            <input type="text" id="pkgTitle" required placeholder="e.g. 3N/4D Classic Kerala Tour" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <input type="text" id="pkgTitle" required placeholder="e.g. 3N/4D Kerala Bliss" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Destination *</label>
@@ -69,11 +69,11 @@
             <input type="text" id="pkgDuration" required placeholder="e.g. 3 Nights / 4 Days" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">B2B Net Starting Price *</label>
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Starting Price *</label>
             <input type="text" id="pkgPrice" required placeholder="e.g. ₹12,500" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Travel Dates / Validity</label>
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Travel Validity</label>
             <input type="text" id="pkgDates" placeholder="e.g. Valid till March 2027" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
         </div>
@@ -81,6 +81,21 @@
         <div>
           <label class="block uppercase tracking-wider mb-1 text-slate-400">Inclusions *</label>
           <input type="text" id="pkgInclusions" required placeholder="e.g. Hotels, Breakfast, AC Cab, Sightseeing" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- RATE GRID BUILDER SECTION -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase text-amber-400"><i class="fa-solid fa-table-cells mr-1.5"></i> Interactive Rate Grid Builder</span>
+            <button type="button" onclick="addRateGridRow()" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-[11px] font-bold transition">
+              <i class="fa-solid fa-plus mr-1"></i> Add Category
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400">Add hotel categories and their corresponding B2B net rates (e.g., 3 Star Standard - ₹14,999).</p>
+          
+          <div id="rateGridRowsContainer" class="space-y-2">
+            <!-- Dynamic rows will be added here -->
+          </div>
         </div>
 
         <div>
@@ -95,7 +110,7 @@
       </form>
     </div>
 
-    <!-- LIVE PACKAGES TABLE WITH CONTROLS -->
+    <!-- LIVE PACKAGES TABLE -->
     <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-lg font-black text-white">Live Database Packages</h3>
@@ -133,7 +148,26 @@
 
     window.onload = function() {
       fetchAdminPackages();
+      addRateGridRow('3 Star Standard', '');
+      addRateGridRow('4 Star Deluxe', '');
     };
+
+    function addRateGridRow(cat = '', pr = '') {
+      const container = document.getElementById('rateGridRowsContainer');
+      const rowId = 'rg-row-' + Date.now() + Math.floor(Math.random() * 1000);
+      
+      const div = document.createElement('div');
+      div.id = rowId;
+      div.className = 'flex items-center gap-2';
+      div.innerHTML = `
+        <input type="text" placeholder="Hotel Category (e.g. 3 Star Standard)" value="${cat}" class="rg-cat flex-1 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
+        <input type="text" placeholder="Net Rate (e.g. ₹14,999)" value="${pr}" class="rg-price w-40 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
+        <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-xl transition text-xs">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      `;
+      container.appendChild(div);
+    }
 
     async function fetchAdminPackages() {
       try {
@@ -210,6 +244,22 @@
       document.getElementById('pkgInclusions').value = p.inclusions || '';
       document.getElementById('pkgItinerary').value = p.itinerary || '';
 
+      // Populate Rate Grid
+      const container = document.getElementById('rateGridRowsContainer');
+      container.innerHTML = '';
+      try {
+        const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
+        if (Array.isArray(grid) && grid.length > 0) {
+          grid.forEach(g => {
+            addRateGridRow(g.category || g.hotel || '', g.price || g.rate || '');
+          });
+        } else {
+          addRateGridRow('3 Star Standard', p.b2bPrice || '');
+        }
+      } catch (e) {
+        addRateGridRow('3 Star Standard', p.b2bPrice || '');
+      }
+
       document.getElementById('formHeading').innerText = `Edit Package (${p.id})`;
       document.getElementById('btnSubmitText').innerText = "Update Package In Google Sheet";
       document.getElementById('btnResetForm').classList.remove('hidden');
@@ -220,7 +270,10 @@
     function resetForm() {
       document.getElementById('editingPackageId').value = '';
       document.getElementById('packageForm').reset();
-      document.getElementById('formHeading').innerText = "Add New B2B Package";
+      document.getElementById('rateGridRowsContainer').innerHTML = '';
+      addRateGridRow('3 Star Standard', '');
+      addRateGridRow('4 Star Deluxe', '');
+      document.getElementById('formHeading').innerText = "Add New B2B Package & Rate Grid";
       document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
       document.getElementById('btnResetForm').classList.add('hidden');
     }
@@ -231,6 +284,19 @@
       const btn = document.getElementById('btnSubmitForm');
       btn.disabled = true;
       btn.classList.add('opacity-50');
+
+      // Collect Rate Grid Data
+      const cats = document.querySelectorAll('.rg-cat');
+      const prices = document.querySelectorAll('.rg-price');
+      const rateGridArr = [];
+      for (let i = 0; i < cats.length; i++) {
+        if (cats[i].value.trim()) {
+          rateGridArr.push({
+            category: cats[i].value.trim(),
+            price: prices[i].value.trim()
+          });
+        }
+      }
 
       const pkgId = document.getElementById('editingPackageId').value;
 
@@ -244,7 +310,8 @@
         b2bPrice: document.getElementById('pkgPrice').value.trim(),
         travelDates: document.getElementById('pkgDates').value.trim(),
         inclusions: document.getElementById('pkgInclusions').value.trim(),
-        itinerary: document.getElementById('pkgItinerary').value.trim()
+        itinerary: document.getElementById('pkgItinerary').value.trim(),
+        ratesGrid: JSON.stringify(rateGridArr)
       };
 
       try {
