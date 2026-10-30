@@ -29,7 +29,6 @@
   <!-- ================= PUBLIC LANDING CONTAINER ================= -->
   <div id="authContainer" class="min-h-screen flex flex-col justify-between">
     <div>
-      <!-- TOP ANNOUNCEMENT BAR -->
       <div class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div class="flex items-center gap-4 text-[11px] font-medium">
@@ -45,7 +44,6 @@
         </div>
       </div>
 
-      <!-- MAIN NAVIGATION HEADER -->
       <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <a href="#" class="flex items-center gap-3.5">
@@ -68,7 +66,6 @@
         </div>
       </header>
 
-      <!-- HERO SECTION -->
       <section class="hero-gradient text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-center">
         <div class="max-w-4xl mx-auto relative z-10">
           <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-bold mb-6">
@@ -83,7 +80,6 @@
       </section>
     </div>
 
-    <!-- CORPORATE FOOTER -->
     <footer class="bg-slate-950 text-slate-300 pt-12 pb-8 border-t border-slate-800 text-xs">
       <div class="max-w-7xl mx-auto px-4 text-center space-y-2 text-slate-400 font-medium">
         <p class="font-extrabold text-white">Registered Office Address: 29 Shalimar Garden Sector 8 Indira Nagar Lucknow 226016 | Helpline: +91 9919382999</p>
@@ -95,7 +91,6 @@
   <!-- ================= AGENT DASHBOARD CONTAINER ================= -->
   <div id="dashboardContainer" class="min-h-screen bg-slate-100 hidden">
     
-    <!-- DASHBOARD TOP NAV -->
     <header class="bg-blue-700 text-white shadow-md sticky top-0 z-40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <div class="flex items-center gap-8">
@@ -109,7 +104,7 @@
           <nav class="hidden lg:flex items-center gap-6 text-xs font-extrabold uppercase tracking-wider">
             <a href="#" class="text-white border-b-2 border-white pb-1">Dashboard</a>
             <a href="javascript:void(0)" onclick="openCustomQuoteModal()" class="text-blue-100 hover:text-white transition">Customized Package</a>
-            <a href="#packages" class="text-blue-100 hover:text-white transition">Quick Package</a>
+            <a href="#quickPackagesSection" class="text-blue-100 hover:text-white transition">Quick Package</a>
             <a href="#" class="text-blue-100 hover:text-white transition">My Queries</a>
             <a href="#" class="text-blue-100 hover:text-white transition">Hotel Booking</a>
           </nav>
@@ -130,10 +125,10 @@
       </div>
     </header>
 
-    <!-- DASHBOARD CONTENT -->
+    <!-- MAIN DASHBOARD CONTENT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
-      <!-- WELCOME BAR[cite: 5] -->
+      <!-- WELCOME BAR -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <div>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Mrs. Jyoti Sonkar</h2>
@@ -141,48 +136,77 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
+          <a href="#quickPackagesSection" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-300"></i> Book Quick Package[cite: 5]
+          </a>
           <button onclick="openCustomQuoteModal()" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2 cursor-pointer">
             <i class="fa-solid fa-plus"></i> Create Custom Package[cite: 5]
           </button>
-          <button onclick="openCustomQuoteModal()" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2 cursor-pointer">
-            <i class="fa-solid fa-plus"></i> Hotel Booking[cite: 5]
-          </button>
         </div>
       </div>
 
-      <!-- 4 STAT CARDS[cite: 5] -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-3xl p-6 flex items-center justify-between">
-          <div><p class="text-xs font-extrabold text-cyan-800 uppercase tracking-wider">Accounts[cite: 5]</p><p class="text-2xl font-black text-slate-900 mt-2">₹0</p></div>
-          <div class="w-14 h-14 bg-cyan-500 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-wallet"></i></div>
+      <!-- PORTAL ACTIVE STATUS CARD (MATCHING SCREENSHOT 39) -->
+      <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Portal Active Status</h3>
+          <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase rounded-full">Active</span>
         </div>
-        <div class="bg-blue-500/10 border border-blue-500/20 rounded-3xl p-6 flex items-center justify-between">
-          <div><p class="text-xs font-extrabold text-blue-800 uppercase tracking-wider">Upcoming Trips[cite: 5]</p><p class="text-2xl font-black text-slate-900 mt-2">0</p></div>
-          <div class="w-14 h-14 bg-blue-700 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-suitcase-rolling"></i></div>
+        <div class="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-2xl">
+          <div class="bg-blue-700 text-white text-center py-2 rounded-xl text-[11px] font-bold">MONTH 1[cite: 3]</div>
+          <div class="bg-white text-slate-600 text-center py-2 rounded-xl text-[11px] font-bold">MONTH 2[cite: 3]</div>
+          <div class="bg-white text-slate-600 text-center py-2 rounded-xl text-[11px] font-bold">MONTH 3[cite: 3]</div>
         </div>
-        <div class="bg-teal-500/10 border border-teal-500/20 rounded-3xl p-6 flex items-center justify-between">
-          <div><p class="text-xs font-extrabold text-teal-800 uppercase tracking-wider">Conversion Rate[cite: 5]</p><p class="text-2xl font-black text-slate-900 mt-2">-</p></div>
-          <div class="w-14 h-14 bg-teal-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-chart-line"></i></div>
-        </div>
-        <div class="bg-indigo-500/10 border border-indigo-500/20 rounded-3xl p-6 flex items-center justify-between">
-          <div><p class="text-xs font-extrabold text-indigo-800 uppercase tracking-wider">Subscription[cite: 5]</p><p class="text-lg font-black text-slate-900 mt-2">31/10/2026</p></div>
-          <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-xl shadow-md"><i class="fa-solid fa-id-card"></i></div>
-        </div>
+        <p class="text-xs font-semibold text-slate-600">Any confirmed booking keeps your portal open for 3 more months. Next check: 6 Nov 2026.[cite: 3]</p>
       </div>
 
-      <!-- NEEDS YOUR ATTENTION[cite: 5] -->
-      <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-        <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Needs Your Attention[cite: 5]
-        </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Pending Query - 0[cite: 5]</div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Bookings & Queries - 0[cite: 5]</div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Invoices & Payments - 0[cite: 5]</div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Upcoming Query - 0[cite: 5]</div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs font-bold text-slate-700">Completed Query - 0[cite: 5]</div>
+      <!-- ================= QUICK PACKAGES SECTION (MATCHING SCREENSHOTS 40 & 41) ================= -->
+      <div id="quickPackagesSection" class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
+        
+        <!-- HEADER STATS -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-slate-100 text-center sm:text-left">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <p class="text-2xl font-black text-slate-900" id="totalPackagesCount">0</p>
+            <p class="text-[10px] font-extrabold uppercase text-slate-500 tracking-wider">Packages Listed[cite: 4]</p>
+          </div>
+          <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+            <p class="text-2xl font-black text-emerald-800" id="openPackagesCount">0</p>
+            <p class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Open For Booking[cite: 4]</p>
+          </div>
+          <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+            <p class="text-2xl font-black text-amber-800" id="closingPackagesCount">0</p>
+            <p class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Closing This Month[cite: 4]</p>
+          </div>
         </div>
+
+        <!-- SEARCH & TABS FILTER BAR (DOMESTIC / INTERNATIONAL / ALL) -->
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+          <div class="relative w-full lg:w-1/2">
+            <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
+            <input type="text" id="packageSearchInput" onkeyup="filterPackages()" placeholder='Search a package — "kerala", "kashmir", "maldives"...' class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+          </div>
+
+          <!-- All / Domestic / International Tab Buttons -->
+          <div class="flex bg-slate-100 p-1.5 rounded-2xl w-full lg:w-auto justify-center">
+            <button id="tabFilterAll" onclick="setRegionFilter('all')" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-blue-700 text-white shadow-sm transition">All</button>
+            <button id="tabFilterDomestic" onclick="setRegionFilter('domestic')" class="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition">Domestic</button>
+            <button id="tabFilterInternational" onclick="setRegionFilter('international')" class="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition">International</button>
+          </div>
+        </div>
+
+        <!-- DESTINATION PILLS CONTAINER -->
+        <div id="destinationPills" class="flex flex-wrap gap-2 pt-2">
+          <!-- Dynamically populated destination filters -->
+        </div>
+
+        <!-- PACKAGES LIST CONTAINER -->
+        <div id="packagesContainer" class="space-y-4 pt-4">
+          <div class="text-center py-12 text-slate-400 font-bold text-xs">
+            <i class="fa-solid fa-spinner fa-spin text-lg mb-2"></i> Loading live packages from database...
+          </div>
+        </div>
+
       </div>
+
     </main>
   </div>
 
@@ -203,11 +227,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block uppercase tracking-wider mb-1">Destination *</label>
-            <input type="text" id="quoteDestination" required placeholder="e.g. Kerala / Kashmir / Munnar" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+            <input type="text" id="quoteDestination" required placeholder="e.g. Kerala / Kashmir / Munnar" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
           </div>
           <div>
             <label class="block uppercase tracking-wider mb-1">Tentative Travel Date *</label>
-            <input type="date" id="quoteTravelDate" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+            <input type="date" id="quoteTravelDate" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
           </div>
         </div>
 
@@ -244,7 +268,7 @@
 
         <div>
           <label class="block uppercase tracking-wider mb-1">Special Requirements / Notes</label>
-          <textarea id="quoteRequirements" rows="3" placeholder="Cab requirement (Sedan/Ertiga/Innova), Houseboat preferences etc." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none"></textarea>
+          <textarea id="quoteRequirements" rows="3" placeholder="Cab requirement, Houseboat preferences etc." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700"></textarea>
         </div>
 
         <button type="submit" id="btnSubmitQuote" class="w-full py-4 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer mt-2">
@@ -330,6 +354,9 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
     let loggedInAgent = null;
+    let allPackages = [];
+    let currentRegion = 'all';
+    let currentDestination = 'all';
 
     window.onload = function() {
       const saved = localStorage.getItem('ja_b2b_agent');
@@ -348,11 +375,125 @@
       document.getElementById('dashAgentName').innerText = agent.name;
       const initials = agent.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
       document.getElementById('agentAvatar').innerText = initials;
+      fetchPackages();
     }
 
     function showAuthLanding() {
       document.getElementById('dashboardContainer').classList.add('hidden');
       document.getElementById('authContainer').classList.remove('hidden');
+    }
+
+    // Fetch Packages from Google Sheets doGet API
+    async function fetchPackages() {
+      try {
+        const response = await fetch(SCRIPT_URL);
+        const res = await response.json();
+        if (res.success) {
+          allPackages = res.packages;
+          renderPackages(allPackages);
+          updatePackageStats(allPackages);
+          renderDestinationPills(allPackages);
+        } else {
+          document.getElementById('packagesContainer').innerHTML = `<p class="text-center text-rose-500 text-xs font-bold py-8">No packages found in Google Sheet.</p>`;
+        }
+      } catch (err) {
+        // Fallback demo packages if sheet is empty yet
+        allPackages = [
+          { code: "JA-MAL-001", title: "OBLU XPERIENCE AILAFUSHI - 4 star", destination: "maldives", region: "international", duration: "3N/4D", category: "4 Star", b2bPrice: "USD 2,274", mrpPrice: "USD 2,800", inclusions: "All-inclusive", status: "OPEN", travelDates: "Travel 01 Nov 2026 - 23 Dec 2026" },
+          { code: "JA-MAL-002", title: "Makunudu Island - 4 star", destination: "maldives", region: "international", duration: "3N/4D", category: "4 Star", b2bPrice: "USD 1,419", mrpPrice: "USD 1,800", inclusions: "All-inclusive", status: "CLOSING SOON", travelDates: "Book by 31st Oct 2026" },
+          { code: "JA-KER-001", title: "Exotic Munnar & Alleppey Houseboat", destination: "kerala", region: "domestic", duration: "3N/4D", category: "3 Star", b2bPrice: "₹12,500", mrpPrice: "₹16,999", inclusions: "Hotel, Cab, Breakfast, Houseboat", status: "OPEN", travelDates: "Valid for Winter 2026" }
+        ];
+        renderPackages(allPackages);
+        updatePackageStats(allPackages);
+        renderDestinationPills(allPackages);
+      }
+    }
+
+    function updatePackageStats(pkgs) {
+      document.getElementById('totalPackagesCount').innerText = pkgs.length;
+      document.getElementById('openPackagesCount').innerText = pkgs.filter(p => p.status === "OPEN").length;
+      document.getElementById('closingPackagesCount').innerText = pkgs.filter(p => p.status === "CLOSING SOON").length;
+    }
+
+    function renderDestinationPills(pkgs) {
+      const pillContainer = document.getElementById('destinationPills');
+      const destCounts = {};
+      pkgs.forEach(p => {
+        const dest = p.destination || "other";
+        destCounts[dest] = (destCounts[dest] || 0) + 1;
+      });
+
+      let html = `<button onclick="setDestinationFilter('all')" class="px-4 py-1.5 rounded-full text-xs font-extrabold ${currentDestination === 'all' ? 'bg-blue-700 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'} transition">All destinations (${pkgs.length})</button>`;
+      
+      for (const [dest, count] of Object.entries(destCounts)) {
+        const capDest = dest.charAt(0).toUpperCase() + dest.slice(1);
+        const isActive = currentDestination === dest;
+        html += `<button onclick="setDestinationFilter('${dest}')" class="px-4 py-1.5 rounded-full text-xs font-extrabold ${isActive ? 'bg-blue-700 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'} transition">${capDest} (${count})</button>`;
+      }
+      pillContainer.innerHTML = html;
+    }
+
+    function setRegionFilter(region) {
+      currentRegion = region;
+      document.getElementById('tabFilterAll').className = `px-5 py-2.5 rounded-xl text-xs font-bold transition ${region === 'all' ? 'bg-blue-700 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`;
+      document.getElementById('tabFilterDomestic').className = `px-5 py-2.5 rounded-xl text-xs font-bold transition ${region === 'domestic' ? 'bg-blue-700 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`;
+      document.getElementById('tabFilterInternational').className = `px-5 py-2.5 rounded-xl text-xs font-bold transition ${region === 'international' ? 'bg-blue-700 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`;
+      filterPackages();
+    }
+
+    function setDestinationFilter(dest) {
+      currentDestination = dest;
+      renderDestinationPills(allPackages);
+      filterPackages();
+    }
+
+    function filterPackages() {
+      const query = document.getElementById('packageSearchInput').value.toLowerCase();
+      const filtered = allPackages.filter(p => {
+        const matchRegion = currentRegion === 'all' || (p.region && p.region.toLowerCase() === currentRegion);
+        const matchDest = currentDestination === 'all' || (p.destination && p.destination.toLowerCase() === currentDestination);
+        const matchQuery = p.title.toLowerCase().includes(query) || p.destination.toLowerCase().includes(query) || (p.inclusions && p.inclusions.toLowerCase().includes(query));
+        return matchRegion && matchDest && matchQuery;
+      });
+      renderPackages(filtered);
+    }
+
+    function renderPackages(pkgs) {
+      const container = document.getElementById('packagesContainer');
+      if (pkgs.length === 0) {
+        container.innerHTML = `<div class="text-center py-12 text-slate-400 font-bold text-xs">No packages match your search criteria.</div>`;
+        return;
+      }
+
+      let html = '';
+      pkgs.forEach(p => {
+        const statusBadge = p.status === "OPEN" 
+          ? `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase rounded-md">OPEN</span>` 
+          : `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-[10px] font-black uppercase rounded-md">CLOSING SOON</span>`;
+
+        html += `
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-blue-300 transition shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-2">
+              <div class="flex items-center gap-3">
+                <h4 class="text-base font-black text-slate-900">${p.title}</h4>
+                ${statusBadge}
+              </div>
+              <p class="text-xs font-bold text-slate-600">Includes · ${p.inclusions || 'Standard Inclusions'}</p>
+              <p class="text-[11px] font-semibold text-slate-500">${p.travelDates || 'Valid for booking this season'}</p>
+              <div class="flex items-center gap-4 pt-1">
+                <button onclick="openCustomQuoteModal()" class="text-xs font-extrabold text-blue-600 hover:underline flex items-center gap-1">
+                  RATES & QUOTE <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </button>
+              </div>
+            </div>
+            <div class="text-left md:text-right border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
+              <p class="text-xl font-black text-slate-900">${p.b2bPrice}</p>
+              <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Per Couple / Package</p>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
     }
 
     function openAuthModal(tab) {
@@ -377,13 +518,6 @@
         document.getElementById('modalTabSignup').className = "flex-1 py-2.5 rounded-xl text-xs font-bold bg-white text-blue-700 shadow-sm transition";
         document.getElementById('modalTabSignin').className = "flex-1 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-900 transition";
       }
-    }
-
-    function showModalAlert(msg, isSuccess) {
-      const box = document.getElementById('modalAlertBox');
-      box.className = `mb-4 p-3.5 rounded-xl text-xs font-bold flex items-center gap-2 ${isSuccess ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-rose-50 text-rose-800 border border-rose-200'}`;
-      box.innerHTML = `<i class="fa-solid ${isSuccess ? 'fa-circle-check text-emerald-600' : 'fa-triangle-exclamation text-rose-600'}"></i> <span>${msg}</span>`;
-      box.classList.remove('hidden');
     }
 
     async function handleModalAuth(e, action) {
@@ -414,7 +548,6 @@
         const res = await response.json();
 
         if (res.success) {
-          showModalAlert(res.message, true);
           localStorage.setItem('ja_b2b_agent', JSON.stringify(res.agent));
           loggedInAgent = res.agent;
           setTimeout(() => {
@@ -422,10 +555,10 @@
             showDashboard(res.agent);
           }, 1000);
         } else {
-          showModalAlert(res.message, false);
+          alert(res.message);
         }
       } catch (err) {
-        showModalAlert("Connection error! Please check network.", false);
+        alert("Connection error!");
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalText;
@@ -438,7 +571,6 @@
       showAuthLanding();
     }
 
-    // Custom Quote Modal Functions
     function openCustomQuoteModal() {
       document.getElementById('customQuoteModal').classList.remove('hidden');
     }
@@ -492,8 +624,8 @@
         }
       } catch (err) {
         alertBox.className = "mb-4 p-3.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200";
-        alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> Connection error! Please try again.`;
-        alertBox.classList.remove('hidden');
+        alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> Connection error!`;
+        alertBox.classList.add('hidden');
       } finally {
         btn.disabled = false;
         btn.innerHTML = `<i class="fa-solid fa-paper-plane text-amber-300 mr-2"></i> Submit Query`;
