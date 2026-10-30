@@ -47,18 +47,18 @@
           Grow Your Business With Direct B2B Rates.
         </h2>
         <p class="mt-4 text-slate-300 text-sm leading-relaxed font-medium max-w-md">
-          Instant access to 150+ verified holiday packages across Kerala and domestic destinations with unbranded itineraries for your retail clients.
+          Instant access to 150+ verified holiday packages across Kerala and domestic Indian destinations with unbranded itineraries for your retail clients.
         </p>
 
         <!-- Feature Points -->
         <div class="mt-8 space-y-3.5">
           <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-200 font-semibold">
             <i class="fa-solid fa-circle-check text-blue-400 text-base"></i>
-            <span>Zero Annual Fees & Free Registration</span>
+            <span>Zero Annual Fees & Free Partner Registration</span>
           </div>
           <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-200 font-semibold">
             <i class="fa-solid fa-circle-check text-blue-400 text-base"></i>
-            <span>Net B2B Rates with Flexible Commission Markup</span>
+            <span>Net B2B Rates with Flexible Commission Markups</span>
           </div>
           <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-200 font-semibold">
             <i class="fa-solid fa-circle-check text-blue-400 text-base"></i>
@@ -179,7 +179,7 @@
       <div class="py-6 space-y-4">
         <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 text-emerald-800 text-xs sm:text-sm leading-relaxed font-semibold">
           <i class="fa-solid fa-circle-check text-emerald-600 text-xl flex-shrink-0"></i>
-          <span>आपका B2B एजेंट अकाउंट सक्रिय है! आप एक्सक्लूसिव पैकेजेस और नेट रेट्स देखने के लिए तैयार हैं।</span>
+          <span>Your B2B Agent Account is Active! You are now authorized to access exclusive holiday packages and confidential net rates.</span>
         </div>
 
         <div class="grid grid-cols-2 gap-4 text-xs">
@@ -188,7 +188,7 @@
             <p id="dashName" class="font-bold text-slate-800 text-sm mt-0.5">-</p>
           </div>
           <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80">
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">City</p>
+            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">City / Location</p>
             <p id="dashCity" class="font-bold text-slate-800 text-sm mt-0.5">-</p>
           </div>
         </div>
@@ -197,7 +197,7 @@
   </div>
 
   <script>
-    // ✅ आपका Google Apps Script Web App URL
+    // Google Apps Script Web App Endpoint URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
 
     window.onload = function() {
@@ -274,7 +274,7 @@
           showAlert(res.message, false);
         }
       } catch (err) {
-        showAlert("कनेक्शन एरर! कृपया दोबारा कोशिश करें।", false);
+        showAlert("Connection error! Please check your network and try again.", false);
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalText;
