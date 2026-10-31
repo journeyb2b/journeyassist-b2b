@@ -84,6 +84,24 @@
       }
     }
 
+    // Helper function to format text as line-by-line bullet points
+    function formatAsList(text, iconClass, itemColorClass) {
+      if (!text) return '<p class="text-xs text-slate-400 font-medium">N/A</p>';
+      const lines = text.split('\n').filter(line => line.trim() !== '');
+      if (lines.length === 0) return '<p class="text-xs text-slate-400 font-medium">N/A</p>';
+      
+      return `
+        <ul class="space-y-1.5 text-xs font-semibold ${itemColorClass}">
+          ${lines.map(l => `
+            <li class="flex items-start gap-2">
+              <i class="${iconClass} mt-0.5 text-[11px] shrink-0"></i>
+              <span>${l.trim()}</span>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    }
+
     function renderBrochure(p) {
       let rateGridsHtml = '';
       try {
@@ -161,6 +179,11 @@
 
       const itineraryFormatted = p.itinerary ? p.itinerary.replace(/\n/g, '<br>') : 'Custom day-wise itinerary will be provided upon booking.';
 
+      // Format line-by-line lists
+      const inclusionsList = formatAsList(p.inclusions, 'fa-solid fa-circle-check text-emerald-600', 'text-slate-800');
+      const exclusionsList = formatAsList(p.exclusions, 'fa-solid fa-circle-xmark text-rose-600', 'text-slate-800');
+      const termsList = formatAsList(p.terms, 'fa-solid fa-angle-right text-blue-600', 'text-slate-700');
+
       document.getElementById('brochureContainer').innerHTML = `
         <!-- BROCHURE HEADER -->
         <div class="bg-slate-900 text-white p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b-4 border-amber-400">
@@ -178,15 +201,19 @@
 
         <div class="p-8 sm:p-10 space-y-8">
           
-          <!-- VALIDITY & INCLUSIONS / EXCLUSIONS -->
+          <!-- INCLUSIONS & EXCLUSIONS (LINE-WISE) -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
-              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-check text-emerald-600 mr-1.5"></i> Inclusions</p>
-              <p class="text-xs font-bold text-slate-800">${p.inclusions || 'Accommodation, Daily breakfast, Transfers & sightseeing per itinerary'}</p>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-square-check text-emerald-600 text-sm"></i> Inclusions
+              </p>
+              ${inclusionsList}
             </div>
-            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
-              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider"><i class="fa-solid fa-square-xmark text-rose-600 mr-1.5"></i> Exclusions</p>
-              <p class="text-xs font-bold text-slate-800">${p.exclusions || 'Air / Train fares, Lunch & Dinner, Personal expenses'}</p>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-square-xmark text-rose-600 text-sm"></i> Exclusions
+              </p>
+              ${exclusionsList}
             </div>
           </div>
 
@@ -208,10 +235,12 @@
             </div>
           </div>
 
-          <!-- TERMS & CONDITIONS / CHILD POLICY -->
-          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-1">
-            <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider"><i class="fa-solid fa-circle-info text-blue-600 mr-1.5"></i> Terms & Conditions / Child Policy</p>
-            <p class="text-xs font-medium text-slate-600">${p.terms || 'Child rates applicable for 6-11 years. Extra bed charges as per hotel policy.'}</p>
+          <!-- TERMS & CONDITIONS / CHILD POLICY (LINE-WISE) -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+            <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-info text-blue-600 text-sm"></i> Terms & Conditions / Policy
+            </p>
+            ${termsList}
           </div>
 
           <!-- FOOTER / HELPLINE -->
