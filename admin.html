@@ -35,7 +35,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage compact multi-duration rate grids, image preview, and live brochure preview.</p>
+          <p class="text-xs font-medium text-slate-400">Manage stacked cards rate grids, image preview, and live brochure preview.</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition cursor-pointer">
           <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
@@ -125,14 +125,14 @@
           </div>
         </div>
 
-        <!-- COMPACT RATE GRID BUILDER -->
+        <!-- RATE GRID BUILDER -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks (Compact)
+                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks
               </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har duration ke liye compact hotel rates aur editable headers configure karein.</p>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har duration ke liye custom hotel rates aur editable headers configure karein.</p>
             </div>
             <button type="button" onclick="addDurationBlock()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
               <i class="fa-solid fa-plus"></i> Add Duration Block
@@ -552,40 +552,32 @@
         const h7 = blk.querySelector('.th-h7').value;
         const h8 = blk.querySelector('.th-h8').value;
 
-        let rowsHtml = '';
+        let cardsHtml = '';
         blk.querySelectorAll('.rate-row').forEach(r => {
-          rowsHtml += `
-            <tr class="border-b border-slate-100 text-[11px]">
-              <td class="p-1.5 font-bold">${r.querySelector('.r-plan').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-cat').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v1').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v2').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v3').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v4').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v5').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v6').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v7').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v8').value}</td>
-            </tr>
+          cardsHtml += `
+            <div class="bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm space-y-2.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span class="font-black text-xs text-slate-800">${r.querySelector('.r-plan').value}</span>
+                <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-[10px] font-extrabold">${r.querySelector('.r-cat').value}</span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h1}</span><strong class="text-amber-600">${r.querySelector('.r-v1').value || '-'}</strong></div>
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h2}</span><strong class="text-amber-600">${r.querySelector('.r-v2').value || '-'}</strong></div>
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h3}</span><strong class="text-amber-600">${r.querySelector('.r-v3').value || '-'}</strong></div>
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h4}</span><strong class="text-amber-600">${r.querySelector('.r-v4').value || '-'}</strong></div>
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h5}</span><span>${r.querySelector('.r-v5').value || '-'}</span></div>
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h6}</span><span>${r.querySelector('.r-v6').value || '-'}</span></div>
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h7}</span><span>${r.querySelector('.r-v7').value || '-'}</span></div>
+                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h8}</span><span>${r.querySelector('.r-v8').value || '-'}</span></div>
+              </div>
+            </div>
           `;
         });
 
         gridsHtml += `
-          <div class="mb-4 bg-slate-50 border border-slate-200 rounded-xl p-3">
+          <div class="mb-4 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
             <h5 class="font-black text-blue-900 text-xs uppercase">${bTitle} — <span class="font-medium text-slate-500">${bSub}</span></h5>
-            <div class="overflow-x-auto mt-2">
-              <table class="w-full text-left text-[10px] min-w-[850px]">
-                <thead class="bg-blue-900 text-white">
-                  <tr>
-                    <th class="p-1">Hotel Plan</th><th class="p-1">Category</th>
-                    <th class="p-1 text-amber-300">${h1}</th><th class="p-1 text-amber-300">${h2}</th>
-                    <th class="p-1 text-amber-300">${h3}</th><th class="p-1 text-amber-300">${h4}</th>
-                    <th class="p-1">${h5}</th><th class="p-1">${h6}</th><th class="p-1">${h7}</th><th class="p-1">${h8}</th>
-                  </tr>
-                </thead>
-                <tbody>${rowsHtml}</tbody>
-              </table>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">${cardsHtml}</div>
           </div>
         `;
       });
@@ -610,7 +602,7 @@
           ${linksHtml ? `<div><h4 class="text-xs font-black uppercase text-slate-500 mb-1">Official Itinerary Documents:</h4>${linksHtml}</div>` : ''}
 
           <div>
-            <h4 class="text-xs font-black uppercase text-slate-500 mb-2">Rate Grid Blocks:</h4>
+            <h4 class="text-xs font-black uppercase text-slate-500 mb-2">Rate Grid Stacked Cards:</h4>
             ${gridsHtml}
           </div>
 
