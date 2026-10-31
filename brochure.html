@@ -84,7 +84,6 @@
       }
     }
 
-    // Helper function to format text as line-by-line bullet points
     function formatAsList(text, iconClass, itemColorClass) {
       if (!text) return '<p class="text-xs text-slate-400 font-medium">N/A</p>';
       const lines = text.split('\n').filter(line => line.trim() !== '');
@@ -162,9 +161,7 @@
                         <th class="p-2.5 border border-slate-300">${h.h8}</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      ${rowsHtml}
-                    </tbody>
+                    <tbody>${rowsHtml}</tbody>
                   </table>
                 </div>
               </div>
@@ -177,22 +174,66 @@
         rateGridsHtml = `<p class="text-xs font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200 mt-2">${p.b2bPrice || 'Rates available on request'}</p>`;
       }
 
-      const itineraryFormatted = p.itinerary ? p.itinerary.replace(/\n/g, '<br>') : 'Custom day-wise itinerary will be provided upon booking.';
+      // Parse Itinerary Document Links (Docs/Drive)
+      let pdfLinksHtml = '';
+      try {
+        const pdfLinks = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
+        if (Array.isArray(pdfLinks) && pdfLinks.length > 0) {
+          pdfLinksHtml = `
+            <div class="bg-blue-50/60 border border-blue-200/80 p-4 rounded-2xl space-y-2">
+              <p class="text-xs font-black text-blue-900 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-link text-blue-600"></i> Official Itinerary Documents
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1">
+                ${pdfLinks.map(l => `
+                  <a href="${l.url || '#'}" target="_blank" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-sm border border-blue-500">
+                    <span>${l.title || 'View Detailed Itinerary'}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
+                  </a>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+      } catch (e) {}
 
-      // Format line-by-line lists
+      // Parse Day-Wise Itinerary
+      let itineraryHtml = '';
+      try {
+        const itineraryData = typeof p.itinerary === 'string' ? JSON.parse(p.itinerary) : p.itinerary;
+        if (Array.isArray(itineraryData) && itineraryData.length > 0) {
+          itineraryHtml = itineraryData.map((day, idx) => `
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1 mb-3">
+              <h4 class="text-xs font-black uppercase text-blue-900 flex items-center gap-2">
+                <span class="w-6 h-6 bg-blue-600 text-white rounded-lg flex items-center justify-center text-[10px] font-bold">${idx + 1}</span>
+                ${day.title || ('Day ' + (idx + 1))}
+              </h4>
+              <p class="text-xs font-medium text-slate-700 pl-8 leading-relaxed whitespace-pre-line">${day.desc || ''}</p>
+            </div>
+          `).join('');
+        } else {
+          itineraryHtml = `<div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line">${p.itinerary || 'Custom day-wise itinerary will be provided upon booking.'}</div>`;
+        }
+      } catch (e) {
+        itineraryHtml = `<div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line">${p.itinerary || 'Custom day-wise itinerary will be provided upon booking.'}</div>`;
+      }
+
       const inclusionsList = formatAsList(p.inclusions, 'fa-solid fa-circle-check text-emerald-600', 'text-slate-800');
       const exclusionsList = formatAsList(p.exclusions, 'fa-solid fa-circle-xmark text-rose-600', 'text-slate-800');
       const termsList = formatAsList(p.terms, 'fa-solid fa-angle-right text-blue-600', 'text-slate-700');
 
+      const bannerImgUrl = p.imageUrl || 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944';
+
       document.getElementById('brochureContainer').innerHTML = `
-        <!-- BROCHURE HEADER -->
-        <div class="bg-slate-900 text-white p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b-4 border-amber-400">
-          <div>
-            <span class="px-3 py-1 rounded-full bg-blue-600/30 border border-blue-400/40 text-amber-300 text-[10px] font-black uppercase tracking-wider">${p.destination || 'Destination Tour'} (${p.region || 'Domestic'})</span>
+        <!-- BROCHURE BANNER HEADER -->
+        <div class="relative min-h-[220px] bg-slate-900 text-white p-8 sm:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b-4 border-amber-400 overflow-hidden">
+          <img src="${bannerImgUrl}" class="absolute inset-0 w-full h-full object-cover opacity-40 z-0" alt="Banner Image">
+          <div class="relative z-10">
+            <span class="px-3 py-1 rounded-full bg-blue-600/60 backdrop-blur-md border border-blue-400/40 text-amber-300 text-[10px] font-black uppercase tracking-wider">${p.destination || 'Destination Tour'} (${p.region || 'Domestic'})</span>
             <h1 class="text-2xl sm:text-4xl font-black mt-2 tracking-tight">${p.title || 'Holiday Package'}</h1>
-            <p class="text-xs font-bold text-slate-300 mt-1"><i class="fa-regular fa-clock text-amber-400 mr-1"></i> Duration: ${p.duration || 'Flexible'}</p>
+            <p class="text-xs font-bold text-slate-200 mt-1"><i class="fa-regular fa-clock text-amber-400 mr-1"></i> Duration: ${p.duration || 'Flexible'}</p>
           </div>
-          <div class="text-left sm:text-right bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+          <div class="relative z-10 text-left sm:text-right bg-slate-900/80 backdrop-blur-md p-4 rounded-2xl border border-slate-700">
             <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Starting Net Rate</p>
             <p class="text-2xl sm:text-3xl font-black text-amber-400">${p.b2bPrice || 'On Request'}</p>
             <p class="text-[9px] text-slate-400 uppercase font-extrabold mt-0.5">B2B Agent Price</p>
@@ -200,8 +241,8 @@
         </div>
 
         <div class="p-8 sm:p-10 space-y-8">
-          
-          <!-- INCLUSIONS & EXCLUSIONS (LINE-WISE) -->
+          ${pdfLinksHtml}
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
               <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
@@ -217,7 +258,6 @@
             </div>
           </div>
 
-          <!-- COMPLETE SUPPLIER RATE GRID -->
           <div>
             <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2 mb-3">
               <i class="fa-solid fa-table-cells text-blue-600"></i> Multi-Duration Supplier Rate Grids
@@ -225,17 +265,13 @@
             ${rateGridsHtml}
           </div>
 
-          <!-- TOUR ITINERARY DETAILS -->
           <div>
             <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
               <i class="fa-solid fa-route text-blue-600"></i> Tour Itinerary Details
             </h3>
-            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs font-medium text-slate-700 leading-relaxed">
-              ${itineraryFormatted}
-            </div>
+            ${itineraryHtml}
           </div>
 
-          <!-- TERMS & CONDITIONS / CHILD POLICY (LINE-WISE) -->
           <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
             <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
               <i class="fa-solid fa-circle-info text-blue-600 text-sm"></i> Terms & Conditions / Policy
@@ -243,12 +279,10 @@
             ${termsList}
           </div>
 
-          <!-- FOOTER / HELPLINE -->
           <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs font-bold text-slate-500 gap-4">
             <p><i class="fa-solid fa-building text-blue-600 mr-1"></i> Journey Assist B2B Operations</p>
             <p><i class="fa-solid fa-phone text-blue-600 mr-1"></i> Helpline: +91 9919382999</p>
           </div>
-
         </div>
       `;
     }
