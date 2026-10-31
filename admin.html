@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Operations Control | Journey Assist</title>
+  <title>Journey Assist | Master Admin Panel (Agents & Packages Management)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen pb-12">
@@ -17,444 +17,369 @@
   <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-white">
-          <i class="fa-solid fa-user-shield"></i>
+        <div class="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center font-black text-slate-950">
+          <i class="fa-solid fa-sliders"></i>
         </div>
-        <h1 class="text-lg font-black tracking-tight text-white">Journey Assist <span class="text-xs text-amber-400 font-semibold uppercase">Admin Panel</span></h1>
+        <div>
+          <h1 class="text-base font-black tracking-tight text-white">Journey Assist <span class="text-xs text-amber-400 font-bold">Backend Master Admin</span></h1>
+        </div>
       </div>
-      <a href="index.html" class="text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5">
-        <i class="fa-solid fa-globe"></i> View B2B Portal
-      </a>
+      
+      <!-- TAB NAVIGATION -->
+      <div class="flex items-center gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-bold">
+        <button id="btnPackagesTab" onclick="switchTab('packages')" class="px-4 py-1.5 bg-amber-500 text-slate-950 rounded-lg transition font-black">
+          <i class="fa-solid fa-box-open mr-1"></i> Holiday Packages
+        </button>
+        <button id="btnAgentsTab" onclick="switchTab('agents')" class="px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
+          <i class="fa-solid fa-users mr-1"></i> B2B Agents Manager
+        </button>
+      </div>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
 
-    <!-- ADD / EDIT PACKAGE FORM WITH SUPPLIER RATE GRID & EXCLUSIONS -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage package details, supplier rates, exclusions, and itinerary links.</p>
-        </div>
-        <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition">
-          <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
-        </button>
-      </div>
-
-      <form id="packageForm" onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs font-bold text-slate-300">
-        <input type="hidden" id="editingPackageId" value="">
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <!-- ========================================================= -->
+    <!-- TAB 1: HOLIDAY PACKAGES MANAGEMENT (BACKEND UPLOAD FORM)   -->
+    <!-- ========================================================= -->
+    <div id="tabPackages" class="space-y-8">
+      
+      <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Package Title *</label>
-            <input type="text" id="pkgTitle" required placeholder="e.g. Kerala Winter FIT — Early Bird Offer" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <h2 class="text-lg font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-folder-plus text-amber-400"></i> Step 1: Manage Holiday Package Entry
+            </h2>
+            <p class="text-xs text-slate-400 font-medium">Add new package, set banner image, itinerary links, rate tables & policies.</p>
           </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Destination *</label>
-            <input type="text" id="pkgDestination" required placeholder="e.g. Kerala" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Region *</label>
-            <select id="pkgRegion" required class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-              <option value="domestic">Domestic</option>
-              <option value="international">International</option>
-            </select>
-          </div>
+          <button onclick="saveMasterPackageBackend()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center gap-2 shadow-lg">
+            <i class="fa-solid fa-floppy-disk"></i> Save Package to Backend
+          </button>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- PACKAGE BASIC INFO -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Duration *</label>
-            <input type="text" id="pkgDuration" required placeholder="e.g. 3N/4D to 7N/8D" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <label class="text-[10px] font-black uppercase text-slate-400">Package Title / Heading</label>
+            <input type="text" id="pkgTitle" placeholder="e.g. Kerala Winter FIT — Early Bird Offer" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold text-xs focus:outline-none focus:border-amber-500">
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Starting Price *</label>
-            <input type="text" id="pkgPrice" required placeholder="e.g. ₹13,450/person" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <label class="text-[10px] font-black uppercase text-slate-400">Destination & Duration Range</label>
+            <input type="text" id="pkgSubtitle" placeholder="e.g. Kerala | 3N/4D to 7N/8D" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-amber-300 font-bold text-xs focus:outline-none">
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Booking / Travel Validity</label>
-            <input type="text" id="pkgDates" placeholder="e.g. Booking window: Until 31 October 2026" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <label class="text-[10px] font-black uppercase text-slate-400">Booking Validity / Window</label>
+            <input type="text" id="pkgValidity" placeholder="e.g. Until 31 October 2026" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sky-400 font-bold text-xs focus:outline-none">
+          </div>
+          <div>
+            <label class="text-[10px] font-black uppercase text-slate-400">Starting Price Label</label>
+            <input type="text" id="pkgPriceLabel" placeholder="e.g. Starting ₹13,450/person" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-emerald-400 font-bold text-xs focus:outline-none">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="text-[10px] font-black uppercase text-slate-400">Header Banner Image URL</label>
+            <input type="text" id="pkgBannerUrl" placeholder="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944..." class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 text-xs focus:outline-none">
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Inclusions *</label>
-            <input type="text" id="pkgInclusions" required placeholder="e.g. Accommodation, Daily breakfast, Transfers" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions *</label>
-            <input type="text" id="pkgExclusions" required placeholder="e.g. Air / Train fares, Lunch & Dinner, Personal expenses" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Itinerary Link / PDF Download URL</label>
-            <input type="text" id="pkgItineraryLink" placeholder="e.g. https://example.com/kerala-pdf" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Terms & Conditions / Child Policy</label>
-            <input type="text" id="pkgTerms" placeholder="e.g. Child rates applicable for 6–11 years" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+        <!-- ITINERARY DOCUMENT LINKS -->
+        <div class="space-y-3 border-t border-slate-800 pt-4">
+          <h3 class="text-xs font-black uppercase text-sky-400 tracking-wider">Itinerary Download Links</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <input type="text" id="link3N" placeholder="3N/4D Itinerary PDF Link" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white">
+            <input type="text" id="link4N" placeholder="4N/5D Itinerary PDF Link" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white">
+            <input type="text" id="link5N" placeholder="5N/6D Itinerary PDF Link" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white">
+            <input type="text" id="link6N" placeholder="6N/7D Itinerary PDF Link" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white">
           </div>
         </div>
 
-        <!-- ADVANCED SUPPLIER RATE GRID BUILDER -->
-        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-                <i class="fa-solid fa-table-cells"></i> Complete Supplier Rate Grid Builder
-              </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Add hotel plan tiers with occupancy rates (Single, Twin, Triple, Child, Extra Bed).</p>
-            </div>
-            <button type="button" onclick="addRateGridRow()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 self-start sm:self-auto">
-              <i class="fa-solid fa-plus"></i> Add Row
+        <!-- SUPPLIER RATE GRID TABLES -->
+        <div class="space-y-4 border-t border-slate-800 pt-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-black uppercase text-amber-400 tracking-wider">Supplier Rate Grids (Tables)</h3>
+            <button onclick="addGridBlock()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+              <i class="fa-solid fa-plus"></i> Add Duration Table
             </button>
           </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs min-w-[800px] border-collapse">
-              <thead>
-                <tr class="bg-slate-950 text-slate-400 font-black uppercase text-[10px] border-b border-slate-800">
-                  <th class="p-2">Hotel Plan</th>
-                  <th class="p-2">Category</th>
-                  <th class="p-2">Meal</th>
-                  <th class="p-2">Single (₹)</th>
-                  <th class="p-2">Twin (₹)</th>
-                  <th class="p-2">Triple (₹)</th>
-                  <th class="p-2">Child (6-11) (₹)</th>
-                  <th class="p-2">Extra Bed (₹)</th>
-                  <th class="p-2 text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody id="rateGridRowsContainer" class="divide-y divide-slate-800/60">
-                <!-- Dynamic Rate Grid rows added via JavaScript -->
-              </tbody>
-            </table>
+          <div id="gridBlocksContainer" class="space-y-4">
+            <!-- Dynamic Grid Blocks -->
           </div>
         </div>
 
-        <div>
-          <label class="block uppercase tracking-wider mb-1 text-slate-400">Day-Wise Itinerary Details</label>
-          <textarea id="pkgItinerary" rows="4" placeholder="Day 1: Arrival Cochin -> Transfer Munnar...&#10;Day 2: Munnar Sightseeing..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-blue-500 focus:outline-none"></textarea>
+        <!-- INCLUSIONS & POLICIES -->
+        <div class="space-y-3 border-t border-slate-800 pt-4">
+          <h3 class="text-xs font-black uppercase text-emerald-400 tracking-wider">Inclusions, Exclusions & Policies</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="text-[10px] font-bold text-slate-400">Inclusions</label>
+              <textarea id="pkgInclusions" rows="3" placeholder="Accommodation, breakfast, transfers..." class="w-full mt-1 p-3 bg-slate-900 border border-slate-800 rounded-xl text-xs font-medium text-slate-200 focus:outline-none"></textarea>
+            </div>
+            <div>
+              <label class="text-[10px] font-bold text-slate-400">Exclusions</label>
+              <textarea id="pkgExclusions" rows="3" placeholder="Air/Train fare, personal expense..." class="w-full mt-1 p-3 bg-slate-900 border border-slate-800 rounded-xl text-xs font-medium text-slate-200 focus:outline-none"></textarea>
+            </div>
+            <div>
+              <label class="text-[10px] font-bold text-slate-400">Child & Extra Bed Policy</label>
+              <textarea id="pkgPolicies" rows="3" placeholder="Child 6-11 yrs, extra bed charges..." class="w-full mt-1 p-3 bg-slate-900 border border-slate-800 rounded-xl text-xs font-medium text-slate-200 focus:outline-none"></textarea>
+            </div>
+          </div>
         </div>
 
-        <button type="submit" id="btnSubmitForm" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
-          <i class="fa-solid fa-cloud-arrow-up text-amber-300"></i>
-          <span id="btnSubmitText">Publish Package To Google Sheet</span>
-        </button>
-      </form>
-    </div>
-
-    <!-- LIVE PACKAGES TABLE WITH CONTROLS -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-black text-white">Live Database Packages</h3>
-        <button onclick="fetchAdminPackages()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 rounded-xl border border-slate-800 transition">
-          <i class="fa-solid fa-rotate-right mr-1"></i> Refresh Table
-        </button>
       </div>
 
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="bg-slate-900 text-slate-400 uppercase font-extrabold border-b border-slate-800">
-              <th class="p-3">ID</th>
-              <th class="p-3">Title & Dest</th>
-              <th class="p-3">Duration</th>
-              <th class="p-3">Price</th>
-              <th class="p-3">Status</th>
-              <th class="p-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="adminPackagesTable" class="divide-y divide-slate-800">
-            <tr>
-              <td colspan="6" class="p-8 text-center text-slate-500 font-bold">Loading live packages...</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- SAVED PACKAGES LIST -->
+      <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
+        <h3 class="text-xs font-black uppercase text-amber-400 tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-list-check"></i> Active Backend Packages List
+        </h3>
+        <div id="activeBackendPackagesList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          <!-- Rendered Packages -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TAB 2: B2B AGENTS MANAGEMENT                               -->
+    <!-- ========================================================= -->
+    <div id="tabAgents" class="space-y-8 hidden">
+      <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-lg font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-user-shield text-amber-400"></i> B2B Travel Agent Directory & Permissions
+            </h2>
+            <p class="text-xs text-slate-400 font-medium">Register agents, set commission slabs, approve/block access.</p>
+          </div>
+          <button onclick="addAgentRow()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-user-plus"></i> Add New Agent
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse min-w-[750px]">
+            <thead>
+              <tr class="bg-slate-900 text-slate-400 uppercase font-extrabold border-b border-slate-800 text-[10px]">
+                <th class="p-2.5">Agency / Agent Name</th>
+                <th class="p-2.5">Phone Number</th>
+                <th class="p-2.5">City / Location</th>
+                <th class="p-2.5">Commission Tier</th>
+                <th class="p-2.5">Status</th>
+                <th class="p-2.5 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="agentsTableBody" class="divide-y divide-slate-800/80">
+              <!-- Dynamic Agent Rows -->
+            </tbody>
+          </table>
+        </div>
+        <button onclick="saveAgentsBackend()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-xl transition">
+          <i class="fa-solid fa-floppy-disk mr-1"></i> Save Agent Directory
+        </button>
       </div>
     </div>
 
   </main>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
-    let adminPackages = [];
-
     window.onload = function() {
-      fetchAdminPackages();
-      addDefaultRateGridRows();
+      addGridBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
+      loadBackendPackages();
+      loadBackendAgents();
     };
 
-    function addDefaultRateGridRows() {
-      document.getElementById('rateGridRowsContainer').innerHTML = '';
-      addRateGridRow('Munnar', 'Standard', 'CP', '13,450', '11,450', '10,450', '6,750', '5,450');
-      addRateGridRow('Munnar', 'Deluxe', 'CP', '15,950', '13,950', '12,950', '7,950', '6,950');
-      addRateGridRow('Munnar', 'Premium', 'CP', '17,950', '25,950', '14,950', '9,450', '7,950');
+    function switchTab(tab) {
+      if (tab === 'packages') {
+        document.getElementById('tabPackages').classList.remove('hidden');
+        document.getElementById('tabAgents').classList.add('hidden');
+        document.getElementById('btnPackagesTab').className = "px-4 py-1.5 bg-amber-500 text-slate-950 rounded-lg transition font-black";
+        document.getElementById('btnAgentsTab').className = "px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition";
+      } else {
+        document.getElementById('tabPackages').classList.add('hidden');
+        document.getElementById('tabAgents').classList.remove('hidden');
+        document.getElementById('btnPackagesTab').className = "px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition";
+        document.getElementById('btnAgentsTab').className = "px-4 py-1.5 bg-amber-500 text-slate-950 rounded-lg transition font-black";
+      }
     }
 
-    function addRateGridRow(plan = '', cat = 'Standard', meal = 'CP', single = '', twin = '', triple = '', child = '', extra = '') {
-      const container = document.getElementById('rateGridRowsContainer');
-      const rowId = 'rg-row-' + Date.now() + Math.floor(Math.random() * 1000);
-      
+    function addGridBlock(title="4N/5D Package", route="2 Nights Munnar + 2 Nights Alleppey") {
+      const container = document.getElementById('gridBlocksContainer');
+      const blockId = 'grid-' + Date.now() + Math.floor(Math.random()*1000);
+
+      const div = document.createElement('div');
+      div.id = blockId;
+      div.className = 'grid-block p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-3';
+      div.innerHTML = `
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div class="flex items-center gap-2 w-full max-w-lg">
+            <input type="text" placeholder="Package Duration Title" value="${title}" class="gb-title bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 font-bold text-amber-400 text-xs w-36">
+            <input type="text" placeholder="Night Split Route" value="${route}" class="gb-route bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 font-bold text-sky-400 text-xs w-full">
+          </div>
+          <button onclick="document.getElementById('${blockId}').remove()" class="text-rose-400 hover:text-rose-300 text-xs font-bold">
+            <i class="fa-solid fa-trash"></i> Delete Grid
+          </button>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-[10px] font-bold text-slate-400">
+            <span>Hotel & Occupancy Rates</span>
+            <button onclick="addRowToBlock('${blockId}')" class="text-sky-400 hover:underline">+ Add Hotel Row</button>
+          </div>
+          <div class="gb-rows space-y-2">
+            <!-- Hotel rows dynamically placed -->
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+      addRowToBlock(blockId, "Munnar", "Standard", "CP", "13450", "11450", "10450", "6750", "5450");
+    }
+
+    function addRowToBlock(blockId, h="Munnar", c="Standard", m="CP", s="13450", tw="11450", tr="10450", ch="6750", ex="5450") {
+      const container = document.querySelector(`#${blockId} .gb-rows`);
+      const row = document.createElement('div');
+      row.className = 'gb-row flex flex-wrap items-center gap-2 text-xs';
+      row.innerHTML = `
+        <input type="text" placeholder="Hotel/City" value="${h}" class="r-h px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-white font-bold w-24">
+        <input type="text" placeholder="Category" value="${c}" class="r-c px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-slate-300 w-24">
+        <input type="text" placeholder="Meal" value="${m}" class="r-m px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-slate-300 w-14">
+        <input type="text" placeholder="Single ₹" value="${s}" class="r-s px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-white font-bold w-20">
+        <input type="text" placeholder="Twin ₹" value="${tw}" class="r-tw px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-emerald-400 font-bold w-20">
+        <input type="text" placeholder="Triple ₹" value="${tr}" class="r-tr px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-sky-400 font-bold w-20">
+        <input type="text" placeholder="Child ₹" value="${ch}" class="r-ch px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-amber-300 font-bold w-20">
+        <input type="text" placeholder="Extra Bed ₹" value="${ex}" class="r-ex px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-slate-300 font-bold w-20">
+        <button onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button>
+      `;
+      container.appendChild(row);
+    }
+
+    function saveMasterPackageBackend() {
+      const data = {
+        title: document.getElementById('pkgTitle').value,
+        subtitle: document.getElementById('pkgSubtitle').value,
+        validity: document.getElementById('pkgValidity').value,
+        priceLabel: document.getElementById('pkgPriceLabel').value,
+        bannerUrl: document.getElementById('pkgBannerUrl').value,
+        links: {
+          l3: document.getElementById('link3N').value,
+          l4: document.getElementById('link4N').value,
+          l5: document.getElementById('link5N').value,
+          l6: document.getElementById('link6N').value
+        },
+        inclusions: document.getElementById('pkgInclusions').value,
+        exclusions: document.getElementById('pkgExclusions').value,
+        policies: document.getElementById('pkgPolicies').value,
+        grids: []
+      };
+
+      document.querySelectorAll('.grid-block').forEach(gb => {
+        const title = gb.querySelector('.gb-title').value;
+        const route = gb.querySelector('.gb-route').value;
+        const rows = [];
+        gb.querySelectorAll('.gb-row').forEach(r => {
+          rows.push({
+            hotel: r.querySelector('.r-h').value,
+            cat: r.querySelector('.r-c').value,
+            meal: r.querySelector('.r-m').value,
+            single: r.querySelector('.r-s').value,
+            twin: r.querySelector('.r-tw').value,
+            triple: r.querySelector('.r-tr').value,
+            child: r.querySelector('.r-ch').value,
+            exbed: r.querySelector('.r-ex').value
+          });
+        });
+        data.grids.push({ title, route, rows });
+      });
+
+      let list = JSON.parse(localStorage.getItem('ja_backend_packages') || '[]');
+      list.push(data);
+      localStorage.setItem('ja_backend_packages', JSON.stringify(list));
+      alert('Holiday Package saved to Backend Master Database!');
+      loadBackendPackages();
+    }
+
+    function loadBackendPackages() {
+      const list = JSON.parse(localStorage.getItem('ja_backend_packages') || '[]');
+      const container = document.getElementById('activeBackendPackagesList');
+      if (list.length === 0) {
+        container.innerHTML = '<p class="text-slate-500 italic sm:col-span-3">No backend packages saved yet.</p>';
+        return;
+      }
+      let html = '';
+      list.forEach(p => {
+        html += `
+          <div class="p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-1">
+            <p class="font-black text-white">${p.title}</p>
+            <p class="text-[10px] text-amber-400 font-bold">${p.subtitle}</p>
+            <p class="text-[10px] text-sky-400">${p.validity}</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded">${p.priceLabel}</span>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    /* AGENTS DIRECTORY FUNCTIONS */
+    function addAgentRow(name='', phone='', city='', tier='Silver Tier', status='Active') {
+      const tbody = document.getElementById('agentsTableBody');
+      const rowId = 'agent-' + Date.now();
       const tr = document.createElement('tr');
       tr.id = rowId;
-      tr.className = 'rg-data-row hover:bg-slate-900/50 transition';
+      tr.className = 'agent-row hover:bg-slate-900/50 transition';
       tr.innerHTML = `
-        <td class="p-1.5"><input type="text" placeholder="e.g. Munnar" value="${plan}" class="rg-plan w-full px-2.5 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
-        <td class="p-1.5">
-          <select class="rg-cat w-full px-2 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
-            <option value="Standard" ${cat === 'Standard' ? 'selected' : ''}>Standard</option>
-            <option value="Deluxe" ${cat === 'Deluxe' ? 'selected' : ''}>Deluxe</option>
-            <option value="Premium" ${cat === 'Premium' ? 'selected' : ''}>Premium</option>
-            <option value="Luxury" ${cat === 'Luxury' ? 'selected' : ''}>Luxury</option>
+        <td class="p-2.5"><input type="text" placeholder="Agency Name" value="${name}" class="ag-name w-full px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs focus:outline-none"></td>
+        <td class="p-2.5"><input type="text" placeholder="9919XXXXXX" value="${phone}" class="ag-phone w-32 px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-bold text-xs focus:outline-none"></td>
+        <td class="p-2.5"><input type="text" placeholder="City" value="${city}" class="ag-city w-28 px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-slate-300 text-xs focus:outline-none"></td>
+        <td class="p-2.5">
+          <select class="ag-tier px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-sky-400 font-bold text-xs focus:outline-none">
+            <option value="Silver Tier" ${tier === 'Silver Tier' ? 'selected' : ''}>Silver Tier (Standard Net)</option>
+            <option value="Gold Tier" ${tier === 'Gold Tier' ? 'selected' : ''}>Gold Tier (Extra 3% Off)</option>
+            <option value="Platinum DMC" ${tier === 'Platinum DMC' ? 'selected' : ''}>Platinum DMC (Wholesale Rate)</option>
           </select>
         </td>
-        <td class="p-1.5"><input type="text" placeholder="CP" value="${meal}" class="rg-meal w-16 px-2 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
-        <td class="p-1.5"><input type="text" placeholder="13,450" value="${single}" class="rg-single w-full px-2 py-2 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 text-xs font-extrabold focus:border-blue-500 focus:outline-none"></td>
-        <td class="p-1.5"><input type="text" placeholder="11,450" value="${twin}" class="rg-twin w-full px-2 py-2 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 text-xs font-extrabold focus:border-blue-500 focus:outline-none"></td>
-        <td class="p-1.5"><input type="text" placeholder="10,450" value="${triple}" class="rg-triple w-full px-2 py-2 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 text-xs font-extrabold focus:border-blue-500 focus:outline-none"></td>
-        <td class="p-1.5"><input type="text" placeholder="6,750" value="${child}" class="rg-child w-full px-2 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
-        <td class="p-1.5"><input type="text" placeholder="5,450" value="${extra}" class="rg-extra w-full px-2 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
-        <td class="p-1.5 text-center">
-          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs">
-            <i class="fa-solid fa-trash"></i>
+        <td class="p-2.5">
+          <select class="ag-status px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs font-bold focus:outline-none ${status === 'Active' ? 'text-emerald-400' : 'text-rose-400'}">
+            <option value="Active" ${status === 'Active' ? 'selected' : ''}>Active</option>
+            <option value="Pending Approval" ${status === 'Pending Approval' ? 'selected' : ''}>Pending Approval</option>
+            <option value="Blocked" ${status === 'Blocked' ? 'selected' : ''}>Blocked</option>
+          </select>
+        </td>
+        <td class="p-2.5 text-center">
+          <button onclick="document.getElementById('${rowId}').remove()" class="p-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition">
+            <i class="fa-solid fa-trash text-xs"></i>
           </button>
         </td>
       `;
-      container.appendChild(tr);
+      tbody.appendChild(tr);
     }
 
-    async function fetchAdminPackages() {
-      try {
-        const response = await fetch(`${SCRIPT_URL}?action=getPackages`);
-        const data = await response.json();
-
-        if (data.success && data.packages) {
-          adminPackages = data.packages;
-          renderAdminTable(adminPackages);
-        } else {
-          document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">No packages found or failed to load.</td></tr>`;
-        }
-      } catch (err) {
-        document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">Error connecting to database.</td></tr>`;
-      }
-    }
-
-    function renderAdminTable(pkgs) {
-      const tbody = document.getElementById('adminPackagesTable');
-      if (pkgs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500 font-bold">No packages in database.</td></tr>`;
-        return;
-      }
-
-      let html = '';
-      pkgs.forEach((p, index) => {
-        const status = (p.status || "OPEN").toUpperCase();
-        const isPaused = status === "PAUSED";
-        const statusBadge = isPaused 
-          ? `<span class="px-2 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black uppercase rounded-md">PAUSED</span>`
-          : `<span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black uppercase rounded-md">OPEN</span>`;
-
-        html += `
-          <tr class="hover:bg-slate-900/60 transition">
-            <td class="p-3 font-mono font-bold text-slate-400">${p.id}</td>
-            <td class="p-3">
-              <p class="font-black text-white">${p.title}</p>
-              <p class="text-[10px] font-bold text-slate-400">${p.destination} (${p.region})</p>
-            </td>
-            <td class="p-3 font-bold text-slate-300">${p.duration}</td>
-            <td class="p-3 font-black text-blue-400">${p.b2bPrice}</td>
-            <td class="p-3">${statusBadge}</td>
-            <td class="p-3 text-right">
-              <div class="flex items-center justify-end gap-2">
-                <button onclick="editPackage(${index})" title="Edit Package" class="px-3 py-1.5 bg-blue-600/20 hover:bg-blue-600 border border-blue-500/40 text-blue-300 hover:text-white text-xs font-bold rounded-lg transition">
-                  <i class="fa-solid fa-pen"></i> Edit
-                </button>
-                <button onclick="togglePackageStatus('${p.id}', '${status}')" title="${isPaused ? 'Resume Package' : 'Pause Package'}" class="px-3 py-1.5 ${isPaused ? 'bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 border-emerald-500/40' : 'bg-amber-600/20 hover:bg-amber-600 text-amber-300 border-amber-500/40'} border hover:text-white text-xs font-bold rounded-lg transition">
-                  <i class="fa-solid ${isPaused ? 'fa-play' : 'fa-pause'}"></i> ${isPaused ? 'Resume' : 'Pause'}
-                </button>
-                <button onclick="deletePackage('${p.id}')" title="Delete Package" class="px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600 border border-rose-500/40 text-rose-300 hover:text-white text-xs font-bold rounded-lg transition">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        `;
-      });
-
-      tbody.innerHTML = html;
-    }
-
-    function editPackage(index) {
-      const p = adminPackages[index];
-      if (!p) return;
-
-      document.getElementById('editingPackageId').value = p.id;
-      document.getElementById('pkgTitle').value = p.title || '';
-      document.getElementById('pkgDestination').value = p.destination || '';
-      document.getElementById('pkgRegion').value = (p.region || 'domestic').toLowerCase();
-      document.getElementById('pkgDuration').value = p.duration || '';
-      document.getElementById('pkgPrice').value = p.b2bPrice || '';
-      document.getElementById('pkgDates').value = p.travelDates || '';
-      document.getElementById('pkgInclusions').value = p.inclusions || '';
-      document.getElementById('pkgExclusions').value = p.exclusions || '';
-      document.getElementById('pkgItineraryLink').value = p.itineraryLink || '';
-      document.getElementById('pkgTerms').value = p.terms || '';
-      document.getElementById('pkgItinerary').value = p.itinerary || '';
-
-      // Populate Advanced Rate Grid
-      const container = document.getElementById('rateGridRowsContainer');
-      container.innerHTML = '';
-      try {
-        const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
-        if (Array.isArray(grid) && grid.length > 0) {
-          grid.forEach(g => {
-            addRateGridRow(g.hotelPlan || g.plan || '', g.category || 'Standard', g.mealPlan || 'CP', g.single || '', g.twin || g.price || '', g.triple || '', g.child || '', g.extraBed || '');
-          });
-        } else {
-          addDefaultRateGridRows();
-        }
-      } catch (e) {
-        addDefaultRateGridRows();
-      }
-
-      document.getElementById('formHeading').innerText = `Edit Package (${p.id})`;
-      document.getElementById('btnSubmitText').innerText = "Update Package In Google Sheet";
-      document.getElementById('btnResetForm').classList.remove('hidden');
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function resetForm() {
-      document.getElementById('editingPackageId').value = '';
-      document.getElementById('packageForm').reset();
-      addDefaultRateGridRows();
-      document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
-      document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
-      document.getElementById('btnResetForm').classList.add('hidden');
-    }
-
-    async function handleFormSubmit(event) {
-      event.preventDefault();
-
-      const btn = document.getElementById('btnSubmitForm');
-      btn.disabled = true;
-      btn.classList.add('opacity-50');
-
-      // Collect Advanced Rate Grid Data
-      const rows = document.querySelectorAll('.rg-data-row');
-      const rateGridArr = [];
-
+    function saveAgentsBackend() {
+      const rows = document.querySelectorAll('.agent-row');
+      const agents = [];
       rows.forEach(r => {
-        const plan = r.querySelector('.rg-plan').value.trim();
-        const cat = r.querySelector('.rg-cat').value;
-        const meal = r.querySelector('.rg-meal').value.trim();
-        const single = r.querySelector('.rg-single').value.trim();
-        const twin = r.querySelector('.rg-twin').value.trim();
-        const triple = r.querySelector('.rg-triple').value.trim();
-        const child = r.querySelector('.rg-child').value.trim();
-        const extraBed = r.querySelector('.rg-extra').value.trim();
-
-        if (plan || twin || single) {
-          rateGridArr.push({
-            hotelPlan: plan,
-            category: cat,
-            mealPlan: meal,
-            single: single,
-            twin: twin,
-            triple: triple,
-            child: child,
-            extraBed: extraBed
-          });
-        }
+        agents.push({
+          name: r.querySelector('.ag-name').value,
+          phone: r.querySelector('.ag-phone').value,
+          city: r.querySelector('.ag-city').value,
+          tier: r.querySelector('.ag-tier').value,
+          status: r.querySelector('.ag-status').value
+        });
       });
-
-      const pkgId = document.getElementById('editingPackageId').value;
-
-      const payload = {
-        action: pkgId ? 'updatePackage' : 'addPackage',
-        id: pkgId,
-        title: document.getElementById('pkgTitle').value.trim(),
-        destination: document.getElementById('pkgDestination').value.trim(),
-        region: document.getElementById('pkgRegion').value,
-        duration: document.getElementById('pkgDuration').value.trim(),
-        b2bPrice: document.getElementById('pkgPrice').value.trim(),
-        travelDates: document.getElementById('pkgDates').value.trim(),
-        inclusions: document.getElementById('pkgInclusions').value.trim(),
-        exclusions: document.getElementById('pkgExclusions').value.trim(),
-        itineraryLink: document.getElementById('pkgItineraryLink').value.trim(),
-        terms: document.getElementById('pkgTerms').value.trim(),
-        itinerary: document.getElementById('pkgItinerary').value.trim(),
-        ratesGrid: JSON.stringify(rateGridArr)
-      };
-
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-
-        if (data.success) {
-          alert(data.message || "Package saved successfully!");
-          resetForm();
-          fetchAdminPackages();
-        } else {
-          alert("Error: " + (data.message || "Failed to save package"));
-        }
-      } catch (err) {
-        alert("Connection error. Could not save package.");
-      } finally {
-        btn.disabled = false;
-        btn.classList.remove('opacity-50');
-      }
+      localStorage.setItem('ja_backend_agents', JSON.stringify(agents));
+      alert('B2B Agent Directory saved!');
     }
 
-    async function togglePackageStatus(id, currentStatus) {
-      const newStatus = currentStatus === 'PAUSED' ? 'OPEN' : 'PAUSED';
-      if (!confirm(`Are you sure you want to set status to ${newStatus}?`)) return;
-
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'updatePackageStatus', id: id, status: newStatus })
-        });
-        const data = await res.json();
-        if (data.success) {
-          fetchAdminPackages();
-        } else {
-          alert("Failed to update status");
-        }
-      } catch (e) {
-        alert("Connection error");
+    function loadBackendAgents() {
+      const saved = localStorage.getItem('ja_backend_agents');
+      if (saved) {
+        try {
+          const agents = JSON.parse(saved);
+          if (agents.length > 0) {
+            document.getElementById('agentsTableBody').innerHTML = '';
+            agents.forEach(a => addAgentRow(a.name, a.phone, a.city, a.tier, a.status));
+            return;
+          }
+        } catch(e) {}
       }
-    }
-
-    async function deletePackage(id) {
-      if (!confirm("Are you sure you want to permanently DELETE this package?")) return;
-
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'deletePackage', id: id })
-        });
-        const data = await res.json();
-        if (data.success) {
-          alert("Package deleted!");
-          fetchAdminPackages();
-        } else {
-          alert("Failed to delete package");
-        }
-      } catch (e) {
-        alert("Connection error");
-      }
+      addAgentRow('Lucky Travels Lucknow', '9919382999', 'Lucknow', 'Gold Tier', 'Active');
     }
   </script>
 </body>
