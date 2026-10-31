@@ -186,22 +186,40 @@
 
       let itineraryHtml = '';
       try {
-        const itineraryData = typeof p.itinerary === 'string' ? JSON.parse(p.itinerary) : p.itinerary;
+        let itineraryData = p.itinerary;
+        if (typeof itineraryData === 'string' && itineraryData.trim() !== '') {
+          try { itineraryData = JSON.parse(itineraryData); } catch(err) {}
+        }
+
         if (Array.isArray(itineraryData) && itineraryData.length > 0) {
-          itineraryHtml = itineraryData.map((day, idx) => `
-            <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1 mb-3">
-              <h4 class="text-xs font-black uppercase text-blue-900 flex items-center gap-2">
-                <span class="w-6 h-6 bg-blue-600 text-white rounded-lg flex items-center justify-center text-[10px] font-bold">${idx + 1}</span>
-                ${day.title || ('Day ' + (idx + 1))}
-              </h4>
-              <p class="text-xs font-medium text-slate-700 pl-8 leading-relaxed whitespace-pre-line">${day.desc || ''}</p>
-            </div>
-          `).join('');
-        } else {
-          itineraryHtml = `<div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line">${p.itinerary || 'Custom day-wise itinerary will be provided upon booking.'}</div>`;
+          let dayRows = '';
+          itineraryData.forEach((day, idx) => {
+            if (day && ((day.title && day.title.trim() !== '') || (day.desc && day.desc.trim() !== ''))) {
+              dayRows += `
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1 mb-3">
+                  <h4 class="text-xs font-black uppercase text-blue-900 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-600 text-white rounded-lg flex items-center justify-center text-[10px] font-bold">${idx + 1}</span>
+                    ${day.title || ('Day ' + (idx + 1))}
+                  </h4>
+                  <p class="text-xs font-medium text-slate-700 pl-8 leading-relaxed whitespace-pre-line">${day.desc || ''}</p>
+                </div>
+              `;
+            }
+          });
+
+          if (dayRows !== '') {
+            itineraryHtml = `
+              <div>
+                <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+                  <i class="fa-solid fa-route text-blue-600"></i> Tour Itinerary Details
+                </h3>
+                ${dayRows}
+              </div>
+            `;
+          }
         }
       } catch (e) {
-        itineraryHtml = `<div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line">${p.itinerary || 'Custom day-wise itinerary will be provided upon booking.'}</div>`;
+        itineraryHtml = '';
       }
 
       const inclusionsList = formatAsList(p.inclusions, 'fa-solid fa-circle-check text-emerald-600', 'text-slate-800');
