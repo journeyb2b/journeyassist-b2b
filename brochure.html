@@ -3,771 +3,286 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Operations Control | Journey Assist</title>
+  <title>B2B Tour Brochure | Journey Assist</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; }
+    }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen pb-12">
+<body class="bg-slate-100 min-h-screen text-slate-900 pb-12">
 
-  <!-- HEADER -->
-  <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-white">
-          <i class="fa-solid fa-user-shield"></i>
-        </div>
-        <h1 class="text-lg font-black tracking-tight text-white">Journey Assist <span class="text-xs text-amber-400 font-semibold uppercase">Admin Panel</span></h1>
-      </div>
-      <a href="index.html" class="text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5">
-        <i class="fa-solid fa-globe"></i> View B2B Portal
+  <!-- PRINT / ACTION BAR -->
+  <div class="no-print bg-slate-900 text-white py-3 px-4 sticky top-0 z-50 shadow-md">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="text-xs font-bold text-slate-300 hover:text-white flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
       </a>
-    </div>
-  </header>
-
-  <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
-
-    <!-- ADD / EDIT PACKAGE FORM -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage compact multi-duration rate grids, image preview, and live brochure preview.</p>
-        </div>
-        <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition cursor-pointer">
-          <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
+      <div class="flex items-center gap-3">
+        <button onclick="window.print()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-extrabold transition flex items-center gap-2">
+          <i class="fa-solid fa-print"></i> Print / Save PDF
         </button>
       </div>
-
-      <form id="packageForm" onsubmit="handleFormSubmit(event)" class="space-y-5 text-xs font-bold text-slate-300">
-        <input type="hidden" id="editingPackageId" value="">
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Package Title *</label>
-            <input type="text" id="pkgTitle" required placeholder="e.g. Kerala Winter FIT — Early Bird Offer" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Destination *</label>
-            <input type="text" id="pkgDestination" required placeholder="e.g. Kerala" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Region *</label>
-            <select id="pkgRegion" required class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-              <option value="domestic">Domestic</option>
-              <option value="international">International</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Duration Range *</label>
-            <input type="text" id="pkgDuration" required placeholder="e.g. 3N/4D to 7N/8D" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Starting Price *</label>
-            <input type="text" id="pkgPrice" required placeholder="e.g. ₹13,450/person" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Booking / Travel Validity</label>
-            <input type="text" id="pkgDates" placeholder="e.g. Until 31 October 2026" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-        </div>
-
-        <!-- BANNER IMAGE URL WITH PREVIEW -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Banner Image URL *</label>
-            <input type="text" id="pkgImageUrl" oninput="updateImagePreview()" placeholder="e.g. https://images.unsplash.com/..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Terms & Conditions / Policy (Line-wise)</label>
-            <textarea id="pkgTerms" rows="3" placeholder="Child rates applicable for 6–11 years&#10;50% advance upon booking confirmation" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
-          </div>
-        </div>
-
-        <!-- IMAGE PREVIEW CONTAINER -->
-        <div id="imgPreviewWrapper" class="hidden bg-slate-900 p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
-          <img id="imgPreview" src="" alt="Banner Preview" class="w-24 h-16 object-cover rounded-xl border border-slate-700 shadow">
-          <div>
-            <p class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i> Banner Image Preview Loaded</p>
-            <p class="text-[10px] text-slate-400">Yeh image brochure aur package card par banner ki tarah dikhegi.</p>
-          </div>
-        </div>
-
-        <!-- DYNAMIC ITINERARY DOCUMENT LINKS -->
-        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-black uppercase text-blue-400 flex items-center gap-2">
-              <i class="fa-solid fa-link"></i> Custom Itinerary Document Links
-            </span>
-            <button type="button" onclick="addItineraryLinkRow()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
-              <i class="fa-solid fa-plus"></i> Add Link Tab
-            </button>
-          </div>
-          <p class="text-[11px] text-slate-400 font-normal">Yahan Google Docs, Drive link, ya koi bhi document URL paste karein.</p>
-          <div id="itineraryLinksContainer" class="space-y-2"></div>
-        </div>
-
-        <!-- INCLUSIONS & EXCLUSIONS LINE-WISE -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Inclusions (Line-wise) *</label>
-            <textarea id="pkgInclusions" rows="3" required placeholder="Accommodation&#10;Daily breakfast&#10;Private Cab Transfers" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
-          </div>
-          <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions (Line-wise) *</label>
-            <textarea id="pkgExclusions" rows="3" required placeholder="Air / Train fares&#10;Personal expenses&#10;Lunch & Dinner" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
-          </div>
-        </div>
-
-        <!-- COMPACT RATE GRID BUILDER -->
-        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks (Compact)
-              </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har duration ke liye compact hotel rates aur editable headers configure karein.</p>
-            </div>
-            <button type="button" onclick="addDurationBlock()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
-              <i class="fa-solid fa-plus"></i> Add Duration Block
-            </button>
-          </div>
-
-          <div id="builderBlocksContainer" class="space-y-6"></div>
-        </div>
-
-        <!-- DYNAMIC DAY-WISE ITINERARY BUILDER -->
-        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
-          <div class="flex items-center justify-between">
-            <div>
-              <span class="text-xs font-black uppercase text-emerald-400 flex items-center gap-2">
-                <i class="fa-solid fa-route"></i> Day-Wise Tour Itinerary Builder
-              </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har din ka title aur uska description alag-alag add karein.</p>
-            </div>
-            <button type="button" onclick="addItineraryDayRow()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
-              <i class="fa-solid fa-plus"></i> Add Day Itinerary
-            </button>
-          </div>
-
-          <div id="itineraryDaysContainer" class="space-y-3"></div>
-        </div>
-
-        <!-- ACTION BUTTONS: PREVIEW & PUBLISH -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-          <button type="button" onclick="openLivePreviewModal()" class="sm:col-span-1 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
-            <i class="fa-solid fa-eye text-base"></i> Preview Package & Brochure
-          </button>
-
-          <button type="submit" id="btnSubmitForm" class="sm:col-span-2 py-4 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
-            <i class="fa-solid fa-cloud-arrow-up text-amber-300"></i>
-            <span id="btnSubmitText">Publish Package To Google Sheet</span>
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <!-- LIVE PACKAGES TABLE -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-black text-white">Live Database Packages</h3>
-        <button onclick="fetchAdminPackages()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 rounded-xl border border-slate-800 transition cursor-pointer">
-          <i class="fa-solid fa-rotate-right mr-1"></i> Refresh Table
-        </button>
-      </div>
-
-      <div class="overflow-x-auto w-full">
-        <table class="w-full text-left text-xs border-collapse min-w-[750px]">
-          <thead>
-            <tr class="bg-slate-900 text-slate-400 uppercase font-extrabold border-b border-slate-800">
-              <th class="p-3 w-36 text-center bg-blue-900/40 text-amber-300 border-r border-slate-800">ACTIONS</th>
-              <th class="p-3">ID</th>
-              <th class="p-3">Title & Dest</th>
-              <th class="p-3">Duration</th>
-              <th class="p-3">Price</th>
-              <th class="p-3">Status</th>
-            </tr>
-          </thead>
-          <tbody id="adminPackagesTable" class="divide-y divide-slate-800">
-            <tr>
-              <td colspan="6" class="p-8 text-center text-slate-500 font-bold">Loading live packages...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- LIVE PREVIEW MODAL -->
-  <div id="previewModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white text-slate-900 w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-y-auto border border-slate-200">
-      <div class="sticky top-0 bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800 z-10">
-        <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-          <i class="fa-solid fa-eye"></i> Live Package Brochure Preview
-        </span>
-        <button onclick="closeLivePreviewModal()" class="text-slate-400 hover:text-white text-lg font-bold">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div id="modalPreviewContent" class="p-6 sm:p-8 space-y-6"></div>
     </div>
   </div>
 
+  <!-- MAIN BROCHURE CARD -->
+  <main class="max-w-4xl mx-auto mt-6 bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden" id="brochureContainer">
+    <div class="p-12 text-center text-slate-400 font-bold text-sm">
+      <i class="fa-solid fa-spinner fa-spin text-2xl text-blue-600 mb-3"></i><br>
+      Loading dynamic brochure details...
+    </div>
+  </main>
+
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCd7Xe2Sns5ZdIme5ZHXRIv3gl4O5abhKWivfBFACmUOMSH1BmSa3y1oAkUFKByS0QkQ/exec";
-    let adminPackages = [];
 
     window.onload = function() {
-      fetchAdminPackages();
-      addItineraryLinkRow('3N/4D Detailed Itinerary', 'https://docs.google.com/document/d/1WDYfzuIl1Zvo2pbqvmQofi6g-s4gdhsnH__mQB9MvQA/edit?tab=t.0');
-      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-      addItineraryDayRow("Day 1: Arrival Cochin -> Transfer Munnar", "Meet & greet on arrival -> Direct drive to Munnar -> Check-in at hotel.");
-    };
+      const urlParams = new URLSearchParams(window.location.search);
+      const pkgId = urlParams.get('id');
 
-    function updateImagePreview() {
-      const url = document.getElementById('pkgImageUrl').value.trim();
-      const wrapper = document.getElementById('imgPreviewWrapper');
-      const img = document.getElementById('imgPreview');
-
-      if (url) {
-        img.src = url;
-        wrapper.classList.remove('hidden');
-      } else {
-        wrapper.classList.add('hidden');
-      }
-    }
-
-    function addItineraryLinkRow(title = 'View Detailed Itinerary', url = '') {
-      const container = document.getElementById('itineraryLinksContainer');
-      const rowId = 'it-row-' + Date.now() + Math.floor(Math.random() * 1000);
-      const div = document.createElement('div');
-      div.id = rowId;
-      div.className = 'flex items-center gap-2';
-      div.innerHTML = `
-        <input type="text" placeholder="Tab Name (e.g. 3N/4D Detailed Itinerary)" value="${title}" class="it-title w-1/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
-        <input type="text" placeholder="Google Doc / Drive Link" value="${url}" class="it-url w-2/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
-        <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-xl transition text-xs cursor-pointer">
-          <i class="fa-solid fa-trash"></i>
-        </button>
-      `;
-      container.appendChild(div);
-    }
-
-    function addItineraryDayRow(dayTitle = "Day 1: Arrival & Transfer", dayDesc = "Arrival at airport/station -> Transfer to hotel -> Evening at leisure.") {
-      const container = document.getElementById('itineraryDaysContainer');
-      const rowId = 'it-day-' + Date.now() + Math.floor(Math.random() * 1000);
-
-      const div = document.createElement('div');
-      div.id = rowId;
-      div.className = 'itinerary-day-row bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2';
-      div.innerHTML = `
-        <div class="flex items-center gap-2">
-          <input type="text" placeholder="Day Title (e.g. Day 1: Arrival Cochin)" value="${dayTitle}" class="it-day-title w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-black focus:border-emerald-500 focus:outline-none">
-          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs cursor-pointer">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-        <textarea rows="2" placeholder="Detailed description for this day..." class="it-day-desc w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-medium focus:border-emerald-500 focus:outline-none">${dayDesc}</textarea>
-      `;
-      container.appendChild(div);
-    }
-
-    function addDurationBlock(title = "3N/4D Package", subtitle = "2 Nights Munnar + 1 Night Kochi", initialRows = null, headers = null) {
-      const container = document.getElementById('builderBlocksContainer');
-      const blockId = 'blk-' + Date.now() + Math.floor(Math.random() * 1000);
-
-      const h1 = headers ? headers.h1 : "2 Pax CP";
-      const h2 = headers ? headers.h2 : "2 Pax MAP";
-      const h3 = headers ? headers.h3 : "4 Pax CP";
-      const h4 = headers ? headers.h4 : "4 Pax MAP";
-      const h5 = headers ? headers.h5 : "Ex. Bed CP";
-      const h6 = headers ? headers.h6 : "Ex. Bed MAP";
-      const h7 = headers ? headers.h7 : "Child CP";
-      const h8 = headers ? headers.h8 : "Child MAP";
-
-      const div = document.createElement('div');
-      div.id = blockId;
-      div.className = 'duration-block bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden space-y-3 pb-4';
-      div.innerHTML = `
-        <div class="bg-blue-600 px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-white">
-          <div class="flex items-center gap-3">
-            <input type="text" value="${title}" class="b-title bg-blue-700 px-3 py-1 rounded-lg font-black text-xs text-white border border-blue-500 w-36 outline-none">
-            <span class="text-xs font-bold text-blue-100 uppercase">Rate Grid Block</span>
+      if (!pkgId) {
+        document.getElementById('brochureContainer').innerHTML = `
+          <div class="p-12 text-center text-rose-500 font-bold text-sm">
+            No package ID provided in the link. Please select a package from dashboard.
           </div>
-          <div class="flex items-center gap-2">
-            <input type="text" value="${subtitle}" placeholder="Subtitle" class="b-sub bg-blue-700 px-3 py-1 rounded-lg font-bold text-xs text-white border border-blue-500 w-72 outline-none">
-            <button type="button" onclick="document.getElementById('${blockId}').remove()" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs cursor-pointer"><i class="fa-solid fa-trash"></i></button>
-          </div>
-        </div>
-        <div class="px-3 overflow-x-auto">
-          <table class="w-full text-left text-xs min-w-[1100px] border-collapse">
-            <thead>
-              <tr class="text-slate-400 uppercase text-[10px] border-b border-slate-800 font-extrabold bg-slate-900">
-                <th class="p-1.5 w-28">Hotel Plan</th>
-                <th class="p-1.5 w-24">Category</th>
-                <th class="p-1.5"><input type="text" value="${h1}" class="th-h1 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h2}" class="th-h2 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h3}" class="th-h3 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h4}" class="th-h4 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h5}" class="th-h5 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h6}" class="th-h6 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h7}" class="th-h7 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h8}" class="th-h8 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5 text-center w-12">Action</th>
-              </tr>
-            </thead>
-            <tbody class="b-rows-container divide-y divide-slate-800/60"></tbody>
-          </table>
-          <button type="button" onclick="addRateRow('${blockId}')" class="mt-3 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-amber-300 rounded-xl text-xs font-bold cursor-pointer transition flex items-center gap-1">
-            <i class="fa-solid fa-plus"></i> Add Hotel Plan Row
-          </button>
-        </div>
-      `;
-      container.appendChild(div);
-
-      if (initialRows && Array.isArray(initialRows)) {
-        initialRows.forEach(r => addRateRow(blockId, r.plan, r.cat, r.v1, r.v2, r.v3, r.v4, r.v5, r.v6, r.v7, r.v8));
-      } else {
-        addRateRow(blockId, "Munnar", "Standard", "11,450", "13,450", "9,950", "11,950", "5,450", "6,450", "4,500", "5,500");
-      }
-    }
-
-    function addRateRow(blockId, plan="Munnar", cat="Standard", v1="", v2="", v3="", v4="", v5="", v6="", v7="", v8="") {
-      const block = document.getElementById(blockId);
-      const tbody = block.querySelector('.b-rows-container');
-      const rowId = 'r-' + Date.now() + Math.floor(Math.random() * 1000);
-
-      const tr = document.createElement('tr');
-      tr.id = rowId;
-      tr.className = 'rate-row hover:bg-slate-900/50 transition';
-      tr.innerHTML = `
-        <td class="p-1"><input type="text" value="${plan}" class="r-plan w-full px-2 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1">
-          <select class="r-cat w-full px-1 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]">
-            <option value="Standard" ${cat==='Standard'?'selected':''}>Standard</option>
-            <option value="Deluxe" ${cat==='Deluxe'?'selected':''}>Deluxe</option>
-            <option value="Premium" ${cat==='Premium'?'selected':''}>Premium</option>
-            <option value="Luxury" ${cat==='Luxury'?'selected':''}>Luxury</option>
-          </select>
-        </td>
-        <td class="p-1"><input type="text" value="${v1}" class="r-v1 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v2}" class="r-v2 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v3}" class="r-v3 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v4}" class="r-v4 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v5}" class="r-v5 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v6}" class="r-v6 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v7}" class="r-v7 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v8}" class="r-v8 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1 text-center">
-          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-[11px] cursor-pointer"><i class="fa-solid fa-trash"></i></button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    }
-
-    async function fetchAdminPackages() {
-      try {
-        const response = await fetch(`${SCRIPT_URL}?action=getPackages`);
-        const data = await response.json();
-        const pkgs = data.packages || (Array.isArray(data) ? data : []);
-        adminPackages = pkgs;
-        renderAdminTable(adminPackages);
-      } catch (err) {
-        document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">Error connecting to database. Please refresh.</td></tr>`;
-      }
-    }
-
-    function renderAdminTable(pkgs) {
-      const tbody = document.getElementById('adminPackagesTable');
-      if (!pkgs || pkgs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500 font-bold">No packages in database.</td></tr>`;
+        `;
         return;
       }
 
-      let html = '';
-      pkgs.forEach((p, index) => {
-        const status = (p.status || "OPEN").toUpperCase();
-        const statusBadge = status === "PAUSED" 
-          ? `<span class="px-2 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black uppercase rounded-md">PAUSED</span>`
-          : `<span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black uppercase rounded-md">OPEN</span>`;
+      fetchPackageData(pkgId);
+    };
 
-        html += `
-          <tr class="hover:bg-slate-900/60 transition border-b border-slate-800">
-            <td class="p-3 text-center bg-slate-950 border-r border-slate-800">
-              <div class="flex items-center justify-center gap-1.5">
-                <button onclick="editPackage(${index})" title="Edit Package" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-black rounded-lg shadow transition cursor-pointer">
-                  <i class="fa-solid fa-pen"></i> Edit
-                </button>
-                <button onclick="deletePackage('${p.id}')" title="Delete Package" class="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-black rounded-lg shadow transition cursor-pointer">
-                  <i class="fa-solid fa-trash"></i> Delete
-                </button>
-              </div>
-            </td>
-            <td class="p-3 font-mono font-bold text-slate-400">${p.id}</td>
-            <td class="p-3">
-              <p class="font-black text-white text-xs">${p.title}</p>
-              <p class="text-[10px] font-bold text-slate-400">${p.destination} (${p.region})</p>
-            </td>
-            <td class="p-3 font-bold text-slate-300">${p.duration}</td>
-            <td class="p-3 font-black text-blue-400">${p.b2bPrice}</td>
-            <td class="p-3">${statusBadge}</td>
-          </tr>
+    async function fetchPackageData(id) {
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=getPackage&id=${encodeURIComponent(id)}`);
+        const data = await response.json();
+
+        if (data.success && data.package) {
+          renderBrochure(data.package);
+        } else {
+          document.getElementById('brochureContainer').innerHTML = `
+            <div class="p-12 text-center text-rose-500 font-bold text-sm">
+              Package details not found for ID: ${id}
+            </div>
+          `;
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById('brochureContainer').innerHTML = `
+          <div class="p-12 text-center text-rose-500 font-bold text-sm">
+            Error loading brochure data. Please check your network connection.
+          </div>
         `;
-      });
-
-      tbody.innerHTML = html;
+      }
     }
 
-    function editPackage(index) {
-      const p = adminPackages[index];
-      if (!p) return;
+    function formatAsList(text, iconClass, itemColorClass) {
+      if (!text) return '<p class="text-xs text-slate-400 font-medium">N/A</p>';
+      const lines = text.split('\n').filter(line => line.trim() !== '');
+      if (lines.length === 0) return '<p class="text-xs text-slate-400 font-medium">N/A</p>';
+      
+      return `
+        <ul class="space-y-1.5 text-xs font-semibold ${itemColorClass}">
+          ${lines.map(l => `
+            <li class="flex items-start gap-2">
+              <i class="${iconClass} mt-0.5 text-[11px] shrink-0"></i>
+              <span>${l.trim()}</span>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    }
 
-      document.getElementById('editingPackageId').value = p.id;
-      document.getElementById('pkgTitle').value = p.title || '';
-      document.getElementById('pkgDestination').value = p.destination || '';
-      document.getElementById('pkgRegion').value = (p.region || 'domestic').toLowerCase();
-      document.getElementById('pkgDuration').value = p.duration || '';
-      document.getElementById('pkgPrice').value = p.b2bPrice || '';
-      document.getElementById('pkgDates').value = p.travelDates || '';
-      document.getElementById('pkgInclusions').value = p.inclusions || '';
-      document.getElementById('pkgExclusions').value = p.exclusions || '';
-      document.getElementById('pkgImageUrl').value = p.imageUrl || '';
-      updateImagePreview();
-      document.getElementById('pkgTerms').value = p.terms || '';
-
-      document.getElementById('itineraryLinksContainer').innerHTML = '';
+    function renderBrochure(p) {
+      let rateGridsHtml = '';
       try {
-        const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
-        if (Array.isArray(links) && links.length > 0) {
-          links.forEach(l => addItineraryLinkRow(l.title, l.url));
+        const gridBlocks = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
+        
+        if (Array.isArray(gridBlocks) && gridBlocks.length > 0) {
+          gridBlocks.forEach(blk => {
+            const h = blk.headers || {
+              h1: "2 Pax CP", h2: "2 Pax MAP", 
+              h3: "4 Pax CP", h4: "4 Pax MAP",
+              h5: "Ex. Bed CP", h6: "Ex. Bed MAP", 
+              h7: "Child CP", h8: "Child MAP"
+            };
+
+            let rowsHtml = '';
+            if (blk.rows && blk.rows.length > 0) {
+              blk.rows.forEach(r => {
+                rowsHtml += `
+                  <tr class="hover:bg-slate-50 font-medium">
+                    <td class="p-2 border border-slate-200 font-bold text-slate-800">${r.plan || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.cat || 'Standard'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v1 || '-'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v2 || '-'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v3 || '-'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v4 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v5 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v6 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v7 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v8 || '-'}</td>
+                  </tr>
+                `;
+              });
+            } else {
+              rowsHtml = `<tr><td colspan="10" class="p-4 text-center text-slate-500 font-bold">No rate rows added in this block.</td></tr>`;
+            }
+
+            rateGridsHtml += `
+              <div class="mb-6 bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-200 pb-3">
+                  <h4 class="text-sm font-black text-blue-900 uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-days text-blue-600"></i> ${blk.title || 'Package Duration'}
+                  </h4>
+                  <p class="text-xs font-bold text-slate-600">${blk.subtitle || ''}</p>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left text-xs border-collapse border border-slate-200 min-w-[1100px]">
+                    <thead>
+                      <tr class="bg-blue-900 text-white font-extrabold uppercase text-[10px]">
+                        <th class="p-2 border border-slate-300 w-28">Hotel Plan</th>
+                        <th class="p-2 border border-slate-300 w-24">Category</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h1}</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h2}</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h3}</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h4}</th>
+                        <th class="p-2 border border-slate-300">${h.h5}</th>
+                        <th class="p-2 border border-slate-300">${h.h6}</th>
+                        <th class="p-2 border border-slate-300">${h.h7}</th>
+                        <th class="p-2 border border-slate-300">${h.h8}</th>
+                      </tr>
+                    </thead>
+                    <tbody>${rowsHtml}</tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          rateGridsHtml = `<p class="text-xs font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200 mt-2">${p.b2bPrice || 'Rates available on request'}</p>`;
+        }
+      } catch (e) {
+        rateGridsHtml = `<p class="text-xs font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200 mt-2">${p.b2bPrice || 'Rates available on request'}</p>`;
+      }
+
+      let pdfLinksHtml = '';
+      try {
+        const pdfLinks = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
+        if (Array.isArray(pdfLinks) && pdfLinks.length > 0) {
+          pdfLinksHtml = `
+            <div class="bg-blue-50/60 border border-blue-200/80 p-4 rounded-2xl space-y-2">
+              <p class="text-xs font-black text-blue-900 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-link text-blue-600"></i> Official Itinerary Documents
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1">
+                ${pdfLinks.map(l => `
+                  <a href="${l.url || '#'}" target="_blank" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-sm border border-blue-500">
+                    <span>${l.title || 'View Detailed Itinerary'}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
+                  </a>
+                `).join('')}
+              </div>
+            </div>
+          `;
         }
       } catch (e) {}
 
-      document.getElementById('itineraryDaysContainer').innerHTML = '';
+      let itineraryHtml = '';
       try {
         const itineraryData = typeof p.itinerary === 'string' ? JSON.parse(p.itinerary) : p.itinerary;
         if (Array.isArray(itineraryData) && itineraryData.length > 0) {
-          itineraryData.forEach(d => addItineraryDayRow(d.title, d.desc));
+          itineraryHtml = itineraryData.map((day, idx) => `
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-1 mb-3">
+              <h4 class="text-xs font-black uppercase text-blue-900 flex items-center gap-2">
+                <span class="w-6 h-6 bg-blue-600 text-white rounded-lg flex items-center justify-center text-[10px] font-bold">${idx + 1}</span>
+                ${day.title || ('Day ' + (idx + 1))}
+              </h4>
+              <p class="text-xs font-medium text-slate-700 pl-8 leading-relaxed whitespace-pre-line">${day.desc || ''}</p>
+            </div>
+          `).join('');
         } else {
-          addItineraryDayRow("Day 1: Tour Overview", p.itinerary || "Detailed itinerary upon booking.");
+          itineraryHtml = `<div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line">${p.itinerary || 'Custom day-wise itinerary will be provided upon booking.'}</div>`;
         }
       } catch (e) {
-        addItineraryDayRow("Day 1: Tour Overview", p.itinerary || "Detailed itinerary upon booking.");
+        itineraryHtml = `<div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line">${p.itinerary || 'Custom day-wise itinerary will be provided upon booking.'}</div>`;
       }
 
-      const builderContainer = document.getElementById('builderBlocksContainer');
-      builderContainer.innerHTML = '';
-      try {
-        const gridBlocks = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
-        if (Array.isArray(gridBlocks) && gridBlocks.length > 0) {
-          gridBlocks.forEach(blk => {
-            addDurationBlock(blk.title || 'Package', blk.subtitle || '', blk.rows || [], blk.headers || null);
-          });
-        } else {
-          addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-        }
-      } catch (e) {
-        addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-      }
+      const inclusionsList = formatAsList(p.inclusions, 'fa-solid fa-circle-check text-emerald-600', 'text-slate-800');
+      const exclusionsList = formatAsList(p.exclusions, 'fa-solid fa-circle-xmark text-rose-600', 'text-slate-800');
+      const termsList = formatAsList(p.terms, 'fa-solid fa-angle-right text-blue-600', 'text-slate-700');
 
-      document.getElementById('formHeading').innerText = `Edit Package (${p.id})`;
-      document.getElementById('btnSubmitText').innerText = "Update Package In Google Sheet";
-      document.getElementById('btnResetForm').classList.remove('hidden');
+      const bannerImgUrl = p.imageUrl || 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944';
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function resetForm() {
-      document.getElementById('editingPackageId').value = '';
-      document.getElementById('packageForm').reset();
-      document.getElementById('imgPreviewWrapper').classList.add('hidden');
-      document.getElementById('itineraryLinksContainer').innerHTML = '';
-      document.getElementById('itineraryDaysContainer').innerHTML = '';
-      document.getElementById('builderBlocksContainer').innerHTML = '';
-      addItineraryLinkRow('3N/4D Detailed Itinerary', 'https://docs.google.com/document/d/1WDYfzuIl1Zvo2pbqvmQofi6g-s4gdhsnH__mQB9MvQA/edit?tab=t.0');
-      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-      addItineraryDayRow("Day 1: Arrival Cochin -> Transfer Munnar", "Meet & greet on arrival -> Direct drive to Munnar -> Check-in at hotel.");
-      document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
-      document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
-      document.getElementById('btnResetForm').classList.add('hidden');
-    }
-
-    function openLivePreviewModal() {
-      const title = document.getElementById('pkgTitle').value || 'Sample Package Title';
-      const dest = document.getElementById('pkgDestination').value || 'Destination';
-      const region = document.getElementById('pkgRegion').value || 'domestic';
-      const duration = document.getElementById('pkgDuration').value || '3N/4D';
-      const price = document.getElementById('pkgPrice').value || '₹0';
-      const imageUrl = document.getElementById('pkgImageUrl').value || 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944';
-      const inclusions = document.getElementById('pkgInclusions').value || 'Standard Inclusions';
-      const exclusions = document.getElementById('pkgExclusions').value || 'Standard Exclusions';
-      const terms = document.getElementById('pkgTerms').value || 'Standard Terms';
-
-      const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
-      let linksHtml = '';
-      linkRows.forEach(r => {
-        const t = r.querySelector('.it-title').value.trim();
-        const u = r.querySelector('.it-url').value.trim();
-        if (t || u) {
-          linksHtml += `
-            <a href="${u || '#'}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white font-bold text-xs rounded-xl mr-2 mb-2 hover:bg-blue-700 transition">
-              <span>${t || 'View Detailed Itinerary'}</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
-            </a>
-          `;
-        }
-      });
-
-      const dayRows = document.querySelectorAll('.itinerary-day-row');
-      let itineraryHtml = '';
-      dayRows.forEach((r, idx) => {
-        const dt = r.querySelector('.it-day-title').value || ('Day ' + (idx + 1));
-        const dd = r.querySelector('.it-day-desc').value || '';
-        itineraryHtml += `
-          <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl mb-2">
-            <h5 class="font-black text-blue-900 text-xs uppercase">${dt}</h5>
-            <p class="text-xs text-slate-600 mt-1 whitespace-pre-line">${dd}</p>
+      document.getElementById('brochureContainer').innerHTML = `
+        <!-- BROCHURE BANNER HEADER -->
+        <div class="relative min-h-[220px] bg-slate-900 text-white p-8 sm:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b-4 border-amber-400 overflow-hidden">
+          <img src="${bannerImgUrl}" class="absolute inset-0 w-full h-full object-cover opacity-40 z-0" alt="Banner Image">
+          <div class="relative z-10">
+            <span class="px-3 py-1 rounded-full bg-blue-600/60 backdrop-blur-md border border-blue-400/40 text-amber-300 text-[10px] font-black uppercase tracking-wider">${p.destination || 'Destination Tour'} (${p.region || 'Domestic'})</span>
+            <h1 class="text-2xl sm:text-4xl font-black mt-2 tracking-tight">${p.title || 'Holiday Package'}</h1>
+            <p class="text-xs font-bold text-slate-200 mt-1"><i class="fa-regular fa-clock text-amber-400 mr-1"></i> Duration: ${p.duration || 'Flexible'}</p>
           </div>
-        `;
-      });
+          <div class="relative z-10 text-left sm:text-right bg-slate-900/80 backdrop-blur-md p-4 rounded-2xl border border-slate-700">
+            <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Starting Net Rate</p>
+            <p class="text-2xl sm:text-3xl font-black text-amber-400">${p.b2bPrice || 'On Request'}</p>
+            <p class="text-[9px] text-slate-400 uppercase font-extrabold mt-0.5">B2B Agent Price</p>
+          </div>
+        </div>
 
-      const blocks = document.querySelectorAll('.duration-block');
-      let gridsHtml = '';
-      blocks.forEach(blk => {
-        const bTitle = blk.querySelector('.b-title').value || 'Package';
-        const bSub = blk.querySelector('.b-sub').value || '';
-        const h1 = blk.querySelector('.th-h1').value;
-        const h2 = blk.querySelector('.th-h2').value;
-        const h3 = blk.querySelector('.th-h3').value;
-        const h4 = blk.querySelector('.th-h4').value;
-        const h5 = blk.querySelector('.th-h5').value;
-        const h6 = blk.querySelector('.th-h6').value;
-        const h7 = blk.querySelector('.th-h7').value;
-        const h8 = blk.querySelector('.th-h8').value;
+        <div class="p-8 sm:p-10 space-y-8">
+          ${pdfLinksHtml}
 
-        let rowsHtml = '';
-        blk.querySelectorAll('.rate-row').forEach(r => {
-          rowsHtml += `
-            <tr class="border-b border-slate-100 text-[11px]">
-              <td class="p-1.5 font-bold">${r.querySelector('.r-plan').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-cat').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v1').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v2').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v3').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v4').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v5').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v6').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v7').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v8').value}</td>
-            </tr>
-          `;
-        });
-
-        gridsHtml += `
-          <div class="mb-4 bg-slate-50 border border-slate-200 rounded-xl p-3">
-            <h5 class="font-black text-blue-900 text-xs uppercase">${bTitle} — <span class="font-medium text-slate-500">${bSub}</span></h5>
-            <div class="overflow-x-auto mt-2">
-              <table class="w-full text-left text-[10px] min-w-[850px]">
-                <thead class="bg-blue-900 text-white">
-                  <tr>
-                    <th class="p-1">Hotel Plan</th><th class="p-1">Category</th>
-                    <th class="p-1 text-amber-300">${h1}</th><th class="p-1 text-amber-300">${h2}</th>
-                    <th class="p-1 text-amber-300">${h3}</th><th class="p-1 text-amber-300">${h4}</th>
-                    <th class="p-1">${h5}</th><th class="p-1">${h6}</th><th class="p-1">${h7}</th><th class="p-1">${h8}</th>
-                  </tr>
-                </thead>
-                <tbody>${rowsHtml}</tbody>
-              </table>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-square-check text-emerald-600 text-sm"></i> Inclusions
+              </p>
+              ${inclusionsList}
+            </div>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+              <p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-square-xmark text-rose-600 text-sm"></i> Exclusions
+              </p>
+              ${exclusionsList}
             </div>
           </div>
-        `;
-      });
-
-      const formatPreviewList = (text) => {
-        if (!text) return '<span>N/A</span>';
-        const lines = text.split('\n').filter(l => l.trim() !== '');
-        return `<ul class="list-disc pl-4 space-y-1">${lines.map(l => `<li>${l}</li>`).join('')}</ul>`;
-      };
-
-      const modalHtml = `
-        <div class="space-y-4">
-          <div class="relative h-44 rounded-2xl overflow-hidden bg-slate-900">
-            <img src="${imageUrl}" class="w-full h-full object-cover opacity-60">
-            <div class="absolute bottom-4 left-4 right-4 text-white">
-              <span class="px-2.5 py-0.5 bg-blue-600 rounded-full text-[10px] font-black uppercase">${dest} (${region})</span>
-              <h2 class="text-2xl font-black mt-1">${title}</h2>
-              <p class="text-xs text-amber-300 font-bold">Duration: ${duration} | Starting: ${price}</p>
-            </div>
-          </div>
-
-          ${linksHtml ? `<div><h4 class="text-xs font-black uppercase text-slate-500 mb-1">Official Itinerary Documents:</h4>${linksHtml}</div>` : ''}
 
           <div>
-            <h4 class="text-xs font-black uppercase text-slate-500 mb-2">Rate Grid Blocks:</h4>
-            ${gridsHtml}
+            <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 flex items-center gap-2 mb-3">
+              <i class="fa-solid fa-table-cells text-blue-600"></i> Multi-Duration Supplier Rate Grids
+            </h3>
+            ${rateGridsHtml}
           </div>
 
-          <div class="grid grid-cols-2 gap-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <div><strong class="text-emerald-600 uppercase block mb-1">Inclusions:</strong> ${formatPreviewList(inclusions)}</div>
-            <div><strong class="text-rose-600 uppercase block mb-1">Exclusions:</strong> ${formatPreviewList(exclusions)}</div>
-          </div>
-
-          <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <strong class="text-blue-700 uppercase block mb-1">Terms & Conditions / Policy:</strong>
-            ${formatPreviewList(terms)}
-          </div>
-
-          <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <strong class="text-slate-700 uppercase block mb-2">Day-Wise Tour Itinerary Details:</strong>
+          <div>
+            <h3 class="text-sm font-black uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-route text-blue-600"></i> Tour Itinerary Details
+            </h3>
             ${itineraryHtml}
+          </div>
+
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+            <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-info text-blue-600 text-sm"></i> Terms & Conditions / Policy
+            </p>
+            ${termsList}
+          </div>
+
+          <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs font-bold text-slate-500 gap-4">
+            <p><i class="fa-solid fa-building text-blue-600 mr-1"></i> Journey Assist B2B Operations</p>
+            <p><i class="fa-solid fa-phone text-blue-600 mr-1"></i> Helpline: +91 9919382999</p>
           </div>
         </div>
       `;
-
-      document.getElementById('modalPreviewContent').innerHTML = modalHtml;
-      document.getElementById('previewModal').classList.remove('hidden');
-    }
-
-    function closeLivePreviewModal() {
-      document.getElementById('previewModal').classList.add('hidden');
-    }
-
-    async function handleFormSubmit(event) {
-      event.preventDefault();
-      const btn = document.getElementById('btnSubmitForm');
-      btn.disabled = true;
-
-      const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
-      const linksArr = [];
-      linkRows.forEach(r => {
-        const title = r.querySelector('.it-title').value.trim();
-        const url = r.querySelector('.it-url').value.trim();
-        if (title || url) {
-          linksArr.push({ title, url });
-        }
-      });
-
-      const dayRows = document.querySelectorAll('.itinerary-day-row');
-      const itineraryArr = [];
-      dayRows.forEach(r => {
-        itineraryArr.push({
-          title: r.querySelector('.it-day-title').value.trim(),
-          desc: r.querySelector('.it-day-desc').value.trim()
-        });
-      });
-
-      const blocks = document.querySelectorAll('.duration-block');
-      const rateGridBlocksArr = [];
-
-      blocks.forEach(blk => {
-        const bTitle = blk.querySelector('.b-title').value.trim();
-        const bSub = blk.querySelector('.b-sub').value.trim();
-        
-        const headersObj = {
-          h1: blk.querySelector('.th-h1').value.trim(),
-          h2: blk.querySelector('.th-h2').value.trim(),
-          h3: blk.querySelector('.th-h3').value.trim(),
-          h4: blk.querySelector('.th-h4').value.trim(),
-          h5: blk.querySelector('.th-h5').value.trim(),
-          h6: blk.querySelector('.th-h6').value.trim(),
-          h7: blk.querySelector('.th-h7').value.trim(),
-          h8: blk.querySelector('.th-h8').value.trim()
-        };
-
-        const rows = blk.querySelectorAll('.rate-row');
-        const rowsArr = [];
-
-        rows.forEach(r => {
-          rowsArr.push({
-            plan: r.querySelector('.r-plan').value.trim(),
-            cat: r.querySelector('.r-cat').value,
-            v1: r.querySelector('.r-v1').value.trim(),
-            v2: r.querySelector('.r-v2').value.trim(),
-            v3: r.querySelector('.r-v3').value.trim(),
-            v4: r.querySelector('.r-v4').value.trim(),
-            v5: r.querySelector('.r-v5').value.trim(),
-            v6: r.querySelector('.r-v6').value.trim(),
-            v7: r.querySelector('.r-v7').value.trim(),
-            v8: r.querySelector('.r-v8').value.trim()
-          });
-        });
-
-        if (bTitle || rowsArr.length > 0) {
-          rateGridBlocksArr.push({
-            title: bTitle || 'Package Block',
-            subtitle: bSub,
-            headers: headersObj,
-            rows: rowsArr
-          });
-        }
-      });
-
-      const pkgId = document.getElementById('editingPackageId').value;
-      const payload = {
-        action: pkgId ? 'updatePackage' : 'addPackage',
-        id: pkgId,
-        title: document.getElementById('pkgTitle').value.trim(),
-        destination: document.getElementById('pkgDestination').value.trim(),
-        region: document.getElementById('pkgRegion').value,
-        duration: document.getElementById('pkgDuration').value.trim(),
-        b2bPrice: document.getElementById('pkgPrice').value.trim(),
-        travelDates: document.getElementById('pkgDates').value.trim(),
-        inclusions: document.getElementById('pkgInclusions').value.trim(),
-        exclusions: document.getElementById('pkgExclusions').value.trim(),
-        imageUrl: document.getElementById('pkgImageUrl').value.trim(),
-        terms: document.getElementById('pkgTerms').value.trim(),
-        itineraryLinks: JSON.stringify(linksArr),
-        itinerary: JSON.stringify(itineraryArr),
-        ratesGrid: JSON.stringify(rateGridBlocksArr)
-      };
-
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data.success) {
-          alert(data.message || "Package saved successfully!");
-          resetForm();
-          fetchAdminPackages();
-        } else {
-          alert("Error: " + (data.message || "Failed"));
-        }
-      } catch (err) {
-        alert("Connection error.");
-      } finally {
-        btn.disabled = false;
-      }
-    }
-
-    async function deletePackage(id) {
-      if (!confirm("Are you sure you want to PERMANENTLY delete this package?")) return;
-
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'deletePackage', id: id })
-        });
-        const data = await res.json();
-        if (data.success) {
-          alert("Package deleted successfully!");
-          fetchAdminPackages();
-        } else {
-          alert("Failed to delete package");
-        }
-      } catch (e) {
-        alert("Connection error");
-      }
     }
   </script>
 </body>
