@@ -437,12 +437,13 @@
       document.getElementById('pkgPrice').value = p.b2bPrice || '';
       document.getElementById('pkgDates').value = p.travelDates || '';
       document.getElementById('pkgInclusions').value = p.inclusions || '';
+      // FIXED: Properly load exclusions and terms on edit
       document.getElementById('pkgExclusions').value = p.exclusions || '';
+      document.getElementById('pkgTerms').value = p.terms || '';
       document.getElementById('pkgImageUrl').value = p.imageUrl || '';
       updateImagePreview();
-      document.getElementById('pkgTerms').value = p.terms || '';
 
-      // FIXED: Properly parse and load itinerary links on edit without breaking original layout
+      // FIXED: Properly parse and load itinerary links on edit
       document.getElementById('itineraryLinksContainer').innerHTML = '';
       try {
         const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
