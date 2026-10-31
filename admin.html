@@ -120,7 +120,7 @@
             <textarea id="pkgInclusions" rows="3" required placeholder="Accommodation&#10;Daily breakfast&#10;Private Cab Transfers" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions (Line-wise) *</label>
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions (Line-wise)</label>
             <textarea id="pkgExclusions" rows="3" placeholder="Air / Train fares&#10;Personal expenses&#10;Lunch & Dinner" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
           </div>
         </div>
@@ -142,14 +142,14 @@
           <div id="builderBlocksContainer" class="space-y-6"></div>
         </div>
 
-        <!-- DYNAMIC DAY-WISE ITINERARY BUILDER -->
+        <!-- DYNAMIC DAY-WISE ITINERARY BUILDER (OPTIONAL) -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
           <div class="flex items-center justify-between">
             <div>
               <span class="text-xs font-black uppercase text-emerald-400 flex items-center gap-2">
-                <i class="fa-solid fa-route"></i> Day-Wise Tour Itinerary Builder
+                <i class="fa-solid fa-route"></i> Day-Wise Tour Itinerary Builder <span class="text-[10px] text-slate-400 font-normal lowercase">(optional)</span>
               </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har din ka title aur uska description alag-alag add karein.</p>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Agar din ke hisab se tour plan add karna chahein to yahan se add karein, na zaroorat ho to empty rehne dein.</p>
             </div>
             <button type="button" onclick="addItineraryDayRow()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
               <i class="fa-solid fa-plus"></i> Add Day Itinerary
@@ -228,7 +228,7 @@
       fetchAdminPackages();
       addItineraryLinkRow('3N/4D Detailed Itinerary', 'https://docs.google.com/document/d/1WDYfzuIl1Zvo2pbqvmQofi6g-s4gdhsnH__mQB9MvQA/edit?tab=t.0');
       addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-      addItineraryDayRow("Day 1: Arrival Cochin -> Transfer Munnar", "Meet & greet on arrival -> Direct drive to Munnar -> Check-in at hotel.");
+      // Day itinerary row kept empty by default so it stays optional
     };
 
     function updateImagePreview() {
@@ -260,7 +260,7 @@
       container.appendChild(div);
     }
 
-    function addItineraryDayRow(dayTitle = "Day 1: Arrival & Transfer", dayDesc = "Arrival at airport/station -> Transfer to hotel -> Evening at leisure.") {
+    function addItineraryDayRow(dayTitle = "", dayDesc = "") {
       const container = document.getElementById('itineraryDaysContainer');
       const rowId = 'it-day-' + Date.now() + Math.floor(Math.random() * 1000);
 
@@ -437,19 +437,17 @@
       document.getElementById('pkgPrice').value = p.b2bPrice || '';
       document.getElementById('pkgDates').value = p.travelDates || '';
       document.getElementById('pkgInclusions').value = p.inclusions || '';
-      
-      // SAFETY CHECK: If exclusions or terms are missing in sheet, prevent crash
       document.getElementById('pkgExclusions').value = p.exclusions || '';
       document.getElementById('pkgTerms').value = p.terms || '';
       document.getElementById('pkgImageUrl').value = p.imageUrl || '';
       updateImagePreview();
 
-      // FIXED & PROTECTED: Parse Itinerary Links Safely regardless of Sheet columns
+      // PARSE ITINERARY LINKS SAFELY
       document.getElementById('itineraryLinksContainer').innerHTML = '';
       try {
         let links = p.itineraryLinks;
         if (typeof links === 'string' && links.trim() !== '') {
-          links = JSON.parse(links);
+          try { links = JSON.parse(links); } catch(err) { links = [{ title: 'View Detailed Itinerary', url: p.itineraryLinks }]; }
         }
         if (Array.isArray(links) && links.length > 0) {
           links.forEach(l => {
@@ -464,6 +462,7 @@
         addItineraryLinkRow('View Detailed Itinerary', '');
       }
 
+      // DAY-WISE ITINERARY (OPTIONAL LOAD)
       document.getElementById('itineraryDaysContainer').innerHTML = '';
       try {
         let itineraryData = p.itinerary;
@@ -471,12 +470,14 @@
           try { itineraryData = JSON.parse(itineraryData); } catch(err) {}
         }
         if (Array.isArray(itineraryData) && itineraryData.length > 0) {
-          itineraryData.forEach(d => addItineraryDayRow(d.title || 'Day', d.desc || ''));
-        } else {
-          addItineraryDayRow("Day 1: Tour Overview", typeof p.itinerary === 'string' ? p.itinerary : "Detailed itinerary upon booking.");
+          itineraryData.forEach(d => {
+            if (d && (d.title || d.desc)) {
+              addItineraryDayRow(d.title || '', d.desc || '');
+            }
+          });
         }
       } catch (e) {
-        addItineraryDayRow("Day 1: Tour Overview", "Detailed itinerary upon booking.");
+        // If empty or invalid, leave empty rows
       }
 
       const builderContainer = document.getElementById('builderBlocksContainer');
@@ -513,7 +514,6 @@
       document.getElementById('builderBlocksContainer').innerHTML = '';
       addItineraryLinkRow('3N/4D Detailed Itinerary', 'https://docs.google.com/document/d/1WDYfzuIl1Zvo2pbqvmQofi6g-s4gdhsnH__mQB9MvQA/edit?tab=t.0');
       addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-      addItineraryDayRow("Day 1: Arrival Cochin -> Transfer Munnar", "Meet & greet on arrival -> Direct drive to Munnar -> Check-in at hotel.");
       document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
       document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
       document.getElementById('btnResetForm').classList.add('hidden');
@@ -526,9 +526,9 @@
       const duration = document.getElementById('pkgDuration').value || '3N/4D';
       const price = document.getElementById('pkgPrice').value || '₹0';
       const imageUrl = document.getElementById('pkgImageUrl').value || 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944';
-      const inclusions = document.getElementById('pkgInclusions').value || 'Standard Inclusions';
-      const exclusions = document.getElementById('pkgExclusions').value || 'Standard Exclusions';
-      const terms = document.getElementById('pkgTerms').value || 'Standard Terms';
+      const inclusions = document.getElementById('pkgInclusions').value || '';
+      const exclusions = document.getElementById('pkgExclusions').value || '';
+      const terms = document.getElementById('pkgTerms').value || '';
 
       const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
       let linksHtml = '';
@@ -545,17 +545,20 @@
         }
       });
 
+      // ONLY SHOW DAY ITINERARY IF USER ENTERED ANY DAY DETAILS
       const dayRows = document.querySelectorAll('.itinerary-day-row');
       let itineraryHtml = '';
       dayRows.forEach((r, idx) => {
-        const dt = r.querySelector('.it-day-title').value || ('Day ' + (idx + 1));
-        const dd = r.querySelector('.it-day-desc').value || '';
-        itineraryHtml += `
-          <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl mb-2">
-            <h5 class="font-black text-blue-900 text-xs uppercase">${dt}</h5>
-            <p class="text-xs text-slate-600 mt-1 whitespace-pre-line">${dd}</p>
-          </div>
-        `;
+        const dt = r.querySelector('.it-day-title').value.trim();
+        const dd = r.querySelector('.it-day-desc').value.trim();
+        if (dt || dd) {
+          itineraryHtml += `
+            <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl mb-2">
+              <h5 class="font-black text-blue-900 text-xs uppercase">${dt || ('Day ' + (idx + 1))}</h5>
+              <p class="text-xs text-slate-600 mt-1 whitespace-pre-line">${dd}</p>
+            </div>
+          `;
+        }
       });
 
       const blocks = document.querySelectorAll('.duration-block');
@@ -631,15 +634,17 @@
             <div><strong class="text-rose-600 uppercase block mb-1">Exclusions:</strong> ${formatPreviewList(exclusions)}</div>
           </div>
 
+          ${terms ? `
           <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
             <strong class="text-blue-700 uppercase block mb-1">Terms & Conditions / Policy:</strong>
             ${formatPreviewList(terms)}
-          </div>
+          </div>` : ''}
 
+          ${itineraryHtml ? `
           <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
             <strong class="text-slate-700 uppercase block mb-2">Day-Wise Tour Itinerary Details:</strong>
             ${itineraryHtml}
-          </div>
+          </div>` : ''}
         </div>
       `;
 
@@ -669,10 +674,11 @@
       const dayRows = document.querySelectorAll('.itinerary-day-row');
       const itineraryArr = [];
       dayRows.forEach(r => {
-        itineraryArr.push({
-          title: r.querySelector('.it-day-title').value.trim(),
-          desc: r.querySelector('.it-day-desc').value.trim()
-        });
+        const t = r.querySelector('.it-day-title').value.trim();
+        const d = r.querySelector('.it-day-desc').value.trim();
+        if (t || d) {
+          itineraryArr.push({ title: t, desc: d });
+        }
       });
 
       const blocks = document.querySelectorAll('.duration-block');
