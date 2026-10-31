@@ -13,7 +13,6 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen pb-12">
 
-  <!-- HEADER -->
   <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -30,12 +29,11 @@
 
   <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
 
-    <!-- ADD / EDIT PACKAGE FORM -->
     <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-6">
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage multi-duration grouped rate grids, editable headers, WhatsApp links, and brochure highlights.</p>
+          <p class="text-xs font-medium text-slate-400">Manage multi-duration rate grids and package brochure details.</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition cursor-pointer">
           <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
@@ -89,61 +87,6 @@
           </div>
         </div>
 
-        <!-- SPECIALITIES / HIGHLIGHTS CHECKBOXES -->
-        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
-          <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-            <i class="fa-solid fa-star"></i> Package Specialities & Highlights (Brochure Icons)
-          </span>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <label class="flex items-center gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer">
-              <input type="checkbox" name="pkgSpec" value="Backwaters & Beaches" checked class="w-4 h-4 text-blue-600 rounded">
-              <span class="text-white text-[11px]">Backwaters & Beaches</span>
-            </label>
-            <label class="flex items-center gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer">
-              <input type="checkbox" name="pkgSpec" value="Hill Stations & Nature" checked class="w-4 h-4 text-blue-600 rounded">
-              <span class="text-white text-[11px]">Hill Stations & Nature</span>
-            </label>
-            <label class="flex items-center gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer">
-              <input type="checkbox" name="pkgSpec" value="Scenic Sightseeing" checked class="w-4 h-4 text-blue-600 rounded">
-              <span class="text-white text-[11px]">Scenic Sightseeing</span>
-            </label>
-            <label class="flex items-center gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer">
-              <input type="checkbox" name="pkgSpec" value="Ayurveda & Wellness" checked class="w-4 h-4 text-blue-600 rounded">
-              <span class="text-white text-[11px]">Ayurveda & Wellness</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- WHATSAPP QUOTE LINKS SECTION -->
-        <div class="bg-emerald-950/30 p-5 rounded-2xl border border-emerald-500/30 space-y-3">
-          <span class="text-xs font-black uppercase text-emerald-400 flex items-center gap-2">
-            <i class="fa-brands fa-whatsapp text-lg"></i> Instant WhatsApp Quote & Share Links
-          </span>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block uppercase tracking-wider mb-1 text-slate-400">"Send to Client" WhatsApp Link</label>
-              <input type="text" id="pkgWaSend" placeholder="https://wa.me/919919382999?text=..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-emerald-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block uppercase tracking-wider mb-1 text-slate-400">"Ask to Hold" WhatsApp Link</label>
-              <input type="text" id="pkgWaHold" placeholder="https://wa.me/919919382999?text=..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-emerald-500 focus:outline-none">
-            </div>
-          </div>
-        </div>
-
-        <!-- MULTIPLE ITINERARY PDF LINKS SECTION -->
-        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-black uppercase text-blue-400 flex items-center gap-2">
-              <i class="fa-solid fa-file-pdf"></i> Multiple Itinerary PDF Download Links
-            </span>
-            <button type="button" onclick="addItineraryLinkRow()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
-              <i class="fa-solid fa-plus"></i> Add PDF Link
-            </button>
-          </div>
-          <div id="itineraryLinksContainer" class="space-y-2"></div>
-        </div>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Inclusions *</label>
@@ -155,28 +98,24 @@
           </div>
         </div>
 
-        <!-- ADVANCED GROUPED RATE GRID BUILDER (EDITABLE HEADERS) -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks (Editable Headers)
+                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks
               </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Add duration blocks and customize table column headers directly.</p>
             </div>
-            <button type="button" onclick="addDurationBlock()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 self-start sm:self-auto cursor-pointer">
+            <button type="button" onclick="addDurationBlock()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
               <i class="fa-solid fa-plus"></i> Add Duration Block
             </button>
           </div>
 
-          <div id="builderBlocksContainer" class="space-y-6">
-            <!-- Dynamic blocks injected here -->
-          </div>
+          <div id="builderBlocksContainer" class="space-y-6"></div>
         </div>
 
         <div>
           <label class="block uppercase tracking-wider mb-1 text-slate-400">Day-Wise Itinerary Details</label>
-          <textarea id="pkgItinerary" rows="4" placeholder="Day 1: Arrival Cochin -> Transfer Munnar...&#10;Day 2: Munnar Sightseeing..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-blue-500 focus:outline-none"></textarea>
+          <textarea id="pkgItinerary" rows="4" placeholder="Day 1: Arrival Cochin -> Transfer Munnar..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-blue-500 focus:outline-none"></textarea>
         </div>
 
         <button type="submit" id="btnSubmitForm" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
@@ -186,7 +125,6 @@
       </form>
     </div>
 
-    <!-- LIVE PACKAGES TABLE WITH EDIT & DELETE -->
     <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-lg font-black text-white">Live Database Packages</h3>
@@ -224,29 +162,8 @@
 
     window.onload = function() {
       fetchAdminPackages();
-      addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
-      addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
-      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", null, {
-        h1: "2 Pax Basis on CP", h2: "2 Pax Basis on MAP", h3: "4 Pax Basis on CP", h4: "4 Pax Basis on MAP",
-        h5: "Extra Bed on CP", h6: "Extra Bed on MAP", h7: "Child W/O Bed on CP", h8: "Child W/O Bed on MAP"
-      });
+      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
     };
-
-    function addItineraryLinkRow(title = '', url = '') {
-      const container = document.getElementById('itineraryLinksContainer');
-      const rowId = 'it-row-' + Date.now() + Math.floor(Math.random() * 1000);
-      const div = document.createElement('div');
-      div.id = rowId;
-      div.className = 'flex items-center gap-2';
-      div.innerHTML = `
-        <input type="text" placeholder="Label (e.g. 3N/4D Kerala Itinerary)" value="${title}" class="it-title w-1/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
-        <input type="text" placeholder="PDF URL (e.g. https://...)" value="${url}" class="it-url w-2/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
-        <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-xl transition text-xs cursor-pointer">
-          <i class="fa-solid fa-trash"></i>
-        </button>
-      `;
-      container.appendChild(div);
-    }
 
     function addDurationBlock(title = "3N/4D Package", subtitle = "2 Nights Munnar + 1 Night Kochi", initialRows = null, headers = null) {
       const container = document.getElementById('builderBlocksContainer');
@@ -271,8 +188,8 @@
             <span class="text-xs font-bold text-blue-100 uppercase">Rate Grid Block</span>
           </div>
           <div class="flex items-center gap-2">
-            <input type="text" value="${subtitle}" placeholder="Subtitle (e.g. 2 Nights Munnar + 1 Night Kochi)" class="b-sub bg-blue-700 px-3 py-1 rounded-lg font-bold text-xs text-white border border-blue-500 w-72 outline-none">
-            <button type="button" onclick="document.getElementById('${blockId}').remove()" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs cursor-pointer" title="Delete Block"><i class="fa-solid fa-trash"></i></button>
+            <input type="text" value="${subtitle}" placeholder="Subtitle" class="b-sub bg-blue-700 px-3 py-1 rounded-lg font-bold text-xs text-white border border-blue-500 w-72 outline-none">
+            <button type="button" onclick="document.getElementById('${blockId}').remove()" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs cursor-pointer"><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
         <div class="px-4 overflow-x-auto">
@@ -346,20 +263,17 @@
         const response = await fetch(`${SCRIPT_URL}?action=getPackages`);
         const data = await response.json();
 
-        if (data.success && data.packages) {
-          adminPackages = data.packages;
-          renderAdminTable(adminPackages);
-        } else {
-          document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">No packages found.</td></tr>`;
-        }
+        const pkgs = data.packages || (Array.isArray(data) ? data : []);
+        adminPackages = pkgs;
+        renderAdminTable(adminPackages);
       } catch (err) {
-        document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">Error connecting to database.</td></tr>`;
+        document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">Error connecting to database. Please refresh.</td></tr>`;
       }
     }
 
     function renderAdminTable(pkgs) {
       const tbody = document.getElementById('adminPackagesTable');
-      if (pkgs.length === 0) {
+      if (!pkgs || pkgs.length === 0) {
         tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500 font-bold">No packages in database.</td></tr>`;
         return;
       }
@@ -367,8 +281,7 @@
       let html = '';
       pkgs.forEach((p, index) => {
         const status = (p.status || "OPEN").toUpperCase();
-        const isPaused = status === "PAUSED";
-        const statusBadge = isPaused 
+        const statusBadge = status === "PAUSED" 
           ? `<span class="px-2 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black uppercase rounded-md">PAUSED</span>`
           : `<span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black uppercase rounded-md">OPEN</span>`;
 
@@ -414,28 +327,8 @@
       document.getElementById('pkgExclusions').value = p.exclusions || '';
       document.getElementById('pkgImageUrl').value = p.imageUrl || '';
       document.getElementById('pkgTerms').value = p.terms || '';
-      document.getElementById('pkgWaSend').value = p.whatsappSend || '';
-      document.getElementById('pkgWaHold').value = p.whatsappHold || '';
       document.getElementById('pkgItinerary').value = p.itinerary || '';
 
-      // Populate Specialities checkboxes
-      try {
-        const specs = typeof p.specialities === 'string' ? JSON.parse(p.specialities) : (p.specialities || []);
-        document.querySelectorAll('input[name="pkgSpec"]').forEach(chk => {
-          chk.checked = specs.includes(chk.value);
-        });
-      } catch (e) {}
-
-      // Populate Itinerary PDF Links
-      document.getElementById('itineraryLinksContainer').innerHTML = '';
-      try {
-        const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
-        if (Array.isArray(links) && links.length > 0) {
-          links.forEach(l => addItineraryLinkRow(l.title, l.url));
-        }
-      } catch (e) {}
-
-      // Populate Grouped Rate Grid Blocks with Editable Headers
       const builderContainer = document.getElementById('builderBlocksContainer');
       builderContainer.innerHTML = '';
       try {
@@ -461,14 +354,8 @@
     function resetForm() {
       document.getElementById('editingPackageId').value = '';
       document.getElementById('packageForm').reset();
-      document.getElementById('itineraryLinksContainer').innerHTML = '';
       document.getElementById('builderBlocksContainer').innerHTML = '';
-      addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
-      addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
-      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", null, {
-        h1: "2 Pax Basis on CP", h2: "2 Pax Basis on MAP", h3: "4 Pax Basis on CP", h4: "4 Pax Basis on MAP",
-        h5: "Extra Bed on CP", h6: "Extra Bed on MAP", h7: "Child W/O Bed on CP", h8: "Child W/O Bed on MAP"
-      });
+      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
       document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
       document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
       document.getElementById('btnResetForm').classList.add('hidden');
@@ -479,24 +366,6 @@
       const btn = document.getElementById('btnSubmitForm');
       btn.disabled = true;
 
-      // Collect Specialities
-      const specsArr = [];
-      document.querySelectorAll('input[name="pkgSpec"]:checked').forEach(chk => {
-        specsArr.push(chk.value);
-      });
-
-      // Collect Itinerary PDF Links
-      const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
-      const linksArr = [];
-      linkRows.forEach(r => {
-        const title = r.querySelector('.it-title').value.trim();
-        const url = r.querySelector('.it-url').value.trim();
-        if (title || url) {
-          linksArr.push({ title, url });
-        }
-      });
-
-      // Collect Grouped Rate Grid Blocks with Headers
       const blocks = document.querySelectorAll('.duration-block');
       const rateGridBlocksArr = [];
 
@@ -504,7 +373,6 @@
         const bTitle = blk.querySelector('.b-title').value.trim();
         const bSub = blk.querySelector('.b-sub').value.trim();
         
-        // Collect Header Values
         const headersObj = {
           h1: blk.querySelector('.th-h1').value.trim(),
           h2: blk.querySelector('.th-h2').value.trim(),
@@ -558,10 +426,6 @@
         exclusions: document.getElementById('pkgExclusions').value.trim(),
         imageUrl: document.getElementById('pkgImageUrl').value.trim(),
         terms: document.getElementById('pkgTerms').value.trim(),
-        whatsappSend: document.getElementById('pkgWaSend').value.trim(),
-        whatsappHold: document.getElementById('pkgWaHold').value.trim(),
-        specialities: JSON.stringify(specsArr),
-        itineraryLinks: JSON.stringify(linksArr),
         itinerary: document.getElementById('pkgItinerary').value.trim(),
         ratesGrid: JSON.stringify(rateGridBlocksArr)
       };
