@@ -1,7 +1,7 @@
 {
   "name": "Journey Assist B2B Portal",
   "short_name": "Journey Assist",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#1e3a8a",
