@@ -3,251 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journey Assist | Advanced B2B Rate Grid & Package Manager</title>
+  <title>Journey Assist | B2B Travel Wholesale Desk</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .hero-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0369a1 100%);
+    }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen pb-12">
+<body class="bg-slate-100 text-slate-800 antialiased py-6 px-4">
 
-  <!-- HEADER -->
-  <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-sky-500 rounded-xl flex items-center justify-center font-black text-slate-950">
-          <i class="fa-solid fa-sliders"></i>
-        </div>
-        <div>
-          <h1 class="text-base font-black tracking-tight text-white">Journey Assist <span class="text-xs text-sky-400 font-bold">B2B Admin Desk</span></h1>
-        </div>
-      </div>
-      <div class="flex items-center gap-2 text-xs font-bold text-slate-400">
-        <span class="px-3 py-1 bg-sky-500/20 text-sky-400 border border-sky-500/30 rounded-full flex items-center gap-1.5">
-          <i class="fa-solid fa-shield-halved"></i> Supplier Rate Grid Manager
-        </span>
-      </div>
-    </div>
-  </header>
+  <main class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl border border-slate-200 overflow-hidden space-y-6">
 
-  <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
-
-    <!-- PACKAGE RATE GRID CREATOR FORM -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+    <!-- HERO HEADER SECTION (Sample Match) -->
+    <header class="hero-bg text-white p-8 sm:p-12 relative overflow-hidden">
+      <!-- Background Banner Image Option -->
+      <div class="absolute inset-0 opacity-25 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80');"></div>
       
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/10 pb-6">
         <div>
-          <h2 class="text-lg font-black text-white flex items-center gap-2">
-            <i class="fa-solid fa-layer-group text-sky-400"></i> Multi-Duration & Vehicle Rate Grid Setup
-          </h2>
-          <p class="text-xs text-slate-400 font-medium">Create multi-day itineraries, night splits, vehicle options, and wholesale rates.</p>
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-black tracking-tight text-white">Journey Assist</span>
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+          </div>
+          <p class="text-[10px] font-extrabold text-sky-400 uppercase tracking-widest mt-0.5">B2B Travel Wholesale Desk[cite: 1]</p>
         </div>
-        <button onclick="saveRateGridPackage()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-900/30">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Save Package Grid
-        </button>
-      </div>
-
-      <!-- BASIC DETAILS -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div>
-          <label class="text-[10px] font-black uppercase text-slate-400">Destination Name</label>
-          <input type="text" id="destName" value="Kerala" placeholder="e.g. Kerala, Kashmir, Maldives" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold text-xs focus:outline-none focus:border-sky-500">
-        </div>
-        <div>
-          <label class="text-[10px] font-black uppercase text-slate-400">Hotel Category / Tier</label>
-          <select id="hotelCategory" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold text-xs focus:outline-none focus:border-sky-500">
-            <option value="3 Star Standard">3 Star Standard</option>
-            <option value="4 Star Deluxe" selected>4 Star Deluxe</option>
-            <option value="5 Star Luxury">5 Star Luxury</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-[10px] font-black uppercase text-slate-400">Meal Plan</label>
-          <select id="mealPlan" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold text-xs focus:outline-none focus:border-sky-500">
-            <option value="CP (Breakfast Only)">CP (Breakfast Only)</option>
-            <option value="MAP (Breakfast + Dinner)" selected>MAP (Breakfast + Dinner)</option>
-            <option value="AP (All Meals)">AP (All Meals)</option>
-          </select>
+        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-2 rounded-2xl backdrop-blur-md">
+          <i class="fa-solid fa-award text-amber-400"></i>
+          <span class="text-xs font-bold text-slate-200">Experience The Real Kerala[cite: 1]</span>
         </div>
       </div>
 
-      <!-- DURATION & NIGHT SPLIT VARIANTS -->
-      <div class="space-y-4">
-        <div class="flex items-center justify-between border-t border-slate-800 pt-4">
-          <h3 class="text-xs font-black uppercase text-amber-400 tracking-wider flex items-center gap-2">
-            <i class="fa-solid fa-clock"></i> Duration Variants & City Night Splits
+      <div class="mt-8 relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="space-y-3 max-w-xl">
+          <span class="px-3 py-1 bg-sky-500/30 border border-sky-400/40 text-sky-300 text-[10px] font-black uppercase rounded-full tracking-wider">Early Bird Offer[cite: 1]</span>
+          <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">Kerala Winter FIT — <br/>Early Bird Offer[cite: 1]</h1>
+          <div class="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-300 pt-2">
+            <p><i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> Kerala | 3N/4D to 7N/8D[cite: 1]</p>
+            <p><i class="fa-regular fa-calendar text-sky-400 mr-1.5"></i> Booking window: Until 31 October 2026[cite: 1]</p>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <span class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-black shadow-lg">3N/4D to 7N/8D[cite: 1]</span>
+            <span class="px-3 py-1.5 bg-sky-600 text-white rounded-xl text-xs font-black shadow-lg">Starting ₹13,450/person[cite: 1]</span>
+          </div>
+        </div>
+
+        <!-- QUICK INSTANT WHATSAPP QUOTE & SHARE CARD -->
+        <div class="bg-white/95 text-slate-900 p-6 rounded-3xl shadow-2xl border border-slate-200 space-y-4 lg:w-80">
+          <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+            <i class="fa-brands fa-whatsapp text-emerald-600 text-xl"></i>
+            <div>
+              <p class="text-xs font-black">Instant WhatsApp Quote & Share[cite: 1]</p>
+              <p class="text-[10px] text-slate-500 font-bold">Send rates directly to agents/clients</p>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <a href="https://wa.me/919919382999?text=Hello%20Journey%20Assist,%20I%20want%20Kerala%20Winter%20FIT%20package%20details." target="_blank" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30">
+              <i class="fa-brands fa-whatsapp"></i> Send to Client[cite: 1]
+            </a>
+            <a href="https://wa.me/919919382999?text=Hold%20Kerala%20package%20query" target="_blank" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-bookmark text-sky-600"></i> Ask to Hold[cite: 1]
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HIGHLIGHT ICONS -->
+      <div class="mt-8 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-slate-200 relative z-10">
+        <div class="flex items-center gap-2"><i class="fa-solid fa-water text-sky-400"></i> Backwaters & Beaches[cite: 1]</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-mountain-sun text-emerald-400"></i> Hill Stations & Nature[cite: 1]</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-camera text-amber-400"></i> Scenic Sightseeing[cite: 1]</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-spa text-rose-400"></i> Ayurveda & Wellness[cite: 1]</div>
+      </div>
+    </header>
+
+    <div class="p-6 sm:p-10 space-y-10">
+
+      <!-- ITINERARIES & LINKED DOCUMENTS -->
+      <section class="bg-slate-50 p-6 rounded-3xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="space-y-1">
+          <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-file-arrow-down text-sky-600"></i> Itineraries & Linked Documents[cite: 1]
           </h3>
-          <button onclick="addDurationVariant()" class="px-3 py-1.5 bg-sky-600/20 hover:bg-sky-600 text-sky-300 hover:text-white rounded-lg text-xs font-bold transition flex items-center gap-1">
-            <i class="fa-solid fa-plus"></i> Add Duration Variant
-          </button>
+          <p class="text-xs text-slate-500 font-medium">Click below to download or view day-wise custom itineraries.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs font-bold">
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 3N/4D Kerala Itinerary[cite: 1]</a>
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 4N/5D Kerala Itinerary[cite: 1]</a>
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 5N/6D Kerala Itinerary[cite: 1]</a>
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 6N/7D Kerala Itinerary[cite: 1]</a>
+        </div>
+      </section>
+
+      <!-- COMPLETE SUPPLIER RATE GRID SECTION -->
+      <section class="space-y-6">
+        <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+          <i class="fa-solid fa-table-cells text-sky-600 text-lg"></i>
+          <h3 class="text-lg font-black text-slate-900">Complete Supplier Rate Grid[cite: 1]</h3>
         </div>
 
-        <div id="durationVariantsContainer" class="space-y-4">
-          <!-- Dynamic Duration Cards -->
+        <!-- 3N/4D PACKAGE TABLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-sky-700 text-white px-4 py-3 flex items-center justify-between text-xs font-black">
+            <span>3N/4D Package[cite: 1]</span>
+            <span class="text-sky-200">2 Nights Munnar + 1 Night Kochi[cite: 1]</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-600 uppercase font-extrabold text-[10px] border-b border-slate-200">
+                <tr>
+                  <th class="p-3">Hotel Plan[cite: 1]</th>
+                  <th class="p-3">Category[cite: 1]</th>
+                  <th class="p-3">Meal Plan[cite: 1]</th>
+                  <th class="p-3">Single (₹)[cite: 1]</th>
+                  <th class="p-3">Twin (₹)[cite: 1]</th>
+                  <th class="p-3">Triple (₹)[cite: 1]</th>
+                  <th class="p-3">Child (6–11 yrs) (₹)[cite: 1]</th>
+                  <th class="p-3">Extra Bed (₹)[cite: 1]</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">13,450[cite: 1]</td><td class="p-3 font-bold text-emerald-600">11,450[cite: 1]</td><td class="p-3">10,450[cite: 1]</td><td class="p-3">6,750[cite: 1]</td><td class="p-3">5,450[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Deluxe[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">15,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">13,950[cite: 1]</td><td class="p-3">12,950[cite: 1]</td><td class="p-3">7,950[cite: 1]</td><td class="p-3">6,950[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Kochi[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">16,450[cite: 1]</td><td class="p-3 font-bold text-emerald-600">14,450[cite: 1]</td><td class="p-3">13,450[cite: 1]</td><td class="p-3">8,450[cite: 1]</td><td class="p-3">6,950[cite: 1]</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-    </div>
+        <!-- 4N/5D PACKAGE TABLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-sky-700 text-white px-4 py-3 flex items-center justify-between text-xs font-black">
+            <span>4N/5D Package[cite: 1]</span>
+            <span class="text-sky-200">2 Nights Munnar + 2 Nights Alleppey[cite: 1]</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-600 uppercase font-extrabold text-[10px] border-b border-slate-200">
+                <tr>
+                  <th class="p-3">Hotel Plan[cite: 1]</th>
+                  <th class="p-3">Category[cite: 1]</th>
+                  <th class="p-3">Meal Plan[cite: 1]</th>
+                  <th class="p-3">Single (₹)[cite: 1]</th>
+                  <th class="p-3">Twin (₹)[cite: 1]</th>
+                  <th class="p-3">Triple (₹)[cite: 1]</th>
+                  <th class="p-3">Child (6–11 yrs) (₹)[cite: 1]</th>
+                  <th class="p-3">Extra Bed (₹)[cite: 1]</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">16,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">14,950[cite: 1]</td><td class="p-3">13,950[cite: 1]</td><td class="p-3">8,950[cite: 1]</td><td class="p-3">7,450[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Alleppey[cite: 1]</td><td class="p-3">Deluxe[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">24,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">21,950[cite: 1]</td><td class="p-3">19,950[cite: 1]</td><td class="p-3">13,950[cite: 1]</td><td class="p-3">11,950[cite: 1]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <!-- PREVIEW / SAVED GRIDS LIST -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
-      <h3 class="text-xs font-black uppercase text-emerald-400 tracking-wider flex items-center gap-2">
-        <i class="fa-solid fa-list-check"></i> Active Multi-Duration Rate Grids
-      </h3>
-      <div id="activeGridsPreview" class="space-y-4 text-xs">
-        <!-- Rendered Active Grids -->
-      </div>
+      </section>
+
+      <!-- INCLUSIONS, EXCLUSIONS & POLICIES FOOTER -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-200 text-xs">
+        
+        <!-- INCLUSIONS -->
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+          <div class="flex items-center gap-2 font-black text-slate-900">
+            <i class="fa-solid fa-circle-check text-emerald-600"></i> Inclusions[cite: 1]
+          </div>
+          <ul class="space-y-2 text-slate-600 font-medium">
+            <li>• Accommodation as per itinerary[cite: 1]</li>
+            <li>• Daily breakfast (as per meal plan)[cite: 1]</li>
+            <li>• Transfers & sightseeing as per itinerary[cite: 1]</li>
+          </ul>
+        </div>
+
+        <!-- EXCLUSIONS -->
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+          <div class="flex items-center gap-2 font-black text-slate-900">
+            <i class="fa-solid fa-circle-xmark text-rose-600"></i> Exclusions[cite: 1]
+          </div>
+          <ul class="space-y-2 text-slate-600 font-medium">
+            <li>• Air / Train fares[cite: 1]</li>
+            <li>• Lunch & Dinner (unless mentioned)[cite: 1]</li>
+            <li>• Personal expenses, tips, entry fees[cite: 1]</li>
+          </ul>
+        </div>
+
+        <!-- CHILD & EXTRA BED POLICY -->
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+          <div class="flex items-center gap-2 font-black text-slate-900">
+            <i class="fa-solid fa-users text-sky-600"></i> Child & Extra Bed Policy[cite: 1]
+          </div>
+          <ul class="space-y-2 text-slate-600 font-medium">
+            <li>• Child rates applicable for 6–11 years[cite: 1]</li>
+            <li>• Extra bed charges as per hotel policy[cite: 1]</li>
+            <li>• Infant rates on request[cite: 1]</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- OFFICIAL BRAND FOOTER -->
+      <footer class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-500">
+        <div>
+          <p class="text-slate-900 font-extrabold">Journey Assist B2B Travel Wholesale Desk</p>
+          <p class="text-[11px] font-normal">29 Shalimar Garden, Sector 8, Indira Nagar, Lucknow - 226016</p>
+        </div>
+        <div class="text-right">
+          <p class="text-sky-600">+91 9919382999</p>
+          <p class="text-[11px] font-normal">support@journeyassist.in</p>
+        </div>
+      </footer>
+
     </div>
 
   </main>
 
-  <script>
-    window.onload = function() {
-      // Add default 3N/4D, 4N/5D, and 5N/6D variants on load
-      addDurationVariant("3N / 4D", "2 Nights Munnar + 1 Night Alleppey (Houseboat)", "Sedan (Dzire/Etios)", 12500, 10500, 8500, 5500, 3500);
-      addDurationVariant("4N / 5D", "2 Nights Munnar + 1 Night Thekkady + 1 Night Alleppey", "SUV Upgrade (Ertiga/Innova)", 16500, 14000, 11500, 7500, 4500);
-      addDurationVariant("5N / 6D", "2 Nights Munnar + 1 Night Thekkady + 1 Night Kovalam + 1 Night Alleppey", "SUV (Innova Crysta)", 21000, 17500, 14500, 9500, 5500);
-      renderPreview();
-    };
-
-    function addDurationVariant(duration = '', split = '', vehicle = 'Sedan (Dzire/Etios)', single = '', twin = '', triple = '', cwb = '', cnwb = '') {
-      const container = document.getElementById('durationVariantsContainer');
-      const cardId = 'variant-' + Date.now() + Math.floor(Math.random() * 1000);
-
-      const div = document.createElement('div');
-      div.id = cardId;
-      div.className = 'variant-card p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-3';
-      div.innerHTML = `
-        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-            <input type="text" placeholder="Duration (e.g. 3N / 4D)" value="${duration}" class="var-duration bg-transparent font-black text-amber-400 text-xs focus:outline-none w-32 border-b border-slate-700">
-          </div>
-          <button onclick="document.getElementById('${cardId}').remove(); renderPreview();" class="text-rose-400 hover:text-rose-300 text-xs font-bold">
-            <i class="fa-solid fa-trash"></i> Remove Variant
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">City Night Split Itinerary</label>
-            <input type="text" placeholder="e.g. 2N Munnar + 1N Thekkady + 1N Alleppey" value="${split}" class="var-split w-full mt-1 px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-xl text-white font-bold text-xs focus:outline-none">
-          </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Vehicle Type / Upgrade</label>
-            <select class="var-vehicle w-full mt-1 px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-xl text-sky-400 font-bold text-xs focus:outline-none">
-              <option value="Sedan (Dzire/Etios)" ${vehicle.includes('Sedan') ? 'selected' : ''}>Sedan (Dzire/Etios)</option>
-              <option value="SUV (Ertiga)" ${vehicle.includes('Ertiga') ? 'selected' : ''}>SUV (Ertiga)</option>
-              <option value="SUV (Innova Crysta)" ${vehicle.includes('Innova') ? 'selected' : ''}>SUV (Innova Crysta)</option>
-              <option value="Tempo Traveller (12 Seater)" ${vehicle.includes('Tempo') ? 'selected' : ''}>Tempo Traveller (12 Seater)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- OCCUPANCY RATES GRID -->
-        <div>
-          <p class="text-[10px] font-extrabold uppercase text-slate-400 mb-1.5">Net Rates Per Person (INR)</p>
-          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
-            <div>
-              <span class="text-[9px] text-slate-400 font-bold block">Single Sharing</span>
-              <input type="number" placeholder="₹ Rate" value="${single}" class="var-single w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-white font-extrabold">
-            </div>
-            <div>
-              <span class="text-[9px] text-slate-400 font-bold block">Twin / Double</span>
-              <input type="number" placeholder="₹ Rate" value="${twin}" class="var-twin w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-emerald-400 font-extrabold">
-            </div>
-            <div>
-              <span class="text-[9px] text-slate-400 font-bold block">Triple Sharing</span>
-              <input type="number" placeholder="₹ Rate" value="${triple}" class="var-triple w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-sky-400 font-extrabold">
-            </div>
-            <div>
-              <span class="text-[9px] text-slate-400 font-bold block">Child Bed (CWB)</span>
-              <input type="number" placeholder="₹ Rate" value="${cwb}" class="var-cwb w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-amber-300 font-extrabold">
-            </div>
-            <div>
-              <span class="text-[9px] text-slate-400 font-bold block">Child No Bed (CNWB)</span>
-              <input type="number" placeholder="₹ Rate" value="${cnwb}" class="var-cnwb w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-slate-300 font-extrabold">
-            </div>
-          </div>
-        </div>
-      `;
-
-      container.appendChild(div);
-    }
-
-    function saveRateGridPackage() {
-      const dest = document.getElementById('destName').value;
-      const hotel = document.getElementById('hotelCategory').value;
-      const meal = document.getElementById('mealPlan').value;
-
-      const variantCards = document.querySelectorAll('.variant-card');
-      const variants = [];
-
-      variantCards.forEach(card => {
-        variants.push({
-          duration: card.querySelector('.var-duration').value,
-          split: card.querySelector('.var-split').value,
-          vehicle: card.querySelector('.var-vehicle').value,
-          single: card.querySelector('.var-single').value,
-          twin: card.querySelector('.var-twin').value,
-          triple: card.querySelector('.var-triple').value,
-          cwb: card.querySelector('.var-cwb').value,
-          cnwb: card.querySelector('.var-cnwb').value
-        });
-      });
-
-      const packageGridData = { dest, hotel, meal, variants };
-      localStorage.setItem('ja_b2b_rate_grid', JSON.stringify(packageGridData));
-      alert('Package Rate Grid Saved Successfully!');
-      renderPreview();
-    }
-
-    function renderPreview() {
-      const saved = localStorage.getItem('ja_b2b_rate_grid');
-      const container = document.getElementById('activeGridsPreview');
-      if (!saved) {
-        container.innerHTML = '<p class="text-slate-500 italic">No rate grid saved yet.</p>';
-        return;
-      }
-
-      const data = JSON.parse(saved);
-      let html = `
-        <div class="p-5 bg-slate-900/90 rounded-2xl border border-sky-500/30 space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <div>
-              <h4 class="text-sm font-black text-white">${data.dest} Package Rate Grid</h4>
-              <p class="text-[10px] text-slate-400 font-bold">${data.hotel} | ${data.meal}</p>
-            </div>
-            <span class="px-2.5 py-1 bg-sky-500/20 text-sky-400 text-[10px] font-black rounded-lg">B2B Net Rates</span>
-          </div>
-          
-          <div class="space-y-2">
-      `;
-
-      data.variants.forEach(v => {
-        html += `
-          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-            <div class="flex items-center justify-between text-xs">
-              <span class="font-black text-amber-400">${v.duration}</span>
-              <span class="font-bold text-sky-400">${v.vehicle}</span>
-            </div>
-            <p class="text-[11px] font-medium text-slate-300"><i class="fa-solid fa-location-dot text-amber-400 mr-1"></i> ${v.split}</p>
-            <div class="flex flex-wrap gap-3 text-[10px] font-bold text-slate-400 pt-1 border-t border-slate-800/60">
-              <span>Twin: <strong class="text-emerald-400">₹${v.twin}</strong></span>
-              <span>Triple: <strong class="text-sky-400">₹${v.triple}</strong></span>
-              <span>Single: <strong class="text-white">₹${v.single}</strong></span>
-              <span>CWB: <strong class="text-amber-300">₹${v.cwb}</strong></span>
-              <span>CNWB: <strong class="text-slate-300">₹${v.cnwb}</strong></span>
-            </div>
-          </div>
-        `;
-      });
-
-      html += `</div></div>`;
-      container.innerHTML = html;
-    }
-  </script>
 </body>
 </html>
