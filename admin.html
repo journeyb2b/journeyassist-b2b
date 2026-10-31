@@ -35,7 +35,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage multi-duration rate grids, PDF itinerary links, and exclusions.</p>
+          <p class="text-xs font-medium text-slate-400">Manage multi-duration rate grids, image URLs, terms, and itinerary details[cite: 2].</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition">
           <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
@@ -48,7 +48,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Package Title *</label>
-            <input type="text" id="pkgTitle" required placeholder="e.g. Kerala Winter FIT" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <input type="text" id="pkgTitle" required placeholder="e.g. Kerala Winter FIT — Early Bird Offer" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Destination *</label>
@@ -65,7 +65,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Duration Range *</label>
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Duration *</label>
             <input type="text" id="pkgDuration" required placeholder="e.g. 3N/4D to 7N/8D" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
           <div>
@@ -81,12 +81,76 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Inclusions *</label>
-            <input type="text" id="pkgInclusions" required placeholder="Accommodation, Daily breakfast, Transfers" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <input type="text" id="pkgInclusions" required placeholder="e.g. Accommodation, Daily breakfast, Transfers" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions *</label>
-            <input type="text" id="pkgExclusions" required placeholder="Air / Train fares, Personal expenses" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <input type="text" id="pkgExclusions" required placeholder="e.g. Air / Train fares, Lunch & Dinner" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Banner Image URL</label>
+            <input type="text" id="pkgImageUrl" placeholder="e.g. https://example.com/banner.jpg" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Terms & Conditions / Child Policy</label>
+            <input type="text" id="pkgTerms" placeholder="e.g. Child rates applicable for 6–11 years" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+          </div>
+        </div>
+
+        <!-- MULTIPLE ITINERARY PDF LINKS SECTION -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase text-blue-400 flex items-center gap-2">
+              <i class="fa-solid fa-file-pdf"></i> Multiple Itinerary PDF Download Links[cite: 2]
+            </span>
+            <button type="button" onclick="addItineraryLinkRow()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
+              <i class="fa-solid fa-plus"></i> Add PDF Link
+            </button>
+          </div>
+          <div id="itineraryLinksContainer" class="space-y-2"></div>
+        </div>
+
+        <!-- ADVANCED MULTI-DURATION SUPPLIER RATE GRID BUILDER -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
+                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Builder[cite: 2]
+              </span>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Add hotel plan tiers and occupancy rates for each duration section[cite: 2].</p>
+            </div>
+            <button type="button" onclick="addRateGridRow()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 self-start sm:self-auto cursor-pointer">
+              <i class="fa-solid fa-plus"></i> Add Row
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs min-w-[950px] border-collapse">
+              <thead>
+                <tr class="bg-slate-950 text-slate-400 font-black uppercase text-[10px] border-b border-slate-800">
+                  <th class="p-2">Section / Duration[cite: 2]</th>
+                  <th class="p-2">Hotel Plan[cite: 2]</th>
+                  <th class="p-2">Category[cite: 2]</th>
+                  <th class="p-2">Meal[cite: 2]</th>
+                  <th class="p-2">Single (₹)[cite: 2]</th>
+                  <th class="p-2">Twin (₹)[cite: 2]</th>
+                  <th class="p-2">Triple (₹)[cite: 2]</th>
+                  <th class="p-2">Child (6-11) (₹)[cite: 2]</th>
+                  <th class="p-2">Extra Bed (₹)[cite: 2]</th>
+                  <th class="p-2 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="rateGridRowsContainer" class="divide-y divide-slate-800/60"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <label class="block uppercase tracking-wider mb-1 text-slate-400">Day-Wise Itinerary Details</label>
+          <textarea id="pkgItinerary" rows="4" placeholder="Day 1: Arrival Cochin -> Transfer Munnar...&#10;Day 2: Munnar Sightseeing..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-blue-500 focus:outline-none"></textarea>
         </div>
 
         <button type="submit" id="btnSubmitForm" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
@@ -96,20 +160,20 @@
       </form>
     </div>
 
-    <!-- LIVE PACKAGES TABLE WITH ALWAYS VISIBLE EDIT & DELETE -->
+    <!-- LIVE PACKAGES TABLE WITH EDIT & DELETE -->
     <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-lg font-black text-white">Live Database Packages</h3>
-        <button onclick="fetchAdminPackages()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 rounded-xl border border-slate-800 transition">
+        <button onclick="fetchAdminPackages()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 rounded-xl border border-slate-800 transition cursor-pointer">
           <i class="fa-solid fa-rotate-right mr-1"></i> Refresh Table
         </button>
       </div>
 
       <div class="overflow-x-auto w-full">
-        <table class="w-full text-left text-xs border-collapse min-w-[700px]">
+        <table class="w-full text-left text-xs border-collapse min-w-[750px]">
           <thead>
             <tr class="bg-slate-900 text-slate-400 uppercase font-extrabold border-b border-slate-800">
-              <th class="p-3 w-32 text-center bg-blue-900/40 text-amber-300 border-r border-slate-800">ACTIONS</th>
+              <th class="p-3 w-36 text-center bg-blue-900/40 text-amber-300 border-r border-slate-800">ACTIONS</th>
               <th class="p-3">ID</th>
               <th class="p-3">Title & Dest</th>
               <th class="p-3">Duration</th>
@@ -134,7 +198,65 @@
 
     window.onload = function() {
       fetchAdminPackages();
+      addDefaultRateGridRows();
+      addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
+      addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
     };
+
+    function addItineraryLinkRow(title = '', url = '') {
+      const container = document.getElementById('itineraryLinksContainer');
+      const rowId = 'it-row-' + Date.now() + Math.floor(Math.random() * 1000);
+      const div = document.createElement('div');
+      div.id = rowId;
+      div.className = 'flex items-center gap-2';
+      div.innerHTML = `
+        <input type="text" placeholder="Label (e.g. 3N/4D Kerala Itinerary)" value="${title}" class="it-title w-1/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
+        <input type="text" placeholder="PDF URL (e.g. https://...)" value="${url}" class="it-url w-2/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
+        <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-xl transition text-xs cursor-pointer">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      `;
+      container.appendChild(div);
+    }
+
+    function addDefaultRateGridRows() {
+      document.getElementById('rateGridRowsContainer').innerHTML = '';
+      addRateGridRow('3N/4D Package', 'Munnar', 'Standard', 'CP', '13,450', '11,450', '10,450', '6,750', '5,450');
+      addRateGridRow('3N/4D Package', 'Munnar', 'Deluxe', 'CP', '15,950', '13,950', '12,950', '7,950', '6,950');
+    }
+
+    function addRateGridRow(section = '3N/4D Package', plan = 'Munnar', cat = 'Standard', meal = 'CP', single = '', twin = '', triple = '', child = '', extra = '') {
+      const container = document.getElementById('rateGridRowsContainer');
+      const rowId = 'rg-row-' + Date.now() + Math.floor(Math.random() * 1000);
+      
+      const tr = document.createElement('tr');
+      tr.id = rowId;
+      tr.className = 'rg-data-row hover:bg-slate-900/50 transition';
+      tr.innerHTML = `
+        <td class="p-1.5"><input type="text" placeholder="3N/4D Package" value="${section}" class="rg-section w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-amber-300 text-xs font-extrabold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5"><input type="text" placeholder="Munnar" value="${plan}" class="rg-plan w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5">
+          <select class="rg-cat w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
+            <option value="Standard" ${cat === 'Standard' ? 'selected' : ''}>Standard</option>
+            <option value="Deluxe" ${cat === 'Deluxe' ? 'selected' : ''}>Deluxe</option>
+            <option value="Premium" ${cat === 'Premium' ? 'selected' : ''}>Premium</option>
+            <option value="Luxury" ${cat === 'Luxury' ? 'selected' : ''}>Luxury</option>
+          </select>
+        </td>
+        <td class="p-1.5"><input type="text" placeholder="CP" value="${meal}" class="rg-meal w-14 px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5"><input type="text" placeholder="13,450" value="${single}" class="rg-single w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-amber-300 text-xs font-extrabold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5"><input type="text" placeholder="11,450" value="${twin}" class="rg-twin w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-amber-300 text-xs font-extrabold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5"><input type="text" placeholder="10,450" value="${triple}" class="rg-triple w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-amber-300 text-xs font-extrabold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5"><input type="text" placeholder="6,750" value="${child}" class="rg-child w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5"><input type="text" placeholder="5,450" value="${extra}" class="rg-extra w-full px-2 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-blue-500 focus:outline-none"></td>
+        <td class="p-1.5 text-center">
+          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs cursor-pointer">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      `;
+      container.appendChild(tr);
+    }
 
     async function fetchAdminPackages() {
       try {
@@ -145,7 +267,7 @@
           adminPackages = data.packages;
           renderAdminTable(adminPackages);
         } else {
-          document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">No packages found in Google Sheet database.</td></tr>`;
+          document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">No packages found.</td></tr>`;
         }
       } catch (err) {
         document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">Error connecting to database.</td></tr>`;
@@ -171,10 +293,10 @@
           <tr class="hover:bg-slate-900/60 transition border-b border-slate-800">
             <td class="p-3 text-center bg-slate-950 border-r border-slate-800">
               <div class="flex items-center justify-center gap-1.5">
-                <button onclick="editPackage(${index})" title="Edit Package" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-black rounded-lg shadow transition">
+                <button onclick="editPackage(${index})" title="Edit Package" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-black rounded-lg shadow transition cursor-pointer">
                   <i class="fa-solid fa-pen"></i> Edit
                 </button>
-                <button onclick="deletePackage('${p.id}')" title="Delete Package" class="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-black rounded-lg shadow transition">
+                <button onclick="deletePackage('${p.id}')" title="Delete Package" class="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-black rounded-lg shadow transition cursor-pointer">
                   <i class="fa-solid fa-trash"></i> Delete
                 </button>
               </div>
@@ -207,6 +329,34 @@
       document.getElementById('pkgDates').value = p.travelDates || '';
       document.getElementById('pkgInclusions').value = p.inclusions || '';
       document.getElementById('pkgExclusions').value = p.exclusions || '';
+      document.getElementById('pkgImageUrl').value = p.imageUrl || '';
+      document.getElementById('pkgTerms').value = p.terms || '';
+      document.getElementById('pkgItinerary').value = p.itinerary || '';
+
+      // Populate Itinerary PDF Links
+      document.getElementById('itineraryLinksContainer').innerHTML = '';
+      try {
+        const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
+        if (Array.isArray(links) && links.length > 0) {
+          links.forEach(l => addItineraryLinkRow(l.title, l.url));
+        }
+      } catch (e) {}
+
+      // Populate Rate Grid
+      const container = document.getElementById('rateGridRowsContainer');
+      container.innerHTML = '';
+      try {
+        const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
+        if (Array.isArray(grid) && grid.length > 0) {
+          grid.forEach(g => {
+            addRateGridRow(g.section || '3N/4D Package', g.hotelPlan || g.plan || '', g.category || 'Standard', g.mealPlan || 'CP', g.single || '', g.twin || g.price || '', g.triple || '', g.child || '', g.extraBed || '');
+          });
+        } else {
+          addDefaultRateGridRows();
+        }
+      } catch (e) {
+        addDefaultRateGridRows();
+      }
 
       document.getElementById('formHeading').innerText = `Edit Package (${p.id})`;
       document.getElementById('btnSubmitText').innerText = "Update Package In Google Sheet";
@@ -218,6 +368,10 @@
     function resetForm() {
       document.getElementById('editingPackageId').value = '';
       document.getElementById('packageForm').reset();
+      document.getElementById('itineraryLinksContainer').innerHTML = '';
+      addDefaultRateGridRows();
+      addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
+      addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
       document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
       document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
       document.getElementById('btnResetForm').classList.add('hidden');
@@ -227,6 +381,47 @@
       event.preventDefault();
       const btn = document.getElementById('btnSubmitForm');
       btn.disabled = true;
+
+      // Collect Itinerary PDF Links
+      const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
+      const linksArr = [];
+      linkRows.forEach(r => {
+        const title = r.querySelector('.it-title').value.trim();
+        const url = r.querySelector('.it-url').value.trim();
+        if (title || url) {
+          linksArr.push({ title, url });
+        }
+      });
+
+      // Collect Rate Grid Data
+      const rows = document.querySelectorAll('.rg-data-row');
+      const rateGridArr = [];
+
+      rows.forEach(r => {
+        const section = r.querySelector('.rg-section').value.trim();
+        const plan = r.querySelector('.rg-plan').value.trim();
+        const cat = r.querySelector('.rg-cat').value;
+        const meal = r.querySelector('.rg-meal').value.trim();
+        const single = r.querySelector('.rg-single').value.trim();
+        const twin = r.querySelector('.rg-twin').value.trim();
+        const triple = r.querySelector('.rg-triple').value.trim();
+        const child = r.querySelector('.rg-child').value.trim();
+        const extraBed = r.querySelector('.rg-extra').value.trim();
+
+        if (plan || twin || single) {
+          rateGridArr.push({
+            section: section || 'Package',
+            hotelPlan: plan,
+            category: cat,
+            mealPlan: meal,
+            single: single,
+            twin: twin,
+            triple: triple,
+            child: child,
+            extraBed: extraBed
+          });
+        }
+      });
 
       const pkgId = document.getElementById('editingPackageId').value;
       const payload = {
@@ -240,7 +435,11 @@
         travelDates: document.getElementById('pkgDates').value.trim(),
         inclusions: document.getElementById('pkgInclusions').value.trim(),
         exclusions: document.getElementById('pkgExclusions').value.trim(),
-        ratesGrid: "[]"
+        imageUrl: document.getElementById('pkgImageUrl').value.trim(),
+        itineraryLinks: JSON.stringify(linksArr),
+        terms: document.getElementById('pkgTerms').value.trim(),
+        itinerary: document.getElementById('pkgItinerary').value.trim(),
+        ratesGrid: JSON.stringify(rateGridArr)
       };
 
       try {
@@ -251,7 +450,7 @@
         });
         const data = await res.json();
         if (data.success) {
-          alert(data.message || "Saved successfully!");
+          alert(data.message || "Package saved successfully!");
           resetForm();
           fetchAdminPackages();
         } else {
