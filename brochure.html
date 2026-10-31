@@ -109,10 +109,10 @@
         if (Array.isArray(gridBlocks) && gridBlocks.length > 0) {
           gridBlocks.forEach(blk => {
             const h = blk.headers || {
-              h1: "2 Pax Basis on CP", h2: "2 Pax Basis on MAP", 
-              h3: "4 Pax Basis on CP", h4: "4 Pax Basis on MAP",
-              h5: "Extra Bed on CP", h6: "Extra Bed on MAP", 
-              h7: "Child W/O Bed on CP", h8: "Child W/O Bed on MAP"
+              h1: "2 Pax CP", h2: "2 Pax MAP", 
+              h3: "4 Pax CP", h4: "4 Pax MAP",
+              h5: "Ex. Bed CP", h6: "Ex. Bed MAP", 
+              h7: "Child CP", h8: "Child MAP"
             };
 
             let rowsHtml = '';
@@ -120,16 +120,16 @@
               blk.rows.forEach(r => {
                 rowsHtml += `
                   <tr class="hover:bg-slate-50 font-medium">
-                    <td class="p-2.5 border border-slate-200 font-bold text-slate-800">${r.plan || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 text-slate-700">${r.cat || 'Standard'}</td>
-                    <td class="p-2.5 border border-slate-200 font-extrabold text-amber-600">${r.v1 || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 font-extrabold text-amber-600">${r.v2 || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 font-extrabold text-amber-600">${r.v3 || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 font-extrabold text-amber-600">${r.v4 || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 text-slate-700">${r.v5 || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 text-slate-700">${r.v6 || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 text-slate-700">${r.v7 || '-'}</td>
-                    <td class="p-2.5 border border-slate-200 text-slate-700">${r.v8 || '-'}</td>
+                    <td class="p-2 border border-slate-200 font-bold text-slate-800">${r.plan || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.cat || 'Standard'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v1 || '-'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v2 || '-'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v3 || '-'}</td>
+                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v4 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v5 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v6 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v7 || '-'}</td>
+                    <td class="p-2 border border-slate-200 text-slate-700">${r.v8 || '-'}</td>
                   </tr>
                 `;
               });
@@ -138,7 +138,7 @@
             }
 
             rateGridsHtml += `
-              <div class="mb-6 bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-3">
+              <div class="mb-6 bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-200 pb-3">
                   <h4 class="text-sm font-black text-blue-900 uppercase flex items-center gap-2">
                     <i class="fa-solid fa-calendar-days text-blue-600"></i> ${blk.title || 'Package Duration'}
@@ -146,19 +146,19 @@
                   <p class="text-xs font-bold text-slate-600">${blk.subtitle || ''}</p>
                 </div>
                 <div class="overflow-x-auto">
-                  <table class="w-full text-left text-xs border-collapse border border-slate-200 min-w-[1300px]">
+                  <table class="w-full text-left text-xs border-collapse border border-slate-200 min-w-[1100px]">
                     <thead>
                       <tr class="bg-blue-900 text-white font-extrabold uppercase text-[10px]">
-                        <th class="p-2.5 border border-slate-300 w-32">Hotel Plan</th>
-                        <th class="p-2.5 border border-slate-300 w-28">Category</th>
-                        <th class="p-2.5 border border-slate-300 text-amber-300">${h.h1}</th>
-                        <th class="p-2.5 border border-slate-300 text-amber-300">${h.h2}</th>
-                        <th class="p-2.5 border border-slate-300 text-amber-300">${h.h3}</th>
-                        <th class="p-2.5 border border-slate-300 text-amber-300">${h.h4}</th>
-                        <th class="p-2.5 border border-slate-300">${h.h5}</th>
-                        <th class="p-2.5 border border-slate-300">${h.h6}</th>
-                        <th class="p-2.5 border border-slate-300">${h.h7}</th>
-                        <th class="p-2.5 border border-slate-300">${h.h8}</th>
+                        <th class="p-2 border border-slate-300 w-28">Hotel Plan</th>
+                        <th class="p-2 border border-slate-300 w-24">Category</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h1}</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h2}</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h3}</th>
+                        <th class="p-2 border border-slate-300 text-amber-300">${h.h4}</th>
+                        <th class="p-2 border border-slate-300">${h.h5}</th>
+                        <th class="p-2 border border-slate-300">${h.h6}</th>
+                        <th class="p-2 border border-slate-300">${h.h7}</th>
+                        <th class="p-2 border border-slate-300">${h.h8}</th>
                       </tr>
                     </thead>
                     <tbody>${rowsHtml}</tbody>
@@ -174,7 +174,6 @@
         rateGridsHtml = `<p class="text-xs font-semibold text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200 mt-2">${p.b2bPrice || 'Rates available on request'}</p>`;
       }
 
-      // Parse Itinerary Document Links (Docs/Drive)
       let pdfLinksHtml = '';
       try {
         const pdfLinks = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
@@ -197,7 +196,6 @@
         }
       } catch (e) {}
 
-      // Parse Day-Wise Itinerary
       let itineraryHtml = '';
       try {
         const itineraryData = typeof p.itinerary === 'string' ? JSON.parse(p.itinerary) : p.itinerary;
