@@ -479,6 +479,19 @@
 
       const modalContent = document.getElementById('modalPackageContent');
       
+      // Itinerary Links HTML Parser
+      let itineraryLinksHtml = '';
+      try {
+        const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
+        if (Array.isArray(links) && links.length > 0) {
+          itineraryLinksHtml = `<div class="space-y-2"><p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Itinerary Documents</p><div class="flex flex-wrap gap-2">`;
+          links.forEach(l => {
+            itineraryLinksHtml += `<a href="${l.url || '#'}" target="_blank" class="px-3 py-1.5 bg-blue-700 text-white text-xs font-bold rounded-xl hover:bg-blue-800 transition flex items-center gap-1.5"><span>${l.title || 'View Itinerary'}</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>`;
+          });
+          itineraryLinksHtml += `</div></div>`;
+        }
+      } catch (err) {}
+
       let rateGridHtml = '';
       try {
         const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
@@ -516,6 +529,8 @@
           <h3 class="text-2xl font-black text-slate-900 mt-2">${p.title}</h3>
           <p class="text-xs font-semibold text-slate-500 mt-1">${p.travelDates || ''}</p>
         </div>
+
+        ${itineraryLinksHtml}
 
         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
           <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Pricing & Inclusions</p>
