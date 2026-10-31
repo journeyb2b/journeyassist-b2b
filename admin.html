@@ -155,14 +155,14 @@
           </div>
         </div>
 
-        <!-- ADVANCED GROUPED RATE GRID BUILDER -->
+        <!-- ADVANCED GROUPED RATE GRID BUILDER (UPDATED COLUMNS) -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
                 <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks
               </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Add duration blocks (e.g. 3N/4D) with custom route subtitles and occupancy rates.</p>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Add duration blocks (e.g. 3N/4D) with custom route subtitles and pax/meal plan rates.</p>
             </div>
             <button type="button" onclick="addDurationBlock()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 self-start sm:self-auto cursor-pointer">
               <i class="fa-solid fa-plus"></i> Add Duration Block
@@ -227,8 +227,8 @@
       addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
       addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
       addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", [
-        { plan: "Munnar", cat: "Standard", meal: "CP", single: "13,450", twin: "11,450", triple: "10,450", child: "6,750", extra: "5,450" },
-        { plan: "Munnar", cat: "Deluxe", meal: "CP", single: "15,950", twin: "13,950", triple: "12,950", child: "7,950", extra: "6,950" }
+        { plan: "Munnar", cat: "Standard", p2cp: "11,450", p2map: "13,450", p4cp: "9,950", p4map: "11,950", exacp: "5,450", examap: "6,450", chcp: "4,500", chmap: "5,500" },
+        { plan: "Munnar", cat: "Deluxe", p2cp: "13,950", p2map: "15,950", p4cp: "11,950", p4map: "13,950", exacp: "6,950", examap: "7,950", chcp: "5,500", chmap: "6,500" }
       ]);
     };
 
@@ -267,17 +267,19 @@
           </div>
         </div>
         <div class="px-4 overflow-x-auto">
-          <table class="w-full text-left text-xs min-w-[850px] border-collapse">
+          <table class="w-full text-left text-xs min-w-[1250px] border-collapse">
             <thead>
               <tr class="text-slate-400 uppercase text-[10px] border-b border-slate-800 font-extrabold">
                 <th class="p-2">Hotel Plan</th>
                 <th class="p-2">Category</th>
-                <th class="p-2">Meal</th>
-                <th class="p-2">Single (₹)</th>
-                <th class="p-2">Twin (₹)</th>
-                <th class="p-2">Triple (₹)</th>
-                <th class="p-2">Child (6-11) (₹)</th>
-                <th class="p-2">Extra Bed (₹)</th>
+                <th class="p-2">2 Pax (CP) (₹)</th>
+                <th class="p-2">2 Pax (MAP) (₹)</th>
+                <th class="p-2">4 Pax (CP) (₹)</th>
+                <th class="p-2">4 Pax (MAP) (₹)</th>
+                <th class="p-2">Extra Bed (CP) (₹)</th>
+                <th class="p-2">Extra Bed (MAP) (₹)</th>
+                <th class="p-2">Child W/O Bed (CP) (₹)</th>
+                <th class="p-2">Child W/O Bed (MAP) (₹)</th>
                 <th class="p-2 text-center">Action</th>
               </tr>
             </thead>
@@ -291,13 +293,13 @@
       container.appendChild(div);
 
       if (initialRows && Array.isArray(initialRows)) {
-        initialRows.forEach(r => addRateRow(blockId, r.plan, r.cat, r.meal, r.single, r.twin, r.triple, r.child, r.extra));
+        initialRows.forEach(r => addRateRow(blockId, r.plan, r.cat, r.p2cp, r.p2map, r.p4cp, r.p4map, r.exacp, r.examap, r.chcp, r.chmap));
       } else {
-        addRateRow(blockId, "Munnar", "Standard", "CP", "13,450", "11,450", "10,450", "6,750", "5,450");
+        addRateRow(blockId, "Munnar", "Standard", "11,450", "13,450", "9,950", "11,950", "5,450", "6,450", "4,500", "5,500");
       }
     }
 
-    function addRateRow(blockId, plan="Munnar", cat="Standard", meal="CP", single="", twin="", triple="", child="", extra="") {
+    function addRateRow(blockId, plan="Munnar", cat="Standard", p2cp="", p2map="", p4cp="", p4map="", exacp="", examap="", chcp="", chmap="") {
       const block = document.getElementById(blockId);
       const tbody = block.querySelector('.b-rows-container');
       const rowId = 'r-' + Date.now() + Math.floor(Math.random() * 1000);
@@ -315,12 +317,14 @@
             <option value="Luxury" ${cat==='Luxury'?'selected':''}>Luxury</option>
           </select>
         </td>
-        <td class="p-1.5"><input type="text" value="${meal}" class="r-meal w-14 px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${single}" class="r-single w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${twin}" class="r-twin w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${triple}" class="r-triple w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${child}" class="r-child w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${extra}" class="r-extra w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${p2cp}" class="r-p2cp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${p2map}" class="r-p2map w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${p4cp}" class="r-p4cp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${p4map}" class="r-p4map w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${exacp}" class="r-exacp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${examap}" class="r-examap w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${chcp}" class="r-chcp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${chmap}" class="r-chmap w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
         <td class="p-1.5 text-center">
           <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs cursor-pointer"><i class="fa-solid fa-trash"></i></button>
         </td>
@@ -428,7 +432,6 @@
       try {
         const gridBlocks = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
         if (Array.isArray(gridBlocks) && gridBlocks.length > 0) {
-          // If stored as grouped blocks
           gridBlocks.forEach(blk => {
             addDurationBlock(blk.title || 'Package', blk.subtitle || '', blk.rows || []);
           });
@@ -454,7 +457,7 @@
       addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
       addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
       addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", [
-        { plan: "Munnar", cat: "Standard", meal: "CP", single: "13,450", twin: "11,450", triple: "10,450", child: "6,750", extra: "5,450" }
+        { plan: "Munnar", cat: "Standard", p2cp: "11,450", p2map: "13,450", p4cp: "9,950", p4map: "11,950", exacp: "5,450", examap: "6,450", chcp: "4,500", chmap: "5,500" }
       ]);
       document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
       document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
@@ -497,12 +500,14 @@
           rowsArr.push({
             plan: r.querySelector('.r-plan').value.trim(),
             cat: r.querySelector('.r-cat').value,
-            meal: r.querySelector('.r-meal').value.trim(),
-            single: r.querySelector('.r-single').value.trim(),
-            twin: r.querySelector('.r-twin').value.trim(),
-            triple: r.querySelector('.r-triple').value.trim(),
-            child: r.querySelector('.r-child').value.trim(),
-            extra: r.querySelector('.r-extra').value.trim()
+            p2cp: r.querySelector('.r-p2cp').value.trim(),
+            p2map: r.querySelector('.r-p2map').value.trim(),
+            p4cp: r.querySelector('.r-p4cp').value.trim(),
+            p4map: r.querySelector('.r-p4map').value.trim(),
+            exacp: r.querySelector('.r-exacp').value.trim(),
+            examap: r.querySelector('.r-examap').value.trim(),
+            chcp: r.querySelector('.r-chcp').value.trim(),
+            chmap: r.querySelector('.r-chmap').value.trim()
           });
         });
 
