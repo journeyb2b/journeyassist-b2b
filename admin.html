@@ -35,7 +35,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage multi-duration grouped rate grids, WhatsApp links, terms, and brochure highlights.</p>
+          <p class="text-xs font-medium text-slate-400">Manage multi-duration grouped rate grids, editable headers, WhatsApp links, and brochure highlights.</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition cursor-pointer">
           <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
@@ -155,14 +155,14 @@
           </div>
         </div>
 
-        <!-- ADVANCED GROUPED RATE GRID BUILDER (UPDATED COLUMNS) -->
+        <!-- ADVANCED GROUPED RATE GRID BUILDER (EDITABLE HEADERS) -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks
+                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks (Editable Headers)
               </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Add duration blocks (e.g. 3N/4D) with custom route subtitles and pax/meal plan rates.</p>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Add duration blocks and customize table column headers directly.</p>
             </div>
             <button type="button" onclick="addDurationBlock()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 self-start sm:self-auto cursor-pointer">
               <i class="fa-solid fa-plus"></i> Add Duration Block
@@ -226,10 +226,10 @@
       fetchAdminPackages();
       addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
       addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
-      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", [
-        { plan: "Munnar", cat: "Standard", p2cp: "11,450", p2map: "13,450", p4cp: "9,950", p4map: "11,950", exacp: "5,450", examap: "6,450", chcp: "4,500", chmap: "5,500" },
-        { plan: "Munnar", cat: "Deluxe", p2cp: "13,950", p2map: "15,950", p4cp: "11,950", p4map: "13,950", exacp: "6,950", examap: "7,950", chcp: "5,500", chmap: "6,500" }
-      ]);
+      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", null, {
+        h1: "2 Pax Basis on CP", h2: "2 Pax Basis on MAP", h3: "4 Pax Basis on CP", h4: "4 Pax Basis on MAP",
+        h5: "Extra Bed on CP", h6: "Extra Bed on MAP", h7: "Child W/O Bed on CP", h8: "Child W/O Bed on MAP"
+      });
     };
 
     function addItineraryLinkRow(title = '', url = '') {
@@ -248,9 +248,18 @@
       container.appendChild(div);
     }
 
-    function addDurationBlock(title = "3N/4D Package", subtitle = "2 Nights Munnar + 1 Night Kochi", initialRows = null) {
+    function addDurationBlock(title = "3N/4D Package", subtitle = "2 Nights Munnar + 1 Night Kochi", initialRows = null, headers = null) {
       const container = document.getElementById('builderBlocksContainer');
       const blockId = 'blk-' + Date.now() + Math.floor(Math.random() * 1000);
+
+      const h1 = headers ? headers.h1 : "2 Pax Basis on CP";
+      const h2 = headers ? headers.h2 : "2 Pax Basis on MAP";
+      const h3 = headers ? headers.h3 : "4 Pax Basis on CP";
+      const h4 = headers ? headers.h4 : "4 Pax Basis on MAP";
+      const h5 = headers ? headers.h5 : "Extra Bed on CP";
+      const h6 = headers ? headers.h6 : "Extra Bed on MAP";
+      const h7 = headers ? headers.h7 : "Child W/O Bed on CP";
+      const h8 = headers ? headers.h8 : "Child W/O Bed on MAP";
 
       const div = document.createElement('div');
       div.id = blockId;
@@ -267,20 +276,20 @@
           </div>
         </div>
         <div class="px-4 overflow-x-auto">
-          <table class="w-full text-left text-xs min-w-[1250px] border-collapse">
+          <table class="w-full text-left text-xs min-w-[1350px] border-collapse">
             <thead>
-              <tr class="text-slate-400 uppercase text-[10px] border-b border-slate-800 font-extrabold">
-                <th class="p-2">Hotel Plan</th>
-                <th class="p-2">Category</th>
-                <th class="p-2">2 Pax (CP) (₹)</th>
-                <th class="p-2">2 Pax (MAP) (₹)</th>
-                <th class="p-2">4 Pax (CP) (₹)</th>
-                <th class="p-2">4 Pax (MAP) (₹)</th>
-                <th class="p-2">Extra Bed (CP) (₹)</th>
-                <th class="p-2">Extra Bed (MAP) (₹)</th>
-                <th class="p-2">Child W/O Bed (CP) (₹)</th>
-                <th class="p-2">Child W/O Bed (MAP) (₹)</th>
-                <th class="p-2 text-center">Action</th>
+              <tr class="text-slate-400 uppercase text-[10px] border-b border-slate-800 font-extrabold bg-slate-900">
+                <th class="p-2 w-32">Hotel Plan</th>
+                <th class="p-2 w-28">Category</th>
+                <th class="p-2"><input type="text" value="${h1}" class="th-h1 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h2}" class="th-h2 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h3}" class="th-h3 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h4}" class="th-h4 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h5}" class="th-h5 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h6}" class="th-h6 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h7}" class="th-h7 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h8}" class="th-h8 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2 text-center w-16">Action</th>
               </tr>
             </thead>
             <tbody class="b-rows-container divide-y divide-slate-800/60"></tbody>
@@ -293,13 +302,13 @@
       container.appendChild(div);
 
       if (initialRows && Array.isArray(initialRows)) {
-        initialRows.forEach(r => addRateRow(blockId, r.plan, r.cat, r.p2cp, r.p2map, r.p4cp, r.p4map, r.exacp, r.examap, r.chcp, r.chmap));
+        initialRows.forEach(r => addRateRow(blockId, r.plan, r.cat, r.v1, r.v2, r.v3, r.v4, r.v5, r.v6, r.v7, r.v8));
       } else {
         addRateRow(blockId, "Munnar", "Standard", "11,450", "13,450", "9,950", "11,950", "5,450", "6,450", "4,500", "5,500");
       }
     }
 
-    function addRateRow(blockId, plan="Munnar", cat="Standard", p2cp="", p2map="", p4cp="", p4map="", exacp="", examap="", chcp="", chmap="") {
+    function addRateRow(blockId, plan="Munnar", cat="Standard", v1="", v2="", v3="", v4="", v5="", v6="", v7="", v8="") {
       const block = document.getElementById(blockId);
       const tbody = block.querySelector('.b-rows-container');
       const rowId = 'r-' + Date.now() + Math.floor(Math.random() * 1000);
@@ -317,14 +326,14 @@
             <option value="Luxury" ${cat==='Luxury'?'selected':''}>Luxury</option>
           </select>
         </td>
-        <td class="p-1.5"><input type="text" value="${p2cp}" class="r-p2cp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${p2map}" class="r-p2map w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${p4cp}" class="r-p4cp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${p4map}" class="r-p4map w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${exacp}" class="r-exacp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${examap}" class="r-examap w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${chcp}" class="r-chcp w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
-        <td class="p-1.5"><input type="text" value="${chmap}" class="r-chmap w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v1}" class="r-v1 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v2}" class="r-v2 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v3}" class="r-v3 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v4}" class="r-v4 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v5}" class="r-v5 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v6}" class="r-v6 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v7}" class="r-v7 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v8}" class="r-v8 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
         <td class="p-1.5 text-center">
           <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs cursor-pointer"><i class="fa-solid fa-trash"></i></button>
         </td>
@@ -426,14 +435,14 @@
         }
       } catch (e) {}
 
-      // Populate Grouped Rate Grid Blocks
+      // Populate Grouped Rate Grid Blocks with Editable Headers
       const builderContainer = document.getElementById('builderBlocksContainer');
       builderContainer.innerHTML = '';
       try {
         const gridBlocks = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
         if (Array.isArray(gridBlocks) && gridBlocks.length > 0) {
           gridBlocks.forEach(blk => {
-            addDurationBlock(blk.title || 'Package', blk.subtitle || '', blk.rows || []);
+            addDurationBlock(blk.title || 'Package', blk.subtitle || '', blk.rows || [], blk.headers || null);
           });
         } else {
           addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
@@ -456,9 +465,10 @@
       document.getElementById('builderBlocksContainer').innerHTML = '';
       addItineraryLinkRow('3N/4D Kerala Itinerary', '#');
       addItineraryLinkRow('4N/5D Kerala Itinerary', '#');
-      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", [
-        { plan: "Munnar", cat: "Standard", p2cp: "11,450", p2map: "13,450", p4cp: "9,950", p4map: "11,950", exacp: "5,450", examap: "6,450", chcp: "4,500", chmap: "5,500" }
-      ]);
+      addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi", null, {
+        h1: "2 Pax Basis on CP", h2: "2 Pax Basis on MAP", h3: "4 Pax Basis on CP", h4: "4 Pax Basis on MAP",
+        h5: "Extra Bed on CP", h6: "Extra Bed on MAP", h7: "Child W/O Bed on CP", h8: "Child W/O Bed on MAP"
+      });
       document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
       document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
       document.getElementById('btnResetForm').classList.add('hidden');
@@ -486,13 +496,26 @@
         }
       });
 
-      // Collect Grouped Rate Grid Blocks
+      // Collect Grouped Rate Grid Blocks with Headers
       const blocks = document.querySelectorAll('.duration-block');
       const rateGridBlocksArr = [];
 
       blocks.forEach(blk => {
         const bTitle = blk.querySelector('.b-title').value.trim();
         const bSub = blk.querySelector('.b-sub').value.trim();
+        
+        // Collect Header Values
+        const headersObj = {
+          h1: blk.querySelector('.th-h1').value.trim(),
+          h2: blk.querySelector('.th-h2').value.trim(),
+          h3: blk.querySelector('.th-h3').value.trim(),
+          h4: blk.querySelector('.th-h4').value.trim(),
+          h5: blk.querySelector('.th-h5').value.trim(),
+          h6: blk.querySelector('.th-h6').value.trim(),
+          h7: blk.querySelector('.th-h7').value.trim(),
+          h8: blk.querySelector('.th-h8').value.trim()
+        };
+
         const rows = blk.querySelectorAll('.rate-row');
         const rowsArr = [];
 
@@ -500,14 +523,14 @@
           rowsArr.push({
             plan: r.querySelector('.r-plan').value.trim(),
             cat: r.querySelector('.r-cat').value,
-            p2cp: r.querySelector('.r-p2cp').value.trim(),
-            p2map: r.querySelector('.r-p2map').value.trim(),
-            p4cp: r.querySelector('.r-p4cp').value.trim(),
-            p4map: r.querySelector('.r-p4map').value.trim(),
-            exacp: r.querySelector('.r-exacp').value.trim(),
-            examap: r.querySelector('.r-examap').value.trim(),
-            chcp: r.querySelector('.r-chcp').value.trim(),
-            chmap: r.querySelector('.r-chmap').value.trim()
+            v1: r.querySelector('.r-v1').value.trim(),
+            v2: r.querySelector('.r-v2').value.trim(),
+            v3: r.querySelector('.r-v3').value.trim(),
+            v4: r.querySelector('.r-v4').value.trim(),
+            v5: r.querySelector('.r-v5').value.trim(),
+            v6: r.querySelector('.r-v6').value.trim(),
+            v7: r.querySelector('.r-v7').value.trim(),
+            v8: r.querySelector('.r-v8').value.trim()
           });
         });
 
@@ -515,6 +538,7 @@
           rateGridBlocksArr.push({
             title: bTitle || 'Package Block',
             subtitle: bSub,
+            headers: headersObj,
             rows: rowsArr
           });
         }
