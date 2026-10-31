@@ -510,17 +510,19 @@
         rateGridHtml = `<p class="text-xs font-medium text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200">Standard rates applicable.</p>`;
       }
 
-      // OPTIONAL DAY-WISE ITINERARY CHECK FOR PORTAL MODAL
+      // STRICT CHECK: ONLY RENDER IF THERE IS VALID NON-EMPTY ITINERARY CONTENT
       let itineraryHtml = '';
       try {
         let itineraryData = p.itinerary;
         if (typeof itineraryData === 'string' && itineraryData.trim() !== '') {
           try { itineraryData = JSON.parse(itineraryData); } catch(err) {}
         }
+        
         if (Array.isArray(itineraryData) && itineraryData.length > 0) {
           let dayRows = '';
           itineraryData.forEach((d, idx) => {
-            if (d && (d.title || d.desc)) {
+            // Check if title or desc actually has text
+            if (d && ((d.title && d.title.trim() !== '') || (d.desc && d.desc.trim() !== ''))) {
               dayRows += `
                 <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl mb-2">
                   <h5 class="font-black text-blue-900 text-xs uppercase">${d.title || ('Day ' + (idx + 1))}</h5>
@@ -529,7 +531,9 @@
               `;
             }
           });
-          if (dayRows) {
+          
+          // Only wrap in HTML if valid day rows were generated
+          if (dayRows !== '') {
             itineraryHtml = `
               <div class="space-y-2">
                 <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Day-Wise Tour Itinerary Details</p>
@@ -577,7 +581,6 @@
 
       document.getElementById('packageModal').classList.remove('hidden');
     }
-
     function closePackageModal() {
       document.getElementById('packageModal').classList.add('hidden');
     }
