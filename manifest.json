@@ -1,0 +1,17 @@
+{
+  "name": "Journey Assist B2B Portal",
+  "short_name": "Journey Assist",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e3a8a",
+  "description": "India's Leading B2B Travel Partner Portal",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3063/3063823.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
