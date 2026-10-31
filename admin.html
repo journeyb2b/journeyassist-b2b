@@ -121,7 +121,7 @@
           </div>
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions (Line-wise) *</label>
-            <textarea id="pkgExclusions" rows="3" required placeholder="Air / Train fares&#10;Personal expenses&#10;Lunch & Dinner" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
+            <textarea id="pkgExclusions" rows="3" placeholder="Air / Train fares&#10;Personal expenses&#10;Lunch & Dinner" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
           </div>
         </div>
 
@@ -429,7 +429,7 @@
       const p = adminPackages[index];
       if (!p) return;
 
-      document.getElementById('editingPackageId').value = p.id;
+      document.getElementById('editingPackageId').value = p.id || '';
       document.getElementById('pkgTitle').value = p.title || '';
       document.getElementById('pkgDestination').value = p.destination || '';
       document.getElementById('pkgRegion').value = (p.region || 'domestic').toLowerCase();
@@ -437,18 +437,26 @@
       document.getElementById('pkgPrice').value = p.b2bPrice || '';
       document.getElementById('pkgDates').value = p.travelDates || '';
       document.getElementById('pkgInclusions').value = p.inclusions || '';
-      // FIXED: Properly load exclusions and terms on edit
+      
+      // SAFETY CHECK: If exclusions or terms are missing in sheet, prevent crash
       document.getElementById('pkgExclusions').value = p.exclusions || '';
       document.getElementById('pkgTerms').value = p.terms || '';
       document.getElementById('pkgImageUrl').value = p.imageUrl || '';
       updateImagePreview();
 
-      // FIXED: Properly parse and load itinerary links on edit
+      // FIXED & PROTECTED: Parse Itinerary Links Safely regardless of Sheet columns
       document.getElementById('itineraryLinksContainer').innerHTML = '';
       try {
-        const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
+        let links = p.itineraryLinks;
+        if (typeof links === 'string' && links.trim() !== '') {
+          links = JSON.parse(links);
+        }
         if (Array.isArray(links) && links.length > 0) {
-          links.forEach(l => addItineraryLinkRow(l.title, l.url));
+          links.forEach(l => {
+            if (l && (l.title || l.url)) {
+              addItineraryLinkRow(l.title || 'View Detailed Itinerary', l.url || '');
+            }
+          });
         } else {
           addItineraryLinkRow('View Detailed Itinerary', '');
         }
@@ -458,20 +466,26 @@
 
       document.getElementById('itineraryDaysContainer').innerHTML = '';
       try {
-        const itineraryData = typeof p.itinerary === 'string' ? JSON.parse(p.itinerary) : p.itinerary;
+        let itineraryData = p.itinerary;
+        if (typeof itineraryData === 'string' && itineraryData.trim() !== '') {
+          try { itineraryData = JSON.parse(itineraryData); } catch(err) {}
+        }
         if (Array.isArray(itineraryData) && itineraryData.length > 0) {
-          itineraryData.forEach(d => addItineraryDayRow(d.title, d.desc));
+          itineraryData.forEach(d => addItineraryDayRow(d.title || 'Day', d.desc || ''));
         } else {
-          addItineraryDayRow("Day 1: Tour Overview", p.itinerary || "Detailed itinerary upon booking.");
+          addItineraryDayRow("Day 1: Tour Overview", typeof p.itinerary === 'string' ? p.itinerary : "Detailed itinerary upon booking.");
         }
       } catch (e) {
-        addItineraryDayRow("Day 1: Tour Overview", p.itinerary || "Detailed itinerary upon booking.");
+        addItineraryDayRow("Day 1: Tour Overview", "Detailed itinerary upon booking.");
       }
 
       const builderContainer = document.getElementById('builderBlocksContainer');
       builderContainer.innerHTML = '';
       try {
-        const gridBlocks = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
+        let gridBlocks = p.ratesGrid;
+        if (typeof gridBlocks === 'string' && gridBlocks.trim() !== '') {
+          gridBlocks = JSON.parse(gridBlocks);
+        }
         if (Array.isArray(gridBlocks) && gridBlocks.length > 0) {
           gridBlocks.forEach(blk => {
             addDurationBlock(blk.title || 'Package', blk.subtitle || '', blk.rows || [], blk.headers || null);
