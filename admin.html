@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Operations Control | Journey Assist</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -35,7 +35,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage compact multi-duration rate grids, image preview, and live brochure preview.</p>
+          <p class="text-xs font-medium text-slate-400">Manage multi-duration rate grids, image preview, custom itinerary doc links, and live brochure preview.</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition cursor-pointer">
           <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
@@ -109,7 +109,7 @@
               <i class="fa-solid fa-plus"></i> Add Link Tab
             </button>
           </div>
-          <p class="text-[11px] text-slate-400 font-normal">Yahan Google Docs, Drive link, ya koi bhi document URL paste karein.</p>
+          <p class="text-[11px] text-slate-400 font-normal">Yahan Google Docs, Drive link, ya koi bhi document URL paste karein. Frontend par clean tab ban kar aayega.</p>
           <div id="itineraryLinksContainer" class="space-y-2"></div>
         </div>
 
@@ -125,14 +125,14 @@
           </div>
         </div>
 
-        <!-- COMPACT RATE GRID BUILDER -->
+        <!-- RATE GRID BUILDER -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
-                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks (Compact)
+                <i class="fa-solid fa-table-cells"></i> Multi-Duration Supplier Rate Grid Blocks
               </span>
-              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har duration ke liye compact hotel rates aur editable headers configure karein.</p>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har duration (3N/4D, 5N/6D) ke liye custom hotel rates aur editable headers configure karein.</p>
             </div>
             <button type="button" onclick="addDurationBlock()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
               <i class="fa-solid fa-plus"></i> Add Duration Block
@@ -283,14 +283,14 @@
       const container = document.getElementById('builderBlocksContainer');
       const blockId = 'blk-' + Date.now() + Math.floor(Math.random() * 1000);
 
-      const h1 = headers ? headers.h1 : "2 Pax CP";
-      const h2 = headers ? headers.h2 : "2 Pax MAP";
-      const h3 = headers ? headers.h3 : "4 Pax CP";
-      const h4 = headers ? headers.h4 : "4 Pax MAP";
-      const h5 = headers ? headers.h5 : "Ex. Bed CP";
-      const h6 = headers ? headers.h6 : "Ex. Bed MAP";
-      const h7 = headers ? headers.h7 : "Child CP";
-      const h8 = headers ? headers.h8 : "Child MAP";
+      const h1 = headers ? headers.h1 : "2 Pax Basis on CP";
+      const h2 = headers ? headers.h2 : "2 Pax Basis on MAP";
+      const h3 = headers ? headers.h3 : "4 Pax Basis on CP";
+      const h4 = headers ? headers.h4 : "4 Pax Basis on MAP";
+      const h5 = headers ? headers.h5 : "Extra Bed on CP";
+      const h6 = headers ? headers.h6 : "Extra Bed on MAP";
+      const h7 = headers ? headers.h7 : "Child W/O Bed on CP";
+      const h8 = headers ? headers.h8 : "Child W/O Bed on MAP";
 
       const div = document.createElement('div');
       div.id = blockId;
@@ -306,21 +306,21 @@
             <button type="button" onclick="document.getElementById('${blockId}').remove()" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs cursor-pointer"><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
-        <div class="px-3 overflow-x-auto">
-          <table class="w-full text-left text-xs min-w-[1100px] border-collapse">
+        <div class="px-4 overflow-x-auto">
+          <table class="w-full text-left text-xs min-w-[1350px] border-collapse">
             <thead>
               <tr class="text-slate-400 uppercase text-[10px] border-b border-slate-800 font-extrabold bg-slate-900">
-                <th class="p-1.5 w-28">Hotel Plan</th>
-                <th class="p-1.5 w-24">Category</th>
-                <th class="p-1.5"><input type="text" value="${h1}" class="th-h1 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h2}" class="th-h2 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h3}" class="th-h3 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h4}" class="th-h4 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h5}" class="th-h5 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h6}" class="th-h6 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h7}" class="th-h7 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5"><input type="text" value="${h8}" class="th-h8 w-full px-1.5 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
-                <th class="p-1.5 text-center w-12">Action</th>
+                <th class="p-2 w-32">Hotel Plan</th>
+                <th class="p-2 w-28">Category</th>
+                <th class="p-2"><input type="text" value="${h1}" class="th-h1 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h2}" class="th-h2 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h3}" class="th-h3 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h4}" class="th-h4 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-amber-300 font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h5}" class="th-h5 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h6}" class="th-h6 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h7}" class="th-h7 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2"><input type="text" value="${h8}" class="th-h8 w-full px-2 py-1 bg-slate-950 border border-slate-800 rounded text-white font-bold text-[10px]"></th>
+                <th class="p-2 text-center w-16">Action</th>
               </tr>
             </thead>
             <tbody class="b-rows-container divide-y divide-slate-800/60"></tbody>
@@ -348,25 +348,25 @@
       tr.id = rowId;
       tr.className = 'rate-row hover:bg-slate-900/50 transition';
       tr.innerHTML = `
-        <td class="p-1"><input type="text" value="${plan}" class="r-plan w-full px-2 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1">
-          <select class="r-cat w-full px-1 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]">
+        <td class="p-1.5"><input type="text" value="${plan}" class="r-plan w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5">
+          <select class="r-cat w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs">
             <option value="Standard" ${cat==='Standard'?'selected':''}>Standard</option>
             <option value="Deluxe" ${cat==='Deluxe'?'selected':''}>Deluxe</option>
             <option value="Premium" ${cat==='Premium'?'selected':''}>Premium</option>
             <option value="Luxury" ${cat==='Luxury'?'selected':''}>Luxury</option>
           </select>
         </td>
-        <td class="p-1"><input type="text" value="${v1}" class="r-v1 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v2}" class="r-v2 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v3}" class="r-v3 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v4}" class="r-v4 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v5}" class="r-v5 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v6}" class="r-v6 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v7}" class="r-v7 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1"><input type="text" value="${v8}" class="r-v8 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
-        <td class="p-1 text-center">
-          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-[11px] cursor-pointer"><i class="fa-solid fa-trash"></i></button>
+        <td class="p-1.5"><input type="text" value="${v1}" class="r-v1 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v2}" class="r-v2 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v3}" class="r-v3 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v4}" class="r-v4 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v5}" class="r-v5 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v6}" class="r-v6 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v7}" class="r-v7 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5"><input type="text" value="${v8}" class="r-v8 w-full px-2 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-xs"></td>
+        <td class="p-1.5 text-center">
+          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="p-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs cursor-pointer"><i class="fa-solid fa-trash"></i></button>
         </td>
       `;
       tbody.appendChild(tr);
@@ -442,6 +442,7 @@
       updateImagePreview();
       document.getElementById('pkgTerms').value = p.terms || '';
 
+      // Populate Itinerary PDF / Doc Links
       document.getElementById('itineraryLinksContainer').innerHTML = '';
       try {
         const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
@@ -450,6 +451,7 @@
         }
       } catch (e) {}
 
+      // Populate Day-Wise Itinerary Rows
       document.getElementById('itineraryDaysContainer').innerHTML = '';
       try {
         const itineraryData = typeof p.itinerary === 'string' ? JSON.parse(p.itinerary) : p.itinerary;
@@ -462,6 +464,7 @@
         addItineraryDayRow("Day 1: Tour Overview", p.itinerary || "Detailed itinerary upon booking.");
       }
 
+      // Populate Rate Grid Blocks
       const builderContainer = document.getElementById('builderBlocksContainer');
       builderContainer.innerHTML = '';
       try {
@@ -555,17 +558,17 @@
         let rowsHtml = '';
         blk.querySelectorAll('.rate-row').forEach(r => {
           rowsHtml += `
-            <tr class="border-b border-slate-100 text-[11px]">
-              <td class="p-1.5 font-bold">${r.querySelector('.r-plan').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-cat').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v1').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v2').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v3').value}</td>
-              <td class="p-1.5 font-black text-amber-600">${r.querySelector('.r-v4').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v5').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v6').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v7').value}</td>
-              <td class="p-1.5">${r.querySelector('.r-v8').value}</td>
+            <tr class="border-b border-slate-100 text-xs">
+              <td class="p-2 font-bold">${r.querySelector('.r-plan').value}</td>
+              <td class="p-2">${r.querySelector('.r-cat').value}</td>
+              <td class="p-2 font-black text-amber-600">${r.querySelector('.r-v1').value}</td>
+              <td class="p-2 font-black text-amber-600">${r.querySelector('.r-v2').value}</td>
+              <td class="p-2 font-black text-amber-600">${r.querySelector('.r-v3').value}</td>
+              <td class="p-2 font-black text-amber-600">${r.querySelector('.r-v4').value}</td>
+              <td class="p-2">${r.querySelector('.r-v5').value}</td>
+              <td class="p-2">${r.querySelector('.r-v6').value}</td>
+              <td class="p-2">${r.querySelector('.r-v7').value}</td>
+              <td class="p-2">${r.querySelector('.r-v8').value}</td>
             </tr>
           `;
         });
@@ -574,13 +577,13 @@
           <div class="mb-4 bg-slate-50 border border-slate-200 rounded-xl p-3">
             <h5 class="font-black text-blue-900 text-xs uppercase">${bTitle} — <span class="font-medium text-slate-500">${bSub}</span></h5>
             <div class="overflow-x-auto mt-2">
-              <table class="w-full text-left text-[10px] min-w-[850px]">
+              <table class="w-full text-left text-[11px] min-w-[900px]">
                 <thead class="bg-blue-900 text-white">
                   <tr>
-                    <th class="p-1">Hotel Plan</th><th class="p-1">Category</th>
-                    <th class="p-1 text-amber-300">${h1}</th><th class="p-1 text-amber-300">${h2}</th>
-                    <th class="p-1 text-amber-300">${h3}</th><th class="p-1 text-amber-300">${h4}</th>
-                    <th class="p-1">${h5}</th><th class="p-1">${h6}</th><th class="p-1">${h7}</th><th class="p-1">${h8}</th>
+                    <th class="p-1.5">Hotel Plan</th><th class="p-1.5">Category</th>
+                    <th class="p-1.5 text-amber-300">${h1}</th><th class="p-1.5 text-amber-300">${h2}</th>
+                    <th class="p-1.5 text-amber-300">${h3}</th><th class="p-1.5 text-amber-300">${h4}</th>
+                    <th class="p-1.5">${h5}</th><th class="p-1.5">${h6}</th><th class="p-1.5">${h7}</th><th class="p-1.5">${h8}</th>
                   </tr>
                 </thead>
                 <tbody>${rowsHtml}</tbody>
