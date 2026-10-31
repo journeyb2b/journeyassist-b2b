@@ -115,54 +115,42 @@
               h7: "Child CP", h8: "Child MAP"
             };
 
-            let rowsHtml = '';
+            let cardsHtml = '';
             if (blk.rows && blk.rows.length > 0) {
               blk.rows.forEach(r => {
-                rowsHtml += `
-                  <tr class="hover:bg-slate-50 font-medium">
-                    <td class="p-2 border border-slate-200 font-bold text-slate-800">${r.plan || '-'}</td>
-                    <td class="p-2 border border-slate-200 text-slate-700">${r.cat || 'Standard'}</td>
-                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v1 || '-'}</td>
-                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v2 || '-'}</td>
-                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v3 || '-'}</td>
-                    <td class="p-2 border border-slate-200 font-extrabold text-amber-600">${r.v4 || '-'}</td>
-                    <td class="p-2 border border-slate-200 text-slate-700">${r.v5 || '-'}</td>
-                    <td class="p-2 border border-slate-200 text-slate-700">${r.v6 || '-'}</td>
-                    <td class="p-2 border border-slate-200 text-slate-700">${r.v7 || '-'}</td>
-                    <td class="p-2 border border-slate-200 text-slate-700">${r.v8 || '-'}</td>
-                  </tr>
+                cardsHtml += `
+                  <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                      <span class="font-black text-xs text-slate-900">${r.plan || '-'}</span>
+                      <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 rounded-full text-[10px] font-extrabold uppercase">${r.cat || 'Standard'}</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h1}</span><strong class="text-amber-600">${r.v1 || '-'}</strong></div>
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h2}</span><strong class="text-amber-600">${r.v2 || '-'}</strong></div>
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h3}</span><strong class="text-amber-600">${r.v3 || '-'}</strong></div>
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h4}</span><strong class="text-amber-600">${r.v4 || '-'}</strong></div>
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h5}</span><span>${r.v5 || '-'}</span></div>
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h6}</span><span>${r.v6 || '-'}</span></div>
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h7}</span><span>${r.v7 || '-'}</span></div>
+                      <div class="bg-slate-50 p-2 rounded-xl border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h.h8}</span><span>${r.v8 || '-'}</span></div>
+                    </div>
+                  </div>
                 `;
               });
             } else {
-              rowsHtml = `<tr><td colspan="10" class="p-4 text-center text-slate-500 font-bold">No rate rows added in this block.</td></tr>`;
+              cardsHtml = `<p class="p-4 text-center text-slate-500 font-bold text-xs">No rate rows added in this block.</p>`;
             }
 
             rateGridsHtml += `
-              <div class="mb-6 bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3">
+              <div class="mb-6 bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-200 pb-3">
                   <h4 class="text-sm font-black text-blue-900 uppercase flex items-center gap-2">
                     <i class="fa-solid fa-calendar-days text-blue-600"></i> ${blk.title || 'Package Duration'}
                   </h4>
                   <p class="text-xs font-bold text-slate-600">${blk.subtitle || ''}</p>
                 </div>
-                <div class="overflow-x-auto">
-                  <table class="w-full text-left text-xs border-collapse border border-slate-200 min-w-[1100px]">
-                    <thead>
-                      <tr class="bg-blue-900 text-white font-extrabold uppercase text-[10px]">
-                        <th class="p-2 border border-slate-300 w-28">Hotel Plan</th>
-                        <th class="p-2 border border-slate-300 w-24">Category</th>
-                        <th class="p-2 border border-slate-300 text-amber-300">${h.h1}</th>
-                        <th class="p-2 border border-slate-300 text-amber-300">${h.h2}</th>
-                        <th class="p-2 border border-slate-300 text-amber-300">${h.h3}</th>
-                        <th class="p-2 border border-slate-300 text-amber-300">${h.h4}</th>
-                        <th class="p-2 border border-slate-300">${h.h5}</th>
-                        <th class="p-2 border border-slate-300">${h.h6}</th>
-                        <th class="p-2 border border-slate-300">${h.h7}</th>
-                        <th class="p-2 border border-slate-300">${h.h8}</th>
-                      </tr>
-                    </thead>
-                    <tbody>${rowsHtml}</tbody>
-                  </table>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  ${cardsHtml}
                 </div>
               </div>
             `;
