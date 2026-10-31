@@ -678,5 +678,26 @@
       closeCustomQuoteModal();
     }
   </script>
+  <script>
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById('installBtn');
+    if (btn) {
+      btn.style.display = 'flex';
+      btn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          }
+          deferredPrompt = null;
+          btn.style.display = 'none';
+        });
+      });
+    }
+  });
+</script>
 </body>
 </html>
