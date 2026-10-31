@@ -78,15 +78,15 @@
           </div>
         </div>
 
-        <!-- IMAGE URL WITH LIVE IMAGE PREVIEW -->
+        <!-- BANNER IMAGE URL WITH PREVIEW -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block uppercase tracking-wider mb-1 text-slate-400">Banner Image URL *</label>
-            <input type="text" id="pkgImageUrl" oninput="updateImagePreview()" placeholder="e.g. https://images.unsplash.com/photo-1602216056096-3b40cc0c9944" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <input type="text" id="pkgImageUrl" oninput="updateImagePreview()" placeholder="e.g. https://images.unsplash.com/..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Terms & Conditions / Child Policy</label>
-            <input type="text" id="pkgTerms" placeholder="e.g. Child rates applicable for 6–11 years" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Terms & Conditions / Policy (Line-wise)</label>
+            <textarea id="pkgTerms" rows="3" placeholder="Child rates applicable for 6–11 years&#10;50% advance upon booking confirmation" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
           </div>
         </div>
 
@@ -99,7 +99,7 @@
           </div>
         </div>
 
-        <!-- MULTIPLE CUSTOM ITINERARY PDF LINKS SECTION -->
+        <!-- MULTIPLE ITINERARY PDF LINKS -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-xs font-black uppercase text-blue-400 flex items-center gap-2">
@@ -109,22 +109,23 @@
               <i class="fa-solid fa-plus"></i> Add PDF Link Row
             </button>
           </div>
-          <p class="text-[11px] text-slate-400 font-normal">Yahan alag-alag durations ke downloadable PDF links enter kar sakte hain (jaise: 3N/4D Detailed Itinerary PDF).</p>
+          <p class="text-[11px] text-slate-400 font-normal">Yahan alag-alag durations ke downloadable PDF links enter kar sakte hain.</p>
           <div id="itineraryLinksContainer" class="space-y-2"></div>
         </div>
 
+        <!-- INCLUSIONS & EXCLUSIONS LINE-WISE -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Inclusions *</label>
-            <input type="text" id="pkgInclusions" required placeholder="Accommodation, Daily breakfast, Transfers" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Inclusions (Line-wise) *</label>
+            <textarea id="pkgInclusions" rows="3" required placeholder="Accommodation&#10;Daily breakfast&#10;Private Cab Transfers" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions *</label>
-            <input type="text" id="pkgExclusions" required placeholder="Air / Train fares, Personal expenses" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none">
+            <label class="block uppercase tracking-wider mb-1 text-slate-400">Exclusions (Line-wise) *</label>
+            <textarea id="pkgExclusions" rows="3" required placeholder="Air / Train fares&#10;Personal expenses&#10;Lunch & Dinner" class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold focus:border-blue-500 focus:outline-none"></textarea>
           </div>
         </div>
 
-        <!-- ADVANCED GROUPED RATE GRID BUILDER -->
+        <!-- RATE GRID BUILDER -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
@@ -143,7 +144,7 @@
 
         <div>
           <label class="block uppercase tracking-wider mb-1 text-slate-400">Day-Wise Custom Itinerary Details</label>
-          <textarea id="pkgItinerary" rows="5" placeholder="Day 1: Arrival Cochin -> Transfer Munnar...&#10;Day 2: Munnar Sightseeing...&#10;Day 3: Munnar to Alleppey Houseboat..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-blue-500 focus:outline-none"></textarea>
+          <textarea id="pkgItinerary" rows="5" placeholder="Day 1: Arrival Cochin -> Transfer Munnar...&#10;Day 2: Munnar Sightseeing..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-blue-500 focus:outline-none"></textarea>
         </div>
 
         <!-- ACTION BUTTONS: PREVIEW & PUBLISH -->
@@ -192,7 +193,7 @@
 
   </main>
 
-  <!-- LIVE PACKAGE & BROCHURE PREVIEW MODAL -->
+  <!-- LIVE PREVIEW MODAL -->
   <div id="previewModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-white text-slate-900 w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-y-auto border border-slate-200">
       <div class="sticky top-0 bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800 z-10">
@@ -455,7 +456,6 @@
       document.getElementById('btnResetForm').classList.add('hidden');
     }
 
-    /* LIVE BROCHURE PREVIEW MODAL FUNCTION */
     function openLivePreviewModal() {
       const title = document.getElementById('pkgTitle').value || 'Sample Package Title';
       const dest = document.getElementById('pkgDestination').value || 'Destination';
@@ -468,7 +468,6 @@
       const terms = document.getElementById('pkgTerms').value || 'Standard Terms';
       const itinerary = document.getElementById('pkgItinerary').value || 'Day-wise itinerary text here...';
 
-      // Collect Itinerary PDF Links
       const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
       let linksHtml = '';
       linkRows.forEach(r => {
@@ -483,7 +482,6 @@
         }
       });
 
-      // Collect Rate Grids
       const blocks = document.querySelectorAll('.duration-block');
       let gridsHtml = '';
       blocks.forEach(blk => {
@@ -536,6 +534,12 @@
         `;
       });
 
+      const formatPreviewList = (text) => {
+        if (!text) return '<span>N/A</span>';
+        const lines = text.split('\n').filter(l => l.trim() !== '');
+        return `<ul class="list-disc pl-4 space-y-1">${lines.map(l => `<li>${l}</li>`).join('')}</ul>`;
+      };
+
       const modalHtml = `
         <div class="space-y-4">
           <div class="relative h-44 rounded-2xl overflow-hidden bg-slate-900">
@@ -555,8 +559,13 @@
           </div>
 
           <div class="grid grid-cols-2 gap-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <div><strong class="text-emerald-600 uppercase block">Inclusions:</strong> ${inclusions}</div>
-            <div><strong class="text-rose-600 uppercase block">Exclusions:</strong> ${exclusions}</div>
+            <div><strong class="text-emerald-600 uppercase block mb-1">Inclusions:</strong> ${formatPreviewList(inclusions)}</div>
+            <div><strong class="text-rose-600 uppercase block mb-1">Exclusions:</strong> ${formatPreviewList(exclusions)}</div>
+          </div>
+
+          <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <strong class="text-blue-700 uppercase block mb-1">Terms & Conditions / Policy:</strong>
+            ${formatPreviewList(terms)}
           </div>
 
           <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
@@ -579,7 +588,6 @@
       const btn = document.getElementById('btnSubmitForm');
       btn.disabled = true;
 
-      // Collect Itinerary PDF Links
       const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
       const linksArr = [];
       linkRows.forEach(r => {
@@ -590,7 +598,6 @@
         }
       });
 
-      // Collect Grouped Rate Grid Blocks with Headers
       const blocks = document.querySelectorAll('.duration-block');
       const rateGridBlocksArr = [];
 
