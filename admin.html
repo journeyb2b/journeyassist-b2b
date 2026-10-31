@@ -3,282 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journey Assist | Master B2B Package Upload Admin Desk</title>
+  <title>Journey Assist | Kerala Winter FIT Brochure</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #0369a1 100%); }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen pb-12">
+<body class="bg-slate-100 text-slate-800 py-6 px-4">
 
-  <!-- HEADER -->
-  <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center font-black text-slate-950">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-        </div>
-        <div>
-          <h1 class="text-base font-black tracking-tight text-white">Journey Assist <span class="text-xs text-amber-400 font-bold">B2B Master Package Upload Desk</span></h1>
-        </div>
-      </div>
-      <div class="flex items-center gap-3 text-xs font-bold text-slate-400">
-        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Dynamic Upload Active
-        </span>
-      </div>
-    </div>
-  </header>
+  <main class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl border border-slate-200 overflow-hidden space-y-6">
 
-  <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
-
-    <!-- PACKAGE CREATOR FORM -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+    <!-- HERO HEADER -->
+    <header class="hero-bg text-white p-8 sm:p-12 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80');"></div>
       
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/10 pb-6">
         <div>
-          <h2 class="text-lg font-black text-white flex items-center gap-2">
-            <i class="fa-solid fa-pen-to-square text-amber-400"></i> Upload New Package & Rate Grid
-          </h2>
-          <p class="text-xs text-slate-400 font-medium">Headings, images, itinerary links, rate tables, and policies upload karein.</p>
+          <h2 class="text-xl font-black tracking-tight text-white">Journey Assist</h2>
+          <p class="text-[10px] font-extrabold text-sky-400 uppercase tracking-widest">B2B Travel Wholesale Desk[cite: 1]</p>
         </div>
-        <button onclick="saveAndGenerateBrochure()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-900/30">
-          <i class="fa-solid fa-file-export"></i> Save & Generate Brochure
-        </button>
-      </div>
-
-      <!-- SECTION 1: HEADER & BANNER DETAILS -->
-      <div class="space-y-4">
-        <h3 class="text-xs font-black uppercase text-amber-400 tracking-wider">1. Package Header & Banner Settings</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Main Package Title</label>
-            <input type="text" id="pkgTitle" value="Kerala Winter FIT — Early Bird Offer" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-white font-bold text-xs focus:outline-none focus:border-amber-500">
-          </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Destination & Duration Range</label>
-            <input type="text" id="pkgSub" value="Kerala | 3N/4D to 7N/8D" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-amber-300 font-bold text-xs focus:outline-none focus:border-amber-500">
-          </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Booking Window / Validity</label>
-            <input type="text" id="pkgValidity" value="Until 31 October 2026" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sky-400 font-bold text-xs focus:outline-none focus:border-amber-500">
-          </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Starting Price Label</label>
-            <input type="text" id="pkgStartPrice" value="Starting ₹13,450/person" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-emerald-400 font-bold text-xs focus:outline-none focus:border-amber-500">
-          </div>
-          <div class="sm:col-span-2">
-            <label class="text-[10px] font-bold text-slate-400">Header Background Image URL</label>
-            <input type="text" id="pkgBannerUrl" value="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80" class="w-full mt-1 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 text-xs focus:outline-none focus:border-amber-500">
-          </div>
+        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-2 rounded-2xl">
+          <i class="fa-solid fa-award text-amber-400"></i>
+          <span class="text-xs font-bold text-slate-200">Experience The Real Kerala[cite: 1]</span>
         </div>
       </div>
 
-      <!-- SECTION 2: ITINERARIES & LINKED DOCUMENTS -->
-      <div class="space-y-4 border-t border-slate-800 pt-4">
-        <h3 class="text-xs font-black uppercase text-amber-400 tracking-wider">2. Itinerary Downloads & Document Links</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">3N/4D Itinerary Link</label>
-            <input type="text" id="link3N" value="https://journeyassist.in/itinerary/3n4d-kerala.pdf" class="w-full mt-1 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:outline-none">
+      <div class="mt-8 relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="space-y-3 max-w-xl">
+          <span class="px-3 py-1 bg-sky-500/30 border border-sky-400/40 text-sky-300 text-[10px] font-black uppercase rounded-full">Early Bird Offer[cite: 1]</span>
+          <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight">Kerala Winter FIT — <br/>Early Bird Offer[cite: 1]</h1>
+          <div class="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-300 pt-2">
+            <p><i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> Kerala | 3N/4D to 7N/8D[cite: 1]</p>
+            <p><i class="fa-regular fa-calendar text-sky-400 mr-1.5"></i> Booking window: Until 31 October 2026[cite: 1]</p>
           </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">4N/5D Itinerary Link</label>
-            <input type="text" id="link4N" value="https://journeyassist.in/itinerary/4n5d-kerala.pdf" class="w-full mt-1 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:outline-none">
+          <div class="flex flex-wrap gap-3 pt-2">
+            <span class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-black shadow-lg">3N/4D to 7N/8D[cite: 1]</span>
+            <span class="px-3 py-1.5 bg-sky-600 text-white rounded-xl text-xs font-black shadow-lg">Starting ₹13,450/person[cite: 1]</span>
           </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">5N/6D Itinerary Link</label>
-            <input type="text" id="link5N" value="https://journeyassist.in/itinerary/5n6d-kerala.pdf" class="w-full mt-1 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:outline-none">
+        </div>
+
+        <!-- INSTANT WHATSAPP ACTIONS -->
+        <div class="bg-white/95 text-slate-900 p-6 rounded-3xl shadow-2xl border border-slate-200 space-y-4 lg:w-80">
+          <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+            <i class="fa-brands fa-whatsapp text-emerald-600 text-xl"></i>
+            <div>
+              <p class="text-xs font-black">Instant WhatsApp Quote & Share[cite: 1]</p>
+              <p class="text-[10px] text-slate-500 font-bold">Send rates directly</p>
+            </div>
           </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">6N/7D Itinerary Link</label>
-            <input type="text" id="link6N" value="https://journeyassist.in/itinerary/6n7d-kerala.pdf" class="w-full mt-1 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:outline-none">
+          <div class="space-y-2">
+            <a href="https://wa.me/919919382999?text=Hello%20Journey%20Assist,%20Send%20Kerala%20rates" target="_blank" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-lg">
+              <i class="fa-brands fa-whatsapp"></i> Send to Client[cite: 1]
+            </a>
+            <a href="https://wa.me/919919382999?text=Hold%20Kerala%20package" target="_blank" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-bookmark text-sky-600"></i> Ask to Hold[cite: 1]
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- SECTION 3: RATE GRID DYNAMICS -->
-      <div class="space-y-4 border-t border-slate-800 pt-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xs font-black uppercase text-amber-400 tracking-wider">3. Supplier Rate Grids (Tables)</h3>
-          <button onclick="addRateGridTable()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
-            <i class="fa-solid fa-plus"></i> Add Table / Duration
-          </button>
+      <!-- HIGHLIGHT ICONS -->
+      <div class="mt-8 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold text-slate-200 relative z-10">
+        <div class="flex items-center gap-2"><i class="fa-solid fa-water text-sky-400"></i> Backwaters & Beaches[cite: 1]</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-mountain-sun text-emerald-400"></i> Hill Stations & Nature[cite: 1]</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-camera text-amber-400"></i> Scenic Sightseeing[cite: 1]</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-spa text-rose-400"></i> Ayurveda & Wellness[cite: 1]</div>
+      </div>
+    </header>
+
+    <div class="p-6 sm:p-10 space-y-10">
+
+      <!-- ITINERARIES & LINKED DOCUMENTS -->
+      <section class="bg-slate-50 p-6 rounded-3xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-file-arrow-down text-sky-600"></i> Itineraries & Linked Documents[cite: 1]
+          </h3>
+          <p class="text-xs text-slate-500 font-medium">Click below to download or view custom day-wise itineraries.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs font-bold">
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 3N/4D Kerala Itinerary[cite: 1]</a>
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 4N/5D Kerala Itinerary[cite: 1]</a>
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 5N/6D Kerala Itinerary[cite: 1]</a>
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 6N/7D Kerala Itinerary[cite: 1]</a>
+          <a href="#" class="px-3.5 py-2 bg-white hover:bg-sky-50 text-sky-700 border border-slate-200 rounded-xl transition shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-download text-[10px]"></i> 7N/8D Kerala Itinerary[cite: 1]</a>
+        </div>
+      </section>
+
+      <!-- COMPLETE SUPPLIER RATE GRID -->
+      <section class="space-y-6">
+        <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+          <i class="fa-solid fa-table-cells text-sky-600 text-lg"></i>
+          <h3 class="text-lg font-black text-slate-900">Complete Supplier Rate Grid[cite: 1]</h3>
         </div>
 
-        <div id="rateTablesContainer" class="space-y-6">
-          <!-- Dynamic Rate Tables -->
-        </div>
-      </div>
-
-      <!-- SECTION 4: POLICIES, INCLUSIONS & EXCLUSIONS -->
-      <div class="space-y-4 border-t border-slate-800 pt-4">
-        <h3 class="text-xs font-black uppercase text-amber-400 tracking-wider">4. Inclusions, Exclusions & Child Policies</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Inclusions (Line separated)</label>
-            <textarea id="pkgInclusions" rows="4" class="w-full mt-1 p-3 bg-slate-900 border border-slate-800 rounded-xl text-xs font-medium text-slate-200 focus:outline-none">Accommodation as per itinerary
-Daily breakfast (as per meal plan)
-Transfers & sightseeing as per itinerary</textarea>
+        <!-- 3N/4D TABLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-sky-700 text-white px-4 py-3 flex items-center justify-between text-xs font-black">
+            <span>3N/4D Package[cite: 1]</span>
+            <span class="text-sky-200">2 Nights Munnar + 1 Night Kochi[cite: 1]</span>
           </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Exclusions (Line separated)</label>
-            <textarea id="pkgExclusions" rows="4" class="w-full mt-1 p-3 bg-slate-900 border border-slate-800 rounded-xl text-xs font-medium text-slate-200 focus:outline-none">Air / Train fares
-Lunch & Dinner (unless mentioned)
-Personal expenses, tips, entry fees</textarea>
-          </div>
-          <div>
-            <label class="text-[10px] font-bold text-slate-400">Child & Extra Bed Policy</label>
-            <textarea id="pkgPolicies" rows="4" class="w-full mt-1 p-3 bg-slate-900 border border-slate-800 rounded-xl text-xs font-medium text-slate-200 focus:outline-none">Child rates applicable for 6–11 years
-Extra bed charges as per hotel policy
-Infant rates on request</textarea>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-600 uppercase font-extrabold text-[10px] border-b border-slate-200">
+                <tr>
+                  <th class="p-3">Hotel Plan[cite: 1]</th><th class="p-3">Category[cite: 1]</th><th class="p-3">Meal Plan[cite: 1]</th><th class="p-3">Single (₹)[cite: 1]</th><th class="p-3">Twin (₹)[cite: 1]</th><th class="p-3">Triple (₹)[cite: 1]</th><th class="p-3">Child (6–11 yrs) (₹)[cite: 1]</th><th class="p-3">Extra Bed (₹)[cite: 1]</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">13,450[cite: 1]</td><td class="p-3 font-bold text-emerald-600">11,450[cite: 1]</td><td class="p-3">10,450[cite: 1]</td><td class="p-3">6,750[cite: 1]</td><td class="p-3">5,450[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Deluxe[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">15,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">13,950[cite: 1]</td><td class="p-3">12,950[cite: 1]</td><td class="p-3">7,950[cite: 1]</td><td class="p-3">6,950[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Kochi[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">16,450[cite: 1]</td><td class="p-3 font-bold text-emerald-600">14,450[cite: 1]</td><td class="p-3">13,450[cite: 1]</td><td class="p-3">8,450[cite: 1]</td><td class="p-3">6,950[cite: 1]</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
 
-    </div>
+        <!-- 4N/5D TABLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-sky-700 text-white px-4 py-3 flex items-center justify-between text-xs font-black">
+            <span>4N/5D Package[cite: 1]</span>
+            <span class="text-sky-200">2 Nights Munnar + 2 Nights Alleppey[cite: 1]</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-600 uppercase font-extrabold text-[10px] border-b border-slate-200">
+                <tr>
+                  <th class="p-3">Hotel Plan[cite: 1]</th><th class="p-3">Category[cite: 1]</th><th class="p-3">Meal Plan[cite: 1]</th><th class="p-3">Single (₹)[cite: 1]</th><th class="p-3">Twin (₹)[cite: 1]</th><th class="p-3">Triple (₹)[cite: 1]</th><th class="p-3">Child (6–11 yrs) (₹)[cite: 1]</th><th class="p-3">Extra Bed (₹)[cite: 1]</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">16,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">14,950[cite: 1]</td><td class="p-3">13,950[cite: 1]</td><td class="p-3">8,950[cite: 1]</td><td class="p-3">7,450[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Alleppey[cite: 1]</td><td class="p-3">Deluxe[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">24,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">21,950[cite: 1]</td><td class="p-3">19,950[cite: 1]</td><td class="p-3">13,950[cite: 1]</td><td class="p-3">11,950[cite: 1]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <!-- SAVED PACKAGES LIST -->
-    <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
-      <h3 class="text-xs font-black uppercase text-emerald-400 tracking-wider flex items-center gap-2">
-        <i class="fa-solid fa-boxes-packing"></i> Uploaded Packages List
-      </h3>
-      <div id="savedPackagesList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-        <!-- Rendered saved package links -->
-      </div>
+        <!-- 5N/6D TABLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-sky-700 text-white px-4 py-3 flex items-center justify-between text-xs font-black">
+            <span>5N/6D Package[cite: 1]</span>
+            <span class="text-sky-200">2 Nights Munnar + 1 Night Thekkady + 2 Nights Alleppey[cite: 1]</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-600 uppercase font-extrabold text-[10px] border-b border-slate-200">
+                <tr>
+                  <th class="p-3">Hotel Plan[cite: 1]</th><th class="p-3">Category[cite: 1]</th><th class="p-3">Meal Plan[cite: 1]</th><th class="p-3">Single (₹)[cite: 1]</th><th class="p-3">Twin (₹)[cite: 1]</th><th class="p-3">Triple (₹)[cite: 1]</th><th class="p-3">Child (6–11 yrs) (₹)[cite: 1]</th><th class="p-3">Extra Bed (₹)[cite: 1]</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">19,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">17,500[cite: 1]</td><td class="p-3">15,950[cite: 1]</td><td class="p-3">10,450[cite: 1]</td><td class="p-3">8,950[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Thekkady[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">22,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">19,950[cite: 1]</td><td class="p-3">17,950[cite: 1]</td><td class="p-3">11,950[cite: 1]</td><td class="p-3">10,450[cite: 1]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 7N/8D TABLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-sky-700 text-white px-4 py-3 flex items-center justify-between text-xs font-black">
+            <span>7N/8D Package[cite: 1]</span>
+            <span class="text-sky-200">2 Nights Munnar + 1 Night Thekkady + 2 Nights Alleppey + 2 Nights Kovalam[cite: 1]</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-600 uppercase font-extrabold text-[10px] border-b border-slate-200">
+                <tr>
+                  <th class="p-3">Hotel Plan[cite: 1]</th><th class="p-3">Category[cite: 1]</th><th class="p-3">Meal Plan[cite: 1]</th><th class="p-3">Single (₹)[cite: 1]</th><th class="p-3">Twin (₹)[cite: 1]</th><th class="p-3">Triple (₹)[cite: 1]</th><th class="p-3">Child (6–11 yrs) (₹)[cite: 1]</th><th class="p-3">Extra Bed (₹)[cite: 1]</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr><td class="p-3 font-bold">Munnar[cite: 1]</td><td class="p-3">Standard[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">27,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">24,950[cite: 1]</td><td class="p-3">21,950[cite: 1]</td><td class="p-3">15,950[cite: 1]</td><td class="p-3">12,950[cite: 1]</td></tr>
+                <tr><td class="p-3 font-bold">Kovalam[cite: 1]</td><td class="p-3">Deluxe[cite: 1]</td><td class="p-3">CP[cite: 1]</td><td class="p-3">38,950[cite: 1]</td><td class="p-3 font-bold text-emerald-600">34,950[cite: 1]</td><td class="p-3">31,950[cite: 1]</td><td class="p-3">24,950[cite: 1]</td><td class="p-3">20,950[cite: 1]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- POLICIES & FOOTER -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-200 text-xs">
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+          <div class="flex items-center gap-2 font-black text-slate-900"><i class="fa-solid fa-circle-check text-emerald-600"></i> Inclusions[cite: 1]</div>
+          <ul class="space-y-2 text-slate-600 font-medium">
+            <li>• Accommodation as per itinerary[cite: 1]</li>
+            <li>• Daily breakfast (as per meal plan)[cite: 1]</li>
+            <li>• Transfers & sightseeing as per itinerary[cite: 1]</li>
+          </ul>
+        </div>
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+          <div class="flex items-center gap-2 font-black text-slate-900"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Exclusions[cite: 1]</div>
+          <ul class="space-y-2 text-slate-600 font-medium">
+            <li>• Air / Train fares[cite: 1]</li>
+            <li>• Lunch & Dinner (unless mentioned)[cite: 1]</li>
+            <li>• Personal expenses, tips, entry fees[cite: 1]</li>
+          </ul>
+        </div>
+        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+          <div class="flex items-center gap-2 font-black text-slate-900"><i class="fa-solid fa-users text-sky-600"></i> Child & Extra Bed Policy[cite: 1]</div>
+          <ul class="space-y-2 text-slate-600 font-medium">
+            <li>• Child rates applicable for 6–11 years[cite: 1]</li>
+            <li>• Extra bed charges as per hotel policy[cite: 1]</li>
+            <li>• Infant rates on request[cite: 1]</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-500">
+        <div>
+          <p class="text-slate-900 font-extrabold">Journey Assist B2B Travel Wholesale Desk</p>
+          <p class="text-[11px] font-normal">29 Shalimar Garden, Sector 8, Indira Nagar, Lucknow - 226016</p>
+        </div>
+        <div class="text-right">
+          <p class="text-sky-600">+91 9919382999</p>
+          <p class="text-[11px] font-normal">support@journeyassist.in</p>
+        </div>
+      </footer>
+
     </div>
 
   </main>
 
-  <script>
-    window.onload = function() {
-      // Add initial sample 3N/4D Table
-      addRateGridTable("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-      loadSavedPackages();
-    };
-
-    function addRateGridTable(title = "4N/5D Package", route = "2 Nights Munnar + 2 Nights Alleppey") {
-      const container = document.getElementById('rateTablesContainer');
-      const tableId = 'table-' + Date.now() + Math.floor(Math.random() * 1000);
-
-      const div = document.createElement('div');
-      div.id = tableId;
-      div.className = 'rate-table-block p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-3';
-      div.innerHTML = `
-        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-          <div class="flex items-center gap-3 w-full max-w-xl">
-            <input type="text" placeholder="Table Title (e.g. 3N/4D Package)" value="${title}" class="tbl-title font-black text-amber-400 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-xs focus:outline-none">
-            <input type="text" placeholder="Route Split (e.g. 2 Nights Munnar + 1 Night Kochi)" value="${route}" class="tbl-route font-bold text-sky-400 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-xs focus:outline-none w-full">
-          </div>
-          <button onclick="document.getElementById('${tableId}').remove()" class="text-rose-400 hover:text-rose-300 text-xs font-bold">
-            <i class="fa-solid fa-trash"></i> Delete Table
-          </button>
-        </div>
-
-        <!-- ROW DATA ENTRY -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase">
-            <span>Hotel Plan & Rates</span>
-            <button onclick="addRowToTable('${tableId}')" class="text-sky-400 hover:underline">+ Add Hotel Row</button>
-          </div>
-          <div class="tbl-rows-container space-y-2">
-            <!-- Dynamic rows will go here -->
-          </div>
-        </div>
-      `;
-      container.appendChild(div);
-      addRowToTable(tableId, "Munnar", "Standard", "CP", "13,450", "11,450", "10,450", "6,750", "5,450");
-    }
-
-    function addRowToTable(tableId, hotel="Munnar", cat="Standard", meal="CP", s="13,450", tw="11,450", tr="10,450", ch="6,750", ex="5,450") {
-      const container = document.querySelector(`#${tableId} .tbl-rows-container`);
-      const rowDiv = document.createElement('div');
-      rowDiv.className = 'tbl-row flex flex-wrap items-center gap-2 text-xs';
-      rowDiv.innerHTML = `
-        <input type="text" placeholder="Hotel/City" value="${hotel}" class="r-hotel px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-white font-bold w-24">
-        <input type="text" placeholder="Category" value="${cat}" class="r-cat px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-slate-300 w-24">
-        <input type="text" placeholder="Meal" value="${meal}" class="r-meal px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-slate-300 w-16">
-        <input type="text" placeholder="Single ₹" value="${s}" class="r-single px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-white font-bold w-20">
-        <input type="text" placeholder="Twin ₹" value="${tw}" class="r-twin px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-emerald-400 font-bold w-20">
-        <input type="text" placeholder="Triple ₹" value="${tr}" class="r-triple px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-sky-400 font-bold w-20">
-        <input type="text" placeholder="Child ₹" value="${ch}" class="r-child px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-amber-300 font-bold w-20">
-        <input type="text" placeholder="Extra Bed ₹" value="${ex}" class="r-exbed px-2 py-1 bg-slate-950 border border-slate-800 rounded-lg text-slate-300 font-bold w-20">
-        <button onclick="this.parentElement.remove()" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button>
-      `;
-      container.appendChild(rowDiv);
-    }
-
-    function saveAndGenerateBrochure() {
-      const pkgData = {
-        id: 'pkg-' + Date.now(),
-        title: document.getElementById('pkgTitle').value,
-        subtitle: document.getElementById('pkgSub').value,
-        validity: document.getElementById('pkgValidity').value,
-        startPrice: document.getElementById('pkgStartPrice').value,
-        bannerUrl: document.getElementById('pkgBannerUrl').value,
-        links: {
-          l3: document.getElementById('link3N').value,
-          l4: document.getElementById('link4N').value,
-          l5: document.getElementById('link5N').value,
-          l6: document.getElementById('link6N').value
-        },
-        inclusions: document.getElementById('pkgInclusions').value,
-        exclusions: document.getElementById('pkgExclusions').value,
-        policies: document.getElementById('pkgPolicies').value,
-        tables: []
-      };
-
-      const tableBlocks = document.querySelectorAll('.rate-table-block');
-      tableBlocks.forEach(block => {
-        const tblTitle = block.querySelector('.tbl-title').value;
-        const tblRoute = block.querySelector('.tbl-route').value;
-        const rows = [];
-        const rowDivs = block.querySelectorAll('.tbl-row');
-        rowDivs.forEach(r => {
-          rows.push({
-            hotel: r.querySelector('.r-hotel').value,
-            cat: r.querySelector('.r-cat').value,
-            meal: r.querySelector('.r-meal').value,
-            single: r.querySelector('.r-single').value,
-            twin: r.querySelector('.r-twin').value,
-            triple: r.querySelector('.r-triple').value,
-            child: r.querySelector('.r-child').value,
-            exbed: r.querySelector('.r-exbed').value
-          });
-        });
-        pkgData.tables.push({ title: tblTitle, route: tblRoute, rows });
-      });
-
-      let existing = JSON.parse(localStorage.getItem('ja_all_packages') || '[]');
-      existing.push(pkgData);
-      localStorage.setItem('ja_all_packages', JSON.stringify(existing));
-      alert('Package Saved Successfully!');
-      loadSavedPackages();
-    }
-
-    function loadSavedPackages() {
-      const existing = JSON.parse(localStorage.getItem('ja_all_packages') || '[]');
-      const container = document.getElementById('savedPackagesList');
-      if (existing.length === 0) {
-        container.innerHTML = '<p class="text-slate-500 italic sm:col-span-3">No packages uploaded yet.</p>';
-        return;
-      }
-
-      let html = '';
-      existing.forEach(p => {
-        html += `
-          <div class="p-4 bg-slate-900 rounded-2xl border border-slate-800 space-y-2">
-            <h4 class="font-black text-white text-xs">${p.title}</h4>
-            <p class="text-[10px] text-amber-400 font-bold">${p.subtitle}</p>
-            <p class="text-[10px] text-sky-400 font-medium">${p.validity}</p>
-            <span class="inline-block px-2 py-0.5 bg-emerald-600/20 text-emerald-400 rounded text-[10px] font-bold">${p.startPrice}</span>
-          </div>
-        `;
-      });
-      container.innerHTML = html;
-    }
-  </script>
 </body>
 </html>
