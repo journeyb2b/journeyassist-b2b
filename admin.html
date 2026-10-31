@@ -35,7 +35,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage multi-duration rate grids, image preview, custom itinerary PDF links, and live brochure preview.</p>
+          <p class="text-xs font-medium text-slate-400">Manage multi-duration rate grids, image preview, custom itinerary doc links, and live brochure preview.</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition cursor-pointer">
           <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
@@ -99,17 +99,17 @@
           </div>
         </div>
 
-        <!-- MULTIPLE ITINERARY PDF LINKS -->
+        <!-- DYNAMIC ITINERARY DOCUMENT LINKS -->
         <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-xs font-black uppercase text-blue-400 flex items-center gap-2">
-              <i class="fa-solid fa-file-pdf"></i> Custom Itinerary PDF Links (Downloadable)
+              <i class="fa-solid fa-link"></i> Custom Itinerary Document Links
             </span>
             <button type="button" onclick="addItineraryLinkRow()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
-              <i class="fa-solid fa-plus"></i> Add PDF Link Row
+              <i class="fa-solid fa-plus"></i> Add Link Tab
             </button>
           </div>
-          <p class="text-[11px] text-slate-400 font-normal">Yahan alag-alag durations ke downloadable PDF links enter kar sakte hain.</p>
+          <p class="text-[11px] text-slate-400 font-normal">Yahan Google Docs, Drive link, ya koi bhi document URL paste karein. Frontend par clean tab ban kar aayega.</p>
           <div id="itineraryLinksContainer" class="space-y-2"></div>
         </div>
 
@@ -142,9 +142,21 @@
           <div id="builderBlocksContainer" class="space-y-6"></div>
         </div>
 
-        <div>
-          <label class="block uppercase tracking-wider mb-1 text-slate-400">Day-Wise Custom Itinerary Details</label>
-          <textarea id="pkgItinerary" rows="5" placeholder="Day 1: Arrival Cochin -> Transfer Munnar...&#10;Day 2: Munnar Sightseeing..." class="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-white font-medium focus:border-blue-500 focus:outline-none"></textarea>
+        <!-- DYNAMIC DAY-WISE ITINERARY BUILDER -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-xs font-black uppercase text-emerald-400 flex items-center gap-2">
+                <i class="fa-solid fa-route"></i> Day-Wise Tour Itinerary Builder
+              </span>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Har din ka title aur uska description alag-alag add karein.</p>
+            </div>
+            <button type="button" onclick="addItineraryDayRow()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
+              <i class="fa-solid fa-plus"></i> Add Day Itinerary
+            </button>
+          </div>
+
+          <div id="itineraryDaysContainer" class="space-y-3"></div>
         </div>
 
         <!-- ACTION BUTTONS: PREVIEW & PUBLISH -->
@@ -214,8 +226,9 @@
 
     window.onload = function() {
       fetchAdminPackages();
-      addItineraryLinkRow('3N/4D Kerala Itinerary PDF', 'https://example.com/kerala-3n4d.pdf');
+      addItineraryLinkRow('3N/4D Detailed Itinerary', 'https://docs.google.com/document/d/1WDYfzuIl1Zvo2pbqvmQofi6g-s4gdhsnH__mQB9MvQA/edit?tab=t.0');
       addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
+      addItineraryDayRow("Day 1: Arrival Cochin -> Transfer Munnar", "Meet & greet on arrival -> Direct drive to Munnar -> Check-in at hotel.");
     };
 
     function updateImagePreview() {
@@ -231,18 +244,37 @@
       }
     }
 
-    function addItineraryLinkRow(title = '', url = '') {
+    function addItineraryLinkRow(title = 'View Detailed Itinerary', url = '') {
       const container = document.getElementById('itineraryLinksContainer');
       const rowId = 'it-row-' + Date.now() + Math.floor(Math.random() * 1000);
       const div = document.createElement('div');
       div.id = rowId;
       div.className = 'flex items-center gap-2';
       div.innerHTML = `
-        <input type="text" placeholder="Label (e.g. 3N/4D Kerala Itinerary PDF)" value="${title}" class="it-title w-1/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
-        <input type="text" placeholder="PDF File URL (e.g. https://...)" value="${url}" class="it-url w-2/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
+        <input type="text" placeholder="Tab Name (e.g. 3N/4D Detailed Itinerary)" value="${title}" class="it-title w-1/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
+        <input type="text" placeholder="Google Doc / Drive Link" value="${url}" class="it-url w-2/3 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-bold focus:border-blue-500 focus:outline-none">
         <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-xl transition text-xs cursor-pointer">
           <i class="fa-solid fa-trash"></i>
         </button>
+      `;
+      container.appendChild(div);
+    }
+
+    function addItineraryDayRow(dayTitle = "Day 1: Arrival & Transfer", dayDesc = "Arrival at airport/station -> Transfer to hotel -> Evening at leisure.") {
+      const container = document.getElementById('itineraryDaysContainer');
+      const rowId = 'it-day-' + Date.now() + Math.floor(Math.random() * 1000);
+
+      const div = document.createElement('div');
+      div.id = rowId;
+      div.className = 'itinerary-day-row bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2';
+      div.innerHTML = `
+        <div class="flex items-center gap-2">
+          <input type="text" placeholder="Day Title (e.g. Day 1: Arrival Cochin)" value="${dayTitle}" class="it-day-title w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-black focus:border-emerald-500 focus:outline-none">
+          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs cursor-pointer">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+        <textarea rows="2" placeholder="Detailed description for this day..." class="it-day-desc w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-medium focus:border-emerald-500 focus:outline-none">${dayDesc}</textarea>
       `;
       container.appendChild(div);
     }
@@ -409,9 +441,8 @@
       document.getElementById('pkgImageUrl').value = p.imageUrl || '';
       updateImagePreview();
       document.getElementById('pkgTerms').value = p.terms || '';
-      document.getElementById('pkgItinerary').value = p.itinerary || '';
 
-      // Populate Itinerary PDF Links
+      // Populate Itinerary PDF / Doc Links
       document.getElementById('itineraryLinksContainer').innerHTML = '';
       try {
         const links = typeof p.itineraryLinks === 'string' ? JSON.parse(p.itineraryLinks) : p.itineraryLinks;
@@ -419,6 +450,19 @@
           links.forEach(l => addItineraryLinkRow(l.title, l.url));
         }
       } catch (e) {}
+
+      // Populate Day-Wise Itinerary Rows
+      document.getElementById('itineraryDaysContainer').innerHTML = '';
+      try {
+        const itineraryData = typeof p.itinerary === 'string' ? JSON.parse(p.itinerary) : p.itinerary;
+        if (Array.isArray(itineraryData) && itineraryData.length > 0) {
+          itineraryData.forEach(d => addItineraryDayRow(d.title, d.desc));
+        } else {
+          addItineraryDayRow("Day 1: Tour Overview", p.itinerary || "Detailed itinerary upon booking.");
+        }
+      } catch (e) {
+        addItineraryDayRow("Day 1: Tour Overview", p.itinerary || "Detailed itinerary upon booking.");
+      }
 
       // Populate Rate Grid Blocks
       const builderContainer = document.getElementById('builderBlocksContainer');
@@ -448,9 +492,11 @@
       document.getElementById('packageForm').reset();
       document.getElementById('imgPreviewWrapper').classList.add('hidden');
       document.getElementById('itineraryLinksContainer').innerHTML = '';
+      document.getElementById('itineraryDaysContainer').innerHTML = '';
       document.getElementById('builderBlocksContainer').innerHTML = '';
-      addItineraryLinkRow('3N/4D Kerala Itinerary PDF', 'https://example.com/kerala-3n4d.pdf');
+      addItineraryLinkRow('3N/4D Detailed Itinerary', 'https://docs.google.com/document/d/1WDYfzuIl1Zvo2pbqvmQofi6g-s4gdhsnH__mQB9MvQA/edit?tab=t.0');
       addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
+      addItineraryDayRow("Day 1: Arrival Cochin -> Transfer Munnar", "Meet & greet on arrival -> Direct drive to Munnar -> Check-in at hotel.");
       document.getElementById('formHeading').innerText = "Add New B2B Package & Supplier Rate Grid";
       document.getElementById('btnSubmitText').innerText = "Publish Package To Google Sheet";
       document.getElementById('btnResetForm').classList.add('hidden');
@@ -466,7 +512,6 @@
       const inclusions = document.getElementById('pkgInclusions').value || 'Standard Inclusions';
       const exclusions = document.getElementById('pkgExclusions').value || 'Standard Exclusions';
       const terms = document.getElementById('pkgTerms').value || 'Standard Terms';
-      const itinerary = document.getElementById('pkgItinerary').value || 'Day-wise itinerary text here...';
 
       const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
       let linksHtml = '';
@@ -475,11 +520,25 @@
         const u = r.querySelector('.it-url').value.trim();
         if (t || u) {
           linksHtml += `
-            <a href="${u || '#'}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 border border-blue-200 text-blue-700 rounded-xl text-xs font-bold mr-2 mb-2 hover:bg-blue-100">
-              <i class="fa-solid fa-file-pdf text-rose-500"></i> ${t || 'Itinerary PDF'}
+            <a href="${u || '#'}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white font-bold text-xs rounded-xl mr-2 mb-2 hover:bg-blue-700 transition">
+              <span>${t || 'View Detailed Itinerary'}</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
             </a>
           `;
         }
+      });
+
+      const dayRows = document.querySelectorAll('.itinerary-day-row');
+      let itineraryHtml = '';
+      dayRows.forEach((r, idx) => {
+        const dt = r.querySelector('.it-day-title').value || ('Day ' + (idx + 1));
+        const dd = r.querySelector('.it-day-desc').value || '';
+        itineraryHtml += `
+          <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl mb-2">
+            <h5 class="font-black text-blue-900 text-xs uppercase">${dt}</h5>
+            <p class="text-xs text-slate-600 mt-1 whitespace-pre-line">${dd}</p>
+          </div>
+        `;
       });
 
       const blocks = document.querySelectorAll('.duration-block');
@@ -551,7 +610,7 @@
             </div>
           </div>
 
-          ${linksHtml ? `<div><h4 class="text-xs font-black uppercase text-slate-500 mb-1">Downloadable PDF Links:</h4>${linksHtml}</div>` : ''}
+          ${linksHtml ? `<div><h4 class="text-xs font-black uppercase text-slate-500 mb-1">Official Itinerary Documents:</h4>${linksHtml}</div>` : ''}
 
           <div>
             <h4 class="text-xs font-black uppercase text-slate-500 mb-2">Rate Grid Blocks:</h4>
@@ -569,8 +628,8 @@
           </div>
 
           <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <strong class="text-slate-700 uppercase block mb-1">Itinerary Details:</strong>
-            <p class="whitespace-pre-line text-slate-600">${itinerary}</p>
+            <strong class="text-slate-700 uppercase block mb-2">Day-Wise Tour Itinerary Details:</strong>
+            ${itineraryHtml}
           </div>
         </div>
       `;
@@ -596,6 +655,15 @@
         if (title || url) {
           linksArr.push({ title, url });
         }
+      });
+
+      const dayRows = document.querySelectorAll('.itinerary-day-row');
+      const itineraryArr = [];
+      dayRows.forEach(r => {
+        itineraryArr.push({
+          title: r.querySelector('.it-day-title').value.trim(),
+          desc: r.querySelector('.it-day-desc').value.trim()
+        });
       });
 
       const blocks = document.querySelectorAll('.duration-block');
@@ -659,7 +727,7 @@
         imageUrl: document.getElementById('pkgImageUrl').value.trim(),
         terms: document.getElementById('pkgTerms').value.trim(),
         itineraryLinks: JSON.stringify(linksArr),
-        itinerary: document.getElementById('pkgItinerary').value.trim(),
+        itinerary: JSON.stringify(itineraryArr),
         ratesGrid: JSON.stringify(rateGridBlocksArr)
       };
 
