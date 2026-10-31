@@ -587,17 +587,15 @@
       let payload = {};
       if (type === 'signin') {
         const val = document.getElementById('modalSigninEmail').value.trim();
-        payload = { action: 'signin', email: val, phone: val, username: val };
+        payload = { action: 'signin', email: val, phone: val };
       } else {
         payload = {
           action: 'signup',
           name: document.getElementById('modalSignupName').value.trim(),
-          company: document.getElementById('modalSignupAgency').value.trim(),
           agencyName: document.getElementById('modalSignupAgency').value.trim(),
           phone: document.getElementById('modalSignupPhone').value.trim(),
           email: document.getElementById('modalSignupEmail').value.trim(),
-          city: document.getElementById('modalSignupCity').value.trim(),
-          password: "N/A"
+          city: document.getElementById('modalSignupCity').value.trim()
         };
       }
 
@@ -610,11 +608,7 @@
         const data = await res.json();
 
         if (data.success) {
-          const agentData = data.agent || { 
-            name: payload.name || payload.email, 
-            agencyName: payload.company || payload.agencyName || 'Retail Partner',
-            email: payload.email 
-          };
+          const agentData = data.agent || { name: payload.name, agencyName: payload.agencyName };
           localStorage.setItem('ja_b2b_agent', JSON.stringify(agentData));
           loggedInAgent = agentData;
           closeAuthModal();
