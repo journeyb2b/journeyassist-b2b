@@ -96,7 +96,7 @@
       </form>
     </div>
 
-    <!-- LIVE PACKAGES TABLE WITH EDIT & DELETE -->
+    <!-- LIVE PACKAGES TABLE WITH ALWAYS VISIBLE EDIT & DELETE -->
     <div class="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-lg font-black text-white">Live Database Packages</h3>
@@ -105,16 +105,16 @@
         </button>
       </div>
 
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs border-collapse">
+      <div class="overflow-x-auto w-full">
+        <table class="w-full text-left text-xs border-collapse min-w-[700px]">
           <thead>
             <tr class="bg-slate-900 text-slate-400 uppercase font-extrabold border-b border-slate-800">
-              <th class="p-4">ID</th>
-              <th class="p-4">Title & Dest</th>
-              <th class="p-4">Duration</th>
-              <th class="p-4">Price</th>
-              <th class="p-4">Status</th>
-              <th class="p-4 text-right">Actions (Edit / Delete)</th>
+              <th class="p-3 w-32 text-center bg-blue-900/40 text-amber-300 border-r border-slate-800">ACTIONS</th>
+              <th class="p-3">ID</th>
+              <th class="p-3">Title & Dest</th>
+              <th class="p-3">Duration</th>
+              <th class="p-3">Price</th>
+              <th class="p-3">Status</th>
             </tr>
           </thead>
           <tbody id="adminPackagesTable" class="divide-y divide-slate-800">
@@ -145,7 +145,7 @@
           adminPackages = data.packages;
           renderAdminTable(adminPackages);
         } else {
-          document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">No packages found.</td></tr>`;
+          document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">No packages found in Google Sheet database.</td></tr>`;
         }
       } catch (err) {
         document.getElementById('adminPackagesTable').innerHTML = `<tr><td colspan="6" class="p-8 text-center text-rose-500 font-bold">Error connecting to database.</td></tr>`;
@@ -164,29 +164,29 @@
         const status = (p.status || "OPEN").toUpperCase();
         const isPaused = status === "PAUSED";
         const statusBadge = isPaused 
-          ? `<span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black uppercase rounded-md">PAUSED</span>`
-          : `<span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black uppercase rounded-md">OPEN</span>`;
+          ? `<span class="px-2 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black uppercase rounded-md">PAUSED</span>`
+          : `<span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black uppercase rounded-md">OPEN</span>`;
 
         html += `
           <tr class="hover:bg-slate-900/60 transition border-b border-slate-800">
-            <td class="p-4 font-mono font-bold text-slate-400">${p.id}</td>
-            <td class="p-4">
-              <p class="font-black text-white text-sm">${p.title}</p>
-              <p class="text-[11px] font-bold text-slate-400 mt-0.5">${p.destination} (${p.region})</p>
-            </td>
-            <td class="p-4 font-bold text-slate-300">${p.duration}</td>
-            <td class="p-4 font-black text-blue-400">${p.b2bPrice}</td>
-            <td class="p-4">${statusBadge}</td>
-            <td class="p-4 text-right">
-              <div class="flex items-center justify-end gap-2">
-                <button onclick="editPackage(${index})" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black rounded-lg shadow transition flex items-center gap-1 cursor-pointer">
+            <td class="p-3 text-center bg-slate-950 border-r border-slate-800">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="editPackage(${index})" title="Edit Package" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-black rounded-lg shadow transition">
                   <i class="fa-solid fa-pen"></i> Edit
                 </button>
-                <button onclick="deletePackage('${p.id}')" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-xs font-black rounded-lg shadow transition flex items-center gap-1.5 cursor-pointer">
+                <button onclick="deletePackage('${p.id}')" title="Delete Package" class="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-black rounded-lg shadow transition">
                   <i class="fa-solid fa-trash"></i> Delete
                 </button>
               </div>
             </td>
+            <td class="p-3 font-mono font-bold text-slate-400">${p.id}</td>
+            <td class="p-3">
+              <p class="font-black text-white text-xs">${p.title}</p>
+              <p class="text-[10px] font-bold text-slate-400">${p.destination} (${p.region})</p>
+            </td>
+            <td class="p-3 font-bold text-slate-300">${p.duration}</td>
+            <td class="p-3 font-black text-blue-400">${p.b2bPrice}</td>
+            <td class="p-3">${statusBadge}</td>
           </tr>
         `;
       });
