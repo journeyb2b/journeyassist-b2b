@@ -35,7 +35,7 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-black text-white" id="formHeading">Add New B2B Package & Supplier Rate Grid</h2>
-          <p class="text-xs font-medium text-slate-400">Manage stacked cards rate grids, image preview, and live brochure preview.</p>
+          <p class="text-xs font-medium text-slate-400">Manage stacked cards rate grids, hotel details, image preview, and live brochure preview.</p>
         </div>
         <button id="btnResetForm" onclick="resetForm()" class="hidden px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition cursor-pointer">
           <i class="fa-solid fa-plus mr-1"></i> Add New Package Mode
@@ -97,6 +97,23 @@
             <p class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i> Banner Image Preview Loaded</p>
             <p class="text-[10px] text-slate-400">Yeh image brochure aur package card par banner ki tarah dikhegi.</p>
           </div>
+        </div>
+
+        <!-- DYNAMIC HOTEL & ROOM CATEGORY MAPPING BUILDER -->
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-xs font-black uppercase text-purple-400 flex items-center gap-2">
+                <i class="fa-solid fa-hotel"></i> Destination & Category-Wise Hotel Mapping (Editable)
+              </span>
+              <p class="text-[11px] text-slate-400 font-normal mt-0.5">Hotel categories, Room types aur Destination-wise hotels ko yahan define karein.</p>
+            </div>
+            <button type="button" onclick="addHotelRow()" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
+              <i class="fa-solid fa-plus"></i> Add Hotel Category Row
+            </button>
+          </div>
+
+          <div id="hotelRowsContainer" class="space-y-3"></div>
         </div>
 
         <!-- DYNAMIC ITINERARY DOCUMENT LINKS -->
@@ -226,9 +243,9 @@
 
     window.onload = function() {
       fetchAdminPackages();
+      setupDefaultHotelRows();
       addItineraryLinkRow('3N/4D Detailed Itinerary', 'https://docs.google.com/document/d/1WDYfzuIl1Zvo2pbqvmQofi6g-s4gdhsnH__mQB9MvQA/edit?tab=t.0');
       addDurationBlock("3N/4D Package", "2 Nights Munnar + 1 Night Kochi");
-      // Day itinerary row kept empty by default so it stays optional
     };
 
     function updateImagePreview() {
@@ -242,6 +259,44 @@
       } else {
         wrapper.classList.add('hidden');
       }
+    }
+
+    // DYNAMIC HOTEL & ROOM CATEGORIES LOGIC
+    function setupDefaultHotelRows() {
+      const container = document.getElementById('hotelRowsContainer');
+      container.innerHTML = '';
+      addHotelRow('3 Star Basic', 'Deluxe Room', 'Munnar: Hotel Green Ridge | Alleppey: Standard HB');
+      addHotelRow('3 Star Premium', 'Super Deluxe Room', 'Munnar: Fort Munnar | Alleppey: Deluxe HB');
+      addHotelRow('4 Star', 'Executive / Premium Room', 'Munnar: Tea County | Alleppey: Premium HB');
+      addHotelRow('5 Star', 'Luxury Suite', 'Munnar: Blanket Hotel | Alleppey: Luxury Resort');
+    }
+
+    function addHotelRow(catName = '', roomCat = '', hotels = '') {
+      const container = document.getElementById('hotelRowsContainer');
+      const rowId = 'ht-row-' + Date.now() + Math.floor(Math.random() * 1000);
+      const div = document.createElement('div');
+      div.id = rowId;
+      div.className = 'hotel-mapping-row bg-slate-950 p-3 rounded-xl border border-slate-800 grid grid-cols-1 md:grid-cols-12 gap-2 items-center';
+      div.innerHTML = `
+        <div class="md:col-span-3">
+          <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Category Name</label>
+          <input type="text" value="${catName}" placeholder="e.g. 3 Star Basic / 4 Star" class="ht-cat w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 text-xs font-bold focus:border-purple-500 focus:outline-none">
+        </div>
+        <div class="md:col-span-3">
+          <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Room Category</label>
+          <input type="text" value="${roomCat}" placeholder="e.g. Deluxe Room / Suite" class="ht-room w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-bold focus:border-purple-500 focus:outline-none">
+        </div>
+        <div class="md:col-span-5">
+          <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Destination Wise Hotels</label>
+          <input type="text" value="${hotels}" placeholder="e.g. Munnar: Hotel A | Alleppey: Resort B" class="ht-hotels w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-white text-xs font-medium focus:border-purple-500 focus:outline-none">
+        </div>
+        <div class="md:col-span-1 flex items-center justify-center pt-4 md:pt-0">
+          <button type="button" onclick="document.getElementById('${rowId}').remove()" class="px-3 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg transition text-xs cursor-pointer">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      `;
+      container.appendChild(div);
     }
 
     function addItineraryLinkRow(title = 'View Detailed Itinerary', url = '') {
@@ -350,12 +405,7 @@
       tr.innerHTML = `
         <td class="p-1"><input type="text" value="${plan}" class="r-plan w-full px-2 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]"></td>
         <td class="p-1">
-          <select class="r-cat w-full px-1 py-1 bg-slate-900 border border-slate-800 rounded-lg text-white font-bold text-[11px]">
-            <option value="Standard" ${cat==='Standard'?'selected':''}>Standard</option>
-            <option value="Deluxe" ${cat==='Deluxe'?'selected':''}>Deluxe</option>
-            <option value="Premium" ${cat==='Premium'?'selected':''}>Premium</option>
-            <option value="Luxury" ${cat==='Luxury'?'selected':''}>Luxury</option>
-          </select>
+          <input type="text" value="${cat}" placeholder="Category" class="r-cat w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-bold text-[11px]">
         </td>
         <td class="p-1"><input type="text" value="${v1}" class="r-v1 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
         <td class="p-1"><input type="text" value="${v2}" class="r-v2 w-full px-1.5 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-300 font-extrabold text-[11px]"></td>
@@ -442,6 +492,25 @@
       document.getElementById('pkgImageUrl').value = p.imageUrl || '';
       updateImagePreview();
 
+      // EDIT HOTEL ROWS LOAD
+      const hotelContainer = document.getElementById('hotelRowsContainer');
+      hotelContainer.innerHTML = '';
+      try {
+        let hotelData = p.hotels;
+        if (typeof hotelData === 'string' && hotelData.trim() !== '') {
+          try { hotelData = JSON.parse(hotelData); } catch(err) {}
+        }
+        if (Array.isArray(hotelData) && hotelData.length > 0) {
+          hotelData.forEach(h => {
+            addHotelRow(h.category || '', h.room || '', h.hotels || '');
+          });
+        } else {
+          setupDefaultHotelRows();
+        }
+      } catch (e) {
+        setupDefaultHotelRows();
+      }
+
       // PARSE ITINERARY LINKS SAFELY
       document.getElementById('itineraryLinksContainer').innerHTML = '';
       try {
@@ -509,6 +578,7 @@
       document.getElementById('editingPackageId').value = '';
       document.getElementById('packageForm').reset();
       document.getElementById('imgPreviewWrapper').classList.add('hidden');
+      setupDefaultHotelRows();
       document.getElementById('itineraryLinksContainer').innerHTML = '';
       document.getElementById('itineraryDaysContainer').innerHTML = '';
       document.getElementById('builderBlocksContainer').innerHTML = '';
@@ -529,6 +599,26 @@
       const inclusions = document.getElementById('pkgInclusions').value || '';
       const exclusions = document.getElementById('pkgExclusions').value || '';
       const terms = document.getElementById('pkgTerms').value || '';
+
+      // HOTEL DETAILS PREVIEW
+      const hotelRows = document.querySelectorAll('.hotel-mapping-row');
+      let hotelsPreviewHtml = '';
+      hotelRows.forEach(r => {
+        const cat = r.querySelector('.ht-cat').value.trim();
+        const room = r.querySelector('.ht-room').value.trim();
+        const hotels = r.querySelector('.ht-hotels').value.trim();
+        if (cat || hotels) {
+          hotelsPreviewHtml += `
+            <div class="bg-white border border-purple-100 p-2.5 rounded-xl text-xs space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-purple-900">${cat || 'Category'}</span>
+                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-[10px] font-bold">${room || 'Standard Room'}</span>
+              </div>
+              <p class="text-slate-600 text-[11px]">${hotels || 'N/A'}</p>
+            </div>
+          `;
+        }
+      });
 
       const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
       let linksHtml = '';
@@ -622,6 +712,12 @@
             </div>
           </div>
 
+          ${hotelsPreviewHtml ? `
+          <div class="bg-purple-50/70 p-3 rounded-2xl border border-purple-200 space-y-2">
+            <h4 class="text-xs font-black uppercase text-purple-900">Hotel Details (Category Wise):</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${hotelsPreviewHtml}</div>
+          </div>` : ''}
+
           ${linksHtml ? `<div><h4 class="text-xs font-black uppercase text-slate-500 mb-1">Official Itinerary Documents:</h4>${linksHtml}</div>` : ''}
 
           <div>
@@ -660,6 +756,18 @@
       event.preventDefault();
       const btn = document.getElementById('btnSubmitForm');
       btn.disabled = true;
+
+      // COLLECT HOTEL CATEGORIES DATA
+      const hotelRows = document.querySelectorAll('.hotel-mapping-row');
+      const hotelsArr = [];
+      hotelRows.forEach(r => {
+        const cat = r.querySelector('.ht-cat').value.trim();
+        const room = r.querySelector('.ht-room').value.trim();
+        const hotels = r.querySelector('.ht-hotels').value.trim();
+        if (cat || hotels) {
+          hotelsArr.push({ category: cat, room: room, hotels: hotels });
+        }
+      });
 
       const linkRows = document.querySelectorAll('#itineraryLinksContainer > div');
       const linksArr = [];
@@ -705,7 +813,7 @@
         rows.forEach(r => {
           rowsArr.push({
             plan: r.querySelector('.r-plan').value.trim(),
-            cat: r.querySelector('.r-cat').value,
+            cat: r.querySelector('.r-cat').value.trim(),
             v1: r.querySelector('.r-v1').value.trim(),
             v2: r.querySelector('.r-v2').value.trim(),
             v3: r.querySelector('.r-v3').value.trim(),
@@ -741,6 +849,7 @@
         exclusions: document.getElementById('pkgExclusions').value.trim(),
         imageUrl: document.getElementById('pkgImageUrl').value.trim(),
         terms: document.getElementById('pkgTerms').value.trim(),
+        hotels: JSON.stringify(hotelsArr),
         itineraryLinks: JSON.stringify(linksArr),
         itinerary: JSON.stringify(itineraryArr),
         ratesGrid: JSON.stringify(rateGridBlocksArr)
