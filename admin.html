@@ -224,8 +224,8 @@
 
   <!-- LIVE PREVIEW MODAL -->
   <div id="previewModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white text-slate-900 w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-y-auto border border-slate-200">
-      <div class="sticky top-0 bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800 z-10">
+    <div class="bg-slate-900 text-slate-100 w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-y-auto border border-slate-800">
+      <div class="sticky top-0 bg-slate-950 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800 z-10">
         <span class="text-xs font-black uppercase text-amber-400 flex items-center gap-2">
           <i class="fa-solid fa-eye"></i> Live Package Brochure Preview
         </span>
@@ -609,12 +609,12 @@
         const hotels = r.querySelector('.ht-hotels').value.trim();
         if (cat || hotels) {
           hotelsPreviewHtml += `
-            <div class="bg-white border border-purple-100 p-2.5 rounded-xl text-xs space-y-1">
+            <div class="bg-slate-950 border border-purple-900/50 p-2.5 rounded-xl text-xs space-y-1">
               <div class="flex items-center justify-between">
-                <span class="font-black text-purple-900">${cat || 'Category'}</span>
-                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-[10px] font-bold">${room || 'Standard Room'}</span>
+                <span class="font-black text-purple-400">${cat || 'Category'}</span>
+                <span class="px-2 py-0.5 bg-purple-900/40 text-purple-300 rounded text-[10px] font-bold border border-purple-700/50">${room || 'Standard Room'}</span>
               </div>
-              <p class="text-slate-600 text-[11px]">${hotels || 'N/A'}</p>
+              <p class="text-slate-300 text-[11px]">${hotels || 'N/A'}</p>
             </div>
           `;
         }
@@ -643,9 +643,9 @@
         const dd = r.querySelector('.it-day-desc').value.trim();
         if (dt || dd) {
           itineraryHtml += `
-            <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl mb-2">
-              <h5 class="font-black text-blue-900 text-xs uppercase">${dt || ('Day ' + (idx + 1))}</h5>
-              <p class="text-xs text-slate-600 mt-1 whitespace-pre-line">${dd}</p>
+            <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl mb-2">
+              <h5 class="font-black text-blue-400 text-xs uppercase">${dt || ('Day ' + (idx + 1))}</h5>
+              <p class="text-xs text-slate-300 mt-1 whitespace-pre-line">${dd}</p>
             </div>
           `;
         }
@@ -668,28 +668,28 @@
         let cardsHtml = '';
         blk.querySelectorAll('.rate-row').forEach(r => {
           cardsHtml += `
-            <div class="bg-white border border-slate-200 rounded-xl p-3.5 shadow-sm space-y-2.5">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <span class="font-black text-xs text-slate-800">${r.querySelector('.r-plan').value}</span>
-                <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-[10px] font-extrabold">${r.querySelector('.r-cat').value}</span>
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5 shadow-sm space-y-2.5">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <span class="font-black text-xs text-white">${r.querySelector('.r-plan').value}</span>
+                <span class="px-2 py-0.5 bg-blue-900/40 text-blue-300 border border-blue-700/50 rounded text-[10px] font-extrabold">${r.querySelector('.r-cat').value}</span>
               </div>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h1}</span><strong class="text-amber-600">${r.querySelector('.r-v1').value || '-'}</strong></div>
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h2}</span><strong class="text-amber-600">${r.querySelector('.r-v2').value || '-'}</strong></div>
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h3}</span><strong class="text-amber-600">${r.querySelector('.r-v3').value || '-'}</strong></div>
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h4}</span><strong class="text-amber-600">${r.querySelector('.r-v4').value || '-'}</strong></div>
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h5}</span><span>${r.querySelector('.r-v5').value || '-'}</span></div>
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h6}</span><span>${r.querySelector('.r-v6').value || '-'}</span></div>
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h7}</span><span>${r.querySelector('.r-v7').value || '-'}</span></div>
-                <div class="bg-slate-50 p-1.5 rounded border border-slate-100"><span class="block text-[9px] text-slate-500 uppercase font-bold">${h8}</span><span>${r.querySelector('.r-v8').value || '-'}</span></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h1}</span><strong class="text-amber-400">${r.querySelector('.r-v1').value || '-'}</strong></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h2}</span><strong class="text-amber-400">${r.querySelector('.r-v2').value || '-'}</strong></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h3}</span><strong class="text-amber-400">${r.querySelector('.r-v3').value || '-'}</strong></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h4}</span><strong class="text-amber-400">${r.querySelector('.r-v4').value || '-'}</strong></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h5}</span><span class="text-slate-200">${r.querySelector('.r-v5').value || '-'}</span></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h6}</span><span class="text-slate-200">${r.querySelector('.r-v6').value || '-'}</span></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h7}</span><span class="text-slate-200">${r.querySelector('.r-v7').value || '-'}</span></div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800"><span class="block text-[9px] text-slate-400 uppercase font-bold">${h8}</span><span class="text-slate-200">${r.querySelector('.r-v8').value || '-'}</span></div>
               </div>
             </div>
           `;
         });
 
         gridsHtml += `
-          <div class="mb-4 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
-            <h5 class="font-black text-blue-900 text-xs uppercase">${bTitle} — <span class="font-medium text-slate-500">${bSub}</span></h5>
+          <div class="mb-4 bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
+            <h5 class="font-black text-blue-400 text-xs uppercase">${bTitle} — <span class="font-medium text-slate-400">${bSub}</span></h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">${cardsHtml}</div>
           </div>
         `;
@@ -698,12 +698,12 @@
       const formatPreviewList = (text) => {
         if (!text) return '<span>N/A</span>';
         const lines = text.split('\n').filter(l => l.trim() !== '');
-        return `<ul class="list-disc pl-4 space-y-1">${lines.map(l => `<li>${l}</li>`).join('')}</ul>`;
+        return `<ul class="list-disc pl-4 space-y-1 text-slate-300">${lines.map(l => `<li>${l}</li>`).join('')}</ul>`;
       };
 
       const modalHtml = `
-        <div class="space-y-4">
-          <div class="relative h-44 rounded-2xl overflow-hidden bg-slate-900">
+        <div class="space-y-4 text-slate-200">
+          <div class="relative h-44 rounded-2xl overflow-hidden bg-slate-950">
             <img src="${imageUrl}" class="w-full h-full object-cover opacity-60">
             <div class="absolute bottom-4 left-4 right-4 text-white">
               <span class="px-2.5 py-0.5 bg-blue-600 rounded-full text-[10px] font-black uppercase">${dest} (${region})</span>
@@ -713,32 +713,32 @@
           </div>
 
           ${hotelsPreviewHtml ? `
-          <div class="bg-purple-50/70 p-3 rounded-2xl border border-purple-200 space-y-2">
-            <h4 class="text-xs font-black uppercase text-purple-900">Hotel Details (Category Wise):</h4>
+          <div class="bg-purple-950/30 p-3 rounded-2xl border border-purple-800/40 space-y-2">
+            <h4 class="text-xs font-black uppercase text-purple-300">Hotel Details (Category Wise):</h4>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${hotelsPreviewHtml}</div>
           </div>` : ''}
 
-          ${linksHtml ? `<div><h4 class="text-xs font-black uppercase text-slate-500 mb-1">Official Itinerary Documents:</h4>${linksHtml}</div>` : ''}
+          ${linksHtml ? `<div><h4 class="text-xs font-black uppercase text-slate-400 mb-1">Official Itinerary Documents:</h4>${linksHtml}</div>` : ''}
 
           <div>
-            <h4 class="text-xs font-black uppercase text-slate-500 mb-2">Rate Grid Stacked Cards:</h4>
+            <h4 class="text-xs font-black uppercase text-slate-400 mb-2">Rate Grid Stacked Cards:</h4>
             ${gridsHtml}
           </div>
 
-          <div class="grid grid-cols-2 gap-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <div><strong class="text-emerald-600 uppercase block mb-1">Inclusions:</strong> ${formatPreviewList(inclusions)}</div>
-            <div><strong class="text-rose-600 uppercase block mb-1">Exclusions:</strong> ${formatPreviewList(exclusions)}</div>
+          <div class="grid grid-cols-2 gap-3 text-xs bg-slate-950 p-3 rounded-xl border border-slate-800">
+            <div><strong class="text-emerald-400 uppercase block mb-1">Inclusions:</strong> ${formatPreviewList(inclusions)}</div>
+            <div><strong class="text-rose-400 uppercase block mb-1">Exclusions:</strong> ${formatPreviewList(exclusions)}</div>
           </div>
 
           ${terms ? `
-          <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <strong class="text-blue-700 uppercase block mb-1">Terms & Conditions / Policy:</strong>
+          <div class="text-xs bg-slate-950 p-3 rounded-xl border border-slate-800">
+            <strong class="text-blue-400 uppercase block mb-1">Terms & Conditions / Policy:</strong>
             ${formatPreviewList(terms)}
           </div>` : ''}
 
           ${itineraryHtml ? `
-          <div class="text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-            <strong class="text-slate-700 uppercase block mb-2">Day-Wise Tour Itinerary Details:</strong>
+          <div class="text-xs bg-slate-950 p-3 rounded-xl border border-slate-800">
+            <strong class="text-slate-300 uppercase block mb-2">Day-Wise Tour Itinerary Details:</strong>
             ${itineraryHtml}
           </div>` : ''}
         </div>
