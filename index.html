@@ -496,10 +496,45 @@
 
       const modalContent = document.getElementById('modalPackageContent');
       
+      // 3. RATE GRID PARSE & RENDER (ONLY SHOWS IF DATA EXISTS)
       let rateGridHtml = '';
       try {
         const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
+        
+        // Tabhi render hoga jab grid ek valid Array ho AUR usme kam se kam 1 row ho
         if (Array.isArray(grid) && grid.length > 0) {
+          // Check ki kam se kam ek category ya price bhara hua hai
+          const hasValidData = grid.some(g => (g.category && g.category.trim() !== '') || (g.price && g.price.trim() !== ''));
+          
+          if (hasValidData) {
+            rateGridHtml = `
+              <div class="space-y-2">
+                <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Rate Grid / Options</p>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr class="bg-slate-100 text-slate-700 font-extrabold uppercase">
+                        <th class="p-2 border border-slate-200">Category</th>
+                        <th class="p-2 border border-slate-200">Rate</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${grid.map(g => `
+                        <tr>
+                          <td class="p-2 border border-slate-200 font-bold">${g.category || g.hotel || 'Option'}</td>
+                          <td class="p-2 border border-slate-200 text-blue-700 font-extrabold">${g.price || g.rate || '-'}</td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          }
+        }
+      } catch (e) {
+        rateGridHtml = '';
+      }
           rateGridHtml = `
             <div class="overflow-x-auto">
               <table class="w-full text-left text-xs border-collapse">
