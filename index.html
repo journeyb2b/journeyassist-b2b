@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .glass-modal { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(10px); }
+    .glass-modal { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); }
     .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%); }
     @keyframes pulse-ring {
       0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
@@ -85,8 +85,8 @@
           <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-bold mb-6">
             <i class="fa-solid fa-award text-amber-400"></i> India's Trusted B2B Travel Marketplace
           </span>
-          <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">Unlock Best Price & Exclusive B2B Rates</h2>
-          <p class="mt-4 text-slate-300 text-sm sm:text-base font-medium max-w-2xl mx-auto">Access verified holiday packages, instant unbranded quotes, and direct DMC pricing.</p>
+          <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">Unlock Curated Holiday Packages & Exclusive B2B Itineraries</h2>
+          <p class="mt-4 text-slate-300 text-sm sm:text-base font-medium max-w-2xl mx-auto">Access verified holiday packages, unbranded detailed itineraries, and direct DMC support.</p>
           <div class="mt-8">
             <button onclick="openAuthModal('signup')" class="px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl transition cursor-pointer">Become An Agent Now</button>
           </div>
@@ -144,12 +144,12 @@
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <div>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Agent</h2>
-          <p class="text-slate-500 text-xs font-semibold mt-1">Here's what's happening with your bookings today</p>
+          <p class="text-slate-500 text-xs font-semibold mt-1">Explore curated holiday packages with complete day-wise itineraries.</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
           <a href="#quickPackagesSection" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2">
-            <i class="fa-solid fa-bolt text-amber-300"></i> Book Quick Package
+            <i class="fa-solid fa-bolt text-amber-300"></i> Explore Packages
           </a>
           <button onclick="openCustomQuoteModal()" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2 cursor-pointer">
             <i class="fa-solid fa-plus"></i> Create Custom Package
@@ -168,11 +168,11 @@
           </div>
           <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
             <p class="text-2xl font-black text-emerald-800" id="openPackagesCount">0</p>
-            <p class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Open For Booking</p>
+            <p class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Ready To View</p>
           </div>
-          <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
-            <p class="text-2xl font-black text-amber-800" id="closingPackagesCount">0</p>
-            <p class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Closing This Month</p>
+          <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200">
+            <p class="text-2xl font-black text-blue-800">100%</p>
+            <p class="text-[10px] font-extrabold uppercase text-blue-600 tracking-wider">Unbranded Itineraries</p>
           </div>
         </div>
 
@@ -205,11 +205,21 @@
     </main>
   </div>
 
-  <!-- ================= PACKAGE DETAILS MODAL ================= -->
-  <div id="packageModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-modal hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-6 sm:p-8 relative border border-slate-100 max-h-[90vh] overflow-y-auto">
-      <button onclick="closePackageModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-extrabold text-sm transition">✕</button>
-      <div id="modalPackageContent" class="space-y-6"></div>
+  <!-- ================= EASEMYTRIP STYLE DETAILED PACKAGE VIEW MODAL ================= -->
+  <div id="packageModal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 glass-modal hidden">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full relative border border-slate-100 max-h-[92vh] flex flex-col overflow-hidden">
+      
+      <!-- Modal Header Bar -->
+      <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[10px] font-black uppercase tracking-wider">Holiday Package Overview</span>
+        </div>
+        <button onclick="closePackageModal()" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-white flex items-center justify-center font-bold text-sm transition cursor-pointer">✕</button>
+      </div>
+
+      <!-- Modal Scrollable Content -->
+      <div id="modalPackageContent" class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1"></div>
+
     </div>
   </div>
 
@@ -401,7 +411,6 @@
     function updatePackageStats(pkgs) {
       document.getElementById('totalPackagesCount').innerText = pkgs.length;
       document.getElementById('openPackagesCount').innerText = pkgs.length;
-      document.getElementById('closingPackagesCount').innerText = 0;
     }
 
     function renderDestinationPills(pkgs) {
@@ -461,8 +470,6 @@
 
       let html = '';
       pkgs.forEach((p, index) => {
-        // NON-MANDATORY STARTING PRICE: FALLBACK TO "ON REQUEST" IF EMPTY
-        const displayPrice = (p.b2bPrice && p.b2bPrice.trim() !== '') ? p.b2bPrice : 'On Request';
         const displayValidity = (p.travelDates && p.travelDates.trim() !== '') ? p.travelDates : 'Valid for booking this season';
 
         html += `
@@ -470,22 +477,22 @@
             <div class="space-y-2">
               <div class="flex items-center gap-3">
                 <h4 class="text-base font-black text-slate-900">${p.title || 'Untitled Package'}</h4>
-                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase rounded-md">OPEN</span>
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase rounded-md">VERIFIED</span>
               </div>
-              <p class="text-xs font-bold text-slate-600">Includes · ${p.inclusions || 'Standard Inclusions'}</p>
+              <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Includes · ${p.inclusions || 'Standard Inclusions'}</p>
               <p class="text-[11px] font-semibold text-slate-500"><i class="fa-regular fa-calendar-days mr-1 text-blue-600"></i> Validity: ${displayValidity}</p>
               <div class="flex items-center gap-4 pt-1">
-                <button onclick="openPackageDetails(${index})" class="text-xs font-extrabold text-blue-600 hover:underline flex items-center gap-1 cursor-pointer">
-                  RATES & DETAILS <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                <button onclick="openPackageDetails(${index})" class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+                  <span>VIEW DETAILS</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </button>
                 <a href="brochure.html?id=${p.id}" target="_blank" class="text-xs font-extrabold text-amber-600 hover:underline flex items-center gap-1 cursor-pointer">
-                  VIEW BROCHURE <i class="fa-solid fa-file-pdf text-[10px]"></i>
+                  <i class="fa-solid fa-file-pdf"></i> VIEW BROCHURE
                 </a>
               </div>
             </div>
             <div class="text-left md:text-right border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
-              <p class="text-xl font-black text-slate-900">${displayPrice}</p>
-              <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Per Person</p>
+              <p class="text-lg font-black text-blue-700">On Request</p>
+              <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">B2B Net Rate</p>
             </div>
           </div>
         `;
@@ -498,7 +505,8 @@
       if (!p) return;
 
       const modalContent = document.getElementById('modalPackageContent');
-      
+      const displayValidity = (p.travelDates && p.travelDates.trim() !== '') ? p.travelDates : 'Valid for booking this season';
+
       // 1. HOTEL DETAILS PARSE & RENDER
       let hotelsDisplay = '';
       try {
@@ -510,18 +518,18 @@
           let hotelCards = '';
           hotelData.forEach(h => {
             hotelCards += `
-              <div class="bg-slate-950 border border-purple-900/50 p-2.5 rounded-xl text-xs space-y-1 mb-2">
+              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs space-y-1 mb-2">
                 <div class="flex items-center justify-between">
-                  <span class="font-black text-purple-400">${h.category || 'Category'}</span>
-                  <span class="px-2 py-0.5 bg-purple-900/40 text-purple-300 rounded text-[10px] font-bold border border-purple-700/50">${h.room || 'Room'}</span>
+                  <span class="font-black text-blue-900">${h.category || 'Category'}</span>
+                  <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-[10px] font-bold">${h.room || 'Room'}</span>
                 </div>
-                <p class="text-slate-300 text-[11px]">${h.hotels || 'N/A'}</p>
+                <p class="text-slate-700 text-[11px] font-medium"><i class="fa-solid fa-hotel text-amber-600 mr-1"></i> ${h.hotels || 'N/A'}</p>
               </div>
             `;
           });
           hotelsDisplay = `
-            <div class="bg-purple-950/20 p-4 rounded-2xl border border-purple-800/40 space-y-2">
-              <p class="text-xs font-extrabold text-purple-300 uppercase tracking-wider"><i class="fa-solid fa-hotel mr-1"></i> Hotel Categories & Room Mapping</p>
+            <div class="space-y-2">
+              <h4 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider border-b pb-1"><i class="fa-solid fa-hotel mr-1 text-blue-600"></i> Hotel Categories & Room Mapping</h4>
               ${hotelCards}
             </div>
           `;
@@ -542,8 +550,9 @@
           linksData.forEach(l => {
             if (l && l.url) {
               linkButtons += `
-                <a href="${l.url}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-600 text-white font-bold text-xs rounded-xl mr-2 mb-2 hover:bg-blue-700 transition">
-                  <span>${l.title || 'View Detailed Itinerary'}</span>
+                <a href="${l.url}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2.5 bg-blue-50 text-blue-700 border border-blue-200 font-bold text-xs rounded-xl mr-2 mb-2 hover:bg-blue-100 transition">
+                  <i class="fa-solid fa-link"></i>
+                  <span>${l.title || 'View Detailed Itinerary Document'}</span>
                   <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
                 </a>
               `;
@@ -552,7 +561,7 @@
           if (linkButtons !== '') {
             linksDisplay = `
               <div class="space-y-2">
-                <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider"><i class="fa-solid fa-link mr-1"></i> Official Itinerary Documents</p>
+                <h4 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider border-b pb-1">Official Itinerary Documents</h4>
                 <div>${linkButtons}</div>
               </div>
             `;
@@ -562,43 +571,7 @@
         linksDisplay = '';
       }
 
-      // 3. RATE GRID PARSE & RENDER (DYNAMICALLY HIDES IF EMPTY)
-      let rateGridHtml = '';
-      try {
-        const grid = typeof p.ratesGrid === 'string' ? JSON.parse(p.ratesGrid) : p.ratesGrid;
-        if (Array.isArray(grid) && grid.length > 0) {
-          const hasValidData = grid.some(g => (g.category && g.category.trim() !== '') || (g.price && g.price.trim() !== ''));
-          if (hasValidData) {
-            rateGridHtml = `
-              <div class="space-y-2">
-                <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Rate Grid / Options</p>
-                <div class="overflow-x-auto">
-                  <table class="w-full text-left text-xs border-collapse">
-                    <thead>
-                      <tr class="bg-slate-100 text-slate-700 font-extrabold uppercase">
-                        <th class="p-2 border border-slate-200">Category</th>
-                        <th class="p-2 border border-slate-200">Rate</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${grid.map(g => `
-                        <tr>
-                          <td class="p-2 border border-slate-200 font-bold">${g.category || g.hotel || 'Option'}</td>
-                          <td class="p-2 border border-slate-200 text-blue-700 font-extrabold">${g.price || g.rate || '-'}</td>
-                        </tr>
-                      `).join('')}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            `;
-          }
-        }
-      } catch (e) {
-        rateGridHtml = '';
-      }
-
-      // 4. DAY-WISE ITINERARY PARSE & RENDER
+      // 3. DAY-WISE ITINERARY PARSE & RENDER
       let itineraryDisplay = '';
       if (p.itinerary && p.itinerary !== '[]' && p.itinerary !== '""' && p.itinerary.trim() !== '') {
         try {
@@ -608,17 +581,17 @@
             parsed.forEach((d, idx) => {
               if (d && ((d.title && d.title.trim() !== '') || (d.desc && d.desc.trim() !== ''))) {
                 rows += `
-                  <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl mb-2">
-                    <h5 class="font-black text-blue-900 text-xs uppercase">${d.title || ('Day ' + (idx + 1))}</h5>
-                    <p class="text-xs text-slate-600 mt-1 whitespace-pre-line">${d.desc || ''}</p>
+                  <div class="bg-slate-50 border-l-4 border-blue-600 p-4 rounded-r-2xl mb-3 shadow-sm">
+                    <h5 class="font-black text-blue-900 text-xs uppercase"><i class="fa-regular fa-calendar-check mr-1 text-amber-600"></i> ${d.title || ('Day ' + (idx + 1))}</h5>
+                    <p class="text-xs text-slate-700 mt-1.5 whitespace-pre-line font-medium leading-relaxed">${d.desc || ''}</p>
                   </div>
                 `;
               }
             });
             if (rows !== '') {
               itineraryDisplay = `
-                <div class="space-y-2">
-                  <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Day-Wise Tour Itinerary Details</p>
+                <div class="space-y-3">
+                  <h4 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider border-b pb-1">Detailed Day-Wise Itinerary Plan</h4>
                   ${rows}
                 </div>
               `;
@@ -629,46 +602,47 @@
         }
       }
 
-      // PRICE DISPLAY FALLBACK FOR MODAL
-      const modalPrice = (p.b2bPrice && p.b2bPrice.trim() !== '') ? p.b2bPrice : 'On Request';
-      const modalValidity = (p.travelDates && p.travelDates.trim() !== '') ? p.travelDates : 'Valid for booking this season';
-
       modalContent.innerHTML = `
-        <div>
-          <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider">${p.destination || 'Package'} (${p.region || 'General'})</span>
-          <h3 class="text-2xl font-black text-slate-900 mt-2">${p.title || 'Untitled Package'}</h3>
-          <p class="text-xs font-semibold text-slate-500 mt-1"><i class="fa-regular fa-calendar-days mr-1 text-blue-600"></i> Validity: ${modalValidity}</p>
+        <!-- Top Title & Destination Banner -->
+        <div class="border-b pb-4 space-y-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider">${p.destination || 'Package'} (${p.region || 'General'})</span>
+            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider"><i class="fa-solid fa-shield-halved mr-1"></i> B2B Verified</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900">${p.title || 'Untitled Package'}</h2>
+          <p class="text-xs font-semibold text-slate-500"><i class="fa-regular fa-calendar-days mr-1 text-blue-600"></i> Validity: ${displayValidity}</p>
         </div>
 
-        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
-          <p class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Pricing & Inclusions</p>
-          <div class="flex justify-between text-xs font-bold">
-            <span class="text-slate-600">B2B Net Rate (Starting):</span>
-            <span class="text-blue-700 text-sm font-black">${modalPrice}</span>
+        <!-- Pricing & Inclusions Banner (Always On Request) -->
+        <div class="bg-blue-50/70 p-5 rounded-2xl border border-blue-100 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-blue-200/60 pb-3">
+            <div>
+              <p class="text-[10px] font-extrabold uppercase text-blue-600 tracking-wider">Package Pricing</p>
+              <p class="text-xl font-black text-blue-900">On Request</p>
+            </div>
+            <a href="brochure.html?id=${p.id}" target="_blank" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-md transition text-center">
+              <i class="fa-solid fa-file-pdf mr-1"></i> Download Brochure PDF
+            </a>
           </div>
-          <div class="flex justify-between text-xs font-bold">
-            <span class="text-slate-600">Inclusions:</span>
-            <span class="text-slate-900">${p.inclusions || 'Standard Inclusions'}</span>
+          <div>
+            <p class="text-[10px] font-extrabold uppercase text-slate-500 tracking-wider mb-1">Package Inclusions</p>
+            <p class="text-xs font-bold text-slate-800"><i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> ${p.inclusions || 'Standard Inclusions'}</p>
           </div>
         </div>
 
+        <!-- Hotels & Room Mapping Section -->
         ${hotelsDisplay}
 
+        <!-- Itinerary Document Links Section -->
         ${linksDisplay}
 
-        ${rateGridHtml}
-
+        <!-- Day-Wise Itinerary Section -->
         ${itineraryDisplay}
-
-        <div class="pt-4 flex justify-end gap-3">
-          <a href="brochure.html?id=${p.id}" target="_blank" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-md transition">
-            <i class="fa-solid fa-file-pdf mr-1"></i> Open Dynamic Brochure
-          </a>
-        </div>
       `;
 
       document.getElementById('packageModal').classList.remove('hidden');
     }
+
     function closePackageModal() {
       document.getElementById('packageModal').classList.add('hidden');
     }
@@ -754,26 +728,5 @@
       closeCustomQuoteModal();
     }
   </script>
-  <script>
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    const btn = document.getElementById('installBtn');
-    if (btn) {
-      btn.style.display = 'flex';
-      btn.addEventListener('click', () => {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the install prompt');
-          }
-          deferredPrompt = null;
-          btn.style.display = 'none';
-        });
-      });
-    }
-  });
-</script>
 </body>
 </html>
