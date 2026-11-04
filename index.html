@@ -1,8 +1,12 @@
-Journey Assist | Live Updated Portal
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- PWA Manifest & Theme -->
+  <!-- Cache Control Metadata -->
+  <meta http-[equiv]="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-[equiv]="Pragma" content="no-cache">
+  <meta http-[equiv]="Expires" content="0">
+
+  <!-- PWA Manifest & Dynamic Service Worker -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1e3a8a">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,17 +15,21 @@ Journey Assist | Live Updated Portal
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063823.png">
 
   <script>
+    // Auto-update Service Worker cache on new commit
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then((reg) => console.log('Service Worker registered! Scope:', reg.scope))
-          .catch((err) => console.log('Service Worker registration failed:', err));
+        navigator.serviceWorker.register('/sw.js?v=2.0')
+          .then((reg) => {
+            reg.update();
+            console.log('Service Worker updated to v2.0!');
+          })
+          .catch((err) => console.log('Service Worker registration error:', err));
       });
     }
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journey Assist | India's Leading B2B Travel Partner Portal</title>
+  <title>Journey Assist | Modern B2B Travel Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +37,7 @@ Journey Assist | Live Updated Portal
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .glass-modal { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); }
+    .glass-modal { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); }
     .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%); }
     @keyframes pulse-ring {
       0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
@@ -53,8 +61,8 @@ Journey Assist | Live Updated Portal
             <span class="hidden sm:inline"><i class="fa-regular fa-clock text-amber-400 mr-1.5"></i> Operations: 10:00 AM - 7:00 PM (Mon-Sat)</span>
           </div>
           <div class="flex items-center gap-4 text-[11px] font-semibold">
-            <span class="text-amber-400"><i class="fa-solid fa-bolt mr-1"></i> Direct Net Rates</span>
-            <span class="text-emerald-400"><i class="fa-solid fa-shield-halved mr-1"></i> Verified B2B DMC</span>
+            <span class="text-amber-400"><i class="fa-solid fa-bolt mr-1"></i> Direct DMC Partner</span>
+            <span class="text-emerald-400"><i class="fa-solid fa-shield-halved mr-1"></i> B2B Verified Agent Portal</span>
           </div>
         </div>
       </div>
@@ -84,10 +92,10 @@ Journey Assist | Live Updated Portal
       <section class="hero-gradient text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden text-center">
         <div class="max-w-4xl mx-auto relative z-10">
           <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-bold mb-6">
-            <i class="fa-solid fa-award text-amber-400"></i> India's Trusted B2B Travel Marketplace
+            <i class="fa-solid fa-award text-amber-400"></i> Modern B2B Holiday Marketplace
           </span>
-          <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">Unlock Curated Holiday Packages & Exclusive B2B Itineraries</h2>
-          <p class="mt-4 text-slate-300 text-sm sm:text-base font-medium max-w-2xl mx-auto">Access verified holiday packages, unbranded detailed itineraries, and direct DMC support.</p>
+          <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">Explore Curated Holiday Packages & Clean Detailed Itineraries</h2>
+          <p class="mt-4 text-slate-300 text-sm sm:text-base font-medium max-w-2xl mx-auto">Access verified tour packages, unbranded itineraries, and direct DMC support for travel agents.</p>
           <div class="mt-8">
             <button onclick="openAuthModal('signup')" class="px-8 py-4 bg-blue-700 hover:bg-blue-800 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl transition cursor-pointer">Become An Agent Now</button>
           </div>
@@ -119,7 +127,7 @@ Journey Assist | Live Updated Portal
           <nav class="hidden lg:flex items-center gap-6 text-xs font-extrabold uppercase tracking-wider">
             <a href="#" class="text-white border-b-2 border-white pb-1">Dashboard</a>
             <a href="javascript:void(0)" onclick="openCustomQuoteModal()" class="text-blue-100 hover:text-white transition">Customized Package</a>
-            <a href="#quickPackagesSection" class="text-blue-100 hover:text-white transition">Quick Package</a>
+            <a href="#quickPackagesSection" class="text-blue-100 hover:text-white transition">Packages</a>
           </nav>
         </div>
 
@@ -145,7 +153,7 @@ Journey Assist | Live Updated Portal
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <div>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dashWelcomeTitle">Welcome, Agent</h2>
-          <p class="text-slate-500 text-xs font-semibold mt-1">Explore curated holiday packages with complete day-wise itineraries.</p>
+          <p class="text-slate-500 text-xs font-semibold mt-1">Explore verified B2B holiday packages with clean detailed itineraries.</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
@@ -153,23 +161,23 @@ Journey Assist | Live Updated Portal
             <i class="fa-solid fa-bolt text-amber-300"></i> Explore Packages
           </a>
           <button onclick="openCustomQuoteModal()" class="px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-2xl shadow-md transition flex items-center gap-2 cursor-pointer">
-            <i class="fa-solid fa-plus"></i> Create Custom Package
+            <i class="fa-solid fa-plus"></i> Request Custom Quote
           </button>
         </div>
       </div>
 
-      <!-- ================= QUICK PACKAGES SECTION ================= -->
+      <!-- ================= PACKAGES SECTION ================= -->
       <div id="quickPackagesSection" class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
         
         <!-- HEADER STATS -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-slate-100 text-center sm:text-left">
           <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
             <p class="text-2xl font-black text-slate-900" id="totalPackagesCount">0</p>
-            <p class="text-[10px] font-extrabold uppercase text-slate-500 tracking-wider">Packages Listed</p>
+            <p class="text-[10px] font-extrabold uppercase text-slate-500 tracking-wider">Packages Available</p>
           </div>
           <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
             <p class="text-2xl font-black text-emerald-800" id="openPackagesCount">0</p>
-            <p class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Ready To View</p>
+            <p class="text-[10px] font-extrabold uppercase text-emerald-600 tracking-wider">Ready To Book</p>
           </div>
           <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200">
             <p class="text-2xl font-black text-blue-800">100%</p>
@@ -181,7 +189,7 @@ Journey Assist | Live Updated Portal
         <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
           <div class="relative w-full lg:w-1/2">
             <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
-            <input type="text" id="packageSearchInput" onkeyup="filterPackages()" placeholder='Search a package — "kerala", "kashmir", "maldives"...' class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
+            <input type="text" id="packageSearchInput" onkeyup="filterPackages()" placeholder='Search packages — "kerala", "kashmir", "maldives"...' class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
           </div>
 
           <div class="flex bg-slate-100 p-1.5 rounded-2xl w-full lg:w-auto justify-center">
@@ -197,7 +205,7 @@ Journey Assist | Live Updated Portal
         <!-- PACKAGES LIST CONTAINER -->
         <div id="packagesContainer" class="space-y-4 pt-4">
           <div class="text-center py-12 text-slate-400 font-bold text-xs">
-            <i class="fa-solid fa-spinner fa-spin text-lg mb-2"></i> Loading live packages from database...
+            <i class="fa-solid fa-spinner fa-spin text-lg mb-2"></i> Loading live packages...
           </div>
         </div>
 
@@ -206,14 +214,14 @@ Journey Assist | Live Updated Portal
     </main>
   </div>
 
-  <!-- ================= EASEMYTRIP STYLE DETAILED PACKAGE VIEW MODAL ================= -->
+  <!-- ================= EASEMYTRIP STYLE DETAILED PACKAGE MODAL ================= -->
   <div id="packageModal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 glass-modal hidden">
     <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full relative border border-slate-100 max-h-[92vh] flex flex-col overflow-hidden">
       
       <!-- Modal Header Bar -->
       <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
         <div class="flex items-center gap-2">
-          <span class="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[10px] font-black uppercase tracking-wider">Holiday Package Overview</span>
+          <span class="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[10px] font-black uppercase tracking-wider">Package Detail View</span>
         </div>
         <button onclick="closePackageModal()" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-white flex items-center justify-center font-bold text-sm transition cursor-pointer">✕</button>
       </div>
@@ -230,16 +238,16 @@ Journey Assist | Live Updated Portal
       <button onclick="closeCustomQuoteModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-extrabold text-sm transition">✕</button>
 
       <div class="mb-6">
-        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider">B2B Agent Inquiry</span>
+        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider">B2B Custom Request</span>
         <h3 class="text-2xl font-black text-slate-900 mt-2">Request Customized Package Quote</h3>
-        <p class="text-xs font-semibold text-slate-500 mt-1">Fill in client travel requirements to get net B2B pricing & unbranded itinerary.</p>
+        <p class="text-xs font-semibold text-slate-500 mt-1">Submit travel details to get custom B2B rate & unbranded itinerary.</p>
       </div>
 
       <form id="customQuoteForm" onsubmit="handleCustomQuoteSubmit(event)" class="space-y-4 text-xs font-bold text-slate-700">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block uppercase tracking-wider mb-1">Destination *</label>
-            <input type="text" id="quoteDestination" required placeholder="e.g. Kerala / Kashmir / Munnar" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+            <input type="text" id="quoteDestination" required placeholder="e.g. Kerala / Kashmir / Maldives" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
           </div>
           <div>
             <label class="block uppercase tracking-wider mb-1">Tentative Travel Date *</label>
@@ -249,7 +257,7 @@ Journey Assist | Live Updated Portal
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block uppercase tracking-wider mb-1">No. of Nights *</label>
+            <label class="block uppercase tracking-wider mb-1">Duration *</label>
             <select id="quoteNights" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
               <option value="2 Nights / 3 Days">2 Nights / 3 Days</option>
               <option value="3 Nights / 4 Days" selected>3 Nights / 4 Days</option>
@@ -269,23 +277,23 @@ Journey Assist | Live Updated Portal
 
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block uppercase tracking-wider mb-1">Adults (12+ Yrs) *</label>
+            <label class="block uppercase tracking-wider mb-1">Adults *</label>
             <input type="number" id="quoteAdults" min="1" value="2" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
           </div>
           <div>
-            <label class="block uppercase tracking-wider mb-1">Kids (Below 12 Yrs)</label>
+            <label class="block uppercase tracking-wider mb-1">Children</label>
             <input type="number" id="quoteKids" min="0" value="0" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
           </div>
         </div>
 
         <div>
           <label class="block uppercase tracking-wider mb-1">Special Requirements / Notes</label>
-          <textarea id="quoteRequirements" rows="3" placeholder="Cab requirement, Houseboat preferences etc." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700"></textarea>
+          <textarea id="quoteRequirements" rows="3" placeholder="Cab preferences, houseboat inclusion etc." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:bg-white focus:ring-2 focus:ring-blue-700"></textarea>
         </div>
 
         <button type="submit" id="btnSubmitQuote" class="w-full py-4 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer mt-2">
           <i class="fa-solid fa-paper-plane text-amber-300"></i>
-          <span>Submit Query</span>
+          <span>Submit Request</span>
         </button>
       </form>
     </div>
@@ -300,8 +308,8 @@ Journey Assist | Live Updated Portal
         <div class="w-14 h-14 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl font-bold border border-blue-100 shadow-sm">
           <i class="fa-solid fa-plane-departure text-amber-500"></i>
         </div>
-        <h3 class="text-2xl font-black text-slate-900">Welcome to Your Next Journey</h3>
-        <p class="text-xs font-semibold text-slate-500 mt-1">Ready to explore B2B agent dashboard?</p>
+        <h3 class="text-2xl font-black text-slate-900">Agent Sign In</h3>
+        <p class="text-xs font-semibold text-slate-500 mt-1">Access B2B travel portal dashboard</p>
       </div>
 
       <div class="flex bg-slate-100 p-1.5 rounded-2xl mb-6">
@@ -313,10 +321,10 @@ Journey Assist | Live Updated Portal
 
       <form id="modalSigninForm" onsubmit="handleModalAuth(event, 'signin')" class="space-y-4">
         <div>
-          <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Email / Phone</label>
-          <input type="text" id="modalSigninEmail" required placeholder="Email or Phone Number" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
+          <label class="block text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Email / Phone Number</label>
+          <input type="text" id="modalSigninEmail" required placeholder="Enter Email or Phone Number" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
         </div>
-        <button type="submit" id="btnModalSignin" class="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition">Sign In to Dashboard</button>
+        <button type="submit" id="btnModalSignin" class="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition">Sign In</button>
       </form>
 
       <form id="modalSignupForm" onsubmit="handleModalAuth(event, 'signup')" class="space-y-3 hidden">
@@ -342,7 +350,7 @@ Journey Assist | Live Updated Portal
           <label class="block text-[10px] font-extrabold text-slate-700 uppercase tracking-wider mb-1">Email Address</label>
           <input type="email" id="modalSignupEmail" required placeholder="agent@agency.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:bg-white focus:ring-2 focus:ring-blue-700">
         </div>
-        <button type="submit" id="btnModalSignup" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition mt-2">Complete Partner Registration</button>
+        <button type="submit" id="btnModalSignup" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition mt-2">Register Partner Account</button>
       </form>
     </div>
   </div>
@@ -493,7 +501,7 @@ Journey Assist | Live Updated Portal
             </div>
             <div class="text-left md:text-right border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
               <p class="text-lg font-black text-blue-700">On Request</p>
-              <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">B2B Net Rate</p>
+              <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">B2B Pricing</p>
             </div>
           </div>
         `;
@@ -622,7 +630,7 @@ Journey Assist | Live Updated Portal
               <p class="text-xl font-black text-blue-900">On Request</p>
             </div>
             <a href="brochure.html?id=${p.id}" target="_blank" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs rounded-xl shadow-md transition text-center">
-              <i class="fa-solid fa-file-pdf mr-1"></i> Download Brochure PDF
+              <i class="fa-solid fa-file-pdf mr-1"></i> View Brochure PDF
             </a>
           </div>
           <div>
@@ -709,6 +717,7 @@ Journey Assist | Live Updated Portal
 
         if (data.success) {
           const agentData = data.agent || { name: payload.name, agencyName: payload.agencyName };
+          localStorage.getItem('ja_b2b_agent');
           localStorage.setItem('ja_b2b_agent', JSON.stringify(agentData));
           loggedInAgent = agentData;
           closeAuthModal();
