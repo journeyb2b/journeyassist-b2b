@@ -3,124 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B2B Agent Registration | Journey Assist</title>
+  <title>Journey Assist B2B | Authorized Partner Onboarding</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .hero-gradient { background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.85) 100%); }
-    .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); }
+    .glass-effect { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(16px); }
+    .glass-form { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); }
+    .hero-gradient { background: radial-gradient(circle at top right, rgba(30, 58, 138, 0.85), rgba(15, 23, 42, 0.95)); }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between antialiased">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-amber-400 selection:text-slate-950">
 
-  <!-- EASEMYTRIP STYLE HEADER -->
-  <header class="bg-slate-950/80 backdrop-filter blur-lg border-b border-slate-800 sticky top-0 z-50">
+  <!-- TOP HIGH-CONVERSION HEADER -->
+  <header class="bg-slate-950/90 border-b border-slate-800/80 sticky top-0 z-50 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3">
-        <div class="w-12 h-12 bg-gradient-to-tr from-blue-700 to-amber-500 text-white rounded-2xl flex items-center justify-center font-extrabold text-2xl shadow-lg shadow-blue-600/30">
-          <i class="fa-solid fa-plane-departure text-white"></i>
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-amber-500 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-blue-600/30 group-hover:scale-105 transition">
+          <i class="fa-solid fa-plane-departure"></i>
         </div>
         <div>
-          <h1 class="text-2xl font-black tracking-tight text-white">Journey Assist</h1>
-          <p class="text-[10px] uppercase font-black tracking-widest text-amber-400">B2B Agent Network</p>
+          <h1 class="text-2xl font-black tracking-tight text-white flex items-center gap-2">
+            Journey Assist <span class="text-xs px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 uppercase font-black tracking-wider">B2B Portal</span>
+          </h1>
+          <p class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Exclusive Travel Agent Network</p>
         </div>
       </a>
 
-      <div class="flex items-center gap-4 text-xs font-bold text-slate-300">
-        <a href="tel:+919919382999" class="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-amber-400 border border-slate-700 transition">
-          <i class="fa-solid fa-headset"></i> Partner Desk: +91 9919382999
+      <div class="flex items-center gap-4 text-xs font-bold">
+        <a href="tel:+919919382999" class="hidden md:flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-amber-300 hover:border-amber-400/50 transition">
+          <i class="fa-solid fa-headset text-amber-400 text-sm"></i>
+          <div>
+            <p class="text-[9px] uppercase tracking-wider text-slate-400">Agent Support Desk</p>
+            <p class="text-xs font-black">+91 9919382999</p>
+          </div>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION WITH BACKGROUND IMAGE -->
-  <div class="relative py-12 lg:py-16 overflow-hidden">
-    <!-- Background Image with Overlay -->
+  <!-- HERO BANNER WITH BACKGROUND CAROUSEL LOOK -->
+  <div class="relative py-12 lg:py-20 overflow-hidden">
     <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1920&q=80" alt="Travel Background" class="w-full h-full object-cover">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" alt="Travel Banner" class="w-full h-full object-cover">
       <div class="absolute inset-0 hero-gradient"></div>
     </div>
 
-    <!-- HERO CONTENT & FORM GRID -->
     <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
-      <!-- LEFT HERO TEXT & VISUAL STATS -->
+      <!-- LEFT SIDE: VALUE PROPOSITION & LIVE METRICS -->
       <div class="lg:col-span-7 space-y-8">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-black uppercase tracking-wider backdrop-blur-md">
-          <i class="fa-solid fa-shield-halved text-amber-400"></i> India's Preferred B2B Travel Network
+        
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-amber-300 text-xs font-black uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          Direct DMC B2B Holiday Inventory
         </div>
 
         <h1 class="text-4xl sm:text-6xl font-black text-white leading-tight">
-          Grow Your Agency Business With <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Zero Investment</span>
+          Transform Your Travel Agency Into A <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-200">B2B Powerhouse</span>
         </h1>
 
-        <p class="text-slate-300 text-sm sm:text-base font-medium max-w-2xl leading-relaxed">
-          Register as an authorized Journey Assist travel partner. Gain instant access to wholesale holiday packages, custom itineraries, and dedicated support.
+        <p class="text-slate-300 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+          Zero sign-up fees. Gain instant access to Kerala, Maldives, Bali & Kashmir wholesale itineraries with customized white-label quotations.
         </p>
 
-        <!-- VISUAL FEATURE CARDS GRID -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-          <div class="bg-slate-900/60 border border-slate-700/60 p-4 rounded-2xl backdrop-blur-md space-y-2">
-            <div class="w-10 h-10 rounded-xl bg-blue-600/30 text-blue-400 flex items-center justify-center font-bold text-lg">
-              <i class="fa-solid fa-id-card"></i>
+        <!-- STATS TICKER BAR -->
+        <div class="grid grid-cols-3 gap-4 pt-2 border-y border-slate-800/80 py-4">
+          <div>
+            <p class="text-2xl sm:text-3xl font-black text-amber-400">100%</p>
+            <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">B2B Net Pricing</p>
+          </div>
+          <div>
+            <p class="text-2xl sm:text-3xl font-black text-white">Instant</p>
+            <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Agent ID Creation</p>
+          </div>
+          <div>
+            <p class="text-2xl sm:text-3xl font-black text-amber-400">White-Label</p>
+            <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">Client Itineraries</p>
+          </div>
+        </div>
+
+        <!-- FEATURE CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="glass-effect p-5 rounded-2xl border border-slate-800 flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-600/30 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xl shrink-0">
+              <i class="fa-solid fa-passport"></i>
             </div>
-            <h4 class="text-xs font-black text-white">Instant Agent ID</h4>
-            <p class="text-[11px] text-slate-400 font-medium">Auto-generated JA-AGT-1001 ID upon registration.</p>
+            <div>
+              <h4 class="text-xs font-black text-white">Unique Agent ID</h4>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">Automated registration code (e.g. JA-AGT-1001) for direct sheet tracking.</p>
+            </div>
           </div>
 
-          <div class="bg-slate-900/60 border border-slate-700/60 p-4 rounded-2xl backdrop-blur-md space-y-2">
-            <div class="w-10 h-10 rounded-xl bg-amber-600/30 text-amber-400 flex items-center justify-center font-bold text-lg">
-              <i class="fa-solid fa-file-pdf"></i>
+          <div class="glass-effect p-5 rounded-2xl border border-slate-800 flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-600/30 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+              <i class="fa-brands fa-whatsapp"></i>
             </div>
-            <h4 class="text-xs font-black text-white">White-Label Quotation</h4>
-            <p class="text-[11px] text-slate-400 font-medium">Unbranded itineraries ready to share with clients.</p>
-          </div>
-
-          <div class="bg-slate-900/60 border border-slate-700/60 p-4 rounded-2xl backdrop-blur-md space-y-2">
-            <div class="w-10 h-10 rounded-xl bg-emerald-600/30 text-emerald-400 flex items-center justify-center font-bold text-lg">
-              <i class="fa-solid fa-tags"></i>
+            <div>
+              <h4 class="text-xs font-black text-white">1-Click WhatsApp Quote</h4>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">Instant quotation requests on WhatsApp with pre-filled package details.</p>
             </div>
-            <h4 class="text-xs font-black text-white">B2B Net Pricing</h4>
-            <p class="text-[11px] text-slate-400 font-medium">Transparent "On Request" wholesale rates.</p>
           </div>
         </div>
 
       </div>
 
-      <!-- RIGHT FORM CARD (EASEMYTRIP STYLE) -->
+      <!-- RIGHT SIDE: EASEMYTRIP STYLE HIGH-CONVERSION FORM CARD -->
       <div class="lg:col-span-5">
-        <div class="glass-card p-6 sm:p-8 rounded-3xl shadow-2xl border border-white/20 text-slate-900">
+        <div class="glass-form p-6 sm:p-8 rounded-3xl shadow-2xl border border-white/40 text-slate-900">
           
-          <!-- SUCCESS CONFIRMATION BOX -->
+          <!-- SUCCESS CONFIRMATION BADGE -->
           <div id="successBox" class="hidden text-center py-8 space-y-4">
             <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl font-black shadow-inner">
-              <i class="fa-solid fa-circle-check"></i>
+              <i class="fa-solid fa-check"></i>
             </div>
-            <h3 class="text-2xl font-black text-slate-900">Registration Complete!</h3>
-            <p class="text-xs text-slate-600 font-bold">Welcome to Journey Assist B2B Partner Network.</p>
+            <h3 class="text-2xl font-black text-slate-900">Partner Account Active!</h3>
+            <p class="text-xs text-slate-600 font-bold">Your travel agency is now registered on Journey Assist B2B network.</p>
             
             <div class="bg-blue-50 p-5 rounded-2xl border border-blue-200 max-w-sm mx-auto space-y-1">
-              <p class="text-[10px] uppercase font-extrabold text-blue-600 tracking-wider">Your Official B2B Agent ID</p>
+              <p class="text-[10px] uppercase font-black text-blue-600 tracking-widest">Your B2B Agent ID</p>
               <p id="resAgentId" class="text-3xl font-black text-blue-900 tracking-wider">JA-AGT-1001</p>
               <p id="resAgentAgency" class="text-xs font-bold text-slate-700">Agency Name</p>
             </div>
+
+            <a href="index.html" class="inline-block px-8 py-3.5 bg-blue-700 hover:bg-blue-800 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition">
+              Explore B2B Packages
+            </a>
           </div>
 
           <!-- SIGN UP FORM -->
           <form id="agentRegisterForm" onsubmit="handleAgentSignUp(event)" class="space-y-4 text-xs font-bold">
             <div class="border-b border-slate-200 pb-4 mb-2">
-              <span class="px-2.5 py-1 rounded bg-blue-100 text-blue-800 text-[10px] font-black uppercase">Free Partner Sign Up</span>
-              <h3 class="text-2xl font-black text-slate-900 mt-1">Register Agency</h3>
-              <p class="text-[11px] text-slate-500 font-medium">Fill in your firm details to create an account.</p>
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 text-[10px] font-black uppercase">Verified Agent Access</span>
+                <span class="text-[10px] font-black text-emerald-600">Free Registration</span>
+              </div>
+              <h3 class="text-2xl font-black text-slate-900 mt-2">Agent Registration</h3>
+              <p class="text-[11px] text-slate-500 font-medium">Enter your travel agency credentials below:</p>
             </div>
 
             <div id="alertBox" class="hidden p-3 rounded-xl text-xs font-bold bg-rose-100 text-rose-800"></div>
 
             <div>
-              <label class="block uppercase tracking-wider mb-1 text-slate-700">Travel Agency / Firm Name *</label>
+              <label class="block uppercase tracking-wider mb-1 text-slate-700">Agency / Firm Name *</label>
               <input type="text" id="regAgency" required placeholder="e.g. Journey Assist Travels" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
             </div>
 
@@ -145,12 +171,10 @@
               <input type="email" id="regEmail" required placeholder="support@journeyassist.in" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-blue-700 focus:outline-none">
             </div>
 
-            <button type="submit" id="btnRegister" class="w-full py-4 bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-blue-950 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-xl transition flex items-center justify-center gap-2 cursor-pointer mt-4">
+            <button type="submit" id="btnRegister" class="w-full py-4 bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 hover:from-blue-800 hover:to-indigo-950 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-xl transition flex items-center justify-center gap-2 cursor-pointer mt-4">
               <i class="fa-solid fa-user-plus text-amber-300"></i>
-              <span>Register Agent Account</span>
+              <span>Register & Generate Agent ID</span>
             </button>
-
-            <p class="text-[10px] text-center text-slate-500 mt-2 font-medium">By registering, you agree to Journey Assist B2B Terms of Partner Service.</p>
           </form>
 
         </div>
@@ -162,7 +186,7 @@
   <!-- FOOTER -->
   <footer class="bg-slate-950 text-slate-400 py-6 text-center text-xs border-t border-slate-800">
     <p class="font-semibold">Registered Office: 29 Shalimar Garden Sector 8 Indira Nagar Lucknow 226016 | Helpline: +91 9919382999</p>
-    <p class="text-[10px] text-slate-500 mt-1">© 2026 Journey Assist. All rights reserved.</p>
+    <p class="text-[10px] text-slate-500 mt-1">© 2026 Journey Assist B2B. All rights reserved.</p>
   </footer>
 
   <script>
@@ -203,13 +227,13 @@
           alertBox.innerText = data.message || "Registration failed. Please try again.";
           alertBox.classList.remove('hidden');
           btn.disabled = false;
-          btn.innerHTML = `<i class="fa-solid fa-user-plus text-amber-300"></i> Register Agent Account`;
+          btn.innerHTML = `<i class="fa-solid fa-user-plus text-amber-300"></i> Register & Generate Agent ID`;
         }
       } catch (err) {
         alertBox.innerText = "Connection error. Please check your internet connection.";
         alertBox.classList.remove('hidden');
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-user-plus text-amber-300"></i> Register Agent Account`;
+        btn.innerHTML = `<i class="fa-solid fa-user-plus text-amber-300"></i> Register & Generate Agent ID`;
       }
     }
   </script>
